@@ -113,10 +113,12 @@
     CGPoint movement = self.lastTouchLocation;
     
     // Move the player
-    CGPoint newLocation = CGPointApplyAffineTransform(self.player.location, CGAffineTransformMakeTranslation(-movement.x, -movement.y));
-    //if ([self.currentLevel canMoveFrom:self.player.location to:newLocation]) {
-        self.player.location = newLocation;
-    //}
+    if (!CGPointEqualToPoint(movement, CGPointZero)) {
+        CGPoint newLocation = CGPointApplyAffineTransform(self.player.location, CGAffineTransformMakeTranslation(-movement.x, -movement.y));
+        if ([self.currentLevel canMoveFrom:self.player.location to:newLocation]) {
+            self.player.location = newLocation;
+        }
+    }
     
     // Center the game view to the players location
     CGFloat b = self.playerView.center.x;
