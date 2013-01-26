@@ -55,6 +55,29 @@
     return [self canMoveFrom:from to:to withLightLimit:CGFLOAT_MAX];
 }
 
+- (void)line:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(int x, int y))block
+{
+    float x0=from.x, y0=from.y;
+    float x1=to.x, y1=to.y;
+    
+    // Check if x difference is bigger than y differene, than swap now and later call block swapped
+    bool steep = (abs(y1-y0) > abs(x1-x0));
+    if(steep) {
+        float swap;
+        swap=y0; x0=y0; y0=swap;
+        swap=y1; x1=y1; y1=swap;
+    }
+    
+    // Run from left to right or from right to left
+    int inc = x1 > x0 ? 1 : -1;
+    
+    for(int x=x0; (inc>0) ? (x<=x1) : (x>=x1); x+=inc) {
+        float progress = (x-x0)/(x1-x0);
+        int y = y0 + (y1-y0)*progress;
+        if(steep) block(x, y); else block(y, x);
+    }
+}
+
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit
 {
     return true;
