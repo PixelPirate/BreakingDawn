@@ -65,7 +65,10 @@
         self.size = imageSize;
         
         // Precache images
-        [UIImage getRGBAsFromImage:self.diffuseMap atX:0 andY:0 count:1];
+        if (self.collisionMap == nil) {
+            self.collisionMap = self.diffuseMap;
+        }
+        [UIImage getRGBAsFromImage:self.collisionMap atX:0 andY:0 count:1];
         [UIImage getRGBAsFromImage:self.lightMap atX:0 andY:0 count:1];
     }
     return self;
@@ -118,7 +121,7 @@
     
     bool __block canMove = YES;
     [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
-        UIColor *color = [[UIImage getRGBAsFromImage:self.diffuseMap atX:x andY:y count:1] lastObject];
+        UIColor *color = [[UIImage getRGBAsFromImage:self.collisionMap atX:x andY:y count:1] lastObject];
         const CGFloat *components = CGColorGetComponents([color CGColor]);
         if(components[0] == 0) {
             canMove = NO;

@@ -30,9 +30,13 @@
 
 @property (strong, readwrite, nonatomic) BDPostProcessingViewController *postProcessingViewController;
 
+@property (strong, readwrite, nonatomic) NSTimer *gameTimer;
+
 - (void)tickWithTimer:(NSTimer *)timer;
 
 - (void)adrenalinChanged;
+
+- (void)gameDidEnd;
 
 @end
 
@@ -43,7 +47,11 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [NSTimer scheduledTimerWithTimeInterval:0.016 target:self selector:@selector(tickWithTimer:) userInfo:nil repeats:YES];
+        self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:0.016
+                                                          target:self
+                                                        selector:@selector(tickWithTimer:)
+                                                        userInfo:nil
+                                                         repeats:YES];
         self.lastTouchLocation = CGPointZero;
     }
     return self;
@@ -174,11 +182,25 @@
                                                               [UIScreen mainScreen].applicationFrame.size.height);
     
     // Mobs
-    CGFloat speed = 1.0;
+    CGFloat speed = [[NSUserDefaults standardUserDefaults] floatForKey:@"MobWalkingSpeed"];
     for (BDMob *mob in self.currentLevel.mobs) {
         BOOL canReach = [self.currentLevel canMoveFrom:mob.location to:self.player.location withLightLimit:0.3];
         if (canReach) {
-            NSLog(@"r");
+            CGPoint direction = CGPointMake(mob.location.x - self.player.location.x, mob.location.y - self.player.location.y);
+            CGFloat maximalMovement = MAX(ABS(direction.x), ABS(direction.y));
+            direction = CGPointMake(direction.x / maximalMovement, direction.y / maximalMovement);
+            direction = CGPointApplyAffineTransform(direction, CGAffineTransformMakeScale(speed, speed));
+            mob.location = CGPointMake(mob.location.x - direction.x, mob.location.y - direction.y);
+        }
+    }
+    
+    // Check mob vs player collisions
+    for (BDMob *mob in self.currentLevel.mobs) {
+        CGRect size = CGRectMake(0, 0, 40, 40);
+        CGRect mobRect = CGRectOffset(size, mob.location.x, mob.location.y);
+        CGRect playerRect = CGRectOffset(size, self.player.location.x, self.player.location.y);
+        if (CGRectIntersectsRect(mobRect, playerRect)) {
+            [self gameDidEnd];
         }
     }
 }
@@ -204,12 +226,14 @@
         }
     }
     
-    CGFloat pulse = 0.0;
-    if (self.player.lastLuminance < 0.7) {
-        //pulse = MIN(0.4 + self.player.adrenalin, 1.0);
-    }
-    
     self.currentLevelView.pulse = self.player.adrenalin;
+}
+
+- (void)gameDidEnd
+{
+    [self.gameTimer invalidate];
+    self.player.adrenalinHandler = nil;
+    self.currentLevelView.pulse = 10.0;
 }
 
 - (void)didReceiveMemoryWarning

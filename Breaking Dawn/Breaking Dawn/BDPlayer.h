@@ -26,6 +26,8 @@ typedef void(^AdrenalinHandler)(void);
 
 @property (assign, readwrite, nonatomic) CGFloat adrenalin;
 
+@property (assign, readonly, nonatomic) CGPoint lastLocation;
+
 @property (assign, readwrite, nonatomic) CGPoint location;
 
 @property (copy, readwrite, nonatomic) AdrenalinHandler adrenalinHandler;

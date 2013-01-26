@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BDMob.h"
 
-@class BDMob;
-
-@interface BDMobView : UIView
+@interface BDMobView : UIView<BDMobDelegate>
 
 @property (strong, readonly, nonatomic) BDMob *mob;
 

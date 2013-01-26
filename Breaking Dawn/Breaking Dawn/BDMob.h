@@ -14,6 +14,8 @@
 
 - (void)mobCollidedWithPlayer:(BDMob *)mob;
 
+- (void)mobDidMove:(BDMob *)mob toPosition:(CGPoint)position;
+
 @end
 
 

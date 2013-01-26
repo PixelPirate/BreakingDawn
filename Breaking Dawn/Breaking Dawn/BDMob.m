@@ -19,4 +19,12 @@
     return self;
 }
 
+- (void)setLocation:(CGPoint)location
+{
+    _location = location;
+    if (self.delegate) {
+        [self.delegate mobDidMove:self toPosition:location];
+    }
+}
+
 @end

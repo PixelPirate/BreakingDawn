@@ -36,10 +36,19 @@
         center = CGPointApplyAffineTransform(center, CGAffineTransformMakeScale(scale, scale));
         self.center = center;
         [self addSubview:self.mobImageView];
-        
-//        self.mob.delegate = self;
+        self.mob.delegate = self;
     }
     return self;
+}
+
+#pragma mark - BDMobDelegate implementations
+
+- (void)mobDidMove:(BDMob *)mob toPosition:(CGPoint)position
+{
+    CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"Scale"];
+    CGPoint center = position;
+    center = CGPointApplyAffineTransform(center, CGAffineTransformMakeScale(scale, scale));
+    self.center = center;
 }
 
 @end
