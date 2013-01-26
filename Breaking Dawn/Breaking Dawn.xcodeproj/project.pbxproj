@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		877DAFF516B464BF00CD9508 /* Ambience-16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFF216B464BF00CD9508 /* Ambience-16.mp3 */; };
+		877DAFF616B464BF00CD9508 /* Ambience-17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFF316B464BF00CD9508 /* Ambience-17.mp3 */; };
+		877DAFF716B464BF00CD9508 /* Ambience-22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFF416B464BF00CD9508 /* Ambience-22.mp3 */; };
+		877DAFFA16B467D000CD9508 /* BDAmbientMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877DAFF916B467D000CD9508 /* BDAmbientMusicController.m */; };
 		87A5371E16B31D8500F7C6DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A5371D16B31D8500F7C6DB /* UIKit.framework */; };
 		87A5372016B31D8500F7C6DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A5371F16B31D8500F7C6DB /* Foundation.framework */; };
 		87A5372216B31D8500F7C6DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A5372116B31D8500F7C6DB /* CoreGraphics.framework */; };
@@ -78,13 +82,15 @@
 		B1C2B52216B43CBA00CFCC37 /* Monster_Awakes2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */; };
 		B1C2B52316B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51C16B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 */; };
 		B1C2B52416B43CBA00CFCC37 /* Monster_Awakes3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51D16B43CBA00CFCC37 /* Monster_Awakes3.mp3 */; };
-		B1C2B53116B441FA00CFCC37 /* Ambience-16.wav in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B52E16B441FA00CFCC37 /* Ambience-16.wav */; };
-		B1C2B53216B441FA00CFCC37 /* Ambience-17.wav in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B52F16B441FA00CFCC37 /* Ambience-17.wav */; };
-		B1C2B53316B441FA00CFCC37 /* Ambience-22.wav in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B53016B441FA00CFCC37 /* Ambience-22.wav */; };
 		B1DC52EA16B44EE10048DED1 /* BDImageMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DC52E916B44EE10048DED1 /* BDImageMap.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		877DAFF216B464BF00CD9508 /* Ambience-16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ambience-16.mp3"; sourceTree = "<group>"; };
+		877DAFF316B464BF00CD9508 /* Ambience-17.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ambience-17.mp3"; sourceTree = "<group>"; };
+		877DAFF416B464BF00CD9508 /* Ambience-22.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ambience-22.mp3"; sourceTree = "<group>"; };
+		877DAFF816B467D000CD9508 /* BDAmbientMusicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAmbientMusicController.h; sourceTree = "<group>"; };
+		877DAFF916B467D000CD9508 /* BDAmbientMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAmbientMusicController.m; sourceTree = "<group>"; };
 		87A5371916B31D8500F7C6DB /* Breaking Dawn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Breaking Dawn.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87A5371D16B31D8500F7C6DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		87A5371F16B31D8500F7C6DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -173,9 +179,6 @@
 		B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Monster_Awakes2.mp3; sourceTree = "<group>"; };
 		B1C2B51C16B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Monster_Awakes2+3.mp3"; sourceTree = "<group>"; };
 		B1C2B51D16B43CBA00CFCC37 /* Monster_Awakes3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Monster_Awakes3.mp3; sourceTree = "<group>"; };
-		B1C2B52E16B441FA00CFCC37 /* Ambience-16.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-16.wav"; sourceTree = "<group>"; };
-		B1C2B52F16B441FA00CFCC37 /* Ambience-17.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-17.wav"; sourceTree = "<group>"; };
-		B1C2B53016B441FA00CFCC37 /* Ambience-22.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-22.wav"; sourceTree = "<group>"; };
 		B1DC52E916B44EE10048DED1 /* BDImageMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BDImageMap.m; path = ../BDImageMap.m; sourceTree = "<group>"; };
 		B1DC52EC16B45B6F0048DED1 /* BDImageMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDImageMap.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -230,22 +233,24 @@
 		87A5372316B31D8500F7C6DB /* Breaking Dawn */ = {
 			isa = PBXGroup;
 			children = (
-				B1DC52EC16B45B6F0048DED1 /* BDImageMap.h */,
-				B1DC52E916B44EE10048DED1 /* BDImageMap.m */,
-				B192C8CA16B435F5000E4BC9 /* BDAudioContainer.h */,
-				B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */,
 				87A5372C16B31D8600F7C6DB /* BDAppDelegate.h */,
 				87A5372D16B31D8700F7C6DB /* BDAppDelegate.m */,
-				B19113B316B40707008BFCB9 /* BDSound.h */,
-				B19113B416B40707008BFCB9 /* BDSound.m */,
-				87A537B316B42D7100F7C6DB /* BDHotspot.h */,
-				87A537B416B42D7100F7C6DB /* BDHotspot.m */,
 				87A5373516B31D8700F7C6DB /* BDViewController.h */,
 				87A5373616B31D8700F7C6DB /* BDViewController.m */,
 				87A5375416B32ACE00F7C6DB /* BDGameViewController.h */,
 				87A5375516B32ACE00F7C6DB /* BDGameViewController.m */,
 				87A5376E16B3983600F7C6DB /* BDPostProcessingViewController.h */,
 				87A5376F16B3983600F7C6DB /* BDPostProcessingViewController.m */,
+				B1DC52EC16B45B6F0048DED1 /* BDImageMap.h */,
+				B1DC52E916B44EE10048DED1 /* BDImageMap.m */,
+				877DAFF816B467D000CD9508 /* BDAmbientMusicController.h */,
+				877DAFF916B467D000CD9508 /* BDAmbientMusicController.m */,
+				B192C8CA16B435F5000E4BC9 /* BDAudioContainer.h */,
+				B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */,
+				B19113B316B40707008BFCB9 /* BDSound.h */,
+				B19113B416B40707008BFCB9 /* BDSound.m */,
+				87A537B316B42D7100F7C6DB /* BDHotspot.h */,
+				87A537B416B42D7100F7C6DB /* BDHotspot.m */,
 				87A5376516B3662500F7C6DB /* UIImage+UIImage_Extras.h */,
 				87A5376616B3662600F7C6DB /* UIImage+UIImage_Extras.m */,
 				87A5374C16B324BE00F7C6DB /* BDPlayerView.h */,
@@ -285,9 +290,9 @@
 		87A5374B16B321AC00F7C6DB /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
-				B1C2B52E16B441FA00CFCC37 /* Ambience-16.wav */,
-				B1C2B52F16B441FA00CFCC37 /* Ambience-17.wav */,
-				B1C2B53016B441FA00CFCC37 /* Ambience-22.wav */,
+				877DAFF216B464BF00CD9508 /* Ambience-16.mp3 */,
+				877DAFF316B464BF00CD9508 /* Ambience-17.mp3 */,
+				877DAFF416B464BF00CD9508 /* Ambience-22.mp3 */,
 				B1C2B51716B43CBA00CFCC37 /* Game_Over_Scream.mp3 */,
 				B1C2B51816B43CBA00CFCC37 /* heartbeat_isolated.mp3 */,
 				B1C2B51916B43CBA00CFCC37 /* Monster_Awakes1.mp3 */,
@@ -510,9 +515,9 @@
 				87A537DD16B4527F00F7C6DB /* player00-move-front-right-01.png in Resources */,
 				87A537DE16B4527F00F7C6DB /* player00-move-front-right-02.png in Resources */,
 				87A537DF16B4527F00F7C6DB /* player00-move-front-right-03.png in Resources */,
-				B1C2B53116B441FA00CFCC37 /* Ambience-16.wav in Resources */,
-				B1C2B53216B441FA00CFCC37 /* Ambience-17.wav in Resources */,
-				B1C2B53316B441FA00CFCC37 /* Ambience-22.wav in Resources */,
+				877DAFF516B464BF00CD9508 /* Ambience-16.mp3 in Resources */,
+				877DAFF616B464BF00CD9508 /* Ambience-17.mp3 in Resources */,
+				877DAFF716B464BF00CD9508 /* Ambience-22.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +544,7 @@
 				B192C8CC16B435F5000E4BC9 /* BDAudioContainer.m in Sources */,
 				87A537B516B42D7200F7C6DB /* BDHotspot.m in Sources */,
 				B1DC52EA16B44EE10048DED1 /* BDImageMap.m in Sources */,
+				877DAFFA16B467D000CD9508 /* BDAmbientMusicController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

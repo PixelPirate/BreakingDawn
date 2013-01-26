@@ -114,22 +114,13 @@
                                    pulse.frame.size.width + extent,
                                    pulse.frame.size.height + extent);
         
-//        [UIView animateWithDuration:0.5 animations:^{
-//            pulse.alpha = 1.0;
-//            //pulse.frame = zoomed;
-//        } completion:^(BOOL finished) {
-//            [UIView animateWithDuration:0.5 animations:^{
-//                pulse.alpha = 0.0;
-//                //pulse.frame = originalFrame;
-//            }];
-//        }];
-        [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             pulse.alpha = 1.0;
+            pulse.frame = zoomed;
         } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [UIView animateWithDuration:0.5 animations:^{
                 pulse.alpha = 0.0;
-            } completion:^(BOOL finished) {
-                
+                pulse.frame = originalFrame;
             }];
         }];
     }
@@ -141,7 +132,7 @@
     _lightScale = scale;
     self.level.lightScale = scale;
     for (UIImageView *i in self.lightLayer.subviews) {
-        if ([i isKindOfClass:[UIImageView class]] && ![self.pulsatingViews containsObject:i]) {
+        if ([i isKindOfClass:[UIImageView class]] /*&& ![self.pulsatingViews containsObject:i]*/) {
             CGSize size = CGSizeApplyAffineTransform(lightSize, CGAffineTransformMakeScale(scale, scale));
             CGPoint center = i.center;
             i.frame = CGRectMake(0, 0, size.width, size.height);
