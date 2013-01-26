@@ -16,6 +16,7 @@
 #import "BDPostProcessingViewController.h"
 #import "BDMob.h"
 #import "BDHotspot.h"
+#import "BDAmbientMusicController.h"
 
 
 @interface BDGameViewController ()
@@ -35,6 +36,8 @@
 @property (strong, readwrite, nonatomic) BDPostProcessingViewController *postProcessingViewController;
 
 @property (strong, readwrite, nonatomic) NSTimer *gameTimer;
+
+@property (strong, readwrite, nonatomic) BDAmbientMusicController *ambientMusicController;
 
 - (void)tickWithTimer:(NSTimer *)timer;
 
@@ -57,6 +60,9 @@
                                                         userInfo:nil
                                                          repeats:YES];
         self.lastTouchLocation = CGPointZero;
+        
+        self.ambientMusicController = [BDAmbientMusicController sharedAmbientMusicController];
+        [self.ambientMusicController play];
     }
     return self;
 }
@@ -269,6 +275,8 @@
     [self.gameTimer invalidate];
     self.player.adrenalinHandler = nil;
     self.currentLevelView.pulse = 10.0;
+    
+    [self.ambientMusicController stop];
 }
 
 - (void)didReceiveMemoryWarning
