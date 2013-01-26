@@ -10,15 +10,16 @@
 #import "UIImage+UIImage_Extras.h"
 #import <QuartzCore/QuartzCore.h>
 #import "BDMob.h"
+#import "BDImageMap.h"
 #import "BDHotspot.h"
 
 @interface BDLevel () // Private setter
 
 @property (strong, readwrite, nonatomic) UIImage *diffuseMap;
 
-@property (strong, readwrite, nonatomic) UIImage *lightMap;
+@property (strong, readwrite, nonatomic) BDImageMap *lightMap;
 
-@property (strong, readwrite, nonatomic) UIImage *collisionMap;
+@property (strong, readwrite, nonatomic) BDImageMap *collisionMap;
 
 @property (assign, readwrite, nonatomic) CGSize size;
 
@@ -40,8 +41,8 @@
     self = [super init];
     if (self) {
         self.diffuseMap = [UIImage imageNamed:[name stringByAppendingString:@"_diffuse"]];
-        self.lightMap = [UIImage imageNamed:[name stringByAppendingString:@"_light"]];
-        self.collisionMap = [UIImage imageNamed:[name stringByAppendingString:@"_collision"]];
+        UIImage *collision = [UIImage imageNamed:[name stringByAppendingString:@"_collision"]];
+        self.collisionMap = [[BDImageMap alloc] initWithUIImage:collision];
         
         self.lights = [NSMutableArray array];
         NSURL *url = [[[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:@"map00.plist"] filePathURL];
@@ -50,7 +51,11 @@
             [self.lights addObject:pointRep];
         }
         
-        if (self.lightMap == nil) {
+        // Load lightmap from file or generate it if file is missing
+        UIImage *light =  [UIImage imageNamed:[name stringByAppendingString:@"_light"]];
+        if (light) {
+            self.lightMap = [[BDImageMap alloc] initWithUIImage:light];
+        } else {
             [self loadLightmap];
         }
         
@@ -72,10 +77,10 @@
         
         // Precache images
         if (self.collisionMap == nil) {
-            self.collisionMap = self.diffuseMap;
+            self.collisionMap = [[BDImageMap alloc] initWithUIImage:self.diffuseMap];
         }
-        [UIImage getRGBAsFromImage:self.collisionMap atX:0 andY:0 count:1];
-        [UIImage getRGBAsFromImage:self.lightMap atX:0 andY:0 count:1];
+        [self.collisionMap getRGBAsFromImageX:0 andY:0 count:1];
+        [self.lightMap getRGBAsFromImageX:0 andY:0 count:1];
     }
     return self;
 }
@@ -127,27 +132,13 @@
     
     bool __block canMove = YES;
     [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
-        UIColor *color = [[UIImage getRGBAsFromImage:self.collisionMap atX:x andY:y count:1] lastObject];
+        UIColor *color = [[self.collisionMap getRGBAsFromImageX:x andY:y count:1] lastObject];
         const CGFloat *components = CGColorGetComponents([color CGColor]);
         if(components[0] == 0) {
             canMove = NO;
             *stop = YES;
         }
-        
-//        if (/*lightLimit != CGFLOAT_MAX &&*/ canMove) {
-//            color = [[UIImage getRGBAsFromImage:self.lightMap atX:x andY:y count:1] lastObject];
-//            CGFloat alpha = 0.0;
-//            CGFloat r = 0.0;
-//            CGFloat g = 0.0;
-//            CGFloat b = 0.0;
-//            [color getRed:&r green:&g blue:&b alpha:&alpha];
-//            //components = CGColorGetComponents([color CGColor]);
-//            printf("%f %f %f %f\n", 1.0-r, 1.0-g, 1.0-b, 1.0-alpha);
-//            if (alpha > lightLimit) {
-//                canMove = NO;
-//                *stop = YES;
-//            }
-//        }
+
     }];
     
     if (canMove && lightLimit != CGFLOAT_MAX) {
@@ -200,7 +191,7 @@
         [v.layer renderInContext:UIGraphicsGetCurrentContext()];
         CGContextRestoreGState(UIGraphicsGetCurrentContext());
     }
-    UIImage *lightmap = UIGraphicsGetImageFromCurrentImageContext();
+    BDImageMap *lightmap = [[BDImageMap alloc] initWithUIImage:UIGraphicsGetImageFromCurrentImageContext()];
     UIGraphicsEndImageContext();
     
     self.lightMap = lightmap;

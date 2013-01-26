@@ -69,6 +69,7 @@
 		B1C2B53116B441FA00CFCC37 /* Ambience-16.wav in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B52E16B441FA00CFCC37 /* Ambience-16.wav */; };
 		B1C2B53216B441FA00CFCC37 /* Ambience-17.wav in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B52F16B441FA00CFCC37 /* Ambience-17.wav */; };
 		B1C2B53316B441FA00CFCC37 /* Ambience-22.wav in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B53016B441FA00CFCC37 /* Ambience-22.wav */; };
+		B1DC52EA16B44EE10048DED1 /* BDImageMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DC52E916B44EE10048DED1 /* BDImageMap.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,6 +152,8 @@
 		B1C2B52E16B441FA00CFCC37 /* Ambience-16.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-16.wav"; sourceTree = "<group>"; };
 		B1C2B52F16B441FA00CFCC37 /* Ambience-17.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-17.wav"; sourceTree = "<group>"; };
 		B1C2B53016B441FA00CFCC37 /* Ambience-22.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-22.wav"; sourceTree = "<group>"; };
+		B1DC52E916B44EE10048DED1 /* BDImageMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BDImageMap.m; path = ../BDImageMap.m; sourceTree = "<group>"; };
+		B1DC52EC16B45B6F0048DED1 /* BDImageMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDImageMap.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +206,8 @@
 		87A5372316B31D8500F7C6DB /* Breaking Dawn */ = {
 			isa = PBXGroup;
 			children = (
+				B1DC52EC16B45B6F0048DED1 /* BDImageMap.h */,
+				B1DC52E916B44EE10048DED1 /* BDImageMap.m */,
 				B192C8CA16B435F5000E4BC9 /* BDAudioContainer.h */,
 				B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */,
 				87A5372C16B31D8600F7C6DB /* BDAppDelegate.h */,
@@ -453,6 +458,7 @@
 				B19113B516B40707008BFCB9 /* BDSound.m in Sources */,
 				B192C8CC16B435F5000E4BC9 /* BDAudioContainer.m in Sources */,
 				87A537B516B42D7200F7C6DB /* BDHotspot.m in Sources */,
+				B1DC52EA16B44EE10048DED1 /* BDImageMap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

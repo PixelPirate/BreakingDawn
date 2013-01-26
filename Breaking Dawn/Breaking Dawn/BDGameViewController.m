@@ -167,8 +167,7 @@
     }
     
     // Check light amount recieved by the player
-    UIColor *light = [[UIImage getRGBAsFromImage:self.currentLevel.lightMap
-                                             atX:self.player.location.x
+    UIColor *light = [[self.currentLevel.lightMap getRGBAsFromImageX:self.player.location.x
                                             andY:self.player.location.y
                                            count:1] lastObject];
     CGFloat luminance = 0.0; // 1 means dark, 0 means bright
