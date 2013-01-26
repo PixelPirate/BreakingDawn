@@ -10,6 +10,8 @@
 
 @interface BDPlayer ()
 
+@property (assign, readwrite, nonatomic) CGPoint lastLocation;
+
 @property (assign, readwrite, nonatomic) CGFloat lastLuminance;
 
 @property (assign, readwrite, nonatomic) CGFloat luminanceDelta;
@@ -23,6 +25,7 @@
     self = [super init];
     if (self) {
         self.location = position;
+        self.lastLocation = self.location;
         self.adrenalin = 0.0;
         self.lastLuminance = 1.0;
         self.luminanceDelta = 0.0;
@@ -32,6 +35,7 @@
 
 - (void)setLocation:(CGPoint)location
 {
+    self.lastLocation = _location;
     _location = location;
     if (self.delegate) {
         [self.delegate playerDidMove:self toPosition:location];

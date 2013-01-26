@@ -24,6 +24,8 @@
 
 @property (strong, readonly, nonatomic) NSMutableArray *mobs;
 
+@property (assign, readwrite, nonatomic) CGFloat lightScale;
+
 - (id)initWithName:(NSString *)name;
 
 + (BDLevel *)levelNamed:(NSString *)name;
