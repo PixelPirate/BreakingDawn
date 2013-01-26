@@ -37,8 +37,9 @@
 		87A5377B16B3E05900F7C6DB /* mob00-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5377A16B3E05900F7C6DB /* mob00-01.png */; };
 		87A5377E16B3E0C400F7C6DB /* BDMobView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5377D16B3E0C300F7C6DB /* BDMobView.m */; };
 		B19113AF16B4018E008BFCB9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19113AE16B4018E008BFCB9 /* AVFoundation.framework */; };
-		B19113B516B40707008BFCB9 /* BDHeartbeatView.m in Sources */ = {isa = PBXBuildFile; fileRef = B19113B416B40707008BFCB9 /* BDHeartbeatView.m */; };
+		B19113B516B40707008BFCB9 /* BDSound.m in Sources */ = {isa = PBXBuildFile; fileRef = B19113B416B40707008BFCB9 /* BDSound.m */; };
 		B19113B716B40CF9008BFCB9 /* heartbeat_isolated.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B19113B616B40CF9008BFCB9 /* heartbeat_isolated.mp3 */; };
+		B192C8CC16B435F5000E4BC9 /* BDAudioContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,9 +87,11 @@
 		87A5377C16B3E0C300F7C6DB /* BDMobView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMobView.h; sourceTree = "<group>"; };
 		87A5377D16B3E0C300F7C6DB /* BDMobView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMobView.m; sourceTree = "<group>"; };
 		B19113AE16B4018E008BFCB9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		B19113B316B40707008BFCB9 /* BDHeartbeatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDHeartbeatView.h; sourceTree = "<group>"; };
-		B19113B416B40707008BFCB9 /* BDHeartbeatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDHeartbeatView.m; sourceTree = "<group>"; };
+		B19113B316B40707008BFCB9 /* BDSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSound.h; sourceTree = "<group>"; };
+		B19113B416B40707008BFCB9 /* BDSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDSound.m; sourceTree = "<group>"; };
 		B19113B616B40CF9008BFCB9 /* heartbeat_isolated.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = heartbeat_isolated.mp3; sourceTree = "<group>"; };
+		B192C8CA16B435F5000E4BC9 /* BDAudioContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAudioContainer.h; sourceTree = "<group>"; };
+		B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAudioContainer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,10 +144,12 @@
 		87A5372316B31D8500F7C6DB /* Breaking Dawn */ = {
 			isa = PBXGroup;
 			children = (
+				B192C8CA16B435F5000E4BC9 /* BDAudioContainer.h */,
+				B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */,
 				87A5372C16B31D8600F7C6DB /* BDAppDelegate.h */,
 				87A5372D16B31D8700F7C6DB /* BDAppDelegate.m */,
-				B19113B316B40707008BFCB9 /* BDHeartbeatView.h */,
-				B19113B416B40707008BFCB9 /* BDHeartbeatView.m */,
+				B19113B316B40707008BFCB9 /* BDSound.h */,
+				B19113B416B40707008BFCB9 /* BDSound.m */,
 				87A5373516B31D8700F7C6DB /* BDViewController.h */,
 				87A5373616B31D8700F7C6DB /* BDViewController.m */,
 				87A5375416B32ACE00F7C6DB /* BDGameViewController.h */,
@@ -288,7 +293,8 @@
 				87A5377016B3983600F7C6DB /* BDPostProcessingViewController.m in Sources */,
 				87A5377916B3DF2500F7C6DB /* BDMob.m in Sources */,
 				87A5377E16B3E0C400F7C6DB /* BDMobView.m in Sources */,
-				B19113B516B40707008BFCB9 /* BDHeartbeatView.m in Sources */,
+				B19113B516B40707008BFCB9 /* BDSound.m in Sources */,
+				B192C8CC16B435F5000E4BC9 /* BDAudioContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

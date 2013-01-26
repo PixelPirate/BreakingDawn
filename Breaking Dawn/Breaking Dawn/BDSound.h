@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BDPlayer.h"
 
-@interface BDHeartbeatView : UIView
+@interface BDSound : NSObject
+
+@property (nonatomic) float bpm;
+
+- (id)initWithPlayer:(BDPlayer *)player;
 
 @end
