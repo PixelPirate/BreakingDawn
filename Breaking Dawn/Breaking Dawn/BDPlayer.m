@@ -47,13 +47,14 @@
     self.luminanceDelta = self.lastLuminance - luminance;
     self.lastLuminance = luminance;
     
-    if (luminance < 0.3) {
-        self.adrenalin += (1.0 - luminance) * 0.006;
+    if (luminance < 0.4) {
+        self.adrenalin += (1.0 - luminance) * 0.008;
         if (self.adrenalin > 1.0) {
             self.adrenalin = 1.0;
         }
     } else {
-        self.adrenalin -= (1.0 - luminance) * 0.05;
+        self.adrenalin -= (luminance) * 0.004;
+        NSLog(@"%f", self.adrenalin);
         if (self.adrenalin < 0.0) {
             self.adrenalin = 0.0;
         }

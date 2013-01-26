@@ -47,7 +47,7 @@
 
 - (void)playerDidMove:(BDPlayer *)player toPosition:(CGPoint)position
 {
-    CGFloat stepRange = 60.0;
+    CGFloat stepRange = 10.0;
     static CGFloat rangeWalked = 0.0;
     
     CGPoint lastPosition = player.lastLocation;
@@ -72,11 +72,11 @@
     NSArray *upright = @[[UIImage imageNamed:@"player00-move-back-01"], [UIImage imageNamed:@"player00-move-back-02"], [UIImage imageNamed:@"player00-move-back-03"]];
     NSArray *up = @[[UIImage imageNamed:@"player00-move-back-01"], [UIImage imageNamed:@"player00-move-back-02"], [UIImage imageNamed:@"player00-move-back-03"]];
     NSArray *upleft = @[[UIImage imageNamed:@"player00-move-back-01"], [UIImage imageNamed:@"player00-move-back-02"], [UIImage imageNamed:@"player00-move-back-03"]];
-    NSArray *left = @[[UIImage imageNamed:@"player00-left"]];
+    NSArray *left = @[[UIImage imageNamed:@"player00-move-left-01"], [UIImage imageNamed:@"player00-move-left-02"], [UIImage imageNamed:@"player00-move-left-03"]];
     NSArray *leftdown = @[[UIImage imageNamed:@"player00-front-left"]];
     NSArray *down = @[[UIImage imageNamed:@"player00-move-front-01"], [UIImage imageNamed:@"player00-move-front-02"], [UIImage imageNamed:@"player00-move-front-03"]];
     NSArray *rightdown = @[[UIImage imageNamed:@"player00-front-right"]];
-    NSArray *right = @[[UIImage imageNamed:@"player00-right"]];
+    NSArray *right = @[[UIImage imageNamed:@"player00-move-right-01"], [UIImage imageNamed:@"player00-move-right-02"], [UIImage imageNamed:@"player00-move-right-03"]];
     
     static NSUInteger index = 0;
     index += s;

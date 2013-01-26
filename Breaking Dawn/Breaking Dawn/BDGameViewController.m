@@ -15,6 +15,7 @@
 #import "UIImage+UIImage_Extras.h"
 #import "BDPostProcessingViewController.h"
 #import "BDMob.h"
+#import "BDHotspot.h"
 
 
 @interface BDGameViewController ()
@@ -95,6 +96,8 @@
     
     self.lastTouchLocation = CGPointZero;
     
+    
+    
     [NSTimer scheduledTimerWithTimeInterval:3.0
                                      target:self.postProcessingViewController
                                    selector:@selector(static)
@@ -158,6 +161,11 @@
         }
     }
     
+    // Hotspots
+    for (BDHotspot *hotspot in self.currentLevel.hotspots) {
+        [hotspot test:self.player.location];
+    }
+    
     // Check light amount recieved by the player
     UIColor *light = [[UIImage getRGBAsFromImage:self.currentLevel.lightMap
                                              atX:self.player.location.x
@@ -188,7 +196,7 @@
     // Mobs
     CGFloat speed = [[NSUserDefaults standardUserDefaults] floatForKey:@"MobWalkingSpeed"];
     for (BDMob *mob in self.currentLevel.mobs) {
-        BOOL canReach = [self.currentLevel canMoveFrom:mob.location to:self.player.location withLightLimit:0.3];
+        BOOL canReach = [self.currentLevel canMoveFrom:mob.location to:self.player.location withLightLimit:0.0];
         if (canReach) {
             CGPoint direction = CGPointMake(mob.location.x - self.player.location.x, mob.location.y - self.player.location.y);
             CGFloat maximalMovement = MAX(ABS(direction.x), ABS(direction.y));
@@ -212,7 +220,7 @@
 - (void)adrenalinChanged
 {
     // Manipulate ambience
-    self.currentLevelView.surfaceLayer.alpha = (1.0 - self.player.adrenalin)-0.5;
+    self.currentLevelView.surfaceLayer.alpha = (1.0 - self.player.adrenalin) - 0.5;
     //CGFloat scale = self.currentLevelView.lightScale;
     //NSLog(@"%f %f", scale, self.player.luminanceDelta);
     //self.currentLevelView.lightScale = scale + self.player.luminanceDelta;

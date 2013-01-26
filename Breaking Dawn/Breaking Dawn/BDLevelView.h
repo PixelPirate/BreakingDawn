@@ -26,4 +26,6 @@
 
 - (id)initWithLevel:(BDLevel *)level;
 
+- (void)reloadData;
+
 @end

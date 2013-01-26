@@ -10,6 +10,7 @@
 #import "UIImage+UIImage_Extras.h"
 #import <QuartzCore/QuartzCore.h>
 #import "BDMob.h"
+#import "BDHotspot.h"
 
 @interface BDLevel () // Private setter
 
@@ -45,7 +46,7 @@
         self.lights = [NSMutableArray array];
         NSURL *url = [[[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:@"map00.plist"] filePathURL];
         NSDictionary *mapInfos = [NSDictionary dictionaryWithContentsOfURL:url];
-        for (NSDictionary *pointRep in mapInfos[@"Lights"]) {
+        for (NSDictionary *pointRep in mapInfos[@"Stages"][0][@"Lights"]) {
             [self.lights addObject:pointRep];
         }
         
@@ -63,6 +64,11 @@
         self.spawn = CGPointMake(imageSize.width/2.0, imageSize.height/2.0);
         
         self.size = imageSize;
+        
+        self.hotspots = [NSMutableArray array];
+        [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1111, 700, 130, 100) trigger:^{
+            [self.lights addObjectsFromArray:mapInfos[@"Stages"][0][@"Lights"]];
+        }]];
         
         // Precache images
         if (self.collisionMap == nil) {
