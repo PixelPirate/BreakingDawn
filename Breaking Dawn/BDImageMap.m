@@ -11,6 +11,9 @@
 @interface BDImageMap ()
 
 @property (readwrite, nonatomic) UIImage *image;
+@property (readwrite, nonatomic) unsigned const char *rawData;
+@property (readwrite, nonatomic) NSUInteger bytesPerPixel;
+@property (readwrite, nonatomic) NSUInteger bytesPerRow;
 
 @end
 
@@ -21,46 +24,39 @@
 {
     self = [super init];
     self.image = image;
+    
+    CGImageRef imageRef = [self.image CGImage];
+    NSUInteger width = CGImageGetWidth(imageRef);
+    NSUInteger height = CGImageGetHeight(imageRef);
+    self.bytesPerPixel = 4;
+    self.bytesPerRow = self.bytesPerPixel * width;
+    NSUInteger bitsPerComponent = 8;
+    
+    unsigned const char *rawData;
+    // First get the image into your data buffer
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    rawData = (unsigned char*) calloc(height * width * 4, sizeof(unsigned char));
+    CGContextRef context = CGBitmapContextCreate((void *)rawData, width, height,
+                                                     bitsPerComponent, self.bytesPerRow, colorSpace,
+                                                     kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+    CGColorSpaceRelease(colorSpace);
+        
+    CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
+    CGContextRelease(context);
+        
+    self.rawData = rawData;
+    
     return self;
 }
 
 - (NSArray*)getRGBAsFromImageX:(int)xx andY:(int)yy count:(int)count
 {
-    static NSCache *cachedImages = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        cachedImages = [[NSCache alloc] init];
-    });
+    unsigned const char *rawData = self.rawData;
     
-    unsigned const char *rawData = [[cachedImages objectForKey:self.image] bytes];
-    
-    CGImageRef imageRef = [self.image CGImage];
-    NSUInteger width = CGImageGetWidth(imageRef);
-    NSUInteger height = CGImageGetHeight(imageRef);
-    NSUInteger bytesPerPixel = 4;
-    NSUInteger bytesPerRow = bytesPerPixel * width;
-    NSUInteger bitsPerComponent = 8;
-    
-    if (rawData == NULL) {
-        // First get the image into your data buffer
-        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-        rawData = (unsigned char*) calloc(height * width * 4, sizeof(unsigned char));
-        CGContextRef context = CGBitmapContextCreate((void *)rawData, width, height,
-                                                     bitsPerComponent, bytesPerRow, colorSpace,
-                                                     kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
-        CGColorSpaceRelease(colorSpace);
-        
-        CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
-        CGContextRelease(context);
-        
-        [cachedImages setObject:[NSData dataWithBytesNoCopy:(void *)rawData
-                                                     length:(height * width * 4 * sizeof(unsigned char))
-                                               freeWhenDone:YES] forKey:self.image];
-    }
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:count];
     
     // Now your rawData contains the image data in the RGBA8888 pixel format.
-    int byteIndex = (bytesPerRow * yy) + xx * bytesPerPixel;
+    int byteIndex = (self.bytesPerRow * yy) + xx * self.bytesPerPixel;
     for (int ii = 0 ; ii < count ; ++ii)
     {
         CGFloat red   = (rawData[byteIndex]     * 1.0) / 255.0;

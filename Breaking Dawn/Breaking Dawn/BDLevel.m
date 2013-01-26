@@ -75,12 +75,10 @@
             [self.lights addObjectsFromArray:mapInfos[@"Stages"][0][@"Lights"]];
         }]];
         
-        // Precache images
+        // Create collision map from diffuse map if missing
         if (self.collisionMap == nil) {
             self.collisionMap = [[BDImageMap alloc] initWithUIImage:self.diffuseMap];
         }
-        [self.collisionMap getRGBAsFromImageX:0 andY:0 count:1];
-        [self.lightMap getRGBAsFromImageX:0 andY:0 count:1];
     }
     return self;
 }
