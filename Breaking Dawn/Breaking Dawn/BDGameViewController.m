@@ -54,15 +54,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:0.016
-                                                          target:self
-                                                        selector:@selector(tickWithTimer:)
-                                                        userInfo:nil
-                                                         repeats:YES];
         self.lastTouchLocation = CGPointZero;
         
         self.ambientMusicController = [BDAmbientMusicController sharedAmbientMusicController];
-        [self.ambientMusicController play];
     }
     return self;
 }
@@ -101,14 +95,21 @@
                                                               [UIScreen mainScreen].applicationFrame.size.height);
     
     self.lastTouchLocation = CGPointZero;
-    
-    
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
     [NSTimer scheduledTimerWithTimeInterval:3.0
                                      target:self.postProcessingViewController
                                    selector:@selector(static)
                                    userInfo:nil
                                     repeats:YES];
+    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:[[NSUserDefaults standardUserDefaults] floatForKey:@"DrawRate"]
+                                                      target:self
+                                                    selector:@selector(tickWithTimer:)
+                                                    userInfo:nil
+                                                     repeats:YES];
+    [self.ambientMusicController play];
 }
 
 - (void)pushTouch:(UITouch *)touch
