@@ -57,31 +57,7 @@
 
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit
 {
-    // Check collision map for obsacles along the path from 'from' to 'to'
-    // If a value in the light map is higher than 'lightLimit', it counts as an obstacle too!
-    
-    NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
-    
-    
-    CGPoint currentPoint = CGPointMake(floor(from.x), floor(from.y));
-    to = CGPointMake(floor(to.x), floor(to.y));
-    
-    while (!CGPointEqualToPoint(currentPoint, to)) {
-        // Check obstacles
-        //NSLog(@"%@ %@", NSStringFromCGPoint(currentPoint), NSStringFromCGPoint(to));
-        
-        CGPoint move = CGPointMake(to.x - currentPoint.x, to.y - currentPoint.y);
-        move = CGPointMake(move.x / MAX(move.x, move.y), move.y / MAX(move.x, move.y));
-        move = CGPointMake(floor(move.x), floor(move.y));
-        if (CGPointEqualToPoint(move, CGPointZero)) {
-            break;
-        }
-        
-        currentPoint = CGPointApplyAffineTransform(currentPoint, CGAffineTransformMakeTranslation(-move.x, -move.y));
-        
-    }
-    
-    //UIColor *color = [[BDLevel getRGBAsFromImage:self.collisionMap atX:0 andY:0 count:1] lastObject];
+    return true;
 }
 
 + (NSArray*)getRGBAsFromImage:(UIImage*)image atX:(int)xx andY:(int)yy count:(int)count

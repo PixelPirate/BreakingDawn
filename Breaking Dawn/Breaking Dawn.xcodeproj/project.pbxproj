@@ -26,6 +26,9 @@
 		87A5375116B324C900F7C6DB /* BDPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5375016B324C900F7C6DB /* BDPlayer.m */; };
 		87A5375316B327D400F7C6DB /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5375216B327D400F7C6DB /* Player.png */; };
 		87A5375616B32ACE00F7C6DB /* BDGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5375516B32ACE00F7C6DB /* BDGameViewController.m */; };
+		87A5375816B34B2300F7C6DB /* player00.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5375716B34B2300F7C6DB /* player00.png */; };
+		87A5375E16B34DC000F7C6DB /* map00_diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5375D16B34DC000F7C6DB /* map00_diffuse.png */; };
+		87A5376016B356CC00F7C6DB /* map00.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87A5375F16B356CC00F7C6DB /* map00.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +61,9 @@
 		87A5375216B327D400F7C6DB /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player.png; sourceTree = "<group>"; };
 		87A5375416B32ACE00F7C6DB /* BDGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDGameViewController.h; sourceTree = "<group>"; };
 		87A5375516B32ACE00F7C6DB /* BDGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDGameViewController.m; sourceTree = "<group>"; };
+		87A5375716B34B2300F7C6DB /* player00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player00.png; sourceTree = "<group>"; };
+		87A5375D16B34DC000F7C6DB /* map00_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map00_diffuse.png; sourceTree = "<group>"; };
+		87A5375F16B356CC00F7C6DB /* map00.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = map00.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +151,9 @@
 			children = (
 				87A5374916B321A500F7C6DB /* Level0_diffuse.png */,
 				87A5375216B327D400F7C6DB /* Player.png */,
+				87A5375716B34B2300F7C6DB /* player00.png */,
+				87A5375D16B34DC000F7C6DB /* map00_diffuse.png */,
+				87A5375F16B356CC00F7C6DB /* map00.plist */,
 			);
 			name = Ressources;
 			sourceTree = "<group>";
@@ -209,6 +218,9 @@
 				87A5373D16B31D8700F7C6DB /* BDViewController_iPad.xib in Resources */,
 				87A5374A16B321A500F7C6DB /* Level0_diffuse.png in Resources */,
 				87A5375316B327D400F7C6DB /* Player.png in Resources */,
+				87A5375816B34B2300F7C6DB /* player00.png in Resources */,
+				87A5375E16B34DC000F7C6DB /* map00_diffuse.png in Resources */,
+				87A5376016B356CC00F7C6DB /* map00.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +281,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -284,6 +296,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -298,7 +311,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -306,6 +319,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

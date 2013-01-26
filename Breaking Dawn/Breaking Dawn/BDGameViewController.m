@@ -21,8 +21,6 @@
 
 @property (strong, readwrite, nonatomic) BDLevel *currentLevel;
 
-@property (strong, readwrite, nonatomic) NSMutableArray *moveEventQueue;
-
 @property (assign, readwrite, nonatomic) CGPoint lastTouchLocation;
 
 - (void)tickWithTimer:(NSTimer *)timer;
@@ -36,11 +34,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.moveEventQueue = [NSMutableArray array];
         [NSTimer scheduledTimerWithTimeInterval:0.016 target:self selector:@selector(tickWithTimer:) userInfo:nil repeats:YES];
         self.lastTouchLocation = CGPointZero;
-        //CGPointMake([UIScreen mainScreen].applicationFrame.size.width/2.0,
-          //                                   [UIScreen mainScreen].applicationFrame.size.height/2.0);
     }
     return self;
 }
@@ -48,9 +43,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     
-    self.currentLevel = [BDLevel levelNamed:@"Level0"];
+    self.currentLevel = [BDLevel levelNamed:@"map00"];
     BDLevelView *levelView = [[BDLevelView alloc] initWithLevel:self.currentLevel];
     self.player = [[BDPlayer alloc] initWithPosition:self.currentLevel.spawn];
     self.playerView = [[BDPlayerView alloc] initWithPlayer:self.player];
@@ -81,7 +75,12 @@
     max = CGSizeApplyAffineTransform(max, CGAffineTransformMakeScale(0.5, 0.5));
     CGPoint normalizedDirection = CGPointMake(direction.x / max.width, direction.y / max.height);
     
-    //[self.moveEventQueue addObject:[NSValue valueWithCGPoint:normalizedDirection]];
+    BOOL precitionControlls = [[NSUserDefaults standardUserDefaults] boolForKey:@"PrecitionControlls"];
+    if (!precitionControlls) {
+        CGFloat maximalMovement = MAX(ABS(normalizedDirection.x), ABS(normalizedDirection.y));
+        normalizedDirection = CGPointMake(normalizedDirection.x / maximalMovement, normalizedDirection.y / maximalMovement);
+    }
+    
     self.lastTouchLocation = normalizedDirection;
 }
 
@@ -98,14 +97,11 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     self.lastTouchLocation = CGPointZero;
-    //[self.view convertPoint:self.playerView.center fromView:self.playerView];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     self.lastTouchLocation = CGPointZero;
-    
-    //[self.view convertPoint:self.playerView.center fromView:self.playerView];
 }
 
 - (void)tickWithTimer:(NSTimer *)timer
@@ -114,7 +110,8 @@
     
     // Move the player
     if (!CGPointEqualToPoint(movement, CGPointZero)) {
-        CGPoint newLocation = CGPointApplyAffineTransform(self.player.location, CGAffineTransformMakeTranslation(-movement.x, -movement.y));
+        CGPoint newLocation = CGPointApplyAffineTransform(self.player.location,
+                                                          CGAffineTransformMakeTranslation(-movement.x, -movement.y));
         if ([self.currentLevel canMoveFrom:self.player.location to:newLocation]) {
             self.player.location = newLocation;
         }

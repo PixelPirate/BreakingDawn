@@ -26,7 +26,7 @@
 - (id)initWithPlayer:(BDPlayer *)player
 {
     CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"Scale"];
-    UIImage *playerImage = [UIImage imageNamed:@"Player"];
+    UIImage *playerImage = [UIImage imageNamed:@"player00"];
     
     self = [super initWithFrame:CGRectMake(0, 0, playerImage.size.width*scale, playerImage.size.height*scale)];
     if (self) {
