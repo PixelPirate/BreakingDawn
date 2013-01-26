@@ -11,6 +11,7 @@
 #import "BDLevel.h"
 #import "BDPlayer.h"
 #import "BDPlayerView.h"
+#import "BDHeartbeatView.h"
 #import "UIImage+UIImage_Extras.h"
 #import "BDPostProcessingViewController.h"
 #import "BDMob.h"
@@ -25,6 +26,8 @@
 @property (strong, readwrite, nonatomic) BDLevel *currentLevel;
 
 @property (strong, readwrite, nonatomic) BDLevelView *currentLevelView;
+
+@property (strong, readwrite, nonatomic) BDHeartbeatView *heartbeatView;
 
 @property (assign, readwrite, nonatomic) CGPoint lastTouchLocation;
 
@@ -69,6 +72,7 @@
     self.player.adrenalinHandler = ^{
         [s adrenalinChanged];
     };
+    self.heartbeatView = [[BDHeartbeatView alloc] init];
     
     self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
     self.postProcessingViewController.currentLevelView = self.currentLevelView;

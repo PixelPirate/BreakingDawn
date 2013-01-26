@@ -49,6 +49,9 @@
 		87A537A116B4213B00F7C6DB /* player00-move-front-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5379E16B4213B00F7C6DB /* player00-move-front-01.png */; };
 		87A537A216B4213B00F7C6DB /* player00-move-front-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5379F16B4213B00F7C6DB /* player00-move-front-02.png */; };
 		87A537A316B4213B00F7C6DB /* player00-move-front-03.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A537A016B4213B00F7C6DB /* player00-move-front-03.png */; };
+		B19113AF16B4018E008BFCB9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19113AE16B4018E008BFCB9 /* AVFoundation.framework */; };
+		B19113B516B40707008BFCB9 /* BDHeartbeatView.m in Sources */ = {isa = PBXBuildFile; fileRef = B19113B416B40707008BFCB9 /* BDHeartbeatView.m */; };
+		B19113B716B40CF9008BFCB9 /* heartbeat_isolated.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B19113B616B40CF9008BFCB9 /* heartbeat_isolated.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +111,10 @@
 		87A5379E16B4213B00F7C6DB /* player00-move-front-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-01.png"; sourceTree = "<group>"; };
 		87A5379F16B4213B00F7C6DB /* player00-move-front-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-02.png"; sourceTree = "<group>"; };
 		87A537A016B4213B00F7C6DB /* player00-move-front-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-03.png"; sourceTree = "<group>"; };
+		B19113AE16B4018E008BFCB9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B19113B316B40707008BFCB9 /* BDHeartbeatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDHeartbeatView.h; sourceTree = "<group>"; };
+		B19113B416B40707008BFCB9 /* BDHeartbeatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDHeartbeatView.m; sourceTree = "<group>"; };
+		B19113B616B40CF9008BFCB9 /* heartbeat_isolated.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = heartbeat_isolated.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B19113AF16B4018E008BFCB9 /* AVFoundation.framework in Frameworks */,
 				87A5377616B3999E00F7C6DB /* CoreImage.framework in Frameworks */,
 				87A5376416B35EA500F7C6DB /* QuartzCore.framework in Frameworks */,
 				87A5371E16B31D8500F7C6DB /* UIKit.framework in Frameworks */,
@@ -146,6 +154,7 @@
 		87A5371C16B31D8500F7C6DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B19113AE16B4018E008BFCB9 /* AVFoundation.framework */,
 				87A5377516B3999E00F7C6DB /* CoreImage.framework */,
 				87A5376316B35EA500F7C6DB /* QuartzCore.framework */,
 				87A5371D16B31D8500F7C6DB /* UIKit.framework */,
@@ -158,9 +167,10 @@
 		87A5372316B31D8500F7C6DB /* Breaking Dawn */ = {
 			isa = PBXGroup;
 			children = (
-				87A5374B16B321AC00F7C6DB /* Ressources */,
 				87A5372C16B31D8600F7C6DB /* BDAppDelegate.h */,
 				87A5372D16B31D8700F7C6DB /* BDAppDelegate.m */,
+				B19113B316B40707008BFCB9 /* BDHeartbeatView.h */,
+				B19113B416B40707008BFCB9 /* BDHeartbeatView.m */,
 				87A5373516B31D8700F7C6DB /* BDViewController.h */,
 				87A5373616B31D8700F7C6DB /* BDViewController.m */,
 				87A5375416B32ACE00F7C6DB /* BDGameViewController.h */,
@@ -183,6 +193,7 @@
 				87A5377816B3DF2500F7C6DB /* BDMob.m */,
 				87A5373816B31D8700F7C6DB /* BDViewController_iPhone.xib */,
 				87A5373B16B31D8700F7C6DB /* BDViewController_iPad.xib */,
+				87A5374B16B321AC00F7C6DB /* Ressources */,
 				87A5372416B31D8600F7C6DB /* Supporting Files */,
 			);
 			path = "Breaking Dawn";
@@ -205,6 +216,7 @@
 		87A5374B16B321AC00F7C6DB /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				B19113B616B40CF9008BFCB9 /* heartbeat_isolated.mp3 */,
 				87A5374916B321A500F7C6DB /* Level0_diffuse.png */,
 				87A5376C16B391C200F7C6DB /* player00.png */,
 				87A5375F16B356CC00F7C6DB /* map00.plist */,
@@ -329,6 +341,7 @@
 				87A537A116B4213B00F7C6DB /* player00-move-front-01.png in Resources */,
 				87A537A216B4213B00F7C6DB /* player00-move-front-02.png in Resources */,
 				87A537A316B4213B00F7C6DB /* player00-move-front-03.png in Resources */,
+				B19113B716B40CF9008BFCB9 /* heartbeat_isolated.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +364,7 @@
 				87A5377016B3983600F7C6DB /* BDPostProcessingViewController.m in Sources */,
 				87A5377916B3DF2500F7C6DB /* BDMob.m in Sources */,
 				87A5377E16B3E0C400F7C6DB /* BDMobView.m in Sources */,
+				B19113B516B40707008BFCB9 /* BDHeartbeatView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +493,7 @@
 				87A5374216B31D8700F7C6DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
