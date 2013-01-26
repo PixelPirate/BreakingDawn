@@ -96,7 +96,7 @@
     // Run from left to right or from right to left
     int inc = x1 > x0 ? 1 : -1;
     
-    for(int x=x0; (inc>0) ? (x<=x1) : (x>=x1); x+=inc) {
+    for(int x=x0; (inc>0) ? (x<=(int)x1) : (x>=(int)x1); x+=inc) {
         float progress = (x-x0)/(x1-x0);
         int y = y0 + (y1-y0)*progress;
         BOOL stop = NO;
