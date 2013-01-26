@@ -12,6 +12,7 @@
 #import "BDMob.h"
 #import "BDImageMap.h"
 #import "BDHotspot.h"
+#import "BDSound.h"
 
 @interface BDLevel () // Private setter
 
@@ -74,6 +75,7 @@
         
         self.hotspots = [NSMutableArray array];
         [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1196, 663, 80, 60) trigger:^{
+            [[BDSound getInstance] playSound:SOUND_LIGHT_SWITCH];
             if (self.delegate) [self.delegate level:self willAddLights:mapInfos[@"Stages"][1][@"Lights"]];
         }]];
         
