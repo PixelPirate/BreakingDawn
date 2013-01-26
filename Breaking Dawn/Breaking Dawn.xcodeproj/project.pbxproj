@@ -510,6 +510,9 @@
 				87A537DD16B4527F00F7C6DB /* player00-move-front-right-01.png in Resources */,
 				87A537DE16B4527F00F7C6DB /* player00-move-front-right-02.png in Resources */,
 				87A537DF16B4527F00F7C6DB /* player00-move-front-right-03.png in Resources */,
+				B1C2B53116B441FA00CFCC37 /* Ambience-16.wav in Resources */,
+				B1C2B53216B441FA00CFCC37 /* Ambience-17.wav in Resources */,
+				B1C2B53316B441FA00CFCC37 /* Ambience-22.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
