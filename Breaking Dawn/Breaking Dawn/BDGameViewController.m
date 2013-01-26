@@ -224,10 +224,10 @@
     // Mobs
     CGFloat speed = [[NSUserDefaults standardUserDefaults] floatForKey:@"MobWalkingSpeed"] * gameSpeed;
     for (BDMob *mob in self.currentLevel.mobs) {
-        // Skip if distance > 200
+        // Skip if distance > 400
         CGFloat dx = mob.location.x - self.player.location.x;
         CGFloat dy = mob.location.y - self.player.location.y;
-        if(sqrt(dx*dx + dy*dy) > 200) continue;
+        if(sqrt(dx*dx + dy*dy) > 400) continue;
         
         BOOL canReach = [self.currentLevel canMoveFrom:mob.location to:self.player.location withLightLimit:0.0];
         if (canReach) {
