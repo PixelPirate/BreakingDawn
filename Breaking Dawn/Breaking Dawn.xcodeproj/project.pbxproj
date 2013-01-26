@@ -49,9 +49,6 @@
 		87A537A116B4213B00F7C6DB /* player00-move-front-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5379E16B4213B00F7C6DB /* player00-move-front-01.png */; };
 		87A537A216B4213B00F7C6DB /* player00-move-front-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5379F16B4213B00F7C6DB /* player00-move-front-02.png */; };
 		87A537A316B4213B00F7C6DB /* player00-move-front-03.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A537A016B4213B00F7C6DB /* player00-move-front-03.png */; };
-		87A537AF16B42AB200F7C6DB /* Ambience-16.wav in Resources */ = {isa = PBXBuildFile; fileRef = 87A537AC16B42AB200F7C6DB /* Ambience-16.wav */; };
-		87A537B016B42AB200F7C6DB /* Ambience-17.wav in Resources */ = {isa = PBXBuildFile; fileRef = 87A537AD16B42AB200F7C6DB /* Ambience-17.wav */; };
-		87A537B116B42AB200F7C6DB /* Ambience-22.wav in Resources */ = {isa = PBXBuildFile; fileRef = 87A537AE16B42AB200F7C6DB /* Ambience-22.wav */; };
 		87A537B516B42D7200F7C6DB /* BDHotspot.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A537B416B42D7100F7C6DB /* BDHotspot.m */; };
 		87A537BE16B4361800F7C6DB /* player00-move-left-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A537B716B4361800F7C6DB /* player00-move-left-01.png */; };
 		87A537BF16B4361800F7C6DB /* player00-move-left-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A537B816B4361800F7C6DB /* player00-move-left-02.png */; };
@@ -69,6 +66,9 @@
 		B1C2B52216B43CBA00CFCC37 /* Monster_Awakes2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */; };
 		B1C2B52316B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51C16B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 */; };
 		B1C2B52416B43CBA00CFCC37 /* Monster_Awakes3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51D16B43CBA00CFCC37 /* Monster_Awakes3.mp3 */; };
+		B1C2B53116B441FA00CFCC37 /* Ambience-16.wav in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B52E16B441FA00CFCC37 /* Ambience-16.wav */; };
+		B1C2B53216B441FA00CFCC37 /* Ambience-17.wav in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B52F16B441FA00CFCC37 /* Ambience-17.wav */; };
+		B1C2B53316B441FA00CFCC37 /* Ambience-22.wav in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B53016B441FA00CFCC37 /* Ambience-22.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,9 +128,6 @@
 		87A5379E16B4213B00F7C6DB /* player00-move-front-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-01.png"; sourceTree = "<group>"; };
 		87A5379F16B4213B00F7C6DB /* player00-move-front-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-02.png"; sourceTree = "<group>"; };
 		87A537A016B4213B00F7C6DB /* player00-move-front-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-03.png"; sourceTree = "<group>"; };
-		87A537AC16B42AB200F7C6DB /* Ambience-16.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-16.wav"; sourceTree = "<group>"; };
-		87A537AD16B42AB200F7C6DB /* Ambience-17.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-17.wav"; sourceTree = "<group>"; };
-		87A537AE16B42AB200F7C6DB /* Ambience-22.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-22.wav"; sourceTree = "<group>"; };
 		87A537B316B42D7100F7C6DB /* BDHotspot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDHotspot.h; sourceTree = "<group>"; };
 		87A537B416B42D7100F7C6DB /* BDHotspot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDHotspot.m; sourceTree = "<group>"; };
 		87A537B716B4361800F7C6DB /* player00-move-left-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-left-01.png"; sourceTree = "<group>"; };
@@ -151,6 +148,9 @@
 		B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Monster_Awakes2.mp3; sourceTree = "<group>"; };
 		B1C2B51C16B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Monster_Awakes2+3.mp3"; sourceTree = "<group>"; };
 		B1C2B51D16B43CBA00CFCC37 /* Monster_Awakes3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Monster_Awakes3.mp3; sourceTree = "<group>"; };
+		B1C2B52E16B441FA00CFCC37 /* Ambience-16.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-16.wav"; sourceTree = "<group>"; };
+		B1C2B52F16B441FA00CFCC37 /* Ambience-17.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-17.wav"; sourceTree = "<group>"; };
+		B1C2B53016B441FA00CFCC37 /* Ambience-22.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-22.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +209,8 @@
 				87A5372D16B31D8700F7C6DB /* BDAppDelegate.m */,
 				B19113B316B40707008BFCB9 /* BDSound.h */,
 				B19113B416B40707008BFCB9 /* BDSound.m */,
+				87A537B316B42D7100F7C6DB /* BDHotspot.h */,
+				87A537B416B42D7100F7C6DB /* BDHotspot.m */,
 				87A5373516B31D8700F7C6DB /* BDViewController.h */,
 				87A5373616B31D8700F7C6DB /* BDViewController.m */,
 				87A5375416B32ACE00F7C6DB /* BDGameViewController.h */,
@@ -254,6 +256,9 @@
 		87A5374B16B321AC00F7C6DB /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				B1C2B52E16B441FA00CFCC37 /* Ambience-16.wav */,
+				B1C2B52F16B441FA00CFCC37 /* Ambience-17.wav */,
+				B1C2B53016B441FA00CFCC37 /* Ambience-22.wav */,
 				B1C2B51716B43CBA00CFCC37 /* Game_Over_Scream.mp3 */,
 				B1C2B51816B43CBA00CFCC37 /* heartbeat_isolated.mp3 */,
 				B1C2B51916B43CBA00CFCC37 /* Monster_Awakes1.mp3 */,
@@ -392,7 +397,6 @@
 				87A5376016B356CC00F7C6DB /* map00.plist in Resources */,
 				87A5376B16B38F5100F7C6DB /* light00-01.jpg in Resources */,
 				87A5376D16B391C200F7C6DB /* player00.png in Resources */,
-				87A5377B16B3E05900F7C6DB /* mob00-01.png in Resources */,
 				B1C2B51E16B43CBA00CFCC37 /* Game_Over_Scream.mp3 in Resources */,
 				B1C2B51F16B43CBA00CFCC37 /* heartbeat_isolated.mp3 in Resources */,
 				B1C2B52016B43CBA00CFCC37 /* Monster_Awakes1.mp3 in Resources */,
@@ -400,6 +404,30 @@
 				B1C2B52216B43CBA00CFCC37 /* Monster_Awakes2.mp3 in Resources */,
 				B1C2B52316B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 in Resources */,
 				B1C2B52416B43CBA00CFCC37 /* Monster_Awakes3.mp3 in Resources */,
+				87A5378416B402C300F7C6DB /* mob00-01.png in Resources */,
+				87A5378616B4089E00F7C6DB /* map00_diffuse.png in Resources */,
+				87A5378816B408A600F7C6DB /* map00_collision.png in Resources */,
+				87A5379016B4098900F7C6DB /* player00-back.png in Resources */,
+				87A5379116B4098900F7C6DB /* player00-front-left.png in Resources */,
+				87A5379216B4098900F7C6DB /* player00-front-right.png in Resources */,
+				87A5379316B4098900F7C6DB /* player00-front.png in Resources */,
+				87A5379416B4098900F7C6DB /* player00-left.png in Resources */,
+				87A5379516B4098900F7C6DB /* player00-right.png in Resources */,
+				87A5379A16B4213700F7C6DB /* player00-move-back-01.png in Resources */,
+				87A5379B16B4213700F7C6DB /* player00-move-back-02.png in Resources */,
+				87A5379C16B4213700F7C6DB /* player00-move-back-03.png in Resources */,
+				87A537A116B4213B00F7C6DB /* player00-move-front-01.png in Resources */,
+				87A537A216B4213B00F7C6DB /* player00-move-front-02.png in Resources */,
+				87A537A316B4213B00F7C6DB /* player00-move-front-03.png in Resources */,
+				87A537BE16B4361800F7C6DB /* player00-move-left-01.png in Resources */,
+				87A537BF16B4361800F7C6DB /* player00-move-left-02.png in Resources */,
+				87A537C016B4361800F7C6DB /* player00-move-left-03.png in Resources */,
+				87A537C116B4361800F7C6DB /* player00-move-right-01.png in Resources */,
+				87A537C216B4361800F7C6DB /* player00-move-right-02.png in Resources */,
+				87A537C316B4361800F7C6DB /* player00-move-right-03.png in Resources */,
+				B1C2B53116B441FA00CFCC37 /* Ambience-16.wav in Resources */,
+				B1C2B53216B441FA00CFCC37 /* Ambience-17.wav in Resources */,
+				B1C2B53316B441FA00CFCC37 /* Ambience-22.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +452,7 @@
 				87A5377E16B3E0C400F7C6DB /* BDMobView.m in Sources */,
 				B19113B516B40707008BFCB9 /* BDSound.m in Sources */,
 				B192C8CC16B435F5000E4BC9 /* BDAudioContainer.m in Sources */,
+				87A537B516B42D7200F7C6DB /* BDHotspot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
