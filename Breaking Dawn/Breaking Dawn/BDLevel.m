@@ -130,7 +130,7 @@
     // Check collision map for obsacles along the path from 'from' to 'to'
     // If a value in the light map is higher than 'lightLimit', it counts as an obstacle too!
     
-    //NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
+    NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
     
     bool __block canMove = YES;
     [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
