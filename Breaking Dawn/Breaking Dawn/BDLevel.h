@@ -26,6 +26,8 @@
 
 @property (assign, readwrite, nonatomic) CGFloat lightScale;
 
+@property (strong, readwrite, nonatomic) NSMutableArray *hotspots;
+
 - (id)initWithName:(NSString *)name;
 
 + (BDLevel *)levelNamed:(NSString *)name;
@@ -33,5 +35,11 @@
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to;
 
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit;
+
+@end
+
+@interface BDLevel (LevelOneExtras)
+
+@property (strong, readwrite, nonatomic) NSMutableArray *secondLights;
 
 @end
