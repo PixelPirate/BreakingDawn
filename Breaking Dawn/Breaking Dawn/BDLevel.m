@@ -64,8 +64,8 @@
     bool steep = (abs(y1-y0) > abs(x1-x0));
     if(steep) {
         float swap;
-        swap=y0; x0=y0; y0=swap;
-        swap=y1; x1=y1; y1=swap;
+        swap=x0; x0=y0; y0=swap;
+        swap=x1; x1=y1; y1=swap;
     }
     
     // Run from left to right or from right to left
@@ -74,7 +74,7 @@
     for(int x=x0; (inc>0) ? (x<=x1) : (x>=x1); x+=inc) {
         float progress = (x-x0)/(x1-x0);
         int y = y0 + (y1-y0)*progress;
-        if(steep) block(x, y); else block(y, x);
+        if(steep) block(y, x); else block(x, y);
     }
 }
 
@@ -85,13 +85,18 @@
     
     //NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
     
+    bool __block canMove = YES;
     [self line:from to:to usingBlock:^(int x, int y) {
         UIColor *color = [[BDLevel getRGBAsFromImage:self.diffuseMap atX:x andY:y count:1] lastObject];
-        NSLog(@"%d %d", x, y);
+        const CGFloat *components = CGColorGetComponents([color CGColor]);
+        printf("%d %d\n", x, y);
+        if(components[0] == 0) {
+            canMove = NO; 
+        }
     }];
     
     
-    return YES;
+    return canMove;
 }
 
 + (NSArray*)getRGBAsFromImage:(UIImage*)image atX:(int)xx andY:(int)yy count:(int)count
