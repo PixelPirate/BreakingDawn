@@ -31,6 +31,8 @@
 		87A5376916B3899F00F7C6DB /* map00_diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5376816B3899F00F7C6DB /* map00_diffuse.png */; };
 		87A5376B16B38F5100F7C6DB /* light00-01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87A5376A16B38F5100F7C6DB /* light00-01.jpg */; };
 		87A5376D16B391C200F7C6DB /* player00.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5376C16B391C200F7C6DB /* player00.png */; };
+		87A5377016B3983600F7C6DB /* BDPostProcessingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5376F16B3983600F7C6DB /* BDPostProcessingViewController.m */; };
+		87A5377616B3999E00F7C6DB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A5377516B3999E00F7C6DB /* CoreImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,9 @@
 		87A5376816B3899F00F7C6DB /* map00_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map00_diffuse.png; sourceTree = "<group>"; };
 		87A5376A16B38F5100F7C6DB /* light00-01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "light00-01.jpg"; sourceTree = "<group>"; };
 		87A5376C16B391C200F7C6DB /* player00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player00.png; sourceTree = "<group>"; };
+		87A5376E16B3983600F7C6DB /* BDPostProcessingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPostProcessingViewController.h; sourceTree = "<group>"; };
+		87A5376F16B3983600F7C6DB /* BDPostProcessingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDPostProcessingViewController.m; sourceTree = "<group>"; };
+		87A5377516B3999E00F7C6DB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87A5377616B3999E00F7C6DB /* CoreImage.framework in Frameworks */,
 				87A5376416B35EA500F7C6DB /* QuartzCore.framework in Frameworks */,
 				87A5371E16B31D8500F7C6DB /* UIKit.framework in Frameworks */,
 				87A5372016B31D8500F7C6DB /* Foundation.framework in Frameworks */,
@@ -106,6 +112,7 @@
 		87A5371C16B31D8500F7C6DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87A5377516B3999E00F7C6DB /* CoreImage.framework */,
 				87A5376316B35EA500F7C6DB /* QuartzCore.framework */,
 				87A5371D16B31D8500F7C6DB /* UIKit.framework */,
 				87A5371F16B31D8500F7C6DB /* Foundation.framework */,
@@ -124,6 +131,8 @@
 				87A5373616B31D8700F7C6DB /* BDViewController.m */,
 				87A5375416B32ACE00F7C6DB /* BDGameViewController.h */,
 				87A5375516B32ACE00F7C6DB /* BDGameViewController.m */,
+				87A5376E16B3983600F7C6DB /* BDPostProcessingViewController.h */,
+				87A5376F16B3983600F7C6DB /* BDPostProcessingViewController.m */,
 				87A5376516B3662500F7C6DB /* UIImage+UIImage_Extras.h */,
 				87A5376616B3662600F7C6DB /* UIImage+UIImage_Extras.m */,
 				87A5374C16B324BE00F7C6DB /* BDPlayerView.h */,
@@ -249,6 +258,7 @@
 				87A5375116B324C900F7C6DB /* BDPlayer.m in Sources */,
 				87A5375616B32ACE00F7C6DB /* BDGameViewController.m in Sources */,
 				87A5376716B3662600F7C6DB /* UIImage+UIImage_Extras.m in Sources */,
+				87A5377016B3983600F7C6DB /* BDPostProcessingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

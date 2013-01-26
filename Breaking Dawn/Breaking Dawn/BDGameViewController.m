@@ -12,6 +12,7 @@
 #import "BDPlayer.h"
 #import "BDPlayerView.h"
 #import "UIImage+UIImage_Extras.h"
+#import "BDPostProcessingViewController.h"
 
 
 @interface BDGameViewController ()
@@ -25,6 +26,8 @@
 @property (strong, readwrite, nonatomic) BDLevelView *currentLevelView;
 
 @property (assign, readwrite, nonatomic) CGPoint lastTouchLocation;
+
+@property (strong, readwrite, nonatomic) BDPostProcessingViewController *postProcessingViewController;
 
 - (void)tickWithTimer:(NSTimer *)timer;
 
@@ -58,6 +61,8 @@
         [s adrenalinChanged];
     };
     
+    self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
+    
     UIView *gameView = [[UIView alloc] initWithFrame:self.currentLevelView.bounds];
     [gameView addSubview:self.currentLevelView];
     [self.currentLevelView.playerLayer addSubview:self.playerView];
@@ -67,6 +72,12 @@
     gameView.frame = CGRectOffset(gameView.frame, -self.playerView.center.x+applicationSize.width/2.0, -self.playerView.center.y+applicationSize.height/2.0);
     
     self.view = gameView;
+    
+    [self.view addSubview:self.postProcessingViewController.view];
+    self.postProcessingViewController.view.frame = CGRectMake(-self.view.frame.origin.x,
+                                                              -self.view.frame.origin.y,
+                                                              [UIScreen mainScreen].applicationFrame.size.width,
+                                                              [UIScreen mainScreen].applicationFrame.size.height);
     
     self.lastTouchLocation = CGPointZero;
 }
@@ -147,12 +158,18 @@
                                  y,
                                  self.view.frame.size.width,
                                  self.view.frame.size.height);
+    
+    // Center the postprocessing view to the screen
+    self.postProcessingViewController.view.frame = CGRectMake(-self.view.frame.origin.x,
+                                                              -self.view.frame.origin.y,
+                                                              [UIScreen mainScreen].applicationFrame.size.width,
+                                                              [UIScreen mainScreen].applicationFrame.size.height);
 }
 
 - (void)adrenalinChanged
 {
     // Manipulate ambience
-    self.currentLevelView.surfaceLayer.alpha = 1.0 - self.player.adrenalin;
+    self.currentLevelView.surfaceLayer.alpha = (1.0 - self.player.adrenalin)-0.5;
     //CGFloat scale = self.currentLevelView.lightScale;
     //NSLog(@"%f %f", scale, self.player.luminanceDelta);
     //self.currentLevelView.lightScale = scale + self.player.luminanceDelta;
