@@ -86,10 +86,11 @@
     //NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
     
     [self line:from to:to usingBlock:^(int x, int y) {
+        UIColor *color = [[BDLevel getRGBAsFromImage:self.diffuseMap atX:x andY:y count:1] lastObject];
         NSLog(@"%d %d", x, y);
     }];
     
-    //UIColor *color = [[BDLevel getRGBAsFromImage:self.collisionMap atX:0 andY:0 count:1] lastObject];
+    
     return YES;
 }
 
