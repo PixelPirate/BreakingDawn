@@ -20,7 +20,7 @@
     [[NSUserDefaults standardUserDefaults] setFloat:2.0 forKey:@"WalkingSpeed"];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [[NSUserDefaults standardUserDefaults] setFloat:2.0 forKey:@"Scale"];
+        [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];
         self.viewController = [[BDViewController alloc] initWithNibName:@"BDViewController_iPhone" bundle:nil];
     } else {
         [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];
