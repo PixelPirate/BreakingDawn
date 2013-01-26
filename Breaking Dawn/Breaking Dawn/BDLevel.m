@@ -131,7 +131,7 @@
             CGFloat b = 0.0;
             [color getRed:&r green:&g blue:&b alpha:&alpha];
             //components = CGColorGetComponents([color CGColor]);
-            printf("%f %f %f %f\n", 1.0-r, 1.0-g, 1.0-b, 1.0-alpha);
+            //printf("%f %f %f %f\n", 1.0-r, 1.0-g, 1.0-b, 1.0-alpha);
             if (alpha > lightLimit) {
                 canMove = NO;
                 *stop = YES;
