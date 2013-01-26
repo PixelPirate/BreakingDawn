@@ -27,7 +27,7 @@
 
 @property (strong, readwrite, nonatomic) BDLevelView *currentLevelView;
 
-@property (strong, readwrite, nonatomic) BDSound *heartbeatView;
+@property (strong, readwrite, nonatomic) BDSound *sound;
 
 @property (assign, readwrite, nonatomic) CGPoint lastTouchLocation;
 
@@ -72,7 +72,7 @@
     self.player.adrenalinHandler = ^{
         [s adrenalinChanged];
     };
-    self.heartbeatView = [[BDSound alloc] initWithPlayer:self.player];
+    self.sound = [[BDSound alloc] initWithPlayer:self.player];
     
     self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
     self.postProcessingViewController.currentLevelView = self.currentLevelView;
