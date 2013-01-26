@@ -20,6 +20,8 @@
 
 @property (assign, readonly, nonatomic) CGPoint spawn;
 
+@property (strong, readonly, nonatomic) NSMutableArray *lights;
+
 - (id)initWithName:(NSString *)name;
 
 + (BDLevel *)levelNamed:(NSString *)name;

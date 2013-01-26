@@ -5,8 +5,52 @@
 	<key>Lights</key>
 	<array>
 		<dict>
-			<key>New item</key>
-			<integer>0</integer>
+			<key>X</key>
+			<real>1584.0</real>
+			<key>Y</key>
+			<real>240.0</real>
+		</dict>
+		<dict>
+			<key>X</key>
+			<real>1392.0</real>
+			<key>Y</key>
+			<real>432.0</real>
+		</dict>
+		<dict>
+			<key>X</key>
+			<real>912.0</real>
+			<key>Y</key>
+			<real>336.0</real>
+		</dict>
+		<dict>
+			<key>X</key>
+			<real>912.0</real>
+			<key>Y</key>
+			<real>592.0</real>
+		</dict>
+		<dict>
+			<key>X</key>
+			<real>1136.0</real>
+			<key>Y</key>
+			<real>720.0</real>
+		</dict>
+		<dict>
+			<key>X</key>
+			<real>528.0</real>
+			<key>Y</key>
+			<real>304.0</real>
+		</dict>
+		<dict>
+			<key>X</key>
+			<real>368.0</real>
+			<key>Y</key>
+			<real>464.0</real>
+		</dict>
+		<dict>
+			<key>X</key>
+			<real>336.0</real>
+			<key>Y</key>
+			<real>656.0</real>
 		</dict>
 	</array>
 </dict>

@@ -51,7 +51,7 @@
     
     UIView *gameView = [[UIView alloc] initWithFrame:levelView.bounds];
     [gameView addSubview:levelView];
-    [gameView insertSubview:self.playerView aboveSubview:levelView];
+    [levelView.playerLayer addSubview:self.playerView];
     
     
     CGSize applicationSize = [[UIScreen mainScreen] applicationFrame].size;
@@ -60,7 +60,6 @@
     self.view = gameView;
     
     self.lastTouchLocation = CGPointZero;
-    //[self.view convertPoint:self.playerView.center fromView:self.playerView];
 }
 
 - (void)pushTouch:(UITouch *)touch
@@ -117,6 +116,9 @@
         }
     }
     
+    // Check light amount recieved by the player
+    self.currentLevel.lightMap;
+    
     // Center the game view to the players location
     CGFloat b = self.playerView.center.x;
     CGFloat a = [UIScreen mainScreen].applicationFrame.size.width / 2.0;
@@ -133,7 +135,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

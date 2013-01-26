@@ -7,6 +7,8 @@
 //
 
 #import "BDLevel.h"
+#import "UIImage+UIImage_Extras.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface BDLevel () // Private setter
 
@@ -20,7 +22,9 @@
 
 @property (assign, readwrite, nonatomic) CGPoint spawn;
 
-+ (NSArray*)getRGBAsFromImage:(UIImage*)image atX:(int)xx andY:(int)yy count:(int)count;
+@property (strong, readwrite, nonatomic) NSMutableArray *lights;
+
+- (void)loadLightmap;
 
 @end
 
@@ -34,6 +38,17 @@
         self.diffuseMap = [UIImage imageNamed:[name stringByAppendingString:@"_diffuse"]];
         self.lightMap = [UIImage imageNamed:[name stringByAppendingString:@"_light"]];
         self.collisionMap = [UIImage imageNamed:[name stringByAppendingString:@"_collision"]];
+        
+        self.lights = [NSMutableArray array];
+        NSURL *url = [[[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:@"map00.plist"] filePathURL];
+        NSDictionary *mapInfos = [NSDictionary dictionaryWithContentsOfURL:url];
+        for (NSDictionary *pointRep in mapInfos[@"Lights"]) {
+            [self.lights addObject:pointRep];
+        }
+        
+        if (self.lightMap == nil) {
+            [self loadLightmap];
+        }
         
         CGSize imageSize = self.diffuseMap.size;
         
@@ -83,54 +98,40 @@
     // Check collision map for obsacles along the path from 'from' to 'to'
     // If a value in the light map is higher than 'lightLimit', it counts as an obstacle too!
     
-    //NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
-    
     [self line:from to:to usingBlock:^(int x, int y) {
-        NSLog(@"%d %d", x, y);
+//        NSLog(@"%d %d", x, y);
     }];
     
-    //UIColor *color = [[BDLevel getRGBAsFromImage:self.collisionMap atX:0 andY:0 count:1] lastObject];
     return YES;
 }
 
-+ (NSArray*)getRGBAsFromImage:(UIImage*)image atX:(int)xx andY:(int)yy count:(int)count
+- (void)loadLightmap
 {
-    NSMutableArray *result = [NSMutableArray arrayWithCapacity:count];
+    UIGraphicsBeginImageContext(self.diffuseMap.size);
+    [[UIColor blackColor] set];
+    UIRectFill(CGRectMake(0, 0, self.diffuseMap.size.width, self.diffuseMap.size.height));
     
-    // First get the image into your data buffer
-    CGImageRef imageRef = [image CGImage];
-    NSUInteger width = CGImageGetWidth(imageRef);
-    NSUInteger height = CGImageGetHeight(imageRef);
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    unsigned char *rawData = (unsigned char*) calloc(height * width * 4, sizeof(unsigned char));
-    NSUInteger bytesPerPixel = 4;
-    NSUInteger bytesPerRow = bytesPerPixel * width;
-    NSUInteger bitsPerComponent = 8;
-    CGContextRef context = CGBitmapContextCreate(rawData, width, height,
-                                                 bitsPerComponent, bytesPerRow, colorSpace,
-                                                 kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
-    CGColorSpaceRelease(colorSpace);
-    
-    CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
-    CGContextRelease(context);
-    
-    // Now your rawData contains the image data in the RGBA8888 pixel format.
-    int byteIndex = (bytesPerRow * yy) + xx * bytesPerPixel;
-    for (int ii = 0 ; ii < count ; ++ii)
-    {
-        CGFloat red   = (rawData[byteIndex]     * 1.0) / 255.0;
-        CGFloat green = (rawData[byteIndex + 1] * 1.0) / 255.0;
-        CGFloat blue  = (rawData[byteIndex + 2] * 1.0) / 255.0;
-        CGFloat alpha = (rawData[byteIndex + 3] * 1.0) / 255.0;
-        byteIndex += 4;
+    for (NSDictionary *pointRep in self.lights) {
+        CGPoint p = CGPointZero;
+        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(pointRep), &p);
         
-        UIColor *acolor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-        [result addObject:acolor];
+        UIView *light = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 224, 224)];
+        light.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.4 alpha:0.8];
+        
+        UIImage *m = [UIImage maskView:light withMask:[UIImage imageNamed:@"light00-01.jpg"]];
+        UIImageView *v = [[UIImageView alloc] initWithImage:m];
+        v.center = p;
+        
+        CGContextSaveGState(UIGraphicsGetCurrentContext());
+        CGContextTranslateCTM(UIGraphicsGetCurrentContext(), v.frame.origin.x, v.frame.origin.y);
+        CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeDestinationOut);
+        [v.layer renderInContext:UIGraphicsGetCurrentContext()];
+        CGContextRestoreGState(UIGraphicsGetCurrentContext());
     }
+    UIImage *lightmap = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
-    free(rawData);
-    
-    return result;
+    self.lightMap = lightmap;
 }
 
 @end

@@ -20,7 +20,6 @@
 @end
 
 
-
 @implementation BDPlayerView
 
 - (id)initWithPlayer:(BDPlayer *)player

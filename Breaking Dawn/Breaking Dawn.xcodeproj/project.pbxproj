@@ -29,6 +29,9 @@
 		87A5375816B34B2300F7C6DB /* player00.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5375716B34B2300F7C6DB /* player00.png */; };
 		87A5375E16B34DC000F7C6DB /* map00_diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5375D16B34DC000F7C6DB /* map00_diffuse.png */; };
 		87A5376016B356CC00F7C6DB /* map00.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87A5375F16B356CC00F7C6DB /* map00.plist */; };
+		87A5376216B35B2200F7C6DB /* light00-01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87A5376116B35B2200F7C6DB /* light00-01.jpg */; };
+		87A5376416B35EA500F7C6DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A5376316B35EA500F7C6DB /* QuartzCore.framework */; };
+		87A5376716B3662600F7C6DB /* UIImage+UIImage_Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5376616B3662600F7C6DB /* UIImage+UIImage_Extras.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,10 @@
 		87A5375716B34B2300F7C6DB /* player00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player00.png; sourceTree = "<group>"; };
 		87A5375D16B34DC000F7C6DB /* map00_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map00_diffuse.png; sourceTree = "<group>"; };
 		87A5375F16B356CC00F7C6DB /* map00.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = map00.plist; sourceTree = "<group>"; };
+		87A5376116B35B2200F7C6DB /* light00-01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "light00-01.jpg"; sourceTree = "<group>"; };
+		87A5376316B35EA500F7C6DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		87A5376516B3662500F7C6DB /* UIImage+UIImage_Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImage_Extras.h"; sourceTree = "<group>"; };
+		87A5376616B3662600F7C6DB /* UIImage+UIImage_Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImage_Extras.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87A5376416B35EA500F7C6DB /* QuartzCore.framework in Frameworks */,
 				87A5371E16B31D8500F7C6DB /* UIKit.framework in Frameworks */,
 				87A5372016B31D8500F7C6DB /* Foundation.framework in Frameworks */,
 				87A5372216B31D8500F7C6DB /* CoreGraphics.framework in Frameworks */,
@@ -100,6 +108,7 @@
 		87A5371C16B31D8500F7C6DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87A5376316B35EA500F7C6DB /* QuartzCore.framework */,
 				87A5371D16B31D8500F7C6DB /* UIKit.framework */,
 				87A5371F16B31D8500F7C6DB /* Foundation.framework */,
 				87A5372116B31D8500F7C6DB /* CoreGraphics.framework */,
@@ -117,6 +126,8 @@
 				87A5373616B31D8700F7C6DB /* BDViewController.m */,
 				87A5375416B32ACE00F7C6DB /* BDGameViewController.h */,
 				87A5375516B32ACE00F7C6DB /* BDGameViewController.m */,
+				87A5376516B3662500F7C6DB /* UIImage+UIImage_Extras.h */,
+				87A5376616B3662600F7C6DB /* UIImage+UIImage_Extras.m */,
 				87A5374C16B324BE00F7C6DB /* BDPlayerView.h */,
 				87A5374D16B324BF00F7C6DB /* BDPlayerView.m */,
 				87A5374F16B324C900F7C6DB /* BDPlayer.h */,
@@ -154,6 +165,7 @@
 				87A5375716B34B2300F7C6DB /* player00.png */,
 				87A5375D16B34DC000F7C6DB /* map00_diffuse.png */,
 				87A5375F16B356CC00F7C6DB /* map00.plist */,
+				87A5376116B35B2200F7C6DB /* light00-01.jpg */,
 			);
 			name = Ressources;
 			sourceTree = "<group>";
@@ -221,6 +233,7 @@
 				87A5375816B34B2300F7C6DB /* player00.png in Resources */,
 				87A5375E16B34DC000F7C6DB /* map00_diffuse.png in Resources */,
 				87A5376016B356CC00F7C6DB /* map00.plist in Resources */,
+				87A5376216B35B2200F7C6DB /* light00-01.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +252,7 @@
 				87A5374E16B324BF00F7C6DB /* BDPlayerView.m in Sources */,
 				87A5375116B324C900F7C6DB /* BDPlayer.m in Sources */,
 				87A5375616B32ACE00F7C6DB /* BDGameViewController.m in Sources */,
+				87A5376716B3662600F7C6DB /* UIImage+UIImage_Extras.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

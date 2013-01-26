@@ -16,19 +16,13 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-//    NSDictionary *d = (__bridge NSDictionary *)(CGPointCreateDictionaryRepresentation(CGPointMake(0, 0)));
-//    NSDictionary *p = @{@"Lights" : @[d]};
-//    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-//    NSString *documentsDirectory = [path objectAtIndex:0];
-//    [p writeToFile:[documentsDirectory stringByAppendingString:@"_save.plist"] atomically:YES];
-    
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"PrecitionControlls"];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [[NSUserDefaults standardUserDefaults] setFloat:2.0 forKey:@"Scale"];
         self.viewController = [[BDViewController alloc] initWithNibName:@"BDViewController_iPhone" bundle:nil];
     } else {
-        [[NSUserDefaults standardUserDefaults] setFloat:2.0 forKey:@"Scale"];
+        [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];
         self.viewController = [[BDViewController alloc] initWithNibName:@"BDViewController_iPad" bundle:nil];
     }
     self.window.rootViewController = self.viewController;

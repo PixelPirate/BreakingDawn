@@ -14,6 +14,12 @@
 
 @property (strong, readonly, nonatomic) BDLevel *level;
 
+@property (strong, readonly, nonatomic) UIView *playerLayer;
+
+@property (strong, readonly, nonatomic) UIView *lightLayer;
+
+@property (strong, readonly, nonatomic) UIView *surfaceLayer;
+
 - (id)initWithLevel:(BDLevel *)level;
 
 
