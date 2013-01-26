@@ -33,6 +33,8 @@
 
 @property (strong, readwrite, nonatomic) BDLevel *level;
 
+@property (strong, readwrite, nonatomic) UIImageView *lightSwitch;
+
 - (void)beginPulsating;
 
 - (void)endPulsating;
@@ -87,6 +89,10 @@
             BDMobView *mobView = [[BDMobView alloc] initWithMob:mob];
             [self.surfaceLayer addSubview:mobView];
         }
+        
+        self.lightSwitch = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightSwitch-On.png"]];
+        self.lightSwitch.frame = CGRectMake(1224, 624, 24, 32);
+        [self addSubview:self.lightSwitch];
     }
     return self;
 }
@@ -207,6 +213,8 @@
 
 - (void)level:(BDLevel *)level willAddLights:(NSArray *)lights
 {
+    self.lightSwitch.image = [UIImage imageNamed:@"lightSwitch-Off"];
+    
     for (NSDictionary *pointRep in lights) {
         
         CGPoint p = CGPointZero;

@@ -73,9 +73,7 @@
         self.size = imageSize;
         
         self.hotspots = [NSMutableArray array];
-        [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1111, 700, 130, 100) trigger:^{
-//            [self.lights addObjectsFromArray:mapInfos[@"Stages"][0][@"Lights"]];
-            //if (self.delegate) [self.delegate levelChangedData:self];
+        [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1196, 663, 80, 60) trigger:^{
             if (self.delegate) [self.delegate level:self willAddLights:mapInfos[@"Stages"][1][@"Lights"]];
         }]];
         
