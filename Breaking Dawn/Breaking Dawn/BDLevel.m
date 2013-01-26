@@ -80,7 +80,17 @@
 
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit
 {
-    return true;
+    // Check collision map for obsacles along the path from 'from' to 'to'
+    // If a value in the light map is higher than 'lightLimit', it counts as an obstacle too!
+    
+    //NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
+    
+    [self line:from to:to usingBlock:^(int x, int y) {
+        NSLog(@"%d %d", x, y);
+    }];
+    
+    //UIColor *color = [[BDLevel getRGBAsFromImage:self.collisionMap atX:0 andY:0 count:1] lastObject];
+    return YES;
 }
 
 + (NSArray*)getRGBAsFromImage:(UIImage*)image atX:(int)xx andY:(int)yy count:(int)count
