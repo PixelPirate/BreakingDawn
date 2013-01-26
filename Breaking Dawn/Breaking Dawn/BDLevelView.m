@@ -37,6 +37,7 @@
         self.surfaceLayer = [[UIView alloc] initWithFrame:self.bounds];;
         self.lightLayer = [[UIView alloc] initWithFrame:self.bounds];;
         
+        self.backgroundColor = [UIColor blackColor];
         [self addSubview:self.surfaceLayer];
         [self insertSubview:self.playerLayer aboveSubview:self.surfaceLayer];
         [self insertSubview:self.lightLayer aboveSubview:self.playerLayer];
@@ -72,6 +73,20 @@
         }
     }
     return self;
+}
+
+- (void)setLightScale:(CGFloat)scale
+{
+    CGSize lightSize = CGSizeMake(224, 224);
+    _lightScale = scale;
+    for (UIImageView *i in self.lightLayer.subviews) {
+        if ([i isKindOfClass:[UIImageView class]]) {
+            CGSize size = CGSizeApplyAffineTransform(lightSize, CGAffineTransformMakeScale(scale, scale));
+            CGPoint center = i.center;
+            i.frame = CGRectMake(0, 0, size.width, size.height);
+            i.center = center;
+        }
+    }
 }
 
 @end

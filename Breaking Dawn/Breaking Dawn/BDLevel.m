@@ -55,6 +55,10 @@
         self.spawn = CGPointMake(imageSize.width/2.0, imageSize.height/2.0);
         
         self.size = imageSize;
+        
+        // Precache images
+        [UIImage getRGBAsFromImage:self.diffuseMap atX:0 andY:0 count:1];
+        [UIImage getRGBAsFromImage:self.lightMap atX:0 andY:0 count:1];
     }
     return self;
 }
@@ -98,11 +102,20 @@
     // Check collision map for obsacles along the path from 'from' to 'to'
     // If a value in the light map is higher than 'lightLimit', it counts as an obstacle too!
     
+    //NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
+    
+    bool __block canMove = YES;
     [self line:from to:to usingBlock:^(int x, int y) {
-//        NSLog(@"%d %d", x, y);
+        UIColor *color = [[UIImage getRGBAsFromImage:self.diffuseMap atX:x andY:y count:1] lastObject];
+        const CGFloat *components = CGColorGetComponents([color CGColor]);
+        //printf("%d %d\n", x, y);
+        if(components[0] == 0) {
+            canMove = NO; 
+        }
     }];
     
-    return YES;
+    
+    return canMove;
 }
 
 - (void)loadLightmap

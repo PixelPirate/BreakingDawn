@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^AdrenalinHandler)(void);
+
+
 @class BDPlayer;
 
 @protocol BDPlayerDelegate <NSObject>
@@ -25,6 +28,14 @@
 
 @property (assign, readwrite, nonatomic) CGPoint location;
 
+@property (copy, readwrite, nonatomic) AdrenalinHandler adrenalinHandler;
+
+@property (assign, readonly, nonatomic) CGFloat lastLuminance;
+
+@property (assign, readonly, nonatomic) CGFloat luminanceDelta;
+
 - (id)initWithPosition:(CGPoint)position;
+
+- (void)updateAdrenalin:(CGFloat)luminance;
 
 @end

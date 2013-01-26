@@ -11,6 +11,7 @@
 #import "BDLevel.h"
 #import "BDPlayer.h"
 #import "BDPlayerView.h"
+#import "UIImage+UIImage_Extras.h"
 
 
 @interface BDGameViewController ()
@@ -21,9 +22,13 @@
 
 @property (strong, readwrite, nonatomic) BDLevel *currentLevel;
 
+@property (strong, readwrite, nonatomic) BDLevelView *currentLevelView;
+
 @property (assign, readwrite, nonatomic) CGPoint lastTouchLocation;
 
 - (void)tickWithTimer:(NSTimer *)timer;
+
+- (void)adrenalinChanged;
 
 @end
 
@@ -45,13 +50,17 @@
     [super viewDidLoad];
     
     self.currentLevel = [BDLevel levelNamed:@"map00"];
-    BDLevelView *levelView = [[BDLevelView alloc] initWithLevel:self.currentLevel];
+    self.currentLevelView = [[BDLevelView alloc] initWithLevel:self.currentLevel];
     self.player = [[BDPlayer alloc] initWithPosition:self.currentLevel.spawn];
     self.playerView = [[BDPlayerView alloc] initWithPlayer:self.player];
+    __weak id s = self;
+    self.player.adrenalinHandler = ^{
+        [s adrenalinChanged];
+    };
     
-    UIView *gameView = [[UIView alloc] initWithFrame:levelView.bounds];
-    [gameView addSubview:levelView];
-    [levelView.playerLayer addSubview:self.playerView];
+    UIView *gameView = [[UIView alloc] initWithFrame:self.currentLevelView.bounds];
+    [gameView addSubview:self.currentLevelView];
+    [self.currentLevelView.playerLayer addSubview:self.playerView];
     
     
     CGSize applicationSize = [[UIScreen mainScreen] applicationFrame].size;
@@ -109,6 +118,8 @@
     
     // Move the player
     if (!CGPointEqualToPoint(movement, CGPointZero)) {
+        CGFloat walkingSpeed = [[NSUserDefaults standardUserDefaults] floatForKey:@"WalkingSpeed"];
+        movement = CGPointApplyAffineTransform(movement, CGAffineTransformMakeScale(walkingSpeed, walkingSpeed));
         CGPoint newLocation = CGPointApplyAffineTransform(self.player.location,
                                                           CGAffineTransformMakeTranslation(-movement.x, -movement.y));
         if ([self.currentLevel canMoveFrom:self.player.location to:newLocation]) {
@@ -117,7 +128,13 @@
     }
     
     // Check light amount recieved by the player
-    self.currentLevel.lightMap;
+    UIColor *light = [[UIImage getRGBAsFromImage:self.currentLevel.lightMap
+                                             atX:self.player.location.x
+                                            andY:self.player.location.y
+                                           count:1] lastObject];
+    CGFloat luminance = 0.0; // 1 means dark, 0 means bright
+    [light getRed:NULL green:NULL blue:NULL alpha:&luminance];
+    [self.player updateAdrenalin:1.0 - luminance];
     
     // Center the game view to the players location
     CGFloat b = self.playerView.center.x;
@@ -130,6 +147,26 @@
                                  y,
                                  self.view.frame.size.width,
                                  self.view.frame.size.height);
+}
+
+- (void)adrenalinChanged
+{
+    // Manipulate ambience
+    self.currentLevelView.surfaceLayer.alpha = 1.0 - self.player.adrenalin;
+    //CGFloat scale = self.currentLevelView.lightScale;
+    //NSLog(@"%f %f", scale, self.player.luminanceDelta);
+    //self.currentLevelView.lightScale = scale + self.player.luminanceDelta;
+    if (self.player.adrenalin > 0.3) {
+        self.currentLevelView.lightScale = self.currentLevelView.lightScale - 0.003;
+        if (self.currentLevelView.lightScale < 0.0) {
+            self.currentLevelView.lightScale = 0.0;
+        }
+    } else {
+        self.currentLevelView.lightScale = self.currentLevelView.lightScale + 0.08;
+        if (self.currentLevelView.lightScale > 1.0) {
+            self.currentLevelView.lightScale = 1.0;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning

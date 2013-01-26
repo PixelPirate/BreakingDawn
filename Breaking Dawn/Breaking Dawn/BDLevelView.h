@@ -20,8 +20,8 @@
 
 @property (strong, readonly, nonatomic) UIView *surfaceLayer;
 
+@property (assign, readwrite, nonatomic) CGFloat lightScale;
+
 - (id)initWithLevel:(BDLevel *)level;
-
-
 
 @end

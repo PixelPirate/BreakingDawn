@@ -17,6 +17,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"PrecitionControlls"];
+    [[NSUserDefaults standardUserDefaults] setFloat:2.0 forKey:@"WalkingSpeed"];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [[NSUserDefaults standardUserDefaults] setFloat:2.0 forKey:@"Scale"];

@@ -26,7 +26,7 @@
     
     [self.view addSubview:self.gameViewController.view];
     
-    
+    self.view.backgroundColor = [UIColor blackColor];
 }
 
 - (void)didReceiveMemoryWarning
