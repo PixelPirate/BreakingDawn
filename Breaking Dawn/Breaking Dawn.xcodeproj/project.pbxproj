@@ -49,6 +49,9 @@
 		87A537A116B4213B00F7C6DB /* player00-move-front-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5379E16B4213B00F7C6DB /* player00-move-front-01.png */; };
 		87A537A216B4213B00F7C6DB /* player00-move-front-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5379F16B4213B00F7C6DB /* player00-move-front-02.png */; };
 		87A537A316B4213B00F7C6DB /* player00-move-front-03.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A537A016B4213B00F7C6DB /* player00-move-front-03.png */; };
+		87A537AF16B42AB200F7C6DB /* Ambience-16.wav in Resources */ = {isa = PBXBuildFile; fileRef = 87A537AC16B42AB200F7C6DB /* Ambience-16.wav */; };
+		87A537B016B42AB200F7C6DB /* Ambience-17.wav in Resources */ = {isa = PBXBuildFile; fileRef = 87A537AD16B42AB200F7C6DB /* Ambience-17.wav */; };
+		87A537B116B42AB200F7C6DB /* Ambience-22.wav in Resources */ = {isa = PBXBuildFile; fileRef = 87A537AE16B42AB200F7C6DB /* Ambience-22.wav */; };
 		B19113AF16B4018E008BFCB9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19113AE16B4018E008BFCB9 /* AVFoundation.framework */; };
 		B19113B516B40707008BFCB9 /* BDHeartbeatView.m in Sources */ = {isa = PBXBuildFile; fileRef = B19113B416B40707008BFCB9 /* BDHeartbeatView.m */; };
 		B19113B716B40CF9008BFCB9 /* heartbeat_isolated.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B19113B616B40CF9008BFCB9 /* heartbeat_isolated.mp3 */; };
@@ -111,6 +114,9 @@
 		87A5379E16B4213B00F7C6DB /* player00-move-front-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-01.png"; sourceTree = "<group>"; };
 		87A5379F16B4213B00F7C6DB /* player00-move-front-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-02.png"; sourceTree = "<group>"; };
 		87A537A016B4213B00F7C6DB /* player00-move-front-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-03.png"; sourceTree = "<group>"; };
+		87A537AC16B42AB200F7C6DB /* Ambience-16.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-16.wav"; sourceTree = "<group>"; };
+		87A537AD16B42AB200F7C6DB /* Ambience-17.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-17.wav"; sourceTree = "<group>"; };
+		87A537AE16B42AB200F7C6DB /* Ambience-22.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ambience-22.wav"; sourceTree = "<group>"; };
 		B19113AE16B4018E008BFCB9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B19113B316B40707008BFCB9 /* BDHeartbeatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDHeartbeatView.h; sourceTree = "<group>"; };
 		B19113B416B40707008BFCB9 /* BDHeartbeatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDHeartbeatView.m; sourceTree = "<group>"; };
@@ -217,6 +223,9 @@
 			isa = PBXGroup;
 			children = (
 				B19113B616B40CF9008BFCB9 /* heartbeat_isolated.mp3 */,
+				87A537AC16B42AB200F7C6DB /* Ambience-16.wav */,
+				87A537AD16B42AB200F7C6DB /* Ambience-17.wav */,
+				87A537AE16B42AB200F7C6DB /* Ambience-22.wav */,
 				87A5374916B321A500F7C6DB /* Level0_diffuse.png */,
 				87A5376C16B391C200F7C6DB /* player00.png */,
 				87A5375F16B356CC00F7C6DB /* map00.plist */,
@@ -342,6 +351,9 @@
 				87A537A216B4213B00F7C6DB /* player00-move-front-02.png in Resources */,
 				87A537A316B4213B00F7C6DB /* player00-move-front-03.png in Resources */,
 				B19113B716B40CF9008BFCB9 /* heartbeat_isolated.mp3 in Resources */,
+				87A537AF16B42AB200F7C6DB /* Ambience-16.wav in Resources */,
+				87A537B016B42AB200F7C6DB /* Ambience-17.wav in Resources */,
+				87A537B116B42AB200F7C6DB /* Ambience-22.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
