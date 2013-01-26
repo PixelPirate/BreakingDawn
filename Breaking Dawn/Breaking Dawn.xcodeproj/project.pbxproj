@@ -15,6 +15,9 @@
 		877DB00016B46EF700CD9508 /* map00_collision.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFFF16B46EF700CD9508 /* map00_collision.png */; };
 		877DB00116B4722200CD9508 /* lightSwitch-Off.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFFB16B46C9100CD9508 /* lightSwitch-Off.png */; };
 		877DB00216B4722400CD9508 /* lightSwitch-On.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFFC16B46C9500CD9508 /* lightSwitch-On.png */; };
+		877DB00516B4768A00CD9508 /* BDIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877DB00416B4768900CD9508 /* BDIntroViewController.m */; };
+		877DB00816B4769900CD9508 /* BDTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877DB00716B4769900CD9508 /* BDTitleViewController.m */; };
+		877DB00A16B4801D00CD9508 /* logo00-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DB00916B4801C00CD9508 /* logo00-02.png */; };
 		87A5371E16B31D8500F7C6DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A5371D16B31D8500F7C6DB /* UIKit.framework */; };
 		87A5372016B31D8500F7C6DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A5371F16B31D8500F7C6DB /* Foundation.framework */; };
 		87A5372216B31D8500F7C6DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A5372116B31D8500F7C6DB /* CoreGraphics.framework */; };
@@ -99,6 +102,11 @@
 		877DAFFC16B46C9500CD9508 /* lightSwitch-On.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lightSwitch-On.png"; sourceTree = "<group>"; };
 		877DAFFD16B46EF300CD9508 /* map00_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map00_diffuse.png; sourceTree = "<group>"; };
 		877DAFFF16B46EF700CD9508 /* map00_collision.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map00_collision.png; sourceTree = "<group>"; };
+		877DB00316B4768800CD9508 /* BDIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDIntroViewController.h; sourceTree = "<group>"; };
+		877DB00416B4768900CD9508 /* BDIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDIntroViewController.m; sourceTree = "<group>"; };
+		877DB00616B4769800CD9508 /* BDTitleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDTitleViewController.h; sourceTree = "<group>"; };
+		877DB00716B4769900CD9508 /* BDTitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDTitleViewController.m; sourceTree = "<group>"; };
+		877DB00916B4801C00CD9508 /* logo00-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo00-02.png"; sourceTree = "<group>"; };
 		87A5371916B31D8500F7C6DB /* Breaking Dawn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Breaking Dawn.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87A5371D16B31D8500F7C6DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		87A5371F16B31D8500F7C6DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -245,6 +253,10 @@
 				87A5372D16B31D8700F7C6DB /* BDAppDelegate.m */,
 				87A5373516B31D8700F7C6DB /* BDViewController.h */,
 				87A5373616B31D8700F7C6DB /* BDViewController.m */,
+				877DB00316B4768800CD9508 /* BDIntroViewController.h */,
+				877DB00416B4768900CD9508 /* BDIntroViewController.m */,
+				877DB00616B4769800CD9508 /* BDTitleViewController.h */,
+				877DB00716B4769900CD9508 /* BDTitleViewController.m */,
 				87A5375416B32ACE00F7C6DB /* BDGameViewController.h */,
 				87A5375516B32ACE00F7C6DB /* BDGameViewController.m */,
 				87A5376E16B3983600F7C6DB /* BDPostProcessingViewController.h */,
@@ -303,6 +315,7 @@
 				B15B92A916B47BF20001670D /* heartbeat_isolated_0_700.mp3 */,
 				B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */,
 				877DAFFB16B46C9100CD9508 /* lightSwitch-Off.png */,
+				877DB00916B4801C00CD9508 /* logo00-02.png */,
 				877DAFFC16B46C9500CD9508 /* lightSwitch-On.png */,
 				877DAFF216B464BF00CD9508 /* Ambience-16.mp3 */,
 				877DAFF316B464BF00CD9508 /* Ambience-17.mp3 */,
@@ -561,6 +574,8 @@
 				87A537B516B42D7200F7C6DB /* BDHotspot.m in Sources */,
 				B1DC52EA16B44EE10048DED1 /* BDImageMap.m in Sources */,
 				877DAFFA16B467D000CD9508 /* BDAmbientMusicController.m in Sources */,
+				877DB00516B4768A00CD9508 /* BDIntroViewController.m in Sources */,
+				877DB00816B4769900CD9508 /* BDTitleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
