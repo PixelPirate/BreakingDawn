@@ -15,6 +15,7 @@
 @property (strong, readwrite, nonatomic) BDPlayer *player;
 
 @property (readwrite, nonatomic) BDAudioContainer *heart;
+@property (readwrite, nonatomic) BDAudioContainer *scream;
 @property (nonatomic) int currentSound;
 
 @end

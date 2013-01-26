@@ -38,8 +38,14 @@
 		87A5377E16B3E0C400F7C6DB /* BDMobView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5377D16B3E0C300F7C6DB /* BDMobView.m */; };
 		B19113AF16B4018E008BFCB9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19113AE16B4018E008BFCB9 /* AVFoundation.framework */; };
 		B19113B516B40707008BFCB9 /* BDSound.m in Sources */ = {isa = PBXBuildFile; fileRef = B19113B416B40707008BFCB9 /* BDSound.m */; };
-		B19113B716B40CF9008BFCB9 /* heartbeat_isolated.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B19113B616B40CF9008BFCB9 /* heartbeat_isolated.mp3 */; };
 		B192C8CC16B435F5000E4BC9 /* BDAudioContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */; };
+		B1C2B51E16B43CBA00CFCC37 /* Game_Over_Scream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51716B43CBA00CFCC37 /* Game_Over_Scream.mp3 */; };
+		B1C2B51F16B43CBA00CFCC37 /* heartbeat_isolated.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51816B43CBA00CFCC37 /* heartbeat_isolated.mp3 */; };
+		B1C2B52016B43CBA00CFCC37 /* Monster_Awakes1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51916B43CBA00CFCC37 /* Monster_Awakes1.mp3 */; };
+		B1C2B52116B43CBA00CFCC37 /* Monster_Awakes1+2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51A16B43CBA00CFCC37 /* Monster_Awakes1+2.mp3 */; };
+		B1C2B52216B43CBA00CFCC37 /* Monster_Awakes2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */; };
+		B1C2B52316B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51C16B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 */; };
+		B1C2B52416B43CBA00CFCC37 /* Monster_Awakes3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51D16B43CBA00CFCC37 /* Monster_Awakes3.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,9 +95,15 @@
 		B19113AE16B4018E008BFCB9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B19113B316B40707008BFCB9 /* BDSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSound.h; sourceTree = "<group>"; };
 		B19113B416B40707008BFCB9 /* BDSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDSound.m; sourceTree = "<group>"; };
-		B19113B616B40CF9008BFCB9 /* heartbeat_isolated.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = heartbeat_isolated.mp3; sourceTree = "<group>"; };
 		B192C8CA16B435F5000E4BC9 /* BDAudioContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAudioContainer.h; sourceTree = "<group>"; };
 		B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAudioContainer.m; sourceTree = "<group>"; };
+		B1C2B51716B43CBA00CFCC37 /* Game_Over_Scream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Game_Over_Scream.mp3; sourceTree = "<group>"; };
+		B1C2B51816B43CBA00CFCC37 /* heartbeat_isolated.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = heartbeat_isolated.mp3; sourceTree = "<group>"; };
+		B1C2B51916B43CBA00CFCC37 /* Monster_Awakes1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Monster_Awakes1.mp3; sourceTree = "<group>"; };
+		B1C2B51A16B43CBA00CFCC37 /* Monster_Awakes1+2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Monster_Awakes1+2.mp3"; sourceTree = "<group>"; };
+		B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Monster_Awakes2.mp3; sourceTree = "<group>"; };
+		B1C2B51C16B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Monster_Awakes2+3.mp3"; sourceTree = "<group>"; };
+		B1C2B51D16B43CBA00CFCC37 /* Monster_Awakes3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Monster_Awakes3.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,7 +207,13 @@
 		87A5374B16B321AC00F7C6DB /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
-				B19113B616B40CF9008BFCB9 /* heartbeat_isolated.mp3 */,
+				B1C2B51716B43CBA00CFCC37 /* Game_Over_Scream.mp3 */,
+				B1C2B51816B43CBA00CFCC37 /* heartbeat_isolated.mp3 */,
+				B1C2B51916B43CBA00CFCC37 /* Monster_Awakes1.mp3 */,
+				B1C2B51A16B43CBA00CFCC37 /* Monster_Awakes1+2.mp3 */,
+				B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */,
+				B1C2B51C16B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 */,
+				B1C2B51D16B43CBA00CFCC37 /* Monster_Awakes3.mp3 */,
 				87A5374916B321A500F7C6DB /* Level0_diffuse.png */,
 				87A5376C16B391C200F7C6DB /* player00.png */,
 				87A5375F16B356CC00F7C6DB /* map00.plist */,
@@ -270,7 +288,13 @@
 				87A5376B16B38F5100F7C6DB /* light00-01.jpg in Resources */,
 				87A5376D16B391C200F7C6DB /* player00.png in Resources */,
 				87A5377B16B3E05900F7C6DB /* mob00-01.png in Resources */,
-				B19113B716B40CF9008BFCB9 /* heartbeat_isolated.mp3 in Resources */,
+				B1C2B51E16B43CBA00CFCC37 /* Game_Over_Scream.mp3 in Resources */,
+				B1C2B51F16B43CBA00CFCC37 /* heartbeat_isolated.mp3 in Resources */,
+				B1C2B52016B43CBA00CFCC37 /* Monster_Awakes1.mp3 in Resources */,
+				B1C2B52116B43CBA00CFCC37 /* Monster_Awakes1+2.mp3 in Resources */,
+				B1C2B52216B43CBA00CFCC37 /* Monster_Awakes2.mp3 in Resources */,
+				B1C2B52316B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 in Resources */,
+				B1C2B52416B43CBA00CFCC37 /* Monster_Awakes3.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
