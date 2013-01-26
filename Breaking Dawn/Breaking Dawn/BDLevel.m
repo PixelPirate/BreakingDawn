@@ -53,6 +53,8 @@
             [self loadLightmap];
         }
         
+        self.lightScale = 1.0;
+        
         self.mobs = [NSMutableArray array];
         [self.mobs addObject:[[BDMob alloc] initWithPosition:CGPointMake(300, 350)]];
         
@@ -123,21 +125,44 @@
             *stop = YES;
         }
         
-        if (/*lightLimit != CGFLOAT_MAX &&*/ canMove) {
-            color = [[UIImage getRGBAsFromImage:self.lightMap atX:x andY:y count:1] lastObject];
-            CGFloat alpha = 0.0;
-            CGFloat r = 0.0;
-            CGFloat g = 0.0;
-            CGFloat b = 0.0;
-            [color getRed:&r green:&g blue:&b alpha:&alpha];
-            //components = CGColorGetComponents([color CGColor]);
-            printf("%f %f %f %f\n", 1.0-r, 1.0-g, 1.0-b, 1.0-alpha);
-            if (alpha > lightLimit) {
-                canMove = NO;
-                *stop = YES;
-            }
-        }
+//        if (/*lightLimit != CGFLOAT_MAX &&*/ canMove) {
+//            color = [[UIImage getRGBAsFromImage:self.lightMap atX:x andY:y count:1] lastObject];
+//            CGFloat alpha = 0.0;
+//            CGFloat r = 0.0;
+//            CGFloat g = 0.0;
+//            CGFloat b = 0.0;
+//            [color getRed:&r green:&g blue:&b alpha:&alpha];
+//            //components = CGColorGetComponents([color CGColor]);
+//            printf("%f %f %f %f\n", 1.0-r, 1.0-g, 1.0-b, 1.0-alpha);
+//            if (alpha > lightLimit) {
+//                canMove = NO;
+//                *stop = YES;
+//            }
+//        }
     }];
+    
+    if (canMove && lightLimit != CGFLOAT_MAX) {
+        [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
+            for (NSDictionary *light in self.lights) {
+                CGPoint lightPosition = CGPointZero;
+                CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(light), &lightPosition);
+                CGFloat fakeRadius = 80.0 * self.lightScale;
+                
+                BOOL(^PointInsideCircle)(CGPoint p, CGPoint center, CGFloat radius) = ^(CGPoint p, CGPoint center, CGFloat radius) {
+                    if ((pow(p.x-center.x, 2.0) + pow(p.y - center.y, 2.0)) < pow(radius, 2.0)) {
+                        return YES;
+                    } else {
+                        return NO;
+                    }
+                };
+                
+                if (PointInsideCircle(CGPointMake(x, y), lightPosition, fakeRadius)) {
+                    canMove = NO;
+                    *stop = YES;
+                }
+            }
+        }];
+    }
     
     
     return canMove;

@@ -31,6 +31,8 @@
 
 @property (strong, readwrite, nonatomic) NSTimer *pulseTimer;
 
+@property (strong, readwrite, nonatomic) BDLevel *level;
+
 - (void)beginPulsating;
 
 - (void)endPulsating;
@@ -49,6 +51,7 @@
     self = [super initWithFrame:CGRectMake(0, 0, level.size.width*scale, level.size.height*scale)];
     if (self) {
         
+        self.level = level;
         self.playerLayer = [[UIView alloc] initWithFrame:self.bounds];;
         self.surfaceLayer = [[UIView alloc] initWithFrame:self.bounds];;
         self.lightLayer = [[UIView alloc] initWithFrame:self.bounds];;
@@ -152,6 +155,7 @@
 {
     CGSize lightSize = CGSizeMake(224, 224);
     _lightScale = scale;
+    self.level.lightScale = scale;
     for (UIImageView *i in self.lightLayer.subviews) {
         if ([i isKindOfClass:[UIImageView class]] /*&& ![self.pulsatingViews containsObject:i]*/) {
             CGSize size = CGSizeApplyAffineTransform(lightSize, CGAffineTransformMakeScale(scale, scale));
