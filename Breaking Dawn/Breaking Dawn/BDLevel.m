@@ -125,6 +125,13 @@
     }
 }
 
+- (BOOL)isFreeX:(int)x andY:(int)y
+{
+    UIColor *color = [[self.collisionMap getRGBAsFromImageX:x andY:y count:1] lastObject];
+    const CGFloat *components = CGColorGetComponents([color CGColor]);
+    return (components[0] != 0);
+}
+
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit
 {
     // Check collision map for obsacles along the path from 'from' to 'to'

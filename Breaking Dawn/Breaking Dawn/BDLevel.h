@@ -47,6 +47,8 @@
 
 + (BDLevel *)levelNamed:(NSString *)name;
 
+- (BOOL)isFreeX:(int)x andY:(int)y;
+
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to;
 
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit;
