@@ -51,7 +51,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:0.016
+        self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:1/25.0
                                                           target:self
                                                         selector:@selector(tickWithTimer:)
                                                         userInfo:nil
@@ -150,9 +150,11 @@
 {
     CGPoint movement = self.lastTouchLocation;
     
+    float gameSpeed = 62.5/25.0;
+    
     // Move the player
     if (!CGPointEqualToPoint(movement, CGPointZero)) {
-        CGFloat walkingSpeed = [[NSUserDefaults standardUserDefaults] floatForKey:@"WalkingSpeed"];
+        CGFloat walkingSpeed = [[NSUserDefaults standardUserDefaults] floatForKey:@"WalkingSpeed"] * gameSpeed;
         movement = CGPointApplyAffineTransform(movement, CGAffineTransformMakeScale(walkingSpeed, walkingSpeed));
         CGPoint newLocation = CGPointApplyAffineTransform(self.player.location,
                                                           CGAffineTransformMakeTranslation(-movement.x, -movement.y));
@@ -214,7 +216,7 @@
                                                               [UIScreen mainScreen].applicationFrame.size.height);
     
     // Mobs
-    CGFloat speed = [[NSUserDefaults standardUserDefaults] floatForKey:@"MobWalkingSpeed"];
+    CGFloat speed = [[NSUserDefaults standardUserDefaults] floatForKey:@"MobWalkingSpeed"] * gameSpeed;
     for (BDMob *mob in self.currentLevel.mobs) {
         BOOL canReach = [self.currentLevel canMoveFrom:mob.location to:self.player.location withLightLimit:0.0];
         if (canReach) {
