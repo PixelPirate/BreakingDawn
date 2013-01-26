@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class BDLevelView;
+
 @interface BDPostProcessingViewController : UIViewController
+
+@property (strong, readwrite, nonatomic) BDLevelView *currentLevelView;
+
+- (void)static;
 
 @end

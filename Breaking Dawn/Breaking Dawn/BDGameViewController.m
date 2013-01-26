@@ -62,6 +62,7 @@
     };
     
     self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
+    self.postProcessingViewController.currentLevelView = self.currentLevelView;
     
     UIView *gameView = [[UIView alloc] initWithFrame:self.currentLevelView.bounds];
     [gameView addSubview:self.currentLevelView];
@@ -80,6 +81,12 @@
                                                               [UIScreen mainScreen].applicationFrame.size.height);
     
     self.lastTouchLocation = CGPointZero;
+    
+    [NSTimer scheduledTimerWithTimeInterval:3.0
+                                     target:self.postProcessingViewController
+                                   selector:@selector(static)
+                                   userInfo:nil
+                                    repeats:YES];
 }
 
 - (void)pushTouch:(UITouch *)touch

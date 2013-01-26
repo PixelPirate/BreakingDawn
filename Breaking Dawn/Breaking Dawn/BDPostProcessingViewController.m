@@ -7,6 +7,7 @@
 //
 
 #import "BDPostProcessingViewController.h"
+#import "BDLevelView.h"
 
 @interface BDPostProcessingViewController ()
 
@@ -16,6 +17,8 @@
 
 @property (strong, nonatomic) CIImage *noiseImage;
 
+@property (strong, readwrite, nonatomic) NSMutableArray *noiseTextures;
+
 @end
 
 @implementation BDPostProcessingViewController
@@ -24,7 +27,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.noiseTextures = [NSMutableArray array];
     }
     return self;
 }
@@ -60,43 +63,45 @@
     
     self.noiseImage = [noiseGenerator outputImage];
     
-    CGSize extentSize = CGSizeMake(5, 5);
-    CGRect extentRect = [self.noiseImage extent];
-    if (CGRectIsInfinite(extentRect) || CGRectIsEmpty(extentRect)) {
-        extentRect = CGRectMake(100, 30, extentSize.width, extentSize.height);
-    }
+    CGSize extentSize = CGSizeMake(480, 480);
     
-    CGImageRef __noiseImage = [self.noiseContext createCGImage:self.noiseImage fromRect:extentRect];
-    self.noiseImageView = [[UIImageView alloc] initWithImage:[UIImage imageWithCGImage:__noiseImage]];
-    CGImageRelease(__noiseImage);
-    self.noiseImageView.frame = self.view.bounds;
-    self.noiseImageView.alpha = arc4random_uniform(300) / 6000.0 + 0.1;
-    [self.view addSubview:self.noiseImageView];
-    self.view.userInteractionEnabled = NO;
-    self.noiseImageView.userInteractionEnabled = NO;
-    
-    __block void(^rand)(void) = ^(void) {
+    for (NSUInteger i = 0; i < 5; ++i) {
         CGRect extentRect = [self.noiseImage extent];
         if (CGRectIsInfinite(extentRect) || CGRectIsEmpty(extentRect)) {
             extentRect = CGRectMake(arc4random_uniform(100), arc4random_uniform(100), extentSize.width, extentSize.height);
         }
         
         CGImageRef __noiseImage = [self.noiseContext createCGImage:self.noiseImage fromRect:extentRect];
-        
-        UIImageView *i = [[UIImageView alloc] initWithImage:[UIImage imageWithCGImage:__noiseImage]];
-        i.userInteractionEnabled = NO;
-        i.alpha = arc4random_uniform(300) / 6000.0 + 0.1;
+        [self.noiseTextures addObject:[UIImage imageWithCGImage:__noiseImage]];
         CGImageRelease(__noiseImage);
-        i.frame = self.noiseImageView.frame;
-        [UIView transitionFromView:self.noiseImageView
-                            toView:i
-                          duration:1.9
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        completion:^(BOOL finished) {
-            self.noiseImageView = i;
-        }];
+    }
+    
+    
+    self.noiseImageView = [[UIImageView alloc] initWithImage:self.noiseTextures.lastObject];
+    self.noiseImageView.frame = self.view.bounds;
+    self.noiseImageView.alpha = arc4random_uniform(100) / 6000.0 + 0.1;
+    [self.view addSubview:self.noiseImageView];
+    self.view.userInteractionEnabled = NO;
+    self.noiseImageView.userInteractionEnabled = NO;
+    
+    __block void(^rand)(void) = ^(void) {
         
-        int64_t delayInMilliseconds = 1000;
+        UIImage *noiseImage = self.noiseTextures[arc4random_uniform(self.noiseTextures.count)];
+        self.noiseImageView.image = noiseImage;
+        self.noiseImageView.alpha = arc4random_uniform(100) / 6000.0 + 0.1;
+//        UIImageView *i = [[UIImageView alloc] initWithImage:noiseImage];
+//        i.userInteractionEnabled = NO;
+//        i.alpha = arc4random_uniform(100) / 6000.0 + 0.1;
+//        i.frame = self.noiseImageView.frame;
+//        [UIView transitionFromView:self.noiseImageView
+//                            toView:i
+//                          duration:0.01 //1.9
+//                           options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionBeginFromCurrentState
+//                        completion:^(BOOL finished) {
+//            self.noiseImageView = i;
+//        }];
+        
+        int64_t delayInMilliseconds = 100;//1000
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             rand();
@@ -104,6 +109,47 @@
     };
     
     rand();
+}
+
+- (void)static
+{
+    self.currentLevelView.surfaceLayer.alpha = 1.0;
+    
+    int64_t delayInMilliseconds = 300;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        self.currentLevelView.surfaceLayer.alpha = 0.3;
+        int64_t delayInMilliseconds = 300;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            self.currentLevelView.surfaceLayer.alpha = 0.9;
+            int64_t delayInMilliseconds = 100;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                self.currentLevelView.surfaceLayer.alpha = 0.1;
+                int64_t delayInMilliseconds = 200;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    self.currentLevelView.surfaceLayer.alpha = 0.4;
+                    int64_t delayInMilliseconds = 500;
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                        self.currentLevelView.surfaceLayer.alpha = 0.2;
+                        int64_t delayInMilliseconds = 300;
+                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
+                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                            self.currentLevelView.surfaceLayer.alpha = 0.8;
+                            int64_t delayInMilliseconds = 4500;
+                            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
+                            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                                self.currentLevelView.surfaceLayer.alpha = 0.4;
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
 }
 
 @end
