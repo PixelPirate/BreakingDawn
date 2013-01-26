@@ -22,6 +22,8 @@
 
 @property (assign, readwrite, nonatomic) CGFloat lightScale;
 
+@property (assign, readwrite, nonatomic) CGFloat pulse;
+
 - (id)initWithLevel:(BDLevel *)level;
 
 @end

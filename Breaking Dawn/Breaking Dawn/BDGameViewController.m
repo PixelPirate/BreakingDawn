@@ -180,17 +180,26 @@
     //CGFloat scale = self.currentLevelView.lightScale;
     //NSLog(@"%f %f", scale, self.player.luminanceDelta);
     //self.currentLevelView.lightScale = scale + self.player.luminanceDelta;
+    
     if (self.player.adrenalin > 0.3) {
         self.currentLevelView.lightScale = self.currentLevelView.lightScale - 0.003;
         if (self.currentLevelView.lightScale < 0.0) {
             self.currentLevelView.lightScale = 0.0;
         }
+        
     } else {
         self.currentLevelView.lightScale = self.currentLevelView.lightScale + 0.08;
         if (self.currentLevelView.lightScale > 1.0) {
             self.currentLevelView.lightScale = 1.0;
         }
     }
+    
+    CGFloat pulse = 0.0;
+    if (self.player.lastLuminance < 0.7) {
+        //pulse = MIN(0.4 + self.player.adrenalin, 1.0);
+    }
+    
+    self.currentLevelView.pulse = self.player.adrenalin;
 }
 
 - (void)didReceiveMemoryWarning

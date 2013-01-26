@@ -21,6 +21,20 @@
 
 @property (strong, readwrite, nonatomic) UIView *surfaceLayer;
 
+@property (strong, readwrite, nonatomic) UIImage *normalLight;
+
+@property (strong, readwrite, nonatomic) UIImage *evilLight;
+
+@property (strong, readwrite, nonatomic) NSMutableArray *pulsatingViews;
+
+@property (strong, readwrite, nonatomic) NSTimer *pulseTimer;
+
+- (void)beginPulsating;
+
+- (void)endPulsating;
+
+- (void)pulsate;
+
 @end
 
 
@@ -36,6 +50,7 @@
         self.playerLayer = [[UIView alloc] initWithFrame:self.bounds];;
         self.surfaceLayer = [[UIView alloc] initWithFrame:self.bounds];;
         self.lightLayer = [[UIView alloc] initWithFrame:self.bounds];;
+        self.pulse = 0.0;
         
         self.backgroundColor = [UIColor blackColor];
         [self addSubview:self.surfaceLayer];
@@ -55,10 +70,15 @@
             light.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.4 alpha:0.8];
             
             UIImage *m = [UIImage maskView:light withMask:[UIImage imageNamed:@"light00-01.jpg"]];
-            UIImageView *v = [[UIImageView alloc] initWithImage:m];
+            self.normalLight = m;
+            light.backgroundColor = [UIColor colorWithRed:1.0 green:0.4 blue:0.4 alpha:0.8];
+            self.evilLight = [UIImage maskView:light withMask:[UIImage imageNamed:@"light00-01.jpg"]];
+            
+            UIImageView *v = [[UIImageView alloc] initWithImage:self.normalLight];
             v.center = p;
             
             [self.lightLayer addSubview:v];
+            
             
             void(^__block flicker)(void) = ^(void) {
                 [UIView animateWithDuration:0.1 animations:^{
@@ -71,8 +91,54 @@
             
             dispatch_async(dispatch_get_main_queue(), flicker);
         }
+        
+        self.pulsatingViews = [NSMutableArray array];
+        for (UIImageView *i in self.lightLayer.subviews) {
+            if ([i isKindOfClass:[UIImageView class]]) {
+                UIImageView *pulse = [[UIImageView alloc] initWithImage:self.evilLight];
+                pulse.frame = i.frame;
+                pulse.alpha = 0.0;
+                [self.lightLayer addSubview:pulse];
+                [self.pulsatingViews addObject:pulse];
+            }
+        }
     }
     return self;
+}
+
+- (void)beginPulsating
+{
+    if (self.pulseTimer.isValid) {
+        return;
+    }
+    self.pulseTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(pulsate) userInfo:nil repeats:YES];
+}
+
+- (void)endPulsating
+{
+    [self.pulseTimer invalidate];
+}
+
+- (void)pulsate
+{
+    for (UIImageView *pulse in self.pulsatingViews) {
+        CGRect originalFrame = pulse.frame;
+        CGFloat extent = 50.0;
+        CGRect zoomed = CGRectMake(pulse.frame.origin.x - extent/2.0,
+                                   pulse.frame.origin.y - extent/2.0,
+                                   pulse.frame.size.width + extent,
+                                   pulse.frame.size.height + extent);
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            pulse.alpha = 1.0;
+            pulse.frame = zoomed;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.5 animations:^{
+                pulse.alpha = 0.0;
+                pulse.frame = originalFrame;
+            }];
+        }];
+    }
 }
 
 - (void)setLightScale:(CGFloat)scale
@@ -80,12 +146,22 @@
     CGSize lightSize = CGSizeMake(224, 224);
     _lightScale = scale;
     for (UIImageView *i in self.lightLayer.subviews) {
-        if ([i isKindOfClass:[UIImageView class]]) {
+        if ([i isKindOfClass:[UIImageView class]] /*&& ![self.pulsatingViews containsObject:i]*/) {
             CGSize size = CGSizeApplyAffineTransform(lightSize, CGAffineTransformMakeScale(scale, scale));
             CGPoint center = i.center;
             i.frame = CGRectMake(0, 0, size.width, size.height);
             i.center = center;
         }
+    }
+}
+
+- (void)setPulse:(CGFloat)pulse
+{
+    _pulse = pulse;
+    if (pulse > 0.1) {
+        [self beginPulsating];
+    } else {
+        [self endPulsating];
     }
 }
 
