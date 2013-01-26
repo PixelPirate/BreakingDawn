@@ -12,6 +12,4 @@
 
 + (UIImage *)maskView:(UIView *)view withMask:(UIImage *)maskImage;
 
-+ (NSArray*)getRGBAsFromImage:(UIImage*)image atX:(int)xx andY:(int)yy count:(int)count;
-
 @end

@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 GlobalGameJam. All rights reserved.
 //
 
+#import "BDImageMap.h"
 #import <Foundation/Foundation.h>
 
 @class BDLevel;
@@ -22,9 +23,9 @@
 
 @property (strong, readonly, nonatomic) UIImage *diffuseMap;
 
-@property (strong, readonly, nonatomic) UIImage *lightMap;
+@property (strong, readonly, nonatomic) BDImageMap *lightMap;
 
-@property (strong, readonly, nonatomic) UIImage *collisionMap;
+@property (strong, readonly, nonatomic) BDImageMap *collisionMap;
 
 @property (assign, readonly, nonatomic) CGSize size;
 
