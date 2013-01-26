@@ -157,9 +157,11 @@
 {
     CGPoint movement = self.lastTouchLocation;
     
+    float gameSpeed = 62.5/25.0;
+    
     // Move the player
     if (!CGPointEqualToPoint(movement, CGPointZero)) {
-        CGFloat walkingSpeed = [[NSUserDefaults standardUserDefaults] floatForKey:@"WalkingSpeed"];
+        CGFloat walkingSpeed = [[NSUserDefaults standardUserDefaults] floatForKey:@"WalkingSpeed"] * gameSpeed;
         movement = CGPointApplyAffineTransform(movement, CGAffineTransformMakeScale(walkingSpeed, walkingSpeed));
         CGPoint newLocation = CGPointApplyAffineTransform(self.player.location,
                                                           CGAffineTransformMakeTranslation(-movement.x, -movement.y));
@@ -221,8 +223,13 @@
                                                               [UIScreen mainScreen].applicationFrame.size.height);
     
     // Mobs
-    CGFloat speed = [[NSUserDefaults standardUserDefaults] floatForKey:@"MobWalkingSpeed"];
+    CGFloat speed = [[NSUserDefaults standardUserDefaults] floatForKey:@"MobWalkingSpeed"] * gameSpeed;
     for (BDMob *mob in self.currentLevel.mobs) {
+        // Skip if distance > 400
+        CGFloat dx = mob.location.x - self.player.location.x;
+        CGFloat dy = mob.location.y - self.player.location.y;
+        if(sqrt(dx*dx + dy*dy) > 400) continue;
+        
         BOOL canReach = [self.currentLevel canMoveFrom:mob.location to:self.player.location withLightLimit:0.0];
         if (canReach) {
             CGPoint direction = CGPointMake(mob.location.x - self.player.location.x, mob.location.y - self.player.location.y);

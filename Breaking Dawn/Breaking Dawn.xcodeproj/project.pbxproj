@@ -32,7 +32,6 @@
 		87A5373D16B31D8700F7C6DB /* BDViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87A5373B16B31D8700F7C6DB /* BDViewController_iPad.xib */; };
 		87A5374516B31DF600F7C6DB /* BDLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5374416B31DF600F7C6DB /* BDLevel.m */; };
 		87A5374816B31FCE00F7C6DB /* BDLevelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5374716B31FCE00F7C6DB /* BDLevelView.m */; };
-		87A5374A16B321A500F7C6DB /* Level0_diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5374916B321A500F7C6DB /* Level0_diffuse.png */; };
 		87A5374E16B324BF00F7C6DB /* BDPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5374D16B324BF00F7C6DB /* BDPlayerView.m */; };
 		87A5375116B324C900F7C6DB /* BDPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5375016B324C900F7C6DB /* BDPlayer.m */; };
 		87A5375616B32ACE00F7C6DB /* BDGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5375516B32ACE00F7C6DB /* BDGameViewController.m */; };
@@ -126,7 +125,6 @@
 		87A5374416B31DF600F7C6DB /* BDLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDLevel.m; sourceTree = "<group>"; };
 		87A5374616B31FCE00F7C6DB /* BDLevelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDLevelView.h; sourceTree = "<group>"; };
 		87A5374716B31FCE00F7C6DB /* BDLevelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDLevelView.m; sourceTree = "<group>"; };
-		87A5374916B321A500F7C6DB /* Level0_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Level0_diffuse.png; sourceTree = "<group>"; };
 		87A5374C16B324BE00F7C6DB /* BDPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPlayerView.h; sourceTree = "<group>"; };
 		87A5374D16B324BF00F7C6DB /* BDPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDPlayerView.m; sourceTree = "<group>"; };
 		87A5374F16B324C900F7C6DB /* BDPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPlayer.h; sourceTree = "<group>"; };
@@ -319,7 +317,6 @@
 				B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */,
 				B1C2B51C16B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 */,
 				B1C2B51D16B43CBA00CFCC37 /* Monster_Awakes3.mp3 */,
-				87A5374916B321A500F7C6DB /* Level0_diffuse.png */,
 				87A5376C16B391C200F7C6DB /* player00.png */,
 				87A5375F16B356CC00F7C6DB /* map00.plist */,
 				87A5376A16B38F5100F7C6DB /* light00-01.jpg */,
@@ -490,7 +487,6 @@
 				87A5373416B31D8700F7C6DB /* Default-568h@2x.png in Resources */,
 				87A5373A16B31D8700F7C6DB /* BDViewController_iPhone.xib in Resources */,
 				87A5373D16B31D8700F7C6DB /* BDViewController_iPad.xib in Resources */,
-				87A5374A16B321A500F7C6DB /* Level0_diffuse.png in Resources */,
 				87A5376016B356CC00F7C6DB /* map00.plist in Resources */,
 				87A5376B16B38F5100F7C6DB /* light00-01.jpg in Resources */,
 				87A5376D16B391C200F7C6DB /* player00.png in Resources */,
