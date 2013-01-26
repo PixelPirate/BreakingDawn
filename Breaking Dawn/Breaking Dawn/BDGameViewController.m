@@ -13,6 +13,7 @@
 #import "BDPlayerView.h"
 #import "UIImage+UIImage_Extras.h"
 #import "BDPostProcessingViewController.h"
+#import "BDMob.h"
 
 
 @interface BDGameViewController ()
@@ -171,6 +172,15 @@
                                                               -self.view.frame.origin.y,
                                                               [UIScreen mainScreen].applicationFrame.size.width,
                                                               [UIScreen mainScreen].applicationFrame.size.height);
+    
+    // Mobs
+    CGFloat speed = 1.0;
+    for (BDMob *mob in self.currentLevel.mobs) {
+        BOOL canReach = [self.currentLevel canMoveFrom:mob.location to:self.player.location withLightLimit:0.3];
+        if (canReach) {
+            NSLog(@"r");
+        }
+    }
 }
 
 - (void)adrenalinChanged

@@ -10,6 +10,8 @@
 #import "BDLevel.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIImage+UIImage_Extras.h"
+#import "BDMob.h"
+#import "BDMobView.h"
 
 @interface BDLevelView ()
 
@@ -101,6 +103,11 @@
                 [self.lightLayer addSubview:pulse];
                 [self.pulsatingViews addObject:pulse];
             }
+        }
+        
+        for (BDMob *mob in level.mobs) {
+            BDMobView *mobView = [[BDMobView alloc] initWithMob:mob];
+            [self.surfaceLayer addSubview:mobView];
         }
     }
     return self;

@@ -22,6 +22,8 @@
 
 @property (strong, readonly, nonatomic) NSMutableArray *lights;
 
+@property (strong, readonly, nonatomic) NSMutableArray *mobs;
+
 - (id)initWithName:(NSString *)name;
 
 + (BDLevel *)levelNamed:(NSString *)name;

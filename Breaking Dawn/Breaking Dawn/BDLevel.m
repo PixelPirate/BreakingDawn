@@ -9,6 +9,7 @@
 #import "BDLevel.h"
 #import "UIImage+UIImage_Extras.h"
 #import <QuartzCore/QuartzCore.h>
+#import "BDMob.h"
 
 @interface BDLevel () // Private setter
 
@@ -23,6 +24,8 @@
 @property (assign, readwrite, nonatomic) CGPoint spawn;
 
 @property (strong, readwrite, nonatomic) NSMutableArray *lights;
+
+@property (strong, readwrite, nonatomic) NSMutableArray *mobs;
 
 - (void)loadLightmap;
 
@@ -50,6 +53,9 @@
             [self loadLightmap];
         }
         
+        self.mobs = [NSMutableArray array];
+        [self.mobs addObject:[[BDMob alloc] initWithPosition:CGPointMake(300, 350)]];
+        
         CGSize imageSize = self.diffuseMap.size;
         
         self.spawn = CGPointMake(imageSize.width/2.0, imageSize.height/2.0);
@@ -74,7 +80,7 @@
     return [self canMoveFrom:from to:to withLightLimit:CGFLOAT_MAX];
 }
 
-- (void)line:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(int x, int y))block
+- (void)line:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(int x, int y, BOOL *stop))block
 {
     float x0=from.x, y0=from.y;
     float x1=to.x, y1=to.y;
@@ -93,7 +99,11 @@
     for(int x=x0; (inc>0) ? (x<=x1) : (x>=x1); x+=inc) {
         float progress = (x-x0)/(x1-x0);
         int y = y0 + (y1-y0)*progress;
-        if(steep) block(y, x); else block(x, y);
+        BOOL stop = NO;
+        if(steep) block(y, x, &stop); else block(x, y, &stop);
+        if (stop) {
+            break;
+        }
     }
 }
 
@@ -105,12 +115,27 @@
     //NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
     
     bool __block canMove = YES;
-    [self line:from to:to usingBlock:^(int x, int y) {
+    [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
         UIColor *color = [[UIImage getRGBAsFromImage:self.diffuseMap atX:x andY:y count:1] lastObject];
         const CGFloat *components = CGColorGetComponents([color CGColor]);
-        //printf("%d %d\n", x, y);
         if(components[0] == 0) {
-            canMove = NO; 
+            canMove = NO;
+            *stop = YES;
+        }
+        
+        if (/*lightLimit != CGFLOAT_MAX &&*/ canMove) {
+            color = [[UIImage getRGBAsFromImage:self.lightMap atX:x andY:y count:1] lastObject];
+            CGFloat alpha = 0.0;
+            CGFloat r = 0.0;
+            CGFloat g = 0.0;
+            CGFloat b = 0.0;
+            [color getRed:&r green:&g blue:&b alpha:&alpha];
+            //components = CGColorGetComponents([color CGColor]);
+            printf("%f %f %f %f\n", 1.0-r, 1.0-g, 1.0-b, 1.0-alpha);
+            if (alpha > lightLimit) {
+                canMove = NO;
+                *stop = YES;
+            }
         }
     }];
     

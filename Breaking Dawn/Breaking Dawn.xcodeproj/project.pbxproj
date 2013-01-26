@@ -33,6 +33,9 @@
 		87A5376D16B391C200F7C6DB /* player00.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5376C16B391C200F7C6DB /* player00.png */; };
 		87A5377016B3983600F7C6DB /* BDPostProcessingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5376F16B3983600F7C6DB /* BDPostProcessingViewController.m */; };
 		87A5377616B3999E00F7C6DB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A5377516B3999E00F7C6DB /* CoreImage.framework */; };
+		87A5377916B3DF2500F7C6DB /* BDMob.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5377816B3DF2500F7C6DB /* BDMob.m */; };
+		87A5377B16B3E05900F7C6DB /* mob00-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A5377A16B3E05900F7C6DB /* mob00-01.png */; };
+		87A5377E16B3E0C400F7C6DB /* BDMobView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A5377D16B3E0C300F7C6DB /* BDMobView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +77,11 @@
 		87A5376E16B3983600F7C6DB /* BDPostProcessingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPostProcessingViewController.h; sourceTree = "<group>"; };
 		87A5376F16B3983600F7C6DB /* BDPostProcessingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDPostProcessingViewController.m; sourceTree = "<group>"; };
 		87A5377516B3999E00F7C6DB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		87A5377716B3DF2400F7C6DB /* BDMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMob.h; sourceTree = "<group>"; };
+		87A5377816B3DF2500F7C6DB /* BDMob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMob.m; sourceTree = "<group>"; };
+		87A5377A16B3E05900F7C6DB /* mob00-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mob00-01.png"; sourceTree = "<group>"; };
+		87A5377C16B3E0C300F7C6DB /* BDMobView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMobView.h; sourceTree = "<group>"; };
+		87A5377D16B3E0C300F7C6DB /* BDMobView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMobView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +151,10 @@
 				87A5374716B31FCE00F7C6DB /* BDLevelView.m */,
 				87A5374316B31DF600F7C6DB /* BDLevel.h */,
 				87A5374416B31DF600F7C6DB /* BDLevel.m */,
+				87A5377C16B3E0C300F7C6DB /* BDMobView.h */,
+				87A5377D16B3E0C300F7C6DB /* BDMobView.m */,
+				87A5377716B3DF2400F7C6DB /* BDMob.h */,
+				87A5377816B3DF2500F7C6DB /* BDMob.m */,
 				87A5373816B31D8700F7C6DB /* BDViewController_iPhone.xib */,
 				87A5373B16B31D8700F7C6DB /* BDViewController_iPad.xib */,
 				87A5372416B31D8600F7C6DB /* Supporting Files */,
@@ -172,6 +184,7 @@
 				87A5375F16B356CC00F7C6DB /* map00.plist */,
 				87A5376816B3899F00F7C6DB /* map00_diffuse.png */,
 				87A5376A16B38F5100F7C6DB /* light00-01.jpg */,
+				87A5377A16B3E05900F7C6DB /* mob00-01.png */,
 			);
 			name = Ressources;
 			sourceTree = "<group>";
@@ -239,6 +252,7 @@
 				87A5376916B3899F00F7C6DB /* map00_diffuse.png in Resources */,
 				87A5376B16B38F5100F7C6DB /* light00-01.jpg in Resources */,
 				87A5376D16B391C200F7C6DB /* player00.png in Resources */,
+				87A5377B16B3E05900F7C6DB /* mob00-01.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +273,8 @@
 				87A5375616B32ACE00F7C6DB /* BDGameViewController.m in Sources */,
 				87A5376716B3662600F7C6DB /* UIImage+UIImage_Extras.m in Sources */,
 				87A5377016B3983600F7C6DB /* BDPostProcessingViewController.m in Sources */,
+				87A5377916B3DF2500F7C6DB /* BDMob.m in Sources */,
+				87A5377E16B3E0C400F7C6DB /* BDMobView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
