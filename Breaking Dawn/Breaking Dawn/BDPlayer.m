@@ -47,18 +47,36 @@
     self.luminanceDelta = self.lastLuminance - luminance;
     self.lastLuminance = luminance;
     
-    if (luminance < 0.4) {
-        self.adrenalin += (1.0 - luminance) * 0.008;
-        if (self.adrenalin > 1.0) {
-            self.adrenalin = 1.0;
-        }
-    } else {
-        self.adrenalin -= (luminance) * 0.004;
-        NSLog(@"%f", self.adrenalin);
-        if (self.adrenalin < 0.0) {
-            self.adrenalin = 0.0;
-        }
+    CGFloat light = [[NSUserDefaults standardUserDefaults] floatForKey:@"AdrenalinLight"];
+    CGFloat dusk = [[NSUserDefaults standardUserDefaults] floatForKey:@"AdrenalinDusk"];
+    CGFloat dark = [[NSUserDefaults standardUserDefaults] floatForKey:@"AdrenalinDark"];
+    
+    if (luminance <= 1.0 && luminance >= 0.4) {
+        self.adrenalin -= light;//0.006;
+    } else if (luminance < 0.4 && luminance > 0.1) {
+        self.adrenalin += dusk;//0.002;
+    } else if (luminance < 0.1) {
+        self.adrenalin += dark;//0.006;
     }
+    
+    if (self.adrenalin > 1.0) {
+        self.adrenalin = 1.0;
+    } else if (self.adrenalin < 0.0) {
+        self.adrenalin = 0.0;
+    }
+//    NSLog(@"%f", self.adrenalin);
+//    if (luminance < 0.4) {
+//        self.adrenalin += /*(1.0 - luminance) **/ 0.0008;
+//        if (self.adrenalin > 1.0) {
+//            self.adrenalin = 1.0;
+//        }
+//    } else {
+//        self.adrenalin -= /*(luminance) **/ 0.0004;
+//        //NSLog(@"%f", self.adrenalin);
+//        if (self.adrenalin < 0.0) {
+//            self.adrenalin = 0.0;
+//        }
+//    }
     
     if (self.adrenalinHandler) {
         self.adrenalinHandler();

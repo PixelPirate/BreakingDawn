@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@class BDLevel;
+
+@protocol BDLevelDelegate <NSObject>
+
+- (void)levelChangedData:(BDLevel *)level;
+
+- (void)level:(BDLevel *)level willAddLights:(NSArray *)lights;
+
+@end
+
 @interface BDLevel : NSObject
 
 @property (strong, readonly, nonatomic) UIImage *diffuseMap;
@@ -28,6 +38,10 @@
 
 @property (strong, readwrite, nonatomic) NSMutableArray *hotspots;
 
+@property (strong, readonly, nonatomic) NSDictionary *stages;
+
+@property (weak, readwrite, nonatomic) id<BDLevelDelegate> delegate;
+
 - (id)initWithName:(NSString *)name;
 
 + (BDLevel *)levelNamed:(NSString *)name;
@@ -35,6 +49,8 @@
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to;
 
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit;
+
+- (void)line:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(int x, int y, BOOL *stop))block;
 
 @end
 

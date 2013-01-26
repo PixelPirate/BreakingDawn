@@ -28,6 +28,8 @@
 
 @property (strong, readwrite, nonatomic) NSMutableArray *mobs;
 
+@property (strong, readwrite, nonatomic) NSDictionary *stages;
+
 - (void)loadLightmap;
 
 @end
@@ -67,7 +69,9 @@
         
         self.hotspots = [NSMutableArray array];
         [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1111, 700, 130, 100) trigger:^{
-            [self.lights addObjectsFromArray:mapInfos[@"Stages"][0][@"Lights"]];
+//            [self.lights addObjectsFromArray:mapInfos[@"Stages"][0][@"Lights"]];
+            //if (self.delegate) [self.delegate levelChangedData:self];
+            if (self.delegate) [self.delegate level:self willAddLights:mapInfos[@"Stages"][1][@"Lights"]];
         }]];
         
         // Precache images

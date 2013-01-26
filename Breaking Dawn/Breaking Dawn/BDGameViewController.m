@@ -167,13 +167,33 @@
     }
     
     // Check light amount recieved by the player
-    UIColor *light = [[UIImage getRGBAsFromImage:self.currentLevel.lightMap
-                                             atX:self.player.location.x
-                                            andY:self.player.location.y
-                                           count:1] lastObject];
-    CGFloat luminance = 0.0; // 1 means dark, 0 means bright
-    [light getRed:NULL green:NULL blue:NULL alpha:&luminance];
-    [self.player updateAdrenalin:1.0 - luminance];
+    CGFloat luminance = 0.0;
+        for (NSDictionary *light in self.currentLevel.lights) {
+            CGPoint lightPosition = CGPointZero;
+            CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(light), &lightPosition);
+            CGFloat fakeRadius = 80.0 * (MAX(self.currentLevel.lightScale, 0.3));
+            
+            BOOL(^PointInsideCircle)(CGPoint p, CGPoint center, CGFloat radius) = ^(CGPoint p, CGPoint center, CGFloat radius) {
+                if ((pow(p.x-center.x, 2.0) + pow(p.y - center.y, 2.0)) < pow(radius, 2.0)) {
+                    return YES;
+                } else {
+                    return NO;
+                }
+            };
+            
+            if (PointInsideCircle(CGPointMake(self.player.location.x, self.player.location.y), lightPosition, fakeRadius)) {
+                //canMove = NO;
+                //*stop = YES;
+                CGSize distance = CGSizeMake(self.player.location.x - lightPosition.x, self.player.location.y - lightPosition.y);
+                CGFloat length = sqrt(pow(distance.width, 2.0) + pow(distance.height, 2.0));
+                
+                luminance = 1.0 - ((length + 0.01) / 80.0); // 1 means dark, 0 means bright
+            }
+        }
+    [self.player updateAdrenalin:luminance];
+//    CGFloat luminance = 0.0; // 1 means dark, 0 means bright
+//    [light getRed:NULL green:NULL blue:NULL alpha:&luminance];
+//    [self.player updateAdrenalin:1.0 - luminance];
     
     // Center the game view to the players location
     CGFloat b = self.playerView.center.x;
@@ -225,18 +245,19 @@
     //NSLog(@"%f %f", scale, self.player.luminanceDelta);
     //self.currentLevelView.lightScale = scale + self.player.luminanceDelta;
     
-    if (self.player.adrenalin > 0.3) {
-        self.currentLevelView.lightScale = self.currentLevelView.lightScale - 0.003;
-        if (self.currentLevelView.lightScale < 0.0) {
-            self.currentLevelView.lightScale = 0.0;
-        }
-        
-    } else {
-        self.currentLevelView.lightScale = self.currentLevelView.lightScale + 0.08;
-        if (self.currentLevelView.lightScale > 1.0) {
-            self.currentLevelView.lightScale = 1.0;
-        }
-    }
+    self.currentLevelView.lightScale = (1.0 - self.player.adrenalin);
+    
+//    if (self.player.adrenalin > 0.3) {
+//        self.currentLevelView.lightScale -= 0.003;
+//        if (self.currentLevelView.lightScale < 0.0) {
+//            self.currentLevelView.lightScale = 0.0;
+//        }
+//    } else {
+//        self.currentLevelView.lightScale += 0.004;
+//        if (self.currentLevelView.lightScale > 1.0) {
+//            self.currentLevelView.lightScale = 1.0;
+//        }
+//    }
     
     self.currentLevelView.pulse = self.player.adrenalin;
 }

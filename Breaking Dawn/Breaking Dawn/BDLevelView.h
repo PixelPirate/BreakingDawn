@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BDLevel.h"
 
-@class BDLevel;
 
-@interface BDLevelView : UIView
+@interface BDLevelView : UIView<BDLevelDelegate>
 
 @property (strong, readonly, nonatomic) BDLevel *level;
 

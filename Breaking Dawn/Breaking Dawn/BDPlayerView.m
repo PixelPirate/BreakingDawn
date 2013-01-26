@@ -69,13 +69,13 @@
     angle = angle * 180.0 / M_PI;
     angle = (angle < 0.0) ? angle + 360.0 : angle;
     
-    NSArray *upright = @[[UIImage imageNamed:@"player00-move-back-01"], [UIImage imageNamed:@"player00-move-back-02"], [UIImage imageNamed:@"player00-move-back-03"]];
+    NSArray *upright = @[[UIImage imageNamed:@"player00-move-back-right-01"], [UIImage imageNamed:@"player00-move-back-right-02"], [UIImage imageNamed:@"player00-move-back-right-03"]];
     NSArray *up = @[[UIImage imageNamed:@"player00-move-back-01"], [UIImage imageNamed:@"player00-move-back-02"], [UIImage imageNamed:@"player00-move-back-03"]];
-    NSArray *upleft = @[[UIImage imageNamed:@"player00-move-back-01"], [UIImage imageNamed:@"player00-move-back-02"], [UIImage imageNamed:@"player00-move-back-03"]];
+    NSArray *upleft = @[[UIImage imageNamed:@"player00-move-back-left-01"], [UIImage imageNamed:@"player00-move-back-left-02"], [UIImage imageNamed:@"player00-move-back-left-03"]];
     NSArray *left = @[[UIImage imageNamed:@"player00-move-left-01"], [UIImage imageNamed:@"player00-move-left-02"], [UIImage imageNamed:@"player00-move-left-03"]];
-    NSArray *leftdown = @[[UIImage imageNamed:@"player00-front-left"]];
+    NSArray *leftdown = @[[UIImage imageNamed:@"player00-move-front-left-01"], [UIImage imageNamed:@"player00-move-front-left-02"], [UIImage imageNamed:@"player00-move-front-left-03"]];
     NSArray *down = @[[UIImage imageNamed:@"player00-move-front-01"], [UIImage imageNamed:@"player00-move-front-02"], [UIImage imageNamed:@"player00-move-front-03"]];
-    NSArray *rightdown = @[[UIImage imageNamed:@"player00-front-right"]];
+    NSArray *rightdown = @[[UIImage imageNamed:@"player00-move-front-right-01"], [UIImage imageNamed:@"player00-move-front-right-02"], [UIImage imageNamed:@"player00-move-front-right-03"]];
     NSArray *right = @[[UIImage imageNamed:@"player00-move-right-01"], [UIImage imageNamed:@"player00-move-right-02"], [UIImage imageNamed:@"player00-move-right-03"]];
     
     static NSUInteger index = 0;
