@@ -55,33 +55,42 @@
     return [self canMoveFrom:from to:to withLightLimit:CGFLOAT_MAX];
 }
 
+- (void)line:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(int x, int y))block
+{
+    float x0=from.x, y0=from.y;
+    float x1=to.x, y1=to.y;
+    
+    // Check if x difference is bigger than y differene, than swap now and later call block swapped
+    bool steep = (abs(y1-y0) > abs(x1-x0));
+    if(steep) {
+        float swap;
+        swap=y0; x0=y0; y0=swap;
+        swap=y1; x1=y1; y1=swap;
+    }
+    
+    // Run from left to right or from right to left
+    int inc = x1 > x0 ? 1 : -1;
+    
+    for(int x=x0; (inc>0) ? (x<=x1) : (x>=x1); x+=inc) {
+        float progress = (x-x0)/(x1-x0);
+        int y = y0 + (y1-y0)*progress;
+        if(steep) block(x, y); else block(y, x);
+    }
+}
+
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit
 {
     // Check collision map for obsacles along the path from 'from' to 'to'
     // If a value in the light map is higher than 'lightLimit', it counts as an obstacle too!
     
-    NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
+    //NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
     
-    
-    CGPoint currentPoint = CGPointMake(floor(from.x), floor(from.y));
-    to = CGPointMake(floor(to.x), floor(to.y));
-    
-    while (!CGPointEqualToPoint(currentPoint, to)) {
-        // Check obstacles
-        //NSLog(@"%@ %@", NSStringFromCGPoint(currentPoint), NSStringFromCGPoint(to));
-        
-        CGPoint move = CGPointMake(to.x - currentPoint.x, to.y - currentPoint.y);
-        move = CGPointMake(move.x / MAX(move.x, move.y), move.y / MAX(move.x, move.y));
-        move = CGPointMake(floor(move.x), floor(move.y));
-        if (CGPointEqualToPoint(move, CGPointZero)) {
-            break;
-        }
-        
-        currentPoint = CGPointApplyAffineTransform(currentPoint, CGAffineTransformMakeTranslation(-move.x, -move.y));
-        
-    }
+    [self line:from to:to usingBlock:^(int x, int y) {
+        NSLog(@"%d %d", x, y);
+    }];
     
     //UIColor *color = [[BDLevel getRGBAsFromImage:self.collisionMap atX:0 andY:0 count:1] lastObject];
+    return YES;
 }
 
 + (NSArray*)getRGBAsFromImage:(UIImage*)image atX:(int)xx andY:(int)yy count:(int)count
