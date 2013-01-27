@@ -86,11 +86,6 @@
             if (self.delegate) [self.delegate level:self willAddLights:mapInfos[@"Stages"][1][@"Lights"]];
             [self.lights addObjectsFromArray:mapInfos[@"Stages"][1][@"Lights"]];
         }]];
-        
-        // Create collision map from diffuse map if missing
-        if (self.collisionMap == nil) {
-            self.collisionMap = [[BDImageMap alloc] initWithUIImage:self.diffuseMap];
-        }
     }
     return self;
 }

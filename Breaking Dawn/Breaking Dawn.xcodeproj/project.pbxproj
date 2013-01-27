@@ -11,7 +11,6 @@
 		877DAFF616B464BF00CD9508 /* Ambience-17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFF316B464BF00CD9508 /* Ambience-17.mp3 */; };
 		877DAFF716B464BF00CD9508 /* Ambience-22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFF416B464BF00CD9508 /* Ambience-22.mp3 */; };
 		877DAFFA16B467D000CD9508 /* BDAmbientMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877DAFF916B467D000CD9508 /* BDAmbientMusicController.m */; };
-		877DB00016B46EF700CD9508 /* map00_collision.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFFF16B46EF700CD9508 /* map00_collision.png */; };
 		877DB00116B4722200CD9508 /* lightSwitch-Off.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFFB16B46C9100CD9508 /* lightSwitch-Off.png */; };
 		877DB00216B4722400CD9508 /* lightSwitch-On.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFFC16B46C9500CD9508 /* lightSwitch-On.png */; };
 		877DB00516B4768A00CD9508 /* BDIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877DB00416B4768900CD9508 /* BDIntroViewController.m */; };
@@ -92,6 +91,7 @@
 		B15B92AC16B47BF20001670D /* heartbeat_isolated_0_700.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92A916B47BF20001670D /* heartbeat_isolated_0_700.mp3 */; };
 		B15B92AD16B47BF20001670D /* Light_Switch_0_250.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */; };
 		B15B92B316B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92B216B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 */; };
+		B15B92D016B551AB0001670D /* map00_collision.png in Resources */ = {isa = PBXBuildFile; fileRef = B15B92CF16B551AB0001670D /* map00_collision.png */; };
 		B19113AF16B4018E008BFCB9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19113AE16B4018E008BFCB9 /* AVFoundation.framework */; };
 		B19113B516B40707008BFCB9 /* BDSound.m in Sources */ = {isa = PBXBuildFile; fileRef = B19113B416B40707008BFCB9 /* BDSound.m */; };
 		B192C8CC16B435F5000E4BC9 /* BDAudioContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */; };
@@ -112,7 +112,6 @@
 		877DAFF916B467D000CD9508 /* BDAmbientMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAmbientMusicController.m; sourceTree = "<group>"; };
 		877DAFFB16B46C9100CD9508 /* lightSwitch-Off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lightSwitch-Off.png"; sourceTree = "<group>"; };
 		877DAFFC16B46C9500CD9508 /* lightSwitch-On.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lightSwitch-On.png"; sourceTree = "<group>"; };
-		877DAFFF16B46EF700CD9508 /* map00_collision.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map00_collision.png; sourceTree = "<group>"; };
 		877DB00316B4768800CD9508 /* BDIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDIntroViewController.h; sourceTree = "<group>"; };
 		877DB00416B4768900CD9508 /* BDIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDIntroViewController.m; sourceTree = "<group>"; };
 		877DB00616B4769800CD9508 /* BDTitleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDTitleViewController.h; sourceTree = "<group>"; };
@@ -209,6 +208,7 @@
 		B15B92A916B47BF20001670D /* heartbeat_isolated_0_700.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = heartbeat_isolated_0_700.mp3; sourceTree = "<group>"; };
 		B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Light_Switch_0_250.mp3; sourceTree = "<group>"; };
 		B15B92B216B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Exploding_Light_Bulb_1_200.mp3; sourceTree = "<group>"; };
+		B15B92CF16B551AB0001670D /* map00_collision.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map00_collision.png; path = ../../../../../Downloads/map00_collision.png; sourceTree = "<group>"; };
 		B19113AE16B4018E008BFCB9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B19113B316B40707008BFCB9 /* BDSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSound.h; sourceTree = "<group>"; };
 		B19113B416B40707008BFCB9 /* BDSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDSound.m; sourceTree = "<group>"; };
@@ -337,6 +337,7 @@
 		87A5374B16B321AC00F7C6DB /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				B15B92CF16B551AB0001670D /* map00_collision.png */,
 				87CF3D7E16B540270073F953 /* GGJ13_RoundBadge.png */,
 				B15B92B216B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 */,
 				8784973516B4CC1B00D72C0D /* start-crying-active.png */,
@@ -368,7 +369,6 @@
 				B1C2B51D16B43CBA00CFCC37 /* Monster_Awakes3.mp3 */,
 				87A5376C16B391C200F7C6DB /* player00.png */,
 				87A5376A16B38F5100F7C6DB /* light00-01.jpg */,
-				877DAFFF16B46EF700CD9508 /* map00_collision.png */,
 				87A5378316B402C300F7C6DB /* mob00-01.png */,
 				87A537D216B4527E00F7C6DB /* move-front-left */,
 				87A537D616B4527F00F7C6DB /* move-front-right */,
@@ -578,7 +578,6 @@
 				877DAFF716B464BF00CD9508 /* Ambience-22.mp3 in Resources */,
 				877DB00116B4722200CD9508 /* lightSwitch-Off.png in Resources */,
 				877DB00216B4722400CD9508 /* lightSwitch-On.png in Resources */,
-				877DB00016B46EF700CD9508 /* map00_collision.png in Resources */,
 				877DB00A16B4801D00CD9508 /* logo00-02.png in Resources */,
 				877DB01416B493C400CD9508 /* map00.plist in Resources */,
 				B15B92AB16B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 in Resources */,
@@ -597,6 +596,7 @@
 				8784973616B4CC1B00D72C0D /* start-crying-active.png in Resources */,
 				87CF3D7C16B4D8020073F953 /* lighter.png in Resources */,
 				87CF3D7F16B540280073F953 /* GGJ13_RoundBadge.png in Resources */,
+				B15B92D016B551AB0001670D /* map00_collision.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
