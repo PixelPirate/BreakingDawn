@@ -60,7 +60,7 @@
     NSUInteger s = floor(steps);
     rangeWalked -= s * stepRange;
     
-    CGPoint direction = CGPointMake(lastPosition.x - position.x, lastPosition.y - position.y);
+    CGPoint direction = player.direction;
     CGFloat maximalMovement = MAX(ABS(direction.x), ABS(direction.y));
     direction = CGPointMake(direction.x / maximalMovement, direction.y / maximalMovement);
     

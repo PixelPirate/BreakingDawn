@@ -20,7 +20,7 @@
     [[NSUserDefaults standardUserDefaults] setFloat:2.0 forKey:@"WalkingSpeed"];
     [[NSUserDefaults standardUserDefaults] setFloat:2.5 forKey:@"MobWalkingSpeed"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DebugMenu"];
-    [[NSUserDefaults standardUserDefaults] setFloat:0.016 forKey:@"DrawRate"];
+    [[NSUserDefaults standardUserDefaults] setFloat:1/30.0 forKey:@"DrawRate"];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];

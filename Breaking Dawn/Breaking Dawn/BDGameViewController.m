@@ -172,9 +172,19 @@
         movement = CGPointApplyAffineTransform(movement, CGAffineTransformMakeScale(walkingSpeed, walkingSpeed));
         CGPoint newLocation = CGPointApplyAffineTransform(self.player.location,
                                                           CGAffineTransformMakeTranslation(-movement.x, -movement.y));
-        if ([self.currentLevel canMoveFrom:self.player.location to:newLocation]) {
-            self.player.location = newLocation;
+        
+        // Try to move at least in one the directions
+        CGPoint pushBack[3] = { CGPointMake(-1, -1), CGPointMake(0, -1), CGPointMake(-1, 0), };
+        for(int i=0; i<3; i++) {
+            newLocation = CGPointApplyAffineTransform(self.player.location,
+                                                                   CGAffineTransformMakeTranslation(movement.x*pushBack[i].x, movement.y*pushBack[i].y));
+            if([self.currentLevel isFreeX:newLocation.x andY:newLocation.y]) {
+                self.player.location = newLocation;
+                break;
+            }
         }
+        
+        self.player.direction = movement;
     }
     
     // Hotspots

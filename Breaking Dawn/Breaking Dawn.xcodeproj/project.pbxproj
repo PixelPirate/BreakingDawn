@@ -77,11 +77,14 @@
 		87A537DD16B4527F00F7C6DB /* player00-move-front-right-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A537D716B4527F00F7C6DB /* player00-move-front-right-01.png */; };
 		87A537DE16B4527F00F7C6DB /* player00-move-front-right-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A537D816B4527F00F7C6DB /* player00-move-front-right-02.png */; };
 		87A537DF16B4527F00F7C6DB /* player00-move-front-right-03.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A537D916B4527F00F7C6DB /* player00-move-front-right-03.png */; };
+		B15B92AB16B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92A816B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 */; };
+		B15B92AC16B47BF20001670D /* heartbeat_isolated_0_700.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92A916B47BF20001670D /* heartbeat_isolated_0_700.mp3 */; };
+		B15B92AD16B47BF20001670D /* Light_Switch_0_250.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */; };
+		B15B92B316B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92B216B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 */; };
 		B19113AF16B4018E008BFCB9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19113AE16B4018E008BFCB9 /* AVFoundation.framework */; };
 		B19113B516B40707008BFCB9 /* BDSound.m in Sources */ = {isa = PBXBuildFile; fileRef = B19113B416B40707008BFCB9 /* BDSound.m */; };
 		B192C8CC16B435F5000E4BC9 /* BDAudioContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */; };
 		B1C2B51E16B43CBA00CFCC37 /* Game_Over_Scream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51716B43CBA00CFCC37 /* Game_Over_Scream.mp3 */; };
-		B1C2B51F16B43CBA00CFCC37 /* heartbeat_isolated.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51816B43CBA00CFCC37 /* heartbeat_isolated.mp3 */; };
 		B1C2B52016B43CBA00CFCC37 /* Monster_Awakes1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51916B43CBA00CFCC37 /* Monster_Awakes1.mp3 */; };
 		B1C2B52116B43CBA00CFCC37 /* Monster_Awakes1+2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51A16B43CBA00CFCC37 /* Monster_Awakes1+2.mp3 */; };
 		B1C2B52216B43CBA00CFCC37 /* Monster_Awakes2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */; };
@@ -180,13 +183,16 @@
 		87A537D716B4527F00F7C6DB /* player00-move-front-right-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-right-01.png"; sourceTree = "<group>"; };
 		87A537D816B4527F00F7C6DB /* player00-move-front-right-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-right-02.png"; sourceTree = "<group>"; };
 		87A537D916B4527F00F7C6DB /* player00-move-front-right-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-right-03.png"; sourceTree = "<group>"; };
+		B15B92A816B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Flickering_Light_Electric_Buzz_5_700.mp3; sourceTree = "<group>"; };
+		B15B92A916B47BF20001670D /* heartbeat_isolated_0_700.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = heartbeat_isolated_0_700.mp3; sourceTree = "<group>"; };
+		B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Light_Switch_0_250.mp3; sourceTree = "<group>"; };
+		B15B92B216B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Exploding_Light_Bulb_1_200.mp3; sourceTree = "<group>"; };
 		B19113AE16B4018E008BFCB9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B19113B316B40707008BFCB9 /* BDSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSound.h; sourceTree = "<group>"; };
 		B19113B416B40707008BFCB9 /* BDSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDSound.m; sourceTree = "<group>"; };
 		B192C8CA16B435F5000E4BC9 /* BDAudioContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAudioContainer.h; sourceTree = "<group>"; };
 		B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAudioContainer.m; sourceTree = "<group>"; };
 		B1C2B51716B43CBA00CFCC37 /* Game_Over_Scream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Game_Over_Scream.mp3; sourceTree = "<group>"; };
-		B1C2B51816B43CBA00CFCC37 /* heartbeat_isolated.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = heartbeat_isolated.mp3; sourceTree = "<group>"; };
 		B1C2B51916B43CBA00CFCC37 /* Monster_Awakes1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Monster_Awakes1.mp3; sourceTree = "<group>"; };
 		B1C2B51A16B43CBA00CFCC37 /* Monster_Awakes1+2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Monster_Awakes1+2.mp3"; sourceTree = "<group>"; };
 		B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Monster_Awakes2.mp3; sourceTree = "<group>"; };
@@ -309,6 +315,10 @@
 		87A5374B16B321AC00F7C6DB /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				B15B92B216B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 */,
+				B15B92A816B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 */,
+				B15B92A916B47BF20001670D /* heartbeat_isolated_0_700.mp3 */,
+				B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */,
 				877DAFFB16B46C9100CD9508 /* lightSwitch-Off.png */,
 				877DB01316B493C400CD9508 /* map00.plist */,
 				877DB00916B4801C00CD9508 /* logo00-02.png */,
@@ -317,7 +327,6 @@
 				877DAFF316B464BF00CD9508 /* Ambience-17.mp3 */,
 				877DAFF416B464BF00CD9508 /* Ambience-22.mp3 */,
 				B1C2B51716B43CBA00CFCC37 /* Game_Over_Scream.mp3 */,
-				B1C2B51816B43CBA00CFCC37 /* heartbeat_isolated.mp3 */,
 				B1C2B51916B43CBA00CFCC37 /* Monster_Awakes1.mp3 */,
 				B1C2B51A16B43CBA00CFCC37 /* Monster_Awakes1+2.mp3 */,
 				B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */,
@@ -495,7 +504,6 @@
 				87A5376B16B38F5100F7C6DB /* light00-01.jpg in Resources */,
 				87A5376D16B391C200F7C6DB /* player00.png in Resources */,
 				B1C2B51E16B43CBA00CFCC37 /* Game_Over_Scream.mp3 in Resources */,
-				B1C2B51F16B43CBA00CFCC37 /* heartbeat_isolated.mp3 in Resources */,
 				B1C2B52016B43CBA00CFCC37 /* Monster_Awakes1.mp3 in Resources */,
 				B1C2B52116B43CBA00CFCC37 /* Monster_Awakes1+2.mp3 in Resources */,
 				B1C2B52216B43CBA00CFCC37 /* Monster_Awakes2.mp3 in Resources */,

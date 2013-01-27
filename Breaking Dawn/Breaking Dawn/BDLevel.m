@@ -12,6 +12,7 @@
 #import "BDMob.h"
 #import "BDImageMap.h"
 #import "BDHotspot.h"
+#import "BDSound.h"
 
 @interface BDLevel () // Private setter
 
@@ -76,6 +77,7 @@
         
         self.hotspots = [NSMutableArray array];
         [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1196, 663, 80, 60) trigger:^{
+            [[BDSound getInstance] playSound:SOUND_LIGHT_SWITCH];
             if (self.delegate) [self.delegate level:self willAddLights:mapInfos[@"Stages"][1][@"Lights"]];
         }]];
         
@@ -123,6 +125,13 @@
             break;
         }
     }
+}
+
+- (BOOL)isFreeX:(int)x andY:(int)y
+{
+    UIColor *color = [[self.collisionMap getRGBAsFromImageX:x andY:y count:1] lastObject];
+    const CGFloat *components = CGColorGetComponents([color CGColor]);
+    return (components[0] != 0);
 }
 
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit
