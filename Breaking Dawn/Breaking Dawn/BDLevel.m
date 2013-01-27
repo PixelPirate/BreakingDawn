@@ -86,6 +86,11 @@
             if (self.delegate) [self.delegate level:self willAddLights:mapInfos[@"Stages"][1][@"Lights"]];
             [self.lights addObjectsFromArray:mapInfos[@"Stages"][1][@"Lights"]];
         }]];
+        
+        
+        [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(50, 705, 80, 100) trigger:^{
+            if (self.delegate) [self.delegate levelWillWin:self];
+        }]];
     }
     return self;
 }

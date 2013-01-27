@@ -93,6 +93,7 @@
 		B15B92D016B551AB0001670D /* map00_collision.png in Resources */ = {isa = PBXBuildFile; fileRef = B15B92CF16B551AB0001670D /* map00_collision.png */; };
 		B165D5D216B5567F00719EAE /* exit-ligher.png in Resources */ = {isa = PBXBuildFile; fileRef = B165D5D116B5567F00719EAE /* exit-ligher.png */; };
 		B165D5D416B556C800719EAE /* map00_collision.png in Resources */ = {isa = PBXBuildFile; fileRef = B165D5D316B556C800719EAE /* map00_collision.png */; };
+		B165D5D716B55D6E00719EAE /* BDGameWinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B165D5D616B55D6E00719EAE /* BDGameWinViewController.m */; };
 		B19113AF16B4018E008BFCB9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19113AE16B4018E008BFCB9 /* AVFoundation.framework */; };
 		B19113B516B40707008BFCB9 /* BDSound.m in Sources */ = {isa = PBXBuildFile; fileRef = B19113B416B40707008BFCB9 /* BDSound.m */; };
 		B192C8CC16B435F5000E4BC9 /* BDAudioContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */; };
@@ -211,6 +212,8 @@
 		B15B92CF16B551AB0001670D /* map00_collision.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map00_collision.png; path = ../../../../../Downloads/map00_collision.png; sourceTree = "<group>"; };
 		B165D5D116B5567F00719EAE /* exit-ligher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exit-ligher.png"; sourceTree = "<group>"; };
 		B165D5D316B556C800719EAE /* map00_collision.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map00_collision.png; sourceTree = "<group>"; };
+		B165D5D516B55D6E00719EAE /* BDGameWinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDGameWinViewController.h; sourceTree = "<group>"; };
+		B165D5D616B55D6E00719EAE /* BDGameWinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDGameWinViewController.m; sourceTree = "<group>"; };
 		B19113AE16B4018E008BFCB9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B19113B316B40707008BFCB9 /* BDSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSound.h; sourceTree = "<group>"; };
 		B19113B416B40707008BFCB9 /* BDSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDSound.m; sourceTree = "<group>"; };
@@ -276,6 +279,8 @@
 		87A5372316B31D8500F7C6DB /* Breaking Dawn */ = {
 			isa = PBXGroup;
 			children = (
+				B165D5D516B55D6E00719EAE /* BDGameWinViewController.h */,
+				B165D5D616B55D6E00719EAE /* BDGameWinViewController.m */,
 				87A5372C16B31D8600F7C6DB /* BDAppDelegate.h */,
 				87A5372D16B31D8700F7C6DB /* BDAppDelegate.m */,
 				87A5373516B31D8700F7C6DB /* BDViewController.h */,
@@ -631,6 +636,7 @@
 				877DB00516B4768A00CD9508 /* BDIntroViewController.m in Sources */,
 				877DB00816B4769900CD9508 /* BDTitleViewController.m in Sources */,
 				877DB01116B4818800CD9508 /* BDGameOverViewController.m in Sources */,
+				B165D5D716B55D6E00719EAE /* BDGameWinViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

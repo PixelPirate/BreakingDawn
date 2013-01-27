@@ -18,6 +18,7 @@
 #import "BDHotspot.h"
 #import "BDAmbientMusicController.h"
 #import "BDGameOverViewController.h"
+#import "BDGameWinViewController.h"
 
 
 @interface BDGameViewController ()
@@ -43,6 +44,8 @@
 @property (strong, readwrite, nonatomic) BDAmbientMusicController *ambientMusicController;
 
 @property (strong, readwrite, nonatomic) BDGameOverViewController *gameOverViewController;
+
+@property (strong, readwrite, nonatomic) BDGameWinViewController *gameWinViewController;
 
 - (void)tickWithTimer:(NSTimer *)timer;
 
@@ -268,7 +271,7 @@
     self.currentLevelView.pulse = self.player.adrenalin;
 }
 
-- (void)gameDidEnd
+- (void)gameStop
 {
     [self.gameTimer invalidate];
     [self.staticTimer invalidate];
@@ -277,11 +280,28 @@
     self.currentLevelView.pulse = 10.0;
     
     [self.ambientMusicController stop];
+}
+
+- (void)gameDidEnd
+{
+    [self gameStop];
+    
+    [[BDSound getInstance] playSound:SOUND_GAME_OVER];
     
     [self.gameOverViewController.view removeFromSuperview];
     self.gameOverViewController = [[BDGameOverViewController alloc] initWithNibName:nil bundle:nil];
     self.gameOverViewController.view.frame = self.view.bounds;
     [self.view addSubview:self.gameOverViewController.view];
+}
+
+- (void)gameWin
+{
+    [self gameStop];
+    
+    [self.gameWinViewController.view removeFromSuperview];
+    self.gameWinViewController = [[BDGameWinViewController alloc] initWithNibName:nil bundle:nil];
+    self.gameWinViewController.view.frame = self.view.bounds;
+    [self.view addSubview:self.gameWinViewController.view];
 }
 
 - (void)loadView

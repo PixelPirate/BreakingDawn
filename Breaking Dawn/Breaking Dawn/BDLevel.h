@@ -17,6 +17,8 @@
 
 - (void)level:(BDLevel *)level willAddLights:(NSArray *)lights;
 
+- (void)levelWillWin:(BDLevel *)level;
+
 @end
 
 @interface BDLevel : NSObject

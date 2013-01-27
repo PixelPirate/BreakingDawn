@@ -218,6 +218,12 @@
     [self reloadData];
 }
 
+- (void)levelWillWin:(BDLevel *)level
+{
+    //(BDGameView *)self.superview;
+    NSLog(@"win");
+}
+
 - (void)level:(BDLevel *)level willAddLights:(NSArray *)lights
 {
     self.lightSwitch.hidden = YES;
