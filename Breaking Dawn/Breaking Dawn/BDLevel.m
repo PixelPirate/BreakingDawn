@@ -140,9 +140,7 @@
 
 - (BOOL)isFreeX:(int)x andY:(int)y
 {
-    UIColor *color = [[self.collisionMap getRGBAsFromImageX:x andY:y count:1] lastObject];
-    const CGFloat *components = CGColorGetComponents([color CGColor]);
-    return (components[0] != 0);
+    return ([self.collisionMap getByteFromX:x andY:y component:0] != 0);
 }
 
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit
@@ -154,9 +152,7 @@
     
     bool __block canMove = YES;
     [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
-        UIColor *color = [[self.collisionMap getRGBAsFromImageX:x andY:y count:1] lastObject];
-        const CGFloat *components = CGColorGetComponents([color CGColor]);
-        if(components[0] == 0) {
+        if([self.collisionMap getByteFromX:x andY:y component:0] == 0) {
             canMove = NO;
             *stop = YES;
         }
