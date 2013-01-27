@@ -279,8 +279,6 @@
 		87A5372316B31D8500F7C6DB /* Breaking Dawn */ = {
 			isa = PBXGroup;
 			children = (
-				B165D5D516B55D6E00719EAE /* BDGameWinViewController.h */,
-				B165D5D616B55D6E00719EAE /* BDGameWinViewController.m */,
 				87A5372C16B31D8600F7C6DB /* BDAppDelegate.h */,
 				87A5372D16B31D8700F7C6DB /* BDAppDelegate.m */,
 				87A5373516B31D8700F7C6DB /* BDViewController.h */,
@@ -291,6 +289,8 @@
 				877DB00716B4769900CD9508 /* BDTitleViewController.m */,
 				87A5375416B32ACE00F7C6DB /* BDGameViewController.h */,
 				87A5375516B32ACE00F7C6DB /* BDGameViewController.m */,
+				B165D5D516B55D6E00719EAE /* BDGameWinViewController.h */,
+				B165D5D616B55D6E00719EAE /* BDGameWinViewController.m */,
 				877DB00F16B4818800CD9508 /* BDGameOverViewController.h */,
 				877DB01016B4818800CD9508 /* BDGameOverViewController.m */,
 				87A5376E16B3983600F7C6DB /* BDPostProcessingViewController.h */,

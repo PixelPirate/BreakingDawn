@@ -12,6 +12,7 @@
 #import "UIImage+UIImage_Extras.h"
 #import "BDMob.h"
 #import "BDMobView.h"
+#import "BDGameViewController.h"
 
 @interface BDLevelView ()
 
@@ -220,8 +221,9 @@
 
 - (void)levelWillWin:(BDLevel *)level
 {
-    //(BDGameView *)self.superview;
-    NSLog(@"win");
+    // Dirty way to inform controller
+    BDGameViewController *controller = (BDGameViewController *)self.superview.nextResponder;
+    [controller gameWin];
 }
 
 - (void)level:(BDLevel *)level willAddLights:(NSArray *)lights

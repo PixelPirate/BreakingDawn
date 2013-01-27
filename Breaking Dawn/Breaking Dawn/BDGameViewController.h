@@ -10,4 +10,6 @@
 
 @interface BDGameViewController : UIViewController
 
+- (void)gameWin;
+
 @end
