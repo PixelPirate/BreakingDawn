@@ -169,10 +169,8 @@
 {
     [self.lightLayer.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    for (NSDictionary *pointRep in self.level.lights) {
-        
-        CGPoint p = CGPointZero;
-        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(pointRep), &p);
+    for (NSValue *light in self.level.lights) {
+        CGPoint p = [light CGPointValue];
         
         UIView *light = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 224, 224)];
         light.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.4 alpha:0.8];

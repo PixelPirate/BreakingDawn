@@ -55,8 +55,10 @@
 //            NSNumber *x = [NSNumber numberWithFloat:[pointRep[@"X"] floatValue] * scale];
 //            NSNumber *y = [NSNumber numberWithFloat:[pointRep[@"Y"] floatValue] * scale];
 //            NSDictionary *p = [NSDictionary dictionaryWithObjectsAndKeys:@"X", x, @"Y", y, nil];
+            CGPoint light;
+            CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(pointRep), &light);
             
-            [self.lights addObject:pointRep];
+            [self.lights addObject:[NSValue valueWithCGPoint:light]];
         }
         
         // Load lightmap from file or generate it if file is missing
@@ -106,11 +108,6 @@
     return level;
 }
 
-- (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to
-{
-    return [self canMoveFrom:from to:to withLightLimit:CGFLOAT_MAX];
-}
-
 - (void)line:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(int x, int y, BOOL *stop))block
 {
     float x0=from.x, y0=from.y;
@@ -143,6 +140,11 @@
     return ([self.collisionMap getByteFromX:x andY:y component:0] != 0);
 }
 
+- (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to
+{
+    return [self canMoveFrom:from to:to withLightLimit:CGFLOAT_MAX];
+}
+
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit
 {
     // Check collision map for obsacles along the path from 'from' to 'to'
@@ -159,13 +161,13 @@
 
     }];
     
+    // Check if there is a light on the line
     if (canMove && lightLimit != CGFLOAT_MAX) {
         [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
-            for (NSDictionary *light in self.lights) {
-                CGPoint lightPosition = CGPointZero;
-                CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(light), &lightPosition);
-                CGFloat fakeRadius = 80.0 * self.lightScale;
+            for (NSValue *light in self.lights) {
+                CGPoint lightPosition = [light CGPointValue];
                 
+                CGFloat fakeRadius = 80.0 * self.lightScale;
                 BOOL(^PointInsideCircle)(CGPoint p, CGPoint center, CGFloat radius) = ^(CGPoint p, CGPoint center, CGFloat radius) {
                     if ((pow(p.x-center.x, 2.0) + pow(p.y - center.y, 2.0)) < pow(radius, 2.0)) {
                         return YES;
@@ -192,9 +194,8 @@
     [[UIColor blackColor] set];
     UIRectFill(CGRectMake(0, 0, self.diffuseMap.size.width, self.diffuseMap.size.height));
     
-    for (NSDictionary *pointRep in self.lights) {
-        CGPoint p = CGPointZero;
-        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(pointRep), &p);
+    for (NSValue *light in self.lights) {
+        CGPoint p = [light CGPointValue];
         
         UIView *light = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 224, 224)];
         light.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.4 alpha:0.8];

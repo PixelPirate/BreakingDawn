@@ -203,9 +203,8 @@
     
     // Check light amount recieved by the player
     CGFloat luminance = 0.0;
-    for (NSDictionary *light in self.currentLevel.lights) {
-        CGPoint lightPosition = CGPointZero;
-        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(light), &lightPosition);
+    for (NSValue *light in self.currentLevel.lights) {
+        CGPoint lightPosition = [light CGPointValue];
         CGFloat fakeRadius = 80.0 * (MAX(self.currentLevel.lightScale, 0.45));
         
         BOOL(^PointInsideCircle)(CGPoint p, CGPoint center, CGFloat radius) = ^(CGPoint p, CGPoint center, CGFloat radius) {
