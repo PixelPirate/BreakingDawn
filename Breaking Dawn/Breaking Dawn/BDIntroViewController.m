@@ -45,8 +45,11 @@
 {
     [super viewDidLoad];
     
-    [self gotoTitleView];
-    return;
+    
+    if([[NSUserDefaults standardUserDefaults] floatForKey:@"SkipIntro"]) {
+        [self gotoTitleView];
+        return;
+    }
     
     UIImageView *dummy = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GGJ13_RoundBadge"]];
     dummy.frame = self.view.bounds;
