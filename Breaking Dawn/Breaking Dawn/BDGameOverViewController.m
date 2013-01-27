@@ -7,6 +7,7 @@
 //
 
 #import "BDGameOverViewController.h"
+#import "BDAppDelegate.h"
 
 @interface BDGameOverViewController ()
 
@@ -63,7 +64,8 @@
 
 - (void)restartGame
 {
-    NSLog(@"%@", self.presentingViewController);
+    BDAppDelegate *d = [[UIApplication sharedApplication] delegate];
+    [d.titleViewController restartGame];
 }
 
 - (void)didReceiveMemoryWarning

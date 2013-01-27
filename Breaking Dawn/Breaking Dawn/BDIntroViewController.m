@@ -8,6 +8,7 @@
 
 #import "BDIntroViewController.h"
 #import "BDTitleViewController.h"
+#import "BDAppDelegate.h"
 
 @interface BDIntroViewController ()
 
@@ -22,6 +23,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.titleViewController = [[BDTitleViewController alloc] initWithNibName:nil bundle:nil];
+        
+        BDAppDelegate *d = [[UIApplication sharedApplication] delegate];
+        d.titleViewController = self.titleViewController;
     }
     return self;
 }

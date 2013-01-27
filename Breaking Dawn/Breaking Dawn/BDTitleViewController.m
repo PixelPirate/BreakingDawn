@@ -84,6 +84,14 @@
     }];
 }
 
+- (void)restartGame
+{
+    self.gameViewController = [[BDGameViewController alloc] initWithNibName:nil bundle:nil];
+    [self dismissViewControllerAnimated:false completion:^{
+        NSLog(@"restart");
+    }];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

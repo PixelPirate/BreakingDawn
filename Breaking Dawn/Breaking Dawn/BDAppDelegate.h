@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BDTitleViewController.h"
 
 @class BDViewController;
 
@@ -15,5 +16,7 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) BDViewController *viewController;
+
+@property (strong, nonatomic) BDTitleViewController *titleViewController;
 
 @end
