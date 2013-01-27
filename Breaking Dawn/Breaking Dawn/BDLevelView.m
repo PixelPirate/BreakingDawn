@@ -35,6 +35,8 @@
 
 @property (strong, readwrite, nonatomic) UIImageView *lightSwitch;
 
+@property (strong, readwrite, nonatomic) UIImageView *exitImage;
+
 - (void)beginPulsating;
 
 - (void)endPulsating;
@@ -94,6 +96,10 @@
         self.lightSwitch = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightSwitchLight.png"]];
         self.lightSwitch.frame = CGRectMake(1224, 642, self.lightSwitch.image.size.width, self.lightSwitch.image.size.height);
         [self addSubview:self.lightSwitch];
+        
+        self.exitImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exit-ligher.png"]];
+        self.exitImage.frame = CGRectMake(50, 800-186, self.exitImage.image.size.width, self.exitImage.image.size.height);
+        [self addSubview:self.exitImage];
     }
     return self;
 }
