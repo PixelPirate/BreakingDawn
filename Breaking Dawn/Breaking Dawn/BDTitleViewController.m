@@ -31,9 +31,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.gameViewController = [[BDGameViewController alloc] initWithNibName:nil bundle:nil];
-        self.postEffectsController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
-        self.logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo00-02"]];
-        self.logoView.frame = CGRectMake(0, 0, self.logoView.image.size.width, self.logoView.image.size.height);
     }
     return self;
 }
@@ -48,15 +45,26 @@
     [self.button setTitle:@"Start Game" forState:UIControlStateNormal];
     [self.button addTarget:self action:@selector(startGame) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.button];
-    
+    self.button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    self.postEffectsController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
     self.postEffectsController.view.frame = self.view.bounds;
     [self.view addSubview:self.postEffectsController.view];
     
-    self.logoView.frame = CGRectMake(self.view.bounds.size.width / 2.0 - self.logoView.bounds.size.width / 2.0,
-                                     self.view.bounds.size.height / 2.0 - self.logoView.bounds.size.height / 2.0,
-                                     self.view.bounds.size.width,
-                                     self.view.bounds.size.height);
+    self.logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo00-02"]];
+    
+    self.logoView.frame = self.view.bounds;
+    self.logoView.contentMode = UIViewContentModeBottom;
     [self.view insertSubview:self.logoView belowSubview:self.button];
+    self.logoView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
+    
+    self.logoView.alpha = 0.0;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.logoView.alpha = 1.0;
+    }];
 }
 
 - (void)loadView
@@ -65,12 +73,16 @@
                                                          0,
                                                          [UIScreen mainScreen].applicationFrame.size.width,
                                                          [UIScreen mainScreen].applicationFrame.size.height)];
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
 }
 
 - (void)startGame
 {
-    [self.button removeFromSuperview];
-    [self.view addSubview:self.gameViewController.view];
+    NSLog(@"%@", self.view);
+    self.view.userInteractionEnabled = NO;
+    [self presentViewController:self.gameViewController animated:NO completion:^{
+        NSLog(@"%@", self.gameViewController.view);
+    }];
 }
 
 - (void)didReceiveMemoryWarning

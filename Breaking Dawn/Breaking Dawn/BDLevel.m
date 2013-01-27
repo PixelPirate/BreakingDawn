@@ -68,7 +68,9 @@
         
         CGSize imageSize = self.diffuseMap.size;
         
-        self.spawn = CGPointMake(imageSize.width/2.0, imageSize.height/2.0);
+        CGPoint spawn = CGPointZero;
+        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(mapInfos[@"Stages"][0][@"Spawn"]), &spawn);
+        self.spawn = spawn;
         
         self.size = imageSize;
         

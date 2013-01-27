@@ -30,13 +30,14 @@
 {
     [super viewDidLoad];
     
-    UILabel *dummy = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 20)];
+    UILabel *dummy = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 350, 100)];
     dummy.center = CGPointMake(self.view.bounds.size.width/2.0, self.view.bounds.size.height/2.0);
     dummy.text = @"B̶r̶e̶a̶k̶i̶n̶g̶ ̶D̶a̶w̶n̶ Nykto";
     dummy.textAlignment = NSTextAlignmentCenter;
     dummy.backgroundColor = [UIColor blackColor];
     dummy.textColor = [UIColor whiteColor];
-    dummy.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
+    dummy.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]*2.0];
+    dummy.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     
     [self.view addSubview:dummy];
     
@@ -71,6 +72,7 @@
                                                          0,
                                                          [UIScreen mainScreen].applicationFrame.size.width,
                                                          [UIScreen mainScreen].applicationFrame.size.height)];
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
 }
 
 - (void)didReceiveMemoryWarning

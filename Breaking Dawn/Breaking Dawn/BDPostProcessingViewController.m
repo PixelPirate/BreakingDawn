@@ -55,6 +55,8 @@
     
     self.view = postProcessingView;
     
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+    
     self.noiseContext = [CIContext contextWithOptions:nil];
     
     CIFilter *noiseGenerator = [CIFilter filterWithName:@"CIColorMonochrome"];
@@ -83,6 +85,7 @@
     [self.view addSubview:self.noiseImageView];
     self.view.userInteractionEnabled = NO;
     self.noiseImageView.userInteractionEnabled = NO;
+    self.noiseImageView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     
     __block void(^rand)(void) = ^(void) {
         

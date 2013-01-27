@@ -5,37 +5,77 @@
 	<key>Stages</key>
 	<array>
 		<dict>
+			<key>Spawn</key>
+			<dict>
+				<key>X</key>
+				<integer>1552</integer>
+				<key>Y</key>
+				<integer>208</integer>
+			</dict>
 			<key>Lights</key>
 			<array>
 				<dict>
 					<key>X</key>
-					<real>1584</real>
+					<integer>1552</integer>
 					<key>Y</key>
-					<real>240</real>
+					<real>208</real>
 				</dict>
 				<dict>
 					<key>X</key>
-					<real>1392</real>
+					<real>1423</real>
 					<key>Y</key>
-					<real>432</real>
+					<real>416</real>
 				</dict>
 				<dict>
 					<key>X</key>
-					<real>912</real>
+					<real>960</real>
 					<key>Y</key>
-					<real>336</real>
+					<real>368</real>
 				</dict>
 				<dict>
 					<key>X</key>
-					<real>912</real>
+					<real>960</real>
 					<key>Y</key>
-					<real>592</real>
+					<real>624</real>
 				</dict>
 				<dict>
 					<key>X</key>
-					<real>1136</real>
+					<real>1184</real>
 					<key>Y</key>
-					<real>720</real>
+					<real>752</real>
+				</dict>
+			</array>
+			<key>Monsters</key>
+			<array>
+				<dict>
+					<key>X</key>
+					<real>1712</real>
+					<key>Y</key>
+					<real>512</real>
+				</dict>
+				<dict>
+					<key>X</key>
+					<real>1064</real>
+					<key>Y</key>
+					<real>193</real>
+				</dict>
+				<dict>
+					<key>X</key>
+					<real>888</real>
+					<key>Y</key>
+					<real>835</real>
+				</dict>
+				<dict>
+					<key>X</key>
+					<real>345</real>
+					<key>Y</key>
+					<real>368</real>
+				</dict>
+				<dict>
+					<key>X</key>
+					<real>496</real>
+					<key>Y</key>
+					<real>771</real>
 				</dict>
 			</array>
 		</dict>
@@ -44,21 +84,21 @@
 			<array>
 				<dict>
 					<key>X</key>
-					<real>336</real>
+					<real>384</real>
 					<key>Y</key>
-					<real>656</real>
+					<real>688</real>
 				</dict>
 				<dict>
 					<key>X</key>
-					<real>368</real>
+					<real>416</real>
 					<key>Y</key>
-					<real>464</real>
+					<real>496</real>
 				</dict>
 				<dict>
 					<key>X</key>
-					<real>528</real>
+					<real>580</real>
 					<key>Y</key>
-					<real>304</real>
+					<real>400</real>
 				</dict>
 			</array>
 		</dict>

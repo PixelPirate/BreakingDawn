@@ -63,27 +63,33 @@
         self.light.maximumValue = 0.1;
         [self.light addTarget:self action:@selector(lightC) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview:self.light];
+        self.light.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
         self.ll = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].applicationFrame.size.width, 20)];
         self.ll.text = [NSString stringWithFormat:@"%f", self.light.value];
         [self.view addSubview:self.ll];
+        self.ll.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
         
         self.dusk = [[UISlider alloc] initWithFrame:CGRectMake(0, 40, [UIScreen mainScreen].applicationFrame.size.width, 20)];
         self.dusk.value = 0.002;
         self.dusk.maximumValue = 0.1;
         [self.dusk addTarget:self action:@selector(duskC) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview:self.dusk];
+        self.dusk.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
         self.dl = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, [UIScreen mainScreen].applicationFrame.size.width, 20)];
         self.dl.text = [NSString stringWithFormat:@"%f", self.dusk.value];
         [self.view addSubview:self.dl];
+        self.dl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
         
         self.dark = [[UISlider alloc] initWithFrame:CGRectMake(0, 80, [UIScreen mainScreen].applicationFrame.size.width, 20)];
         self.dark.value = 0.006;
         self.dark.maximumValue = 0.1;
         [self.dark addTarget:self action:@selector(darkC) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview:self.dark];
+        self.dark.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
         self.ddl = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, [UIScreen mainScreen].applicationFrame.size.width, 20)];
         self.ddl.text = [NSString stringWithFormat:@"%f", self.dark.value];
         [self.view addSubview:self.ddl];
+        self.ddl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
     }
 }
 

@@ -17,6 +17,7 @@
 #import "BDMob.h"
 #import "BDHotspot.h"
 #import "BDAmbientMusicController.h"
+#import "BDGameOverViewController.h"
 
 
 @interface BDGameViewController ()
@@ -64,7 +65,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+        
     self.currentLevel = [BDLevel levelNamed:@"map00"];
     self.currentLevelView = [[BDLevelView alloc] initWithLevel:self.currentLevel];
     self.player = [[BDPlayer alloc] initWithPosition:self.currentLevel.spawn];
@@ -78,15 +79,21 @@
     self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
     self.postProcessingViewController.currentLevelView = self.currentLevelView;
     
-    UIView *gameView = [[UIView alloc] initWithFrame:self.currentLevelView.bounds];
-    [gameView addSubview:self.currentLevelView];
+    //UIView *gameView = [[UIView alloc] initWithFrame:self.currentLevelView.bounds];
+    //[gameView addSubview:self.currentLevelView];
     [self.currentLevelView.playerLayer addSubview:self.playerView];
     
-    
+    /*
     CGSize applicationSize = [[UIScreen mainScreen] applicationFrame].size;
-    gameView.frame = CGRectOffset(gameView.frame, -self.playerView.center.x+applicationSize.width/2.0, -self.playerView.center.y+applicationSize.height/2.0);
+    gameView.frame = CGRectOffset(gameView.frame,
+                                  -self.playerView.center.x+applicationSize.width/2.0,
+                                  -self.playerView.center.y+applicationSize.height/2.0);
+    */
     
-    self.view = gameView;
+//    self.view = gameView;
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:self.currentLevelView];//gameView];
+    
     
     [self.view addSubview:self.postProcessingViewController.view];
     self.postProcessingViewController.view.frame = CGRectMake(-self.view.frame.origin.x,
@@ -115,7 +122,7 @@
 - (void)pushTouch:(UITouch *)touch
 {
     // Direction of player to touch
-    CGPoint location = [touch locationInView:self.view];
+    CGPoint location = [touch locationInView:self.currentLevelView];
     
     CGPoint direction = CGPointMake(self.playerView.center.x - location.x, self.playerView.center.y - location.y);
     
@@ -203,7 +210,7 @@
 //    CGFloat luminance = 0.0; // 1 means dark, 0 means bright
 //    [light getRed:NULL green:NULL blue:NULL alpha:&luminance];
 //    [self.player updateAdrenalin:1.0 - luminance];
-    
+    /*
     // Center the game view to the players location
     CGFloat b = self.playerView.center.x;
     CGFloat a = [UIScreen mainScreen].applicationFrame.size.width / 2.0;
@@ -215,13 +222,23 @@
                                  y,
                                  self.view.frame.size.width,
                                  self.view.frame.size.height);
+     */
     
+    self.currentLevelView.frame = CGRectMake(-self.playerView.center.x+self.view.bounds.size.width/2.0,
+                                             -self.playerView.center.y+self.view.bounds.size.height/2.0,
+                                             self.currentLevelView.frame.size.width,
+                                             self.currentLevelView.frame.size.height);
+//    NSLog(@"%@ %@ %@", NSStringFromCGRect(self.view.bounds), NSStringFromCGRect(self.currentLevelView.frame), NSStringFromCGPoint(self.playerView.center));
+    //child.center = [parent convertPoint:parent.center fromView:parent.superview];
+    //self.currentLevelView.center = [self.view convertPoint:self.view.center fromView:self.view.superview];
+    //self.currentLevelView.center = [self.playerView convertPoint:self.playerView.center toView:self.currentLevelView.superview];
+    /*
     // Center the postprocessing view to the screen
     self.postProcessingViewController.view.frame = CGRectMake(-self.view.frame.origin.x,
                                                               -self.view.frame.origin.y,
                                                               [UIScreen mainScreen].applicationFrame.size.width,
                                                               [UIScreen mainScreen].applicationFrame.size.height);
-    
+    */
     // Mobs
     CGFloat speed = [[NSUserDefaults standardUserDefaults] floatForKey:@"MobWalkingSpeed"] * gameSpeed;
     for (BDMob *mob in self.currentLevel.mobs) {
@@ -283,11 +300,54 @@
     self.currentLevelView.pulse = 10.0;
     
     [self.ambientMusicController stop];
+    
+    BDGameOverViewController *gameOverViewController = [[BDGameOverViewController alloc] initWithNibName:nil bundle:nil];
+    gameOverViewController.view.frame = CGRectMake(5, 5, self.view.bounds.size.width-10, self.view.bounds.size.height-10);
+    [self.view addSubview:gameOverViewController.view];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+//- (BOOL)shouldAutorotate
+//{
+//    return NO;
+//}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    // we grab the screen frame first off; these are always
+    // in portrait mode
+    CGRect bounds = [[UIScreen mainScreen] applicationFrame];
+    CGSize size = bounds.size;
+    
+    // let's figure out if width/height must be swapped
+    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+        // we're going to landscape, which means we gotta swap them
+        size.width = bounds.size.height;
+        size.height = bounds.size.width;
+    }
+//    if (toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+//        NSLog(@"asd");
+//        CGSize applicationSize = [[UIScreen mainScreen] applicationFrame].size;
+//        self.view.frame = CGRectOffset(self.view.frame,
+//                                       self.playerView.center.x+applicationSize.width/2.0,
+//                                       self.playerView.center.y+applicationSize.height/2.0);
+//    }
+//    self.view.frame = CGRectMake(self.view.frame.origin.x,
+//                                 self.view.frame.origin.y,
+//                                 size.width,
+//                                 size.height);
+//        self.view.frame = CGRectMake(0,
+//                                     0,
+//                                     self.view.bounds.size.width,
+//                                     self.view.bounds.size.height);
+    //child.center = [parent convertPoint:parent.center fromView:parent.superview];
+    //self.view.center = [self.view.superview convertPoint:self.view.superview.center fromView:self.view.superview.superview];
+   // [self.view setCenter:self.view.superview.center];
+//    NSLog(@"%@", self.view.superview);
 }
 
 @end
