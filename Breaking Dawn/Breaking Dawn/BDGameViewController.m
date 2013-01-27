@@ -219,38 +219,11 @@
             }
         }
     [self.player updateAdrenalin:luminance];
-//    CGFloat luminance = 0.0; // 1 means dark, 0 means bright
-//    [light getRed:NULL green:NULL blue:NULL alpha:&luminance];
-//    [self.player updateAdrenalin:1.0 - luminance];
-    /*
-    // Center the game view to the players location
-    CGFloat b = self.playerView.center.x;
-    CGFloat a = [UIScreen mainScreen].applicationFrame.size.width / 2.0;
-    CGFloat x = -b + a;
-    CGFloat u = self.playerView.center.y;
-    CGFloat v = [UIScreen mainScreen].applicationFrame.size.height / 2.0;
-    CGFloat y = -u + v;
-    self.view.frame = CGRectMake(x,
-                                 y,
-                                 self.view.frame.size.width,
-                                 self.view.frame.size.height);
-     */
-    
     self.currentLevelView.frame = CGRectMake(-self.playerView.center.x+self.view.bounds.size.width/2.0,
                                              -self.playerView.center.y+self.view.bounds.size.height/2.0,
                                              self.currentLevelView.frame.size.width,
                                              self.currentLevelView.frame.size.height);
-//    NSLog(@"%@ %@ %@", NSStringFromCGRect(self.view.bounds), NSStringFromCGRect(self.currentLevelView.frame), NSStringFromCGPoint(self.playerView.center));
-    //child.center = [parent convertPoint:parent.center fromView:parent.superview];
-    //self.currentLevelView.center = [self.view convertPoint:self.view.center fromView:self.view.superview];
-    //self.currentLevelView.center = [self.playerView convertPoint:self.playerView.center toView:self.currentLevelView.superview];
-    /*
-    // Center the postprocessing view to the screen
-    self.postProcessingViewController.view.frame = CGRectMake(-self.view.frame.origin.x,
-                                                              -self.view.frame.origin.y,
-                                                              [UIScreen mainScreen].applicationFrame.size.width,
-                                                              [UIScreen mainScreen].applicationFrame.size.height);
-    */
+    
     // Mobs
     CGFloat speed = [[NSUserDefaults standardUserDefaults] floatForKey:@"MobWalkingSpeed"] * gameSpeed;
     for (BDMob *mob in self.currentLevel.mobs) {
@@ -266,6 +239,7 @@
             direction = CGPointMake(direction.x / maximalMovement, direction.y / maximalMovement);
             direction = CGPointApplyAffineTransform(direction, CGAffineTransformMakeScale(speed, speed));
             mob.location = CGPointMake(mob.location.x - direction.x, mob.location.y - direction.y);
+            [[BDSound getInstance] playMonster:arc4random_uniform(5)];
         }
     }
     
@@ -323,11 +297,6 @@
 {
     [super didReceiveMemoryWarning];
 }
-
-//- (BOOL)shouldAutorotate
-//{
-//    return NO;
-//}
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
