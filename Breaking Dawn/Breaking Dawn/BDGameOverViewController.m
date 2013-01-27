@@ -44,7 +44,7 @@
     
     UILabel *dummy = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 20)];
     dummy.center = CGPointMake(self.view.bounds.size.width/2.0, self.view.bounds.size.height/2.0);
-    dummy.text = [NSString stringWithFormat:@"Game Over, %@", @[@"Bitch", @"Dirtbag", @"Fool"][arc4random_uniform(3)]];
+    dummy.text = [NSString stringWithFormat:@"Game Over, %@", @[@"Bitch", @"Dirtbag", @"Fool", @"Foolish Mortal"][arc4random_uniform(3)]];
     dummy.textAlignment = NSTextAlignmentCenter;
     dummy.backgroundColor = [UIColor blackColor];
     dummy.textColor = [UIColor whiteColor];

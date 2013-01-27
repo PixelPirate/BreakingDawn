@@ -19,6 +19,7 @@ static BDSound *instance;
 @property (readwrite, nonatomic) BDAudioContainer *heart;
 @property (readwrite, nonatomic) NSMutableArray *monsters;
 @property (readwrite, nonatomic) NSMutableArray *sounds;
+@property (readwrite, nonatomic) NSMutableArray *blockedMonsterSoundIDs;
 
 @end
 
@@ -38,11 +39,13 @@ static BDSound *instance;
     self.heart = [[BDAudioContainer alloc] initWithPath:@"heartbeat_isolated_0_700" count:10];
     
     self.monsters = [NSMutableArray array];
-    [self.monsters addObject:[[BDAudioContainer alloc] initWithPath:@"Monster_Awakes1" count:2]];
-    [self.monsters addObject:[[BDAudioContainer alloc] initWithPath:@"Monster_Awakes1+2" count:2]];
-    [self.monsters addObject:[[BDAudioContainer alloc] initWithPath:@"Monster_Awakes2" count:2]];
-    [self.monsters addObject:[[BDAudioContainer alloc] initWithPath:@"Monster_Awakes2+3" count:2]];
-    [self.monsters addObject:[[BDAudioContainer alloc] initWithPath:@"Monster_Awakes3" count:2]];
+    BOOL simultanousMonsterSounds = [[NSUserDefaults standardUserDefaults] boolForKey:@"SimultanousMonsterSounds"];
+    NSUInteger count = (simultanousMonsterSounds) ? 2 : 1;
+    [self.monsters addObject:[[BDAudioContainer alloc] initWithPath:@"Monster_Awakes1" count:count]];
+    [self.monsters addObject:[[BDAudioContainer alloc] initWithPath:@"Monster_Awakes1+2" count:count]];
+    [self.monsters addObject:[[BDAudioContainer alloc] initWithPath:@"Monster_Awakes2" count:count]];
+    [self.monsters addObject:[[BDAudioContainer alloc] initWithPath:@"Monster_Awakes2+3" count:count]];
+    [self.monsters addObject:[[BDAudioContainer alloc] initWithPath:@"Monster_Awakes3" count:count]];
 	    
     self.sounds = [NSMutableArray array];
     [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Game_Over_Scream" count:2]];
@@ -59,7 +62,9 @@ static BDSound *instance;
 
 - (void)playMonster:(int)soundId
 {
+    BOOL simultanousMonsterSounds = [[NSUserDefaults standardUserDefaults] boolForKey:@"SimultanousMonsterSounds"];
     AVAudioPlayer *player = [self.monsters[soundId] getPlayer];
+    if (!simultanousMonsterSounds && player.isPlaying) return;
     [player play];
 }
 
