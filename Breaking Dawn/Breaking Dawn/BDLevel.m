@@ -66,6 +66,11 @@
         
         self.mobs = [NSMutableArray array];
         [self.mobs addObject:[[BDMob alloc] initWithPosition:CGPointMake(300, 350)]];
+        for (NSDictionary *pointRep in mapInfos[@"Stages"][0][@"Monsters"]) {
+            CGPoint position = CGPointZero;
+            CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(pointRep), &position);
+            [self.mobs addObject:[[BDMob alloc] initWithPosition:position]];
+        }
         
         CGSize imageSize = self.diffuseMap.size;
         
