@@ -83,9 +83,13 @@
     self.noiseTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changeNoise) userInfo:nil repeats:YES];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [_noiseTimer invalidate];
+}
+
 - (void)dealloc
 {
-    NSLog(@"as");
     [_noiseTimer invalidate];
 }
 
@@ -108,7 +112,7 @@
 }
 
 - (void)static
-{/*
+{
     self.currentLevelView.surfaceLayer.alpha = 1.0;
     
     int64_t delayInMilliseconds = 300;
@@ -145,7 +149,7 @@
                 });
             });
         });
-    });*/
+    });
 }
 
 @end
