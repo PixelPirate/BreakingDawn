@@ -141,7 +141,7 @@
 		8784972E16B4CB0200D72C0D /* cry-again-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cry-again-normal.png"; sourceTree = "<group>"; };
 		8784973216B4CB2A00D72C0D /* start-crying-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start-crying-normal.png"; sourceTree = "<group>"; };
 		8784973516B4CC1B00D72C0D /* start-crying-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start-crying-active.png"; sourceTree = "<group>"; };
-		87A5371916B31D8500F7C6DB /* Breaking Dawn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Breaking Dawn.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		87A5371916B31D8500F7C6DB /* Nykto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nykto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87A5371D16B31D8500F7C6DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		87A5371F16B31D8500F7C6DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		87A5372116B31D8500F7C6DB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -282,7 +282,7 @@
 		87A5371A16B31D8500F7C6DB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				87A5371916B31D8500F7C6DB /* Breaking Dawn.app */,
+				87A5371916B31D8500F7C6DB /* Nykto.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -539,7 +539,7 @@
 			);
 			name = Nykto;
 			productName = "Breaking Dawn";
-			productReference = 87A5371916B31D8500F7C6DB /* Breaking Dawn.app */;
+			productReference = 87A5371916B31D8500F7C6DB /* Nykto.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -775,10 +775,12 @@
 		87A5374116B31D8700F7C6DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Breaking Dawn/Breaking Dawn-Prefix.pch";
 				INFOPLIST_FILE = "Breaking Dawn/Breaking Dawn-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -786,10 +788,12 @@
 		87A5374216B31D8700F7C6DB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Breaking Dawn/Breaking Dawn-Prefix.pch";
 				INFOPLIST_FILE = "Breaking Dawn/Breaking Dawn-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
