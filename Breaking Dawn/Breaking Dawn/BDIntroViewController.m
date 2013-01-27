@@ -45,27 +45,27 @@
     
     UIImageView *sleepingGirlView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"intro-girl-01.jpg"]];
     sleepingGirlView.frame = self.view.bounds;
-    sleepingGirlView.contentMode = UIViewContentModeScaleAspectFit;
+    sleepingGirlView.contentMode = UIViewContentModeScaleAspectFill;
     sleepingGirlView.backgroundColor = [UIColor clearColor];
     sleepingGirlView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     UIImageView *wakeGirlView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"intro-girl-02.jpg"]];
     wakeGirlView.frame = self.view.bounds;
-    wakeGirlView.contentMode = UIViewContentModeScaleAspectFit;
+    wakeGirlView.contentMode = UIViewContentModeScaleAspectFill;
     wakeGirlView.backgroundColor = [UIColor clearColor];
     wakeGirlView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     UIImageView *brightDoorView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"intro-door-01.jpg"]];
     brightDoorView.frame = self.view.bounds;
-    brightDoorView.contentMode = UIViewContentModeScaleAspectFit;
+    brightDoorView.contentMode = UIViewContentModeScaleAspectFill;
     brightDoorView.backgroundColor = [UIColor clearColor];
     brightDoorView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     UIImageView *dimmDoorView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"intro-door-02.jpg"]];
     dimmDoorView.frame = self.view.bounds;
-    dimmDoorView.contentMode = UIViewContentModeScaleAspectFit;
+    dimmDoorView.contentMode = UIViewContentModeScaleAspectFill;
     dimmDoorView.backgroundColor = [UIColor clearColor];
     dimmDoorView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     UIImageView *darkDoorView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"intro-door-03.jpg"]];
     darkDoorView.frame = self.view.bounds;
-    darkDoorView.contentMode = UIViewContentModeScaleAspectFit;
+    darkDoorView.contentMode = UIViewContentModeScaleAspectFill;
     darkDoorView.backgroundColor = [UIColor clearColor];
     darkDoorView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     
@@ -143,67 +143,11 @@
                         }];
                     }];
 
-                });/*
-                [UIView animateWithDuration:0.01 delay:0.5 options:0 animations:^{
-                    [UIView transitionFromView:sleepingGirlView toView:brightDoorView duration:0.3 options:0 completion:nil];
-                } completion:^(BOOL finished) {
-                    [UIView animateWithDuration:0.01 delay:0.5 options:0 animations:^{
-                        [UIView transitionFromView:brightDoorView toView:dimmDoorView duration:0.01 options:0 completion:nil];
-                    } completion:^(BOOL finished) {
-                        [UIView animateWithDuration:0.01 delay:0.5 options:0 animations:^{
-                            [UIView transitionFromView:dimmDoorView toView:brightDoorView duration:0.01 options:0 completion:nil];
-                        } completion:^(BOOL finished) {
-                            [UIView animateWithDuration:0.01 delay:0.5 options:0 animations:^{
-                                [UIView transitionFromView:brightDoorView toView:dimmDoorView duration:0.01 options:0 completion:nil];
-                            } completion:^(BOOL finished) {
-                                [UIView animateWithDuration:0.01 delay:0.5 options:0 animations:^{
-                                    [UIView transitionFromView:dimmDoorView toView:brightDoorView duration:0.01 options:0 completion:nil];
-                                } completion:^(BOOL finished) {
-                                    [UIView animateWithDuration:0.01 delay:0.5 options:0 animations:^{
-                                        [UIView transitionFromView:brightDoorView toView:darkDoorView duration:0.01 options:0 completion:nil];
-                                    } completion:^(BOOL finished) {
-                                        
-                                    }];
-                                }];
-                            }];
-                        }];
-                    }];
-                }];*/
+                });
             });
         }];
     });
 };
-
-//                [UIView transitionFromView:sleepingGirlView toView:brightDoorView duration:0.3 options:0 completion:^(BOOL finished) {
-//                    [UIView transitionFromView:brightDoorView toView:dimmDoorView duration:0.01 options:0 completion:^(BOOL finished) {
-//                        [UIView transitionFromView:dimmDoorView toView:brightDoorView duration:0.01 options:0 completion:^(BOOL finished) {
-//                            [UIView transitionFromView:brightDoorView toView:dimmDoorView duration:0.01 options:0 completion:^(BOOL finished) {
-//                                [UIView transitionFromView:dimmDoorView toView:brightDoorView duration:0.01 options:0 completion:^(BOOL finished) {
-                                    /*[UIView transitionFromView:brightDoorView toView:darkDoorView duration:0.01 options:0 completion:^(BOOL finished) {
-                                        
-                                    }];
-                                }];
-                            }];
-                        }];
-                    }];
-                }];
-            });
-            
-            */
-            
-            
-            
-            
-            
-//            self.titleViewController.view.alpha = 0.0;
-//            self.titleViewController.view.frame = self.view.bounds;
-//            [self.view addSubview:self.titleViewController.view];
-//            [UIView animateWithDuration:0.5 animations:^{
-//                self.titleViewController.view.alpha = 1.0;
-//            }];
-//        }];
-//    });
-//}
 
 - (void)viewDidAppear:(BOOL)animated
 {

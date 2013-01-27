@@ -51,11 +51,16 @@
         NSURL *url = [[[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:@"map00.plist"] filePathURL];
         NSDictionary *mapInfos = [NSDictionary dictionaryWithContentsOfURL:url];
         for (NSDictionary *pointRep in mapInfos[@"Stages"][0][@"Lights"]) {
-            [self.lights addObject:pointRep];
+            CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"Scale"];
+            NSNumber *x = [NSNumber numberWithFloat:[pointRep[@"X"] floatValue] * scale];
+            NSNumber *y = [NSNumber numberWithFloat:[pointRep[@"Y"] floatValue] * scale];
+            NSDictionary *p = [NSDictionary dictionaryWithObjectsAndKeys:@"X", x, @"Y", y, nil];
+            
+            [self.lights addObject:p];
         }
         
         // Load lightmap from file or generate it if file is missing
-        UIImage *light =  [UIImage imageNamed:[name stringByAppendingString:@"_light"]];
+        UIImage *light = [UIImage imageNamed:[name stringByAppendingString:@"_light"]];
         if (light) {
             self.lightMap = [[BDImageMap alloc] initWithUIImage:light];
         } else {
