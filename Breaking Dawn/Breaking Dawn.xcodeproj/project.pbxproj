@@ -618,6 +618,10 @@
 				B15B92D016B551AB0001670D /* map00_collision.png in Resources */,
 				B165D5D216B5567F00719EAE /* exit-ligher.png in Resources */,
 				B165D5D416B556C800719EAE /* map00_collision.png in Resources */,
+				87CF3D8116B5509A0073F953 /* Icon00.png in Resources */,
+				87CF3D8316B550D80073F953 /* Icon0072.png in Resources */,
+				87CF3D8516B555D00073F953 /* Icon01.png in Resources */,
+				87CF3D8716B555F60073F953 /* Icon012.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
