@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BDTitleViewController : UIViewController
+
 - (void)restartGame;
+
 @end

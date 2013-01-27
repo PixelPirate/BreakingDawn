@@ -234,6 +234,10 @@
         
         [self.lightLayer addSubview:v];
         
+        UIImageView *lighter = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lighter"]];
+        lighter.frame = CGRectMake(45, 642, lighter.image.size.width, lighter.image.size.height);
+        [self insertSubview:lighter aboveSubview:self.lightLayer];
+        
         
         void(^__block flicker)(void) = ^(void) {
             [UIView animateWithDuration:0.1 animations:^{

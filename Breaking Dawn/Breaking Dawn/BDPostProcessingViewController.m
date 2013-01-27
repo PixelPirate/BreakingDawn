@@ -19,6 +19,10 @@
 
 @property (strong, readwrite, nonatomic) NSMutableArray *noiseTextures;
 
+@property (strong, readwrite, nonatomic) NSTimer *noiseTimer;
+
+- (void)changeNoise;
+
 @end
 
 @implementation BDPostProcessingViewController
@@ -30,18 +34,6 @@
         self.noiseTextures = [NSMutableArray array];
     }
     return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)loadView
@@ -87,35 +79,35 @@
     self.noiseImageView.userInteractionEnabled = NO;
     self.noiseImageView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     
-    __block void(^rand)(void) = ^(void) {
-        
-        UIImage *noiseImage = self.noiseTextures[arc4random_uniform(self.noiseTextures.count)];
-        self.noiseImageView.image = noiseImage;
-        self.noiseImageView.alpha = arc4random_uniform(100) / 6000.0 + 0.1;
-//        UIImageView *i = [[UIImageView alloc] initWithImage:noiseImage];
-//        i.userInteractionEnabled = NO;
-//        i.alpha = arc4random_uniform(100) / 6000.0 + 0.1;
-//        i.frame = self.noiseImageView.frame;
-//        [UIView transitionFromView:self.noiseImageView
-//                            toView:i
-//                          duration:0.01 //1.9
-//                           options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionBeginFromCurrentState
-//                        completion:^(BOOL finished) {
-//            self.noiseImageView = i;
-//        }];
-        
-        int64_t delayInMilliseconds = 100;//1000
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            rand();
-        });
-    };
-    
-    rand();
+    self.noiseTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changeNoise) userInfo:nil repeats:YES];
+}
+
+- (void)dealloc
+{
+    NSLog(@"as");
+    [_noiseTimer invalidate];
+}
+
+- (void)changeNoise
+{
+    UIImage *noiseImage = self.noiseTextures[arc4random_uniform(self.noiseTextures.count)];
+    self.noiseImageView.image = noiseImage;
+    self.noiseImageView.alpha = arc4random_uniform(100) / 6000.0 + 0.1;
+    //        UIImageView *i = [[UIImageView alloc] initWithImage:noiseImage];
+    //        i.userInteractionEnabled = NO;
+    //        i.alpha = arc4random_uniform(100) / 6000.0 + 0.1;
+    //        i.frame = self.noiseImageView.frame;
+    //        [UIView transitionFromView:self.noiseImageView
+    //                            toView:i
+    //                          duration:0.01 //1.9
+    //                           options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionBeginFromCurrentState
+    //                        completion:^(BOOL finished) {
+    //            self.noiseImageView = i;
+    //        }];
 }
 
 - (void)static
-{
+{/*
     self.currentLevelView.surfaceLayer.alpha = 1.0;
     
     int64_t delayInMilliseconds = 300;
@@ -152,7 +144,7 @@
                 });
             });
         });
-    });
+    });*/
 }
 
 @end

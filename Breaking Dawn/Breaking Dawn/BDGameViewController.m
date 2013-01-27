@@ -38,6 +38,8 @@
 
 @property (strong, readwrite, nonatomic) NSTimer *gameTimer;
 
+@property (strong, readwrite, nonatomic) NSTimer *staticTimer;
+
 @property (strong, readwrite, nonatomic) BDAmbientMusicController *ambientMusicController;
 
 @property (strong, readwrite, nonatomic) BDGameOverViewController *gameOverViewController;
@@ -81,18 +83,8 @@
     self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
     self.postProcessingViewController.currentLevelView = self.currentLevelView;
     
-    //UIView *gameView = [[UIView alloc] initWithFrame:self.currentLevelView.bounds];
-    //[gameView addSubview:self.currentLevelView];
     [self.currentLevelView.playerLayer addSubview:self.playerView];
     
-    /*
-    CGSize applicationSize = [[UIScreen mainScreen] applicationFrame].size;
-    gameView.frame = CGRectOffset(gameView.frame,
-                                  -self.playerView.center.x+applicationSize.width/2.0,
-                                  -self.playerView.center.y+applicationSize.height/2.0);
-    */
-    
-//    self.view = gameView;
     self.view.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:self.currentLevelView];//gameView];
     
@@ -108,7 +100,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [NSTimer scheduledTimerWithTimeInterval:3.0
+    self.staticTimer = [NSTimer scheduledTimerWithTimeInterval:3.0
                                      target:self.postProcessingViewController
                                    selector:@selector(static)
                                    userInfo:nil
@@ -250,7 +242,10 @@
         CGRect mobRect = CGRectOffset(size, mob.location.x, mob.location.y);
         CGRect playerRect = CGRectOffset(size, self.player.location.x, self.player.location.y);
         if (CGRectIntersectsRect(mobRect, playerRect)) {
-            [self gameDidEnd];
+            BOOL godeMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"GodMode"];
+            if (!godeMode) {
+                [self gameDidEnd];
+            }
         }
     }
 }
