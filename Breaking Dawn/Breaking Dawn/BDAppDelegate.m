@@ -9,6 +9,7 @@
 #import "BDAppDelegate.h"
 
 #import "BDViewController.h"
+#import "BDTitleViewController.h"
 
 @implementation BDAppDelegate
 

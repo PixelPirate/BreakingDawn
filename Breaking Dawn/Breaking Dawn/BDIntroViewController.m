@@ -8,6 +8,7 @@
 
 #import "BDIntroViewController.h"
 #import "BDTitleViewController.h"
+#import "BDAppDelegate.h"
 
 @interface BDIntroViewController ()
 
@@ -22,6 +23,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.titleViewController = [[BDTitleViewController alloc] initWithNibName:nil bundle:nil];
+        
+        BDAppDelegate *d = [[UIApplication sharedApplication] delegate];
+        d.titleViewController = self.titleViewController;
     }
     return self;
 }
@@ -41,7 +45,7 @@
     
     [self.view addSubview:dummy];
     
-    
+    // Change this to skip intro
     int64_t delayInSeconds = 4.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
