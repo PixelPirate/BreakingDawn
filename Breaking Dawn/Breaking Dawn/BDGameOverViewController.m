@@ -63,7 +63,7 @@
 
 - (void)restartGame
 {
-    
+    NSLog(@"%@", self.presentingViewController);
 }
 
 - (void)didReceiveMemoryWarning
