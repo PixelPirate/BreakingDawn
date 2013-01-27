@@ -53,7 +53,7 @@
 
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to;
 
-- (BOOL)noLightsFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit;
+- (BOOL)noLightsFrom:(CGPoint)from to:(CGPoint)to;
 
 - (void)line:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(int x, int y, BOOL *stop))block;
 

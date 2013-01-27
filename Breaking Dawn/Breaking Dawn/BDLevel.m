@@ -165,31 +165,47 @@
     return canMove;
 }
 
-- (BOOL)noLightsFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit
+- (BOOL)noLightsFrom:(CGPoint)from to:(CGPoint)to
 {
     // Check if there is a light on the line
-    bool __block canMove = YES;
-    [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
-        for (NSValue *light in self.lights) {
-            CGPoint lightPosition = [light CGPointValue];
-            
-            CGFloat fakeRadius = 80.0 * self.lightScale;
-            BOOL(^PointInsideCircle)(CGPoint p, CGPoint center, CGFloat radius) = ^(CGPoint p, CGPoint center, CGFloat radius) {
-                if ((pow(p.x-center.x, 2.0) + pow(p.y - center.y, 2.0)) < pow(radius, 2.0)) {
-                    return YES;
-                } else {
-                    return NO;
-                }
-            };
-            
-            if (PointInsideCircle(CGPointMake(x, y), lightPosition, fakeRadius)) {
-                canMove = NO;
-                *stop = YES;
-            }
-        }
-    }];
+    CGFloat fakeRadius = 80.0 * self.lightScale;
+    for (NSValue *light in self.lights) {
+        CGPoint lightPosition = [light CGPointValue];
+        
+        if([self isLineFrom:from to:to withinRadius:fakeRadius fromPoint:lightPosition]) return NO;
+
+    }
     
-    return canMove;
+    return YES;
+}
+
+- (BOOL)isLineFrom:(CGPoint)from to:(CGPoint)to withinRadius:(CGFloat)radius fromPoint:(CGPoint)point
+{
+    CGPoint v = CGPointMake(to.x - from.x, to.y - from.y);
+    CGPoint w = CGPointMake(point.x - from.x, point.y - from.y);
+    CGFloat c1 = dotProduct(w, v);
+    CGFloat c2 = dotProduct(v, v);
+    CGFloat d;
+    if (c1 <= 0) {
+        d = distance(point, from);
+    }
+    else if (c2 <= c1) {
+        d = distance(point, to);
+    }
+    else {
+        CGFloat b = c1 / c2;
+        CGPoint Pb = CGPointMake(from.x + b * v.x, from.y + b * v.y);
+        d = distance(point, Pb);
+    }
+    return d <= radius;
+}
+
+CGFloat distance(const CGPoint p1, const CGPoint p2) {
+    return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2));
+}
+
+CGFloat dotProduct(const CGPoint p1, const CGPoint p2) {
+    return p1.x * p2.x + p1.y * p2.y;
 }
 
 - (void)loadLightmap

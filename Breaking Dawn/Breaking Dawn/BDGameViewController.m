@@ -238,7 +238,7 @@
         
         BOOL canReach = [self.currentLevel canMoveFrom:mob.location to:self.player.location];
         if (canReach) {
-            canReach = [self.currentLevel noLightsFrom:mob.location to:self.player.location withLightLimit:0.0];
+            canReach = [self.currentLevel noLightsFrom:mob.location to:self.player.location];
             if(canReach) {
                 CGPoint direction = CGPointMake(mob.location.x - self.player.location.x, mob.location.y - self.player.location.y);
                 CGFloat maximalMovement = MAX(ABS(direction.x), ABS(direction.y));
