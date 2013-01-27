@@ -152,48 +152,42 @@
 
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to
 {
-    return [self canMoveFrom:from to:to withLightLimit:CGFLOAT_MAX];
-}
-
-- (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit
-{
     // Check collision map for obsacles along the path from 'from' to 'to'
-    // If a value in the light map is higher than 'lightLimit', it counts as an obstacle too!
-    
-    //NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
-    
     bool __block canMove = YES;
     [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
         if([self.collisionMap getByteFromX:x andY:y component:0] == 0) {
             canMove = NO;
             *stop = YES;
         }
-
+        
     }];
-    
+
+    return canMove;
+}
+
+- (BOOL)noLightsFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit
+{
     // Check if there is a light on the line
-    if (canMove && lightLimit != CGFLOAT_MAX) {
-        [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
-            for (NSValue *light in self.lights) {
-                CGPoint lightPosition = [light CGPointValue];
-                
-                CGFloat fakeRadius = 80.0 * self.lightScale;
-                BOOL(^PointInsideCircle)(CGPoint p, CGPoint center, CGFloat radius) = ^(CGPoint p, CGPoint center, CGFloat radius) {
-                    if ((pow(p.x-center.x, 2.0) + pow(p.y - center.y, 2.0)) < pow(radius, 2.0)) {
-                        return YES;
-                    } else {
-                        return NO;
-                    }
-                };
-                
-                if (PointInsideCircle(CGPointMake(x, y), lightPosition, fakeRadius)) {
-                    canMove = NO;
-                    *stop = YES;
+    bool __block canMove = YES;
+    [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
+        for (NSValue *light in self.lights) {
+            CGPoint lightPosition = [light CGPointValue];
+            
+            CGFloat fakeRadius = 80.0 * self.lightScale;
+            BOOL(^PointInsideCircle)(CGPoint p, CGPoint center, CGFloat radius) = ^(CGPoint p, CGPoint center, CGFloat radius) {
+                if ((pow(p.x-center.x, 2.0) + pow(p.y - center.y, 2.0)) < pow(radius, 2.0)) {
+                    return YES;
+                } else {
+                    return NO;
                 }
+            };
+            
+            if (PointInsideCircle(CGPointMake(x, y), lightPosition, fakeRadius)) {
+                canMove = NO;
+                *stop = YES;
             }
-        }];
-    }
-    
+        }
+    }];
     
     return canMove;
 }

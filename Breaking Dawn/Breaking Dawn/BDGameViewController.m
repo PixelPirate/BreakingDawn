@@ -236,14 +236,17 @@
         CGFloat dy = mob.location.y - self.player.location.y;
         if(sqrt(dx*dx + dy*dy) > 400) continue;
         
-        BOOL canReach = [self.currentLevel canMoveFrom:mob.location to:self.player.location withLightLimit:0.0];
+        BOOL canReach = [self.currentLevel canMoveFrom:mob.location to:self.player.location];
         if (canReach) {
-            CGPoint direction = CGPointMake(mob.location.x - self.player.location.x, mob.location.y - self.player.location.y);
-            CGFloat maximalMovement = MAX(ABS(direction.x), ABS(direction.y));
-            direction = CGPointMake(direction.x / maximalMovement, direction.y / maximalMovement);
-            direction = CGPointApplyAffineTransform(direction, CGAffineTransformMakeScale(speed, speed));
-            mob.location = CGPointMake(mob.location.x - direction.x, mob.location.y - direction.y);
-            [[BDSound getInstance] playMonster:arc4random_uniform(5)];
+            canReach = [self.currentLevel noLightsFrom:mob.location to:self.player.location withLightLimit:0.0];
+            if(canReach) {
+                CGPoint direction = CGPointMake(mob.location.x - self.player.location.x, mob.location.y - self.player.location.y);
+                CGFloat maximalMovement = MAX(ABS(direction.x), ABS(direction.y));
+                direction = CGPointMake(direction.x / maximalMovement, direction.y / maximalMovement);
+                direction = CGPointApplyAffineTransform(direction, CGAffineTransformMakeScale(speed, speed));
+                mob.location = CGPointMake(mob.location.x - direction.x, mob.location.y - direction.y);
+                [[BDSound getInstance] playMonster:arc4random_uniform(5)];
+            }
         }
     }
     
