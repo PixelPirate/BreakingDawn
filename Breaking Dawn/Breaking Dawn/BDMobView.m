@@ -17,7 +17,12 @@
 
 @property (strong, readwrite, nonatomic) UIImageView *mobImageView;
 
+@property (strong, readwrite, nonatomic) NSTimer *dismissTimer;
+
+- (void)dismiss;
+
 @end
+
 
 @implementation BDMobView
 
@@ -41,14 +46,29 @@
     return self;
 }
 
+- (void)dismiss
+{
+    self.hidden = YES;
+    [self.mob return];
+    CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"Scale"];
+    CGPoint center = self.mob.location;
+    center = CGPointApplyAffineTransform(center, CGAffineTransformMakeScale(scale, scale));
+    self.center = center;
+}
+
 #pragma mark - BDMobDelegate implementations
 
 - (void)mobDidMove:(BDMob *)mob toPosition:(CGPoint)position
 {
+    self.hidden = NO;
+    [self.dismissTimer invalidate];
+    
     CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"Scale"];
     CGPoint center = position;
     center = CGPointApplyAffineTransform(center, CGAffineTransformMakeScale(scale, scale));
     self.center = center;
+    
+    self.dismissTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(dismiss) userInfo:nil repeats:NO];
 }
 
 @end

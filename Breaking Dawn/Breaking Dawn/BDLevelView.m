@@ -88,10 +88,11 @@
         for (BDMob *mob in level.mobs) {
             BDMobView *mobView = [[BDMobView alloc] initWithMob:mob];
             [self.surfaceLayer addSubview:mobView];
+            mobView.hidden = YES;
         }
         
-        self.lightSwitch = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightSwitch-On.png"]];
-        self.lightSwitch.frame = CGRectMake(1224, 624, 24, 32);
+        self.lightSwitch = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightSwitchLight.png"]];
+        self.lightSwitch.frame = CGRectMake(1224, 624, self.lightSwitch.image.size.width, self.lightSwitch.image.size.height);
         [self addSubview:self.lightSwitch];
     }
     return self;
@@ -213,7 +214,8 @@
 
 - (void)level:(BDLevel *)level willAddLights:(NSArray *)lights
 {
-    self.lightSwitch.image = [UIImage imageNamed:@"lightSwitch-Off"];
+    self.lightSwitch.hidden = YES;
+    //image = [UIImage imageNamed:@"lightSwitch-Off"];
     
     for (NSDictionary *pointRep in lights) {
         

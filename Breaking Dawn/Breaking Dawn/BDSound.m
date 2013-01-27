@@ -53,8 +53,7 @@ static BDSound *instance;
     [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Exploding_Light_Bulb_1_200" count:2]];
     [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Light_Switch_0_250" count:2]];
     
-
-    [NSTimer scheduledTimerWithTimeInterval:60/self.bpm target:self selector:@selector(tickHeart:) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:60.0/self.bpm target:self selector:@selector(tickHeart:) userInfo:nil repeats:NO];
     
     instance = self;
     return self;
@@ -64,6 +63,7 @@ static BDSound *instance;
 {
     BOOL simultanousMonsterSounds = [[NSUserDefaults standardUserDefaults] boolForKey:@"SimultanousMonsterSounds"];
     AVAudioPlayer *player = [self.monsters[soundId] getPlayer];
+    player.volume = 0.5;
     if (!simultanousMonsterSounds && player.isPlaying) return;
     [player play];
 }
