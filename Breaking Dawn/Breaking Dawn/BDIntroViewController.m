@@ -27,12 +27,26 @@
         BDAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
         delegate.titleViewController = self.titleViewController;
     }
+    
     return self;
+}
+
+- (void)gotoTitleView
+{
+    self.titleViewController.view.alpha = 0.0;
+    self.titleViewController.view.frame = self.view.bounds;
+    [self.view addSubview:self.titleViewController.view];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.titleViewController.view.alpha = 1.0;
+    }];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self gotoTitleView];
+    return;
     
     UIImageView *dummy = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GGJ13_RoundBadge"]];
     dummy.frame = self.view.bounds;
@@ -69,7 +83,6 @@
     darkDoorView.backgroundColor = [UIColor clearColor];
     darkDoorView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     
-    // Change this to skip intro
     int64_t delayInSeconds = 4.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -125,12 +138,7 @@
                                                         int64_t delayInSeconds = 1.0;
                                                         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
                                                         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                                                            self.titleViewController.view.alpha = 0.0;
-                                                            self.titleViewController.view.frame = self.view.bounds;
-                                                            [self.view addSubview:self.titleViewController.view];
-                                                            [UIView animateWithDuration:0.5 animations:^{
-                                                                self.titleViewController.view.alpha = 1.0;
-                                                            }];
+                                                            [self gotoTitleView];
                                                         });
                                                         
                                                     }];
