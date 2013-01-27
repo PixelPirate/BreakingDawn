@@ -90,7 +90,7 @@
         
         for (BDMob *mob in level.mobs) {
             BDMobView *mobView = [[BDMobView alloc] initWithMob:mob];
-            [self.surfaceLayer addSubview:mobView];
+            [self.playerLayer addSubview:mobView];
             mobView.hidden = YES;
         }
         
