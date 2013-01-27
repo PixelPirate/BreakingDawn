@@ -59,17 +59,16 @@
     
     
     UIImageView *title = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@[@"fail-01", @"fail-02", @"fail-03", @"fail-04"][arc4random_uniform(4)]]];
-    title.frame = CGRectMake(0.0, 0.0, title.image.size.width, title.image.size.height);
-    title.center = CGPointMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0);
-    title.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
+    title.frame = CGRectMake(0.0, 0.0, self.view.bounds.size.width, title.image.size.height);
+    title.center = CGPointMake(self.view.bounds.size.width / 2.0, (self.view.bounds.size.height / 2.0) - 70.0);
+    title.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    title.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:title];
     
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.button.frame = CGRectMake(0, 0, 390, 60);
-    self.button.center = CGPointMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 1.5);
-    self.button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    //[self.button setTitle:@"Title Screen" forState:UIControlStateNormal];
-    self.button.contentMode = UIViewContentModeTop;
+    self.button.frame = CGRectMake(0, title.frame.origin.y + title.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - (title.frame.origin.y + title.frame.size.height));
+    self.button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
+    self.button.contentMode = UIViewContentModeScaleAspectFit;
     [self.button setImage:[UIImage imageNamed:@"cry-again-normal"] forState:UIControlStateNormal];
     [self.button setImage:[UIImage imageNamed:@"cry-again-active"] forState:UIControlStateHighlighted];
     [self.button addTarget:self action:@selector(restartGame) forControlEvents:UIControlEventTouchUpInside];

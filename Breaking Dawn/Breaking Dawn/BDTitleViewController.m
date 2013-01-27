@@ -105,21 +105,19 @@
     
     self.gameViewController.view.frame = self.view.bounds;
     [self.view addSubview:self.gameViewController.view];
-    
-    //[self presentViewController:self.gameViewController animated:NO completion:^{    }];
 }
 
 - (void)restartGame
 {
     [self.gameViewController.view removeFromSuperview];
     self.gameViewController = [[BDGameViewController alloc] initWithNibName:nil bundle:nil];
-    //[self dismissViewControllerAnimated:false completion:^{ }];
+    
+    [self viewDidAppear:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
