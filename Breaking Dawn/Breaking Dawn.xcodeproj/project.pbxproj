@@ -549,6 +549,10 @@
 				877DB00016B46EF700CD9508 /* map00_collision.png in Resources */,
 				877DB00A16B4801D00CD9508 /* logo00-02.png in Resources */,
 				877DB01416B493C400CD9508 /* map00.plist in Resources */,
+				B15B92AB16B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 in Resources */,
+				B15B92AC16B47BF20001670D /* heartbeat_isolated_0_700.mp3 in Resources */,
+				B15B92AD16B47BF20001670D /* Light_Switch_0_250.mp3 in Resources */,
+				B15B92B316B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

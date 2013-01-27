@@ -40,6 +40,8 @@
 
 @property (strong, readwrite, nonatomic) BDAmbientMusicController *ambientMusicController;
 
+@property (strong, readwrite, nonatomic) BDGameOverViewController *gameOverViewController;
+
 - (void)tickWithTimer:(NSTimer *)timer;
 
 - (void)adrenalinChanged;
@@ -197,7 +199,7 @@
         for (NSDictionary *light in self.currentLevel.lights) {
             CGPoint lightPosition = CGPointZero;
             CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(light), &lightPosition);
-            CGFloat fakeRadius = 80.0 * (MAX(self.currentLevel.lightScale, 0.3));
+            CGFloat fakeRadius = 80.0 * (MAX(self.currentLevel.lightScale, 0.45));
             
             BOOL(^PointInsideCircle)(CGPoint p, CGPoint center, CGFloat radius) = ^(CGPoint p, CGPoint center, CGFloat radius) {
                 if ((pow(p.x-center.x, 2.0) + pow(p.y - center.y, 2.0)) < pow(radius, 2.0)) {
@@ -311,9 +313,10 @@
     
     [self.ambientMusicController stop];
     
-    BDGameOverViewController *gameOverViewController = [[BDGameOverViewController alloc] initWithNibName:nil bundle:nil];
-    gameOverViewController.view.frame = CGRectMake(5, 5, self.view.bounds.size.width-10, self.view.bounds.size.height-10);
-    [self.view addSubview:gameOverViewController.view];
+    [self.gameOverViewController.view removeFromSuperview];
+    self.gameOverViewController = [[BDGameOverViewController alloc] initWithNibName:nil bundle:nil];
+    self.gameOverViewController.view.frame = CGRectMake(5, 5, self.view.bounds.size.width-10, self.view.bounds.size.height-10);
+    [self.view addSubview:self.gameOverViewController.view];
 }
 
 - (void)didReceiveMemoryWarning

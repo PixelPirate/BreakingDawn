@@ -78,10 +78,9 @@
 
 - (void)startGame
 {
-    NSLog(@"%@", self.view);
     self.view.userInteractionEnabled = NO;
     [self presentViewController:self.gameViewController animated:NO completion:^{
-        NSLog(@"%@", self.gameViewController.view);
+        //NSLog(@"%@", self.gameViewController.view);
     }];
 }
 
