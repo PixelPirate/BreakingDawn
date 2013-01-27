@@ -8,6 +8,13 @@
 
 #import "BDMob.h"
 
+@interface BDMob ()
+
+@property (assign, readwrite, nonatomic) CGPoint origin;
+
+@end
+
+
 @implementation BDMob
 
 - (id)initWithPosition:(CGPoint)position
@@ -15,6 +22,7 @@
     self = [super init];
     if (self) {
         self.location = position;
+        self.origin = position;
     }
     return self;
 }
@@ -25,6 +33,11 @@
     if (self.delegate) {
         [self.delegate mobDidMove:self toPosition:location];
     }
+}
+
+- (void)return
+{
+    _location = self.origin;
 }
 
 @end

@@ -23,8 +23,12 @@
 
 @property (assign, readwrite, nonatomic) CGPoint location;
 
+@property (assign, readonly, nonatomic) CGPoint origin;
+
 @property (weak, readwrite, nonatomic) id<BDMobDelegate> delegate;
 
 - (id)initWithPosition:(CGPoint)position;
+
+- (void)return;
 
 @end
