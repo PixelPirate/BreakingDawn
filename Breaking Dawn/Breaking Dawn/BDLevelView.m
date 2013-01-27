@@ -228,10 +228,8 @@
 {
     self.lightSwitch.hidden = YES;
     
-    for (NSDictionary *pointRep in lights) {
-        
-        CGPoint p = CGPointZero;
-        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(pointRep), &p);
+    for (NSValue *lightValue in lights) {
+        CGPoint p = [lightValue CGPointValue];
         
         UIView *light = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 224, 224)];
         light.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.4 alpha:0.8];

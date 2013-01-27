@@ -50,16 +50,9 @@
         self.lights = [NSMutableArray array];
         NSURL *url = [[[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:@"map00.plist"] filePathURL];
         NSDictionary *mapInfos = [NSDictionary dictionaryWithContentsOfURL:url];
-        for (NSDictionary *pointRep in mapInfos[@"Stages"][0][@"Lights"]) {
-//            CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"Scale"];
-//            NSNumber *x = [NSNumber numberWithFloat:[pointRep[@"X"] floatValue] * scale];
-//            NSNumber *y = [NSNumber numberWithFloat:[pointRep[@"Y"] floatValue] * scale];
-//            NSDictionary *p = [NSDictionary dictionaryWithObjectsAndKeys:@"X", x, @"Y", y, nil];
-            CGPoint light;
-            CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(pointRep), &light);
-            
-            [self.lights addObject:[NSValue valueWithCGPoint:light]];
-        }
+        
+        NSArray *pointLights = [self convertLights:mapInfos[@"Stages"][0][@"Lights"]];
+        [self.lights addObjectsFromArray:pointLights];
         
         // Load lightmap from file or generate it if file is missing
         UIImage *light = [UIImage imageNamed:[name stringByAppendingString:@"_light"]];
@@ -90,8 +83,9 @@
         self.hotspots = [NSMutableArray array];
         [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1196, 663, 80, 60) trigger:^{
             [[BDSound getInstance] playSound:SOUND_LIGHT_SWITCH];
-            if (self.delegate) [self.delegate level:self willAddLights:mapInfos[@"Stages"][1][@"Lights"]];
-            [self.lights addObjectsFromArray:mapInfos[@"Stages"][1][@"Lights"]];
+            NSArray *pointLights = [self convertLights:mapInfos[@"Stages"][1][@"Lights"]];
+            if (self.delegate) [self.delegate level:self willAddLights:pointLights];
+            [self.lights addObjectsFromArray:pointLights];
         }]];
         
         
@@ -100,6 +94,22 @@
         }]];
     }
     return self;
+}
+
+- (NSArray *)convertLights:(NSArray *)lights
+{
+    NSMutableArray *pointLights = [NSMutableArray array];
+    for (NSDictionary *pointRep in lights) {
+        //            CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"Scale"];
+        //            NSNumber *x = [NSNumber numberWithFloat:[pointRep[@"X"] floatValue] * scale];
+        //            NSNumber *y = [NSNumber numberWithFloat:[pointRep[@"Y"] floatValue] * scale];
+        //            NSDictionary *p = [NSDictionary dictionaryWithObjectsAndKeys:@"X", x, @"Y", y, nil];
+        CGPoint light;
+        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(pointRep), &light);
+        
+        [pointLights addObject:[NSValue valueWithCGPoint:light]];
+    }
+    return pointLights;
 }
 
 + (BDLevel *)levelNamed:(NSString *)name
