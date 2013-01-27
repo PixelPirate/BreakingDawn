@@ -8,11 +8,9 @@
 
 #import "BDViewController.h"
 #import "BDIntroViewController.h"
-#import "BDGameViewController.h"
 
 @interface BDViewController () // Private setter
 
-@property (strong, readwrite, nonatomic) BDGameViewController *gameViewController;
 @property (strong, readwrite, nonatomic) BDIntroViewController *introViewController;
 @property (strong, readwrite, nonatomic) UISlider *light;
 @property (strong, readwrite, nonatomic) UISlider *dusk;
@@ -47,15 +45,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    // Decide here if you want to have intro
-    if(FALSE) {
-        self.gameViewController = [[BDGameViewController alloc] initWithNibName:nil bundle:nil];
-        [self.view addSubview:self.gameViewController.view];
-    } else {
-        self.introViewController = [[BDIntroViewController alloc] initWithNibName:nil bundle:nil];
-        [self.view addSubview:self.introViewController.view];
-    }
-
+    self.introViewController = [[BDIntroViewController alloc] initWithNibName:nil bundle:nil];
+    [self.view addSubview:self.introViewController.view];
     
     self.view.backgroundColor = [UIColor blackColor];
     
