@@ -20,6 +20,8 @@
 
 @property (strong, readwrite, nonatomic) UIButton *button;
 
+@property (strong, readwrite, nonatomic) UILabel *titleText;
+
 - (void)startGame;
 
 @end
@@ -38,29 +40,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.button = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.button.frame = CGRectMake(0, 0, 520, 70);
-    self.button.center = CGPointMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 4.0);
-    [self.button setImage:[UIImage imageNamed:@"start-crying-normal"] forState:UIControlStateNormal];
-    [self.button setImage:[UIImage imageNamed:@"start-crying-active"] forState:UIControlStateHighlighted];
-    [self.button addTarget:self action:@selector(startGame) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.button];
-    self.button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     self.postEffectsController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
     self.postEffectsController.view.frame = self.view.bounds;
     [self.view addSubview:self.postEffectsController.view];
     
-    self.logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo00-02"]];
-    
-    self.logoView.frame = self.view.bounds;
-    self.logoView.contentMode = UIViewContentModeBottom;
-    [self.view insertSubview:self.logoView belowSubview:self.button];
-    self.logoView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
     
     self.logoView.alpha = 0.0;
     [UIView animateWithDuration:0.5 animations:^{
@@ -72,24 +61,59 @@
 {
     self.view = [[UIView alloc] initWithFrame:CGRectMake(0,
                                                          0,
-                                                         [UIScreen mainScreen].applicationFrame.size.width,
-                                                         [UIScreen mainScreen].applicationFrame.size.height)];
-    self.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
+                                                         [UIScreen mainScreen].bounds.size.width,
+                                                         [UIScreen mainScreen].bounds.size.height)];
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
+    
+    self.titleText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 1)];
+    self.titleText.text = @"Nykto";
+    self.titleText.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]*2.5];
+    CGSize textSize = [self.titleText.text sizeWithFont:self.titleText.font
+                                               forWidth:self.titleText.bounds.size.width
+                                          lineBreakMode:NSLineBreakByClipping];
+    self.titleText.frame = CGRectMake(0, 0, textSize.width, textSize.height);
+    self.titleText.center = CGPointMake(self.view.bounds.size.width / 2.0, self.titleText.bounds.size.height/2.0);
+    self.titleText.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+    [self.view addSubview:self.titleText];
+    
+    
+    self.button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIEdgeInsets insets = UIEdgeInsetsMake(5.0, 0.0, 0.0, 0.0);
+    self.button.frame = CGRectMake(0 + insets.left,
+                                   self.titleText.frame.origin.y + self.titleText.bounds.size.height + insets.top,
+                                   self.view.bounds.size.width + insets.right,
+                                   70 + insets.bottom);
+    self.button.contentMode = UIViewContentModeCenter;
+    [self.button setImage:[UIImage imageNamed:@"start-crying-normal"] forState:UIControlStateNormal];
+    [self.button setImage:[UIImage imageNamed:@"start-crying-active"] forState:UIControlStateHighlighted];
+    [self.button addTarget:self action:@selector(startGame) forControlEvents:UIControlEventTouchUpInside];
+    self.button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+    [self.view addSubview:self.button];
+    
+    self.logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo00-02"]];
+    self.logoView.frame = self.view.bounds;
+    self.logoView.contentMode = UIViewContentModeBottom;
+    self.logoView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.logoView.alpha = 0.0;
+    [self.view insertSubview:self.logoView belowSubview:self.titleText];
 }
 
 - (void)startGame
 {
-    self.view.userInteractionEnabled = NO;
-    [self presentViewController:self.gameViewController animated:NO completion:^{
-        //NSLog(@"%@", self.gameViewController.view);
-    }];
+    [self.postEffectsController.view removeFromSuperview];
+    self.postEffectsController = nil;
+    
+    self.gameViewController.view.frame = self.view.bounds;
+    [self.view addSubview:self.gameViewController.view];
+    
+    //[self presentViewController:self.gameViewController animated:NO completion:^{    }];
 }
 
 - (void)restartGame
 {
+    [self.gameViewController.view removeFromSuperview];
     self.gameViewController = [[BDGameViewController alloc] initWithNibName:nil bundle:nil];
-    [self dismissViewControllerAnimated:false completion:^{
-    }];
+    //[self dismissViewControllerAnimated:false completion:^{ }];
 }
 
 - (void)didReceiveMemoryWarning

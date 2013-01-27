@@ -69,37 +69,41 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
     self.currentLevel = [BDLevel levelNamed:@"map00"];
     self.currentLevelView = [[BDLevelView alloc] initWithLevel:self.currentLevel];
+    
     self.player = [[BDPlayer alloc] initWithPosition:self.currentLevel.spawn];
     self.playerView = [[BDPlayerView alloc] initWithPlayer:self.player];
     __weak id s = self;
     self.player.adrenalinHandler = ^{
         [s adrenalinChanged];
     };
+    
     self.sound = [[BDSound alloc] initWithPlayer:self.player];
     
-    self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
-    self.postProcessingViewController.currentLevelView = self.currentLevelView;
-    
     [self.currentLevelView.playerLayer addSubview:self.playerView];
-    
-    self.view.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
-    [self.view addSubview:self.currentLevelView];//gameView];
-    
-    
-    [self.view addSubview:self.postProcessingViewController.view];
-    self.postProcessingViewController.view.frame = CGRectMake(-self.view.frame.origin.x,
-                                                              -self.view.frame.origin.y,
-                                                              [UIScreen mainScreen].applicationFrame.size.width,
-                                                              [UIScreen mainScreen].applicationFrame.size.height);
+    [self.view addSubview:self.currentLevelView];
     
     self.lastTouchLocation = CGPointZero;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
+    self.postProcessingViewController.currentLevelView = self.currentLevelView;
+    self.postProcessingViewController.view.frame = self.view.bounds;
+    //    self.postProcessingViewController.view.frame = CGRectMake(-self.view.frame.origin.x,
+    //                                                              -self.view.frame.origin.y,
+    //                                                              [UIScreen mainScreen].applicationFrame.size.width,
+    //                                                              [UIScreen mainScreen].applicationFrame.size.height);
+    [self.view addSubview:self.postProcessingViewController.view];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     self.staticTimer = [NSTimer scheduledTimerWithTimeInterval:3.0
                                      target:self.postProcessingViewController
                                    selector:@selector(static)
@@ -111,6 +115,13 @@
                                                     userInfo:nil
                                                      repeats:YES];
     [self.ambientMusicController play];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self.postProcessingViewController.view removeFromSuperview];
+    self.postProcessingViewController.currentLevelView = nil;
+    self.postProcessingViewController = nil;
 }
 
 - (void)pushTouch:(UITouch *)touch
@@ -189,28 +200,26 @@
     
     // Check light amount recieved by the player
     CGFloat luminance = 0.0;
-        for (NSDictionary *light in self.currentLevel.lights) {
-            CGPoint lightPosition = CGPointZero;
-            CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(light), &lightPosition);
-            CGFloat fakeRadius = 80.0 * (MAX(self.currentLevel.lightScale, 0.45));
-            
-            BOOL(^PointInsideCircle)(CGPoint p, CGPoint center, CGFloat radius) = ^(CGPoint p, CGPoint center, CGFloat radius) {
-                if ((pow(p.x-center.x, 2.0) + pow(p.y - center.y, 2.0)) < pow(radius, 2.0)) {
-                    return YES;
-                } else {
-                    return NO;
-                }
-            };
-            
-            if (PointInsideCircle(CGPointMake(self.player.location.x, self.player.location.y), lightPosition, fakeRadius)) {
-                //canMove = NO;
-                //*stop = YES;
-                CGSize distance = CGSizeMake(self.player.location.x - lightPosition.x, self.player.location.y - lightPosition.y);
-                CGFloat length = sqrt(pow(distance.width, 2.0) + pow(distance.height, 2.0));
-                
-                luminance = 1.0 - ((length + 0.01) / 80.0); // 1 means dark, 0 means bright
+    for (NSDictionary *light in self.currentLevel.lights) {
+        CGPoint lightPosition = CGPointZero;
+        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(light), &lightPosition);
+        CGFloat fakeRadius = 80.0 * (MAX(self.currentLevel.lightScale, 0.45));
+        
+        BOOL(^PointInsideCircle)(CGPoint p, CGPoint center, CGFloat radius) = ^(CGPoint p, CGPoint center, CGFloat radius) {
+            if ((pow(p.x-center.x, 2.0) + pow(p.y - center.y, 2.0)) < pow(radius, 2.0)) {
+                return YES;
+            } else {
+                return NO;
             }
+        };
+        
+        if (PointInsideCircle(CGPointMake(self.player.location.x, self.player.location.y), lightPosition, fakeRadius)) {
+            CGSize distance = CGSizeMake(self.player.location.x - lightPosition.x, self.player.location.y - lightPosition.y);
+            CGFloat length = sqrt(pow(distance.width, 2.0) + pow(distance.height, 2.0));
+            
+            luminance = 1.0 - ((length + 0.01) / 80.0); // 1 means dark, 0 means bright
         }
+    }
     [self.player updateAdrenalin:luminance];
     self.currentLevelView.frame = CGRectMake(-self.playerView.center.x+self.view.bounds.size.width/2.0,
                                              -self.playerView.center.y+self.view.bounds.size.height/2.0,
@@ -254,23 +263,7 @@
 {
     // Manipulate ambience
     self.currentLevelView.surfaceLayer.alpha = (1.0 - self.player.adrenalin) - 0.5;
-    //CGFloat scale = self.currentLevelView.lightScale;
-    //NSLog(@"%f %f", scale, self.player.luminanceDelta);
-    //self.currentLevelView.lightScale = scale + self.player.luminanceDelta;
-    
     self.currentLevelView.lightScale = (1.0 - self.player.adrenalin);
-    
-//    if (self.player.adrenalin > 0.3) {
-//        self.currentLevelView.lightScale -= 0.003;
-//        if (self.currentLevelView.lightScale < 0.0) {
-//            self.currentLevelView.lightScale = 0.0;
-//        }
-//    } else {
-//        self.currentLevelView.lightScale += 0.004;
-//        if (self.currentLevelView.lightScale > 1.0) {
-//            self.currentLevelView.lightScale = 1.0;
-//        }
-//    }
     
     self.currentLevelView.pulse = self.player.adrenalin;
 }
@@ -278,6 +271,8 @@
 - (void)gameDidEnd
 {
     [self.gameTimer invalidate];
+    [self.staticTimer invalidate];
+    
     self.player.adrenalinHandler = nil;
     self.currentLevelView.pulse = 10.0;
     
@@ -285,47 +280,23 @@
     
     [self.gameOverViewController.view removeFromSuperview];
     self.gameOverViewController = [[BDGameOverViewController alloc] initWithNibName:nil bundle:nil];
-    self.gameOverViewController.view.frame = CGRectMake(5, 5, self.view.bounds.size.width-10, self.view.bounds.size.height-10);
+    self.gameOverViewController.view.frame = self.view.bounds;
     [self.view addSubview:self.gameOverViewController.view];
+}
+
+- (void)loadView
+{
+    self.view = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                         0,
+                                                         [UIScreen mainScreen].applicationFrame.size.width,
+                                                         [UIScreen mainScreen].applicationFrame.size.height)];
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
+    self.view.backgroundColor = [UIColor blackColor];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    // we grab the screen frame first off; these are always
-    // in portrait mode
-    CGRect bounds = [[UIScreen mainScreen] applicationFrame];
-    CGSize size = bounds.size;
-    
-    // let's figure out if width/height must be swapped
-    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-        // we're going to landscape, which means we gotta swap them
-        size.width = bounds.size.height;
-        size.height = bounds.size.width;
-    }
-//    if (toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-//        NSLog(@"asd");
-//        CGSize applicationSize = [[UIScreen mainScreen] applicationFrame].size;
-//        self.view.frame = CGRectOffset(self.view.frame,
-//                                       self.playerView.center.x+applicationSize.width/2.0,
-//                                       self.playerView.center.y+applicationSize.height/2.0);
-//    }
-//    self.view.frame = CGRectMake(self.view.frame.origin.x,
-//                                 self.view.frame.origin.y,
-//                                 size.width,
-//                                 size.height);
-//        self.view.frame = CGRectMake(0,
-//                                     0,
-//                                     self.view.bounds.size.width,
-//                                     self.view.bounds.size.height);
-    //child.center = [parent convertPoint:parent.center fromView:parent.superview];
-    //self.view.center = [self.view.superview convertPoint:self.view.superview.center fromView:self.view.superview.superview];
-   // [self.view setCenter:self.view.superview.center];
-//    NSLog(@"%@", self.view.superview);
 }
 
 @end

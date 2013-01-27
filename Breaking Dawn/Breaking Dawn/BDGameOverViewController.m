@@ -43,18 +43,24 @@
     self.view.backgroundColor = [UIColor clearColor];
     self.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
     
-    UILabel *dummy = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 20)];
-    dummy.center = CGPointMake(self.view.bounds.size.width/2.0, 20);
+    UILabel *dummy = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
     dummy.text = [NSString stringWithFormat:@"Game Over, %@", @[@"Bitch", @"Dirtbag", @"Fool", @"Foolish Mortal"][arc4random_uniform(3)]];
+    dummy.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
+    CGSize textSize = [dummy.text sizeWithFont:dummy.font
+                                      forWidth:dummy.bounds.size.width
+                                 lineBreakMode:NSLineBreakByClipping];
+    dummy.frame = CGRectMake(0, 0, textSize.width, textSize.height);
+    dummy.center = CGPointMake(self.view.bounds.size.width / 2.0, 20);
     dummy.textAlignment = NSTextAlignmentCenter;
     dummy.backgroundColor = [UIColor blackColor];
     dummy.textColor = [UIColor whiteColor];
-    dummy.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
-    dummy.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    dummy.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self.view addSubview:dummy];
     
+    
     UIImageView *title = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@[@"fail-01", @"fail-02", @"fail-03", @"fail-04"][arc4random_uniform(4)]]];
-    title.frame = CGRectMake(self.view.bounds.size.width / 2.0 - 470.0 / 2.0, self.view.bounds.size.height / 3.0, 470, 240);
+    title.frame = CGRectMake(0.0, 0.0, title.image.size.width, title.image.size.height);
+    title.center = CGPointMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0);
     title.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:title];
     
@@ -79,7 +85,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

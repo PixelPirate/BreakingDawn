@@ -32,6 +32,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.noiseTextures = [NSMutableArray array];
+        self.view.userInteractionEnabled = NO;
     }
     return self;
 }

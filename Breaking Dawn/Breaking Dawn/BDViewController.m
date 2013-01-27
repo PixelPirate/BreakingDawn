@@ -46,6 +46,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     self.introViewController = [[BDIntroViewController alloc] initWithNibName:nil bundle:nil];
+    self.introViewController.view.frame = self.view.bounds;
     [self.view addSubview:self.introViewController.view];
     
     self.view.backgroundColor = [UIColor blackColor];

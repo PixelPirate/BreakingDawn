@@ -23,7 +23,7 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DebugMenu"];
     [[NSUserDefaults standardUserDefaults] setFloat:1/30.0 forKey:@"DrawRate"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SimultanousMonsterSounds"];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"GodMode"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"GodMode"];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];
