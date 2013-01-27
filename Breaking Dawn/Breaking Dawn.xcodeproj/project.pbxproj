@@ -92,6 +92,9 @@
 		B15B92AD16B47BF20001670D /* Light_Switch_0_250.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */; };
 		B15B92B316B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92B216B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 */; };
 		B15B92D016B551AB0001670D /* map00_collision.png in Resources */ = {isa = PBXBuildFile; fileRef = B15B92CF16B551AB0001670D /* map00_collision.png */; };
+		B165D5CF16B5544E00719EAE /* BDGameWinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B165D5CE16B5544E00719EAE /* BDGameWinViewController.m */; };
+		B165D5D216B5567F00719EAE /* lighter-01-02.png in Resources */ = {isa = PBXBuildFile; fileRef = B165D5D116B5567F00719EAE /* lighter-01-02.png */; };
+		B165D5D416B556C800719EAE /* map00_collision.png in Resources */ = {isa = PBXBuildFile; fileRef = B165D5D316B556C800719EAE /* map00_collision.png */; };
 		B19113AF16B4018E008BFCB9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19113AE16B4018E008BFCB9 /* AVFoundation.framework */; };
 		B19113B516B40707008BFCB9 /* BDSound.m in Sources */ = {isa = PBXBuildFile; fileRef = B19113B416B40707008BFCB9 /* BDSound.m */; };
 		B192C8CC16B435F5000E4BC9 /* BDAudioContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */; };
@@ -209,6 +212,10 @@
 		B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Light_Switch_0_250.mp3; sourceTree = "<group>"; };
 		B15B92B216B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Exploding_Light_Bulb_1_200.mp3; sourceTree = "<group>"; };
 		B15B92CF16B551AB0001670D /* map00_collision.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map00_collision.png; path = ../../../../../Downloads/map00_collision.png; sourceTree = "<group>"; };
+		B165D5CD16B5544E00719EAE /* BDGameWinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDGameWinViewController.h; sourceTree = "<group>"; };
+		B165D5CE16B5544E00719EAE /* BDGameWinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDGameWinViewController.m; sourceTree = "<group>"; };
+		B165D5D116B5567F00719EAE /* lighter-01-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lighter-01-02.png"; sourceTree = "<group>"; };
+		B165D5D316B556C800719EAE /* map00_collision.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map00_collision.png; sourceTree = "<group>"; };
 		B19113AE16B4018E008BFCB9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B19113B316B40707008BFCB9 /* BDSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSound.h; sourceTree = "<group>"; };
 		B19113B416B40707008BFCB9 /* BDSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDSound.m; sourceTree = "<group>"; };
@@ -284,6 +291,8 @@
 				877DB00716B4769900CD9508 /* BDTitleViewController.m */,
 				87A5375416B32ACE00F7C6DB /* BDGameViewController.h */,
 				87A5375516B32ACE00F7C6DB /* BDGameViewController.m */,
+				B165D5CD16B5544E00719EAE /* BDGameWinViewController.h */,
+				B165D5CE16B5544E00719EAE /* BDGameWinViewController.m */,
 				877DB00F16B4818800CD9508 /* BDGameOverViewController.h */,
 				877DB01016B4818800CD9508 /* BDGameOverViewController.m */,
 				87A5376E16B3983600F7C6DB /* BDPostProcessingViewController.h */,
@@ -343,7 +352,9 @@
 				8784973516B4CC1B00D72C0D /* start-crying-active.png */,
 				8784973216B4CB2A00D72C0D /* start-crying-normal.png */,
 				87CF3D7B16B4D8020073F953 /* lighter.png */,
+				B165D5D116B5567F00719EAE /* lighter-01-02.png */,
 				8784971516B4BF9800D72C0D /* map00_diffuse.png */,
+				B165D5D316B556C800719EAE /* map00_collision.png */,
 				8784972D16B4CB0200D72C0D /* cry-again-active.png */,
 				8784972E16B4CB0200D72C0D /* cry-again-normal.png */,
 				8784971B16B4C5E000D72C0D /* fail-01 */,
@@ -597,6 +608,8 @@
 				87CF3D7C16B4D8020073F953 /* lighter.png in Resources */,
 				87CF3D7F16B540280073F953 /* GGJ13_RoundBadge.png in Resources */,
 				B15B92D016B551AB0001670D /* map00_collision.png in Resources */,
+				B165D5D216B5567F00719EAE /* lighter-01-02.png in Resources */,
+				B165D5D416B556C800719EAE /* map00_collision.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +640,7 @@
 				877DB00516B4768A00CD9508 /* BDIntroViewController.m in Sources */,
 				877DB00816B4769900CD9508 /* BDTitleViewController.m in Sources */,
 				877DB01116B4818800CD9508 /* BDGameOverViewController.m in Sources */,
+				B165D5CF16B5544E00719EAE /* BDGameWinViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
