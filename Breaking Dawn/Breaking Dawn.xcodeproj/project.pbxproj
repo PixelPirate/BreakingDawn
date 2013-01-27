@@ -525,9 +525,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		87A5371816B31D8500F7C6DB /* Breaking Dawn */ = {
+		87A5371816B31D8500F7C6DB /* Nykto */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 87A5374016B31D8700F7C6DB /* Build configuration list for PBXNativeTarget "Breaking Dawn" */;
+			buildConfigurationList = 87A5374016B31D8700F7C6DB /* Build configuration list for PBXNativeTarget "Nykto" */;
 			buildPhases = (
 				87A5371516B31D8500F7C6DB /* Sources */,
 				87A5371616B31D8500F7C6DB /* Frameworks */,
@@ -537,7 +537,7 @@
 			);
 			dependencies = (
 			);
-			name = "Breaking Dawn";
+			name = Nykto;
 			productName = "Breaking Dawn";
 			productReference = 87A5371916B31D8500F7C6DB /* Breaking Dawn.app */;
 			productType = "com.apple.product-type.application";
@@ -564,7 +564,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				87A5371816B31D8500F7C6DB /* Breaking Dawn */,
+				87A5371816B31D8500F7C6DB /* Nykto */,
 			);
 		};
 /* End PBXProject section */
@@ -806,7 +806,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		87A5374016B31D8700F7C6DB /* Build configuration list for PBXNativeTarget "Breaking Dawn" */ = {
+		87A5374016B31D8700F7C6DB /* Build configuration list for PBXNativeTarget "Nykto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				87A5374116B31D8700F7C6DB /* Debug */,
