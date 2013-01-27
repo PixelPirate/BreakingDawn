@@ -12,7 +12,7 @@
 
 @protocol BDMobDelegate <NSObject>
 
-- (void)mobCollidedWithPlayer:(BDMob *)mob;
+//- (void)mobCollidedWithPlayer:(BDMob *)mob;
 
 - (void)mobDidMove:(BDMob *)mob toPosition:(CGPoint)position;
 

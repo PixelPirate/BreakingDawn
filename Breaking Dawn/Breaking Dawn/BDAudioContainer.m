@@ -19,14 +19,16 @@
 
 -(id)initWithPath:(NSString *)path count:(int)count;
 {
-	NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: [[NSBundle mainBundle] pathForResource:path ofType:@"mp3"]];    
-    self.players = [NSMutableArray array];
-    for(int i=0; i<count; i++) {
-        AVAudioPlayer *heartPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
-        heartPlayer.enableRate = YES;
-        [self.players addObject:heartPlayer];
+    self = [super init];
+    if (self) {
+        NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: [[NSBundle mainBundle] pathForResource:path ofType:@"mp3"]];
+        self.players = [NSMutableArray array];
+        for(int i=0; i<count; i++) {
+            AVAudioPlayer *heartPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+            heartPlayer.enableRate = YES;
+            [self.players addObject:heartPlayer];
+        }
     }
-    
     return self;
 }
 

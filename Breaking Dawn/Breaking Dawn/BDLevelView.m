@@ -92,7 +92,7 @@
         }
         
         self.lightSwitch = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightSwitchLight.png"]];
-        self.lightSwitch.frame = CGRectMake(1224, 624, self.lightSwitch.image.size.width, self.lightSwitch.image.size.height);
+        self.lightSwitch.frame = CGRectMake(1224, 642, self.lightSwitch.image.size.width, self.lightSwitch.image.size.height);
         [self addSubview:self.lightSwitch];
     }
     return self;
@@ -215,7 +215,6 @@
 - (void)level:(BDLevel *)level willAddLights:(NSArray *)lights
 {
     self.lightSwitch.hidden = YES;
-    //image = [UIImage imageNamed:@"lightSwitch-Off"];
     
     for (NSDictionary *pointRep in lights) {
         

@@ -11,7 +11,6 @@
 		877DAFF616B464BF00CD9508 /* Ambience-17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFF316B464BF00CD9508 /* Ambience-17.mp3 */; };
 		877DAFF716B464BF00CD9508 /* Ambience-22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFF416B464BF00CD9508 /* Ambience-22.mp3 */; };
 		877DAFFA16B467D000CD9508 /* BDAmbientMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877DAFF916B467D000CD9508 /* BDAmbientMusicController.m */; };
-		877DAFFE16B46EF300CD9508 /* map00_diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFFD16B46EF300CD9508 /* map00_diffuse.png */; };
 		877DB00016B46EF700CD9508 /* map00_collision.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFFF16B46EF700CD9508 /* map00_collision.png */; };
 		877DB00116B4722200CD9508 /* lightSwitch-Off.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFFB16B46C9100CD9508 /* lightSwitch-Off.png */; };
 		877DB00216B4722400CD9508 /* lightSwitch-On.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFFC16B46C9500CD9508 /* lightSwitch-On.png */; };
@@ -21,6 +20,15 @@
 		877DB01116B4818800CD9508 /* BDGameOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877DB01016B4818800CD9508 /* BDGameOverViewController.m */; };
 		877DB01416B493C400CD9508 /* map00.plist in Resources */ = {isa = PBXBuildFile; fileRef = 877DB01316B493C400CD9508 /* map00.plist */; };
 		877DB01A16B4AE7600CD9508 /* lightSwitchLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DB01916B4AE7600CD9508 /* lightSwitchLight.png */; };
+		8784971616B4BF9800D72C0D /* map00_diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 8784971516B4BF9800D72C0D /* map00_diffuse.png */; };
+		8784972516B4C5EC00D72C0D /* fail-01 in Resources */ = {isa = PBXBuildFile; fileRef = 8784971B16B4C5E000D72C0D /* fail-01 */; };
+		8784972616B4C5EC00D72C0D /* fail-02 in Resources */ = {isa = PBXBuildFile; fileRef = 8784971C16B4C5E000D72C0D /* fail-02 */; };
+		8784972716B4C5EC00D72C0D /* fail-03 in Resources */ = {isa = PBXBuildFile; fileRef = 8784971D16B4C5E000D72C0D /* fail-03 */; };
+		8784972816B4C5EC00D72C0D /* fail-04 in Resources */ = {isa = PBXBuildFile; fileRef = 8784971E16B4C5E000D72C0D /* fail-04 */; };
+		8784972F16B4CB0200D72C0D /* cry-again-active.png in Resources */ = {isa = PBXBuildFile; fileRef = 8784972D16B4CB0200D72C0D /* cry-again-active.png */; };
+		8784973016B4CB0200D72C0D /* cry-again-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8784972E16B4CB0200D72C0D /* cry-again-normal.png */; };
+		8784973416B4CB2A00D72C0D /* start-crying-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8784973216B4CB2A00D72C0D /* start-crying-normal.png */; };
+		8784973616B4CC1B00D72C0D /* start-crying-active.png in Resources */ = {isa = PBXBuildFile; fileRef = 8784973516B4CC1B00D72C0D /* start-crying-active.png */; };
 		87A5371E16B31D8500F7C6DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A5371D16B31D8500F7C6DB /* UIKit.framework */; };
 		87A5372016B31D8500F7C6DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A5371F16B31D8500F7C6DB /* Foundation.framework */; };
 		87A5372216B31D8500F7C6DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A5372116B31D8500F7C6DB /* CoreGraphics.framework */; };
@@ -102,7 +110,6 @@
 		877DAFF916B467D000CD9508 /* BDAmbientMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAmbientMusicController.m; sourceTree = "<group>"; };
 		877DAFFB16B46C9100CD9508 /* lightSwitch-Off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lightSwitch-Off.png"; sourceTree = "<group>"; };
 		877DAFFC16B46C9500CD9508 /* lightSwitch-On.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lightSwitch-On.png"; sourceTree = "<group>"; };
-		877DAFFD16B46EF300CD9508 /* map00_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map00_diffuse.png; sourceTree = "<group>"; };
 		877DAFFF16B46EF700CD9508 /* map00_collision.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map00_collision.png; sourceTree = "<group>"; };
 		877DB00316B4768800CD9508 /* BDIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDIntroViewController.h; sourceTree = "<group>"; };
 		877DB00416B4768900CD9508 /* BDIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDIntroViewController.m; sourceTree = "<group>"; };
@@ -113,6 +120,15 @@
 		877DB01016B4818800CD9508 /* BDGameOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDGameOverViewController.m; sourceTree = "<group>"; };
 		877DB01316B493C400CD9508 /* map00.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = map00.plist; sourceTree = "<group>"; };
 		877DB01916B4AE7600CD9508 /* lightSwitchLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightSwitchLight.png; sourceTree = "<group>"; };
+		8784971516B4BF9800D72C0D /* map00_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map00_diffuse.png; sourceTree = "<group>"; };
+		8784971B16B4C5E000D72C0D /* fail-01 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fail-01"; sourceTree = "<group>"; };
+		8784971C16B4C5E000D72C0D /* fail-02 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fail-02"; sourceTree = "<group>"; };
+		8784971D16B4C5E000D72C0D /* fail-03 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fail-03"; sourceTree = "<group>"; };
+		8784971E16B4C5E000D72C0D /* fail-04 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fail-04"; sourceTree = "<group>"; };
+		8784972D16B4CB0200D72C0D /* cry-again-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cry-again-active.png"; sourceTree = "<group>"; };
+		8784972E16B4CB0200D72C0D /* cry-again-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cry-again-normal.png"; sourceTree = "<group>"; };
+		8784973216B4CB2A00D72C0D /* start-crying-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start-crying-normal.png"; sourceTree = "<group>"; };
+		8784973516B4CC1B00D72C0D /* start-crying-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start-crying-active.png"; sourceTree = "<group>"; };
 		87A5371916B31D8500F7C6DB /* Breaking Dawn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Breaking Dawn.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87A5371D16B31D8500F7C6DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		87A5371F16B31D8500F7C6DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -318,6 +334,15 @@
 			isa = PBXGroup;
 			children = (
 				B15B92B216B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 */,
+				8784973516B4CC1B00D72C0D /* start-crying-active.png */,
+				8784973216B4CB2A00D72C0D /* start-crying-normal.png */,
+				8784971516B4BF9800D72C0D /* map00_diffuse.png */,
+				8784972D16B4CB0200D72C0D /* cry-again-active.png */,
+				8784972E16B4CB0200D72C0D /* cry-again-normal.png */,
+				8784971B16B4C5E000D72C0D /* fail-01 */,
+				8784971C16B4C5E000D72C0D /* fail-02 */,
+				8784971D16B4C5E000D72C0D /* fail-03 */,
+				8784971E16B4C5E000D72C0D /* fail-04 */,
 				B15B92A816B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 */,
 				B15B92A916B47BF20001670D /* heartbeat_isolated_0_700.mp3 */,
 				877DB01916B4AE7600CD9508 /* lightSwitchLight.png */,
@@ -338,7 +363,6 @@
 				87A5376C16B391C200F7C6DB /* player00.png */,
 				87A5376A16B38F5100F7C6DB /* light00-01.jpg */,
 				877DAFFF16B46EF700CD9508 /* map00_collision.png */,
-				877DAFFD16B46EF300CD9508 /* map00_diffuse.png */,
 				87A5378316B402C300F7C6DB /* mob00-01.png */,
 				87A537D216B4527E00F7C6DB /* move-front-left */,
 				87A537D616B4527F00F7C6DB /* move-front-right */,
@@ -546,7 +570,6 @@
 				877DAFF516B464BF00CD9508 /* Ambience-16.mp3 in Resources */,
 				877DAFF616B464BF00CD9508 /* Ambience-17.mp3 in Resources */,
 				877DAFF716B464BF00CD9508 /* Ambience-22.mp3 in Resources */,
-				877DAFFE16B46EF300CD9508 /* map00_diffuse.png in Resources */,
 				877DB00116B4722200CD9508 /* lightSwitch-Off.png in Resources */,
 				877DB00216B4722400CD9508 /* lightSwitch-On.png in Resources */,
 				877DB00016B46EF700CD9508 /* map00_collision.png in Resources */,
@@ -557,6 +580,15 @@
 				B15B92AD16B47BF20001670D /* Light_Switch_0_250.mp3 in Resources */,
 				B15B92B316B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 in Resources */,
 				877DB01A16B4AE7600CD9508 /* lightSwitchLight.png in Resources */,
+				8784971616B4BF9800D72C0D /* map00_diffuse.png in Resources */,
+				8784972516B4C5EC00D72C0D /* fail-01 in Resources */,
+				8784972616B4C5EC00D72C0D /* fail-02 in Resources */,
+				8784972716B4C5EC00D72C0D /* fail-03 in Resources */,
+				8784972816B4C5EC00D72C0D /* fail-04 in Resources */,
+				8784972F16B4CB0200D72C0D /* cry-again-active.png in Resources */,
+				8784973016B4CB0200D72C0D /* cry-again-normal.png in Resources */,
+				8784973416B4CB2A00D72C0D /* start-crying-normal.png in Resources */,
+				8784973616B4CC1B00D72C0D /* start-crying-active.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

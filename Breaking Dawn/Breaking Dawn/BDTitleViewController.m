@@ -39,10 +39,11 @@
 {
     [super viewDidLoad];
     
-    self.button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.button.frame = CGRectMake(0, 0, 100, 20);
+    self.button = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.button.frame = CGRectMake(0, 0, 520, 70);
     self.button.center = CGPointMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 4.0);
-    [self.button setTitle:@"Start Game" forState:UIControlStateNormal];
+    [self.button setImage:[UIImage imageNamed:@"start-crying-normal"] forState:UIControlStateNormal];
+    [self.button setImage:[UIImage imageNamed:@"start-crying-active"] forState:UIControlStateHighlighted];
     [self.button addTarget:self action:@selector(startGame) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.button];
     self.button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;

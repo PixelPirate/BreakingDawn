@@ -84,6 +84,7 @@
         [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1196, 663, 80, 60) trigger:^{
             [[BDSound getInstance] playSound:SOUND_LIGHT_SWITCH];
             if (self.delegate) [self.delegate level:self willAddLights:mapInfos[@"Stages"][1][@"Lights"]];
+            [self.lights addObjectsFromArray:mapInfos[@"Stages"][1][@"Lights"]];
         }]];
         
         // Create collision map from diffuse map if missing

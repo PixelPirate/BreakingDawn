@@ -43,7 +43,7 @@
     self.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
     
     UILabel *dummy = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 20)];
-    dummy.center = CGPointMake(self.view.bounds.size.width/2.0, self.view.bounds.size.height/2.0);
+    dummy.center = CGPointMake(self.view.bounds.size.width/2.0, 20);
     dummy.text = [NSString stringWithFormat:@"Game Over, %@", @[@"Bitch", @"Dirtbag", @"Fool", @"Foolish Mortal"][arc4random_uniform(3)]];
     dummy.textAlignment = NSTextAlignmentCenter;
     dummy.backgroundColor = [UIColor blackColor];
@@ -52,11 +52,19 @@
     dummy.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [self.view addSubview:dummy];
     
-    self.button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.button.frame = CGRectMake(0, 0, 100, 20);
+    UIImageView *title = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@[@"fail-01", @"fail-02", @"fail-03", @"fail-04"][arc4random_uniform(4)]]];
+    title.frame = CGRectMake(self.view.bounds.size.width / 2.0 - 470.0 / 2.0, self.view.bounds.size.height / 3.0, 470, 240);
+    title.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
+    [self.view addSubview:title];
+    
+    self.button = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.button.frame = CGRectMake(0, 0, 390, 60);
     self.button.center = CGPointMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 1.5);
     self.button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    [self.button setTitle:@"Title Screen" forState:UIControlStateNormal];
+    //[self.button setTitle:@"Title Screen" forState:UIControlStateNormal];
+    self.button.contentMode = UIViewContentModeTop;
+    [self.button setImage:[UIImage imageNamed:@"cry-again-normal"] forState:UIControlStateNormal];
+    [self.button setImage:[UIImage imageNamed:@"cry-again-active"] forState:UIControlStateHighlighted];
     [self.button addTarget:self action:@selector(restartGame) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.button];
 }
