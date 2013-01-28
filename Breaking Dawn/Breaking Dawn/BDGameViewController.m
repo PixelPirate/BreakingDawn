@@ -84,12 +84,14 @@
         [s adrenalinChanged];
     };
     
-    self.sound = [[BDSound alloc] initWithPlayer:self.player];
+    self.sound = [BDSound sharedSound];
     
     [self.currentLevelView.playerLayer addSubview:self.playerView];
     [self.view addSubview:self.currentLevelView];
     
     self.lastTouchLocation = CGPointZero;
+    
+    self.view.alpha = 0.0;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -97,10 +99,6 @@
     self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
     self.postProcessingViewController.flickerView = self.currentLevelView.surfaceLayer;
     self.postProcessingViewController.view.frame = self.view.bounds;
-    //    self.postProcessingViewController.view.frame = CGRectMake(-self.view.frame.origin.x,
-    //                                                              -self.view.frame.origin.y,
-    //                                                              [UIScreen mainScreen].applicationFrame.size.width,
-    //                                                              [UIScreen mainScreen].applicationFrame.size.height);
     [self.view addSubview:self.postProcessingViewController.view];
 }
 
@@ -119,6 +117,15 @@
                                                     userInfo:nil
                                                      repeats:YES];
     [self.ambientMusicController play];
+    [self.sound beginHeartbeatForPlayer:self.player];
+    
+    int64_t delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [UIView animateWithDuration:0.5 animations:^{
+            self.view.alpha = 1.0;
+        }];
+    });
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -245,7 +252,7 @@
             direction = CGPointMake(direction.x / maximalMovement, direction.y / maximalMovement);
             direction = CGPointApplyAffineTransform(direction, CGAffineTransformMakeScale(speed, speed));
             mob.location = CGPointMake(mob.location.x - direction.x, mob.location.y - direction.y);
-            [[BDSound getInstance] playMonster:arc4random_uniform(5)];
+            [[BDSound sharedSound] playMonster:arc4random_uniform(5)];
         }
     }
     
@@ -268,9 +275,7 @@
     // Manipulate ambience
     self.currentLevelView.surfaceLayer.alpha = (1.0 - self.player.adrenalin) - 0.5;
     self.currentLevel.lightScale = (1.0 - self.player.adrenalin);
-    [self.currentLevelView reloadData];
-//    self.currentLevelView.lightScale = (1.0 - self.player.adrenalin);
-    
+    [self.currentLevelView reloadData];    
     self.currentLevelView.pulse = self.player.adrenalin;
 }
 
@@ -283,13 +288,14 @@
     self.currentLevelView.pulse = 10.0;
     
     [self.ambientMusicController stop];
+    [self.sound endHeartbeat];
 }
 
 - (void)gameDidEnd
 {
     [self gameStop];
     
-    [[BDSound getInstance] playSound:SOUND_GAME_OVER];
+    [[BDSound sharedSound] playSound:SOUND_GAME_OVER];
     
     [self.gameOverViewController.view removeFromSuperview];
     self.gameOverViewController = [[BDGameOverViewController alloc] initWithNibName:nil bundle:nil];

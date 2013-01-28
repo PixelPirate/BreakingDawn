@@ -87,7 +87,7 @@
         
         self.hotspots = [NSMutableArray array];
         [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1196, 663, 80, 60) trigger:^{
-            [[BDSound getInstance] playSound:SOUND_LIGHT_SWITCH];
+            [[BDSound sharedSound] playSound:SOUND_LIGHT_SWITCH];
             // The model (BDLevel) notifies it's view (BDLevelView) that the data has been changed and the view shoud refresh itselve.
             [self.lights addObjectsFromArray:mapInfos[@"Stages"][1][@"Lights"]];
             self.lightSwitchVisible = NO;

@@ -16,7 +16,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"PrecitionControlls"];
     [[NSUserDefaults standardUserDefaults] setFloat:2.0 forKey:@"WalkingSpeed"];
     [[NSUserDefaults standardUserDefaults] setFloat:2.5 forKey:@"MobWalkingSpeed"];
@@ -24,7 +23,7 @@
     [[NSUserDefaults standardUserDefaults] setFloat:1/30.0 forKey:@"DrawRate"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SimultanousMonsterSounds"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"GodMode"];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SkipIntro"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SkipIntro"];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];

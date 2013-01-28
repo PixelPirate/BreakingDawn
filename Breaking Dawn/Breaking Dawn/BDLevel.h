@@ -13,7 +13,7 @@
 @class BDLevel;
 
 
-@protocol BDLevelDelegate <NSObject>
+@protocol BDLevelDelegate <NSObject> // These callbacks are due to notify about dynamic changes to the level though its hotspots.
 
 - (void)level:(BDLevel *)level didAddLights:(NSArray *)lights;
 

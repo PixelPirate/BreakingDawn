@@ -8,6 +8,7 @@
 
 #import "BDViewController.h"
 #import "BDIntroViewController.h"
+#import "BDPostProcessingViewController.h"
 
 @interface BDViewController () // Private setter
 
@@ -44,6 +45,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    [BDPostProcessingViewController noiseTextures]; // Preload
     
     self.introViewController = [[BDIntroViewController alloc] initWithNibName:nil bundle:nil];
     self.introViewController.view.frame = self.view.bounds;

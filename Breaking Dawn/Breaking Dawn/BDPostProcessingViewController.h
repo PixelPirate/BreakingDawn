@@ -14,6 +14,8 @@
 
 @property (strong, readwrite, nonatomic) UIView *flickerView;
 
++ (NSArray *)noiseTextures;
+
 - (void)static;
 
 @end

@@ -84,6 +84,11 @@
     self.postEffectsController.view.frame = self.view.bounds;
     [self.view addSubview:self.postEffectsController.view];
     
+    self.logoView.alpha = 1.0;
+    self.button.alpha = 1.0;
+    self.titleText.alpha = 1.0;
+    self.view.backgroundColor = [UIColor clearColor];
+    
     
     self.logoView.alpha = 0.0;
     [UIView animateWithDuration:0.5 animations:^{
@@ -140,11 +145,18 @@
 
 - (void)startGame
 {
-    [self.postEffectsController.view removeFromSuperview];
-    self.postEffectsController = nil;
-    
-    self.gameViewController.view.frame = self.view.bounds;
-    [self.view addSubview:self.gameViewController.view];
+    [UIView animateWithDuration:0.5 delay:0.0 options:0 animations:^{
+        self.logoView.alpha = 0.0;
+        self.button.alpha = 0.0;
+        self.titleText.alpha = 0.0;
+        self.view.backgroundColor = [UIColor blackColor];
+    } completion:^(BOOL finished) {
+        [self.postEffectsController.view removeFromSuperview];
+        self.postEffectsController = nil;
+        
+        self.gameViewController.view.frame = self.view.bounds;
+        [self.view addSubview:self.gameViewController.view];
+    }];
 }
 
 - (void)restartGame
