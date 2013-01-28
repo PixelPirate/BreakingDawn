@@ -54,8 +54,8 @@ static BDSound *instance;
 	    
         self.sounds = [NSMutableArray array];
         [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Game_Over_Scream" count:2]];
-        [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Flickering_Light_Electric_Buzz_5_700" count:2]];
         [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Exploding_Light_Bulb_1_200" count:2]];
+        [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Flickering_Light_Electric_Buzz_5_700" count:2]];
         [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Light_Switch_0_250" count:2]];
     }
     return self;

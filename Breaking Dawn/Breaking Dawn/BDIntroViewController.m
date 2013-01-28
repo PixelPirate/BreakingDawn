@@ -9,6 +9,7 @@
 #import "BDIntroViewController.h"
 #import "BDTitleViewController.h"
 #import "BDAppDelegate.h"
+#import "BDSound.h"
 
 @interface BDIntroViewController ()
 
@@ -133,6 +134,7 @@ static Clip ClipMake() {
                         } completion:^(BOOL finished) {
                             [UIView animateWithDuration:0.01 delay:0.01 options:0 animations:^{
                                 self.brightDoorView.alpha = 0.1; // Show dimm door
+                                [[BDSound sharedSound] playSound:SOUND_LIGHT_FLICKER];
                             } completion:^(BOOL finished) {
                                 [UIView animateWithDuration:0.01 delay:0.01 options:0 animations:^{
                                     self.brightDoorView.alpha = 1.0; // Show bright door
@@ -150,6 +152,11 @@ static Clip ClipMake() {
                                                     self.brightDoorView.alpha = 1.0; // show bright door
                                                 } completion:^(BOOL finished) {
                                                     self.dimmDoorView.alpha = 0.0;
+                                                    int64_t delayInMilliseconds = 1500;
+                                                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
+                                                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                                                        [[BDSound sharedSound] playSound:SOUND_LIGHT_EXPLODE];
+                                                    });
                                                     [UIView animateWithDuration:1.0 delay:1.5 options:0 animations:^{
                                                         self.brightDoorView.alpha = 0.0; // Show dark door
                                                     } completion:^(BOOL finished) {
@@ -204,9 +211,10 @@ static Clip ClipMake() {
                                                          [UIScreen mainScreen].bounds.size.height)];
     self.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
     
-    self.coverView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GGJ13_RoundBadge"]];
+    self.coverView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ggj13-poster"]];//GGJ13_RoundBadge
     self.coverView.frame = self.view.bounds;
-    self.coverView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    self.coverView.contentMode = UIViewContentModeScaleAspectFill;
     self.coverView.backgroundColor = [UIColor blackColor];
     self.coverView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:self.coverView];
