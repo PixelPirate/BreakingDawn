@@ -45,6 +45,7 @@
         BDAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
         delegate.titleViewController = self.titleViewController;
     }
+    
     return self;
 }
 /*
