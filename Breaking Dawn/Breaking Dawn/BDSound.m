@@ -92,7 +92,6 @@ static BDSound *instance;
     
     // Speed between 1 and 2, depending on bpm (from 60 to 180)
     player.rate = fmax(fmin(1.0 + (self.bpm - 60.0) / (180.0 - 60.0), 2.0), 1.0);
-    NSLog(@"Rate %f", player.rate);
     [player play];
 }
 

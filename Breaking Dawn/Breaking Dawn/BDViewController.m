@@ -54,10 +54,6 @@
     
     self.view.backgroundColor = [UIColor blackColor];
     
-    [[NSUserDefaults standardUserDefaults] setFloat:0.024 forKey:@"AdrenalinLight"];
-    [[NSUserDefaults standardUserDefaults] setFloat:0.0068 forKey:@"AdrenalinDusk"];
-    [[NSUserDefaults standardUserDefaults] setFloat:0.012 forKey:@"AdrenalinDark"];
-    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"DebugMenu"]) {
         self.light = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].applicationFrame.size.width, 20)];
         self.light.value = 0.006;

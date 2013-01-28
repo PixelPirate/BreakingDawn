@@ -16,6 +16,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [[NSUserDefaults standardUserDefaults] setFloat:0.024 forKey:@"AdrenalinLight"];
+    [[NSUserDefaults standardUserDefaults] setFloat:0.0068 forKey:@"AdrenalinDusk"];
+    [[NSUserDefaults standardUserDefaults] setFloat:0.012 forKey:@"AdrenalinDark"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"PrecitionControlls"];
     [[NSUserDefaults standardUserDefaults] setFloat:2.0 forKey:@"WalkingSpeed"];
     [[NSUserDefaults standardUserDefaults] setFloat:2.5 forKey:@"MobWalkingSpeed"];
@@ -23,7 +27,7 @@
     [[NSUserDefaults standardUserDefaults] setFloat:1/30.0 forKey:@"DrawRate"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SimultanousMonsterSounds"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"GodMode"];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SkipIntro"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SkipIntro"];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];

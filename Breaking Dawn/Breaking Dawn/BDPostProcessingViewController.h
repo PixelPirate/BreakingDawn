@@ -18,4 +18,6 @@
 
 - (void)static;
 
+- (void)fadeToNoise;
+
 @end

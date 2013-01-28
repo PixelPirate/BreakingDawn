@@ -48,6 +48,7 @@
     
     self.postProcessingViewController.view.frame = self.view.bounds;
     [self.view addSubview:self.postProcessingViewController.view];
+    [self.postProcessingViewController fadeToNoise];
     
     UILabel *dummy = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
     dummy.text = [NSString stringWithFormat:@"Game Over, %@", @[@"Bitch", @"Dirtbag", @"Fool", @"Foolish Mortal"][arc4random_uniform(4)]];

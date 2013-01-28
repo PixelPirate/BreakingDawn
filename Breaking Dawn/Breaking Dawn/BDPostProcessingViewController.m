@@ -106,6 +106,13 @@
     self.noiseImageView.alpha = arc4random_uniform(100) / 6000.0 + 0.1;
 }
 
+- (void)changeNoiseKeepAlpha
+{
+    NSArray *noiseTextures = [BDPostProcessingViewController noiseTextures];
+    UIImage *noiseImage = noiseTextures[arc4random_uniform(noiseTextures.count)];
+    self.noiseImageView.image = noiseImage;
+}
+
 - (void)static
 {
     self.flickerView.alpha = 1.0;
@@ -145,6 +152,21 @@
             });
         });
     });
+}
+
+- (void)fadeToNoise
+{
+    [self.noiseTimer invalidate];
+    self.noiseTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                       target:self
+                                                     selector:@selector(changeNoiseKeepAlpha)
+                                                     userInfo:nil
+                                                      repeats:YES];
+    
+    [UIView animateWithDuration:4.5 animations:^{
+        self.noiseImageView.alpha = 1.0;
+        self.view.backgroundColor = [UIColor blackColor];
+    }];
 }
 
 @end
