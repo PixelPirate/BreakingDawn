@@ -88,14 +88,17 @@
         self.hotspots = [NSMutableArray array];
         [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1196, 663, 80, 60) trigger:^{
             [[BDSound getInstance] playSound:SOUND_LIGHT_SWITCH];
-            if (self.delegate) [self.delegate level:self willAddLights:mapInfos[@"Stages"][1][@"Lights"]];
+            // The model (BDLevel) notifies it's view (BDLevelView) that the data has been changed and the view shoud refresh itselve.
             [self.lights addObjectsFromArray:mapInfos[@"Stages"][1][@"Lights"]];
+            self.lightSwitchVisible = NO;
+            [self.delegate level:self didAddLights:mapInfos[@"Stages"][1][@"Lights"]];
         }]];
-        
         
         [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(50, 705, 80, 100) trigger:^{
-            if (self.delegate) [self.delegate levelWillWin:self];
+            [self.delegate levelWillWin:self];
         }]];
+        
+        self.lightSwitchVisible = YES;
     }
     return self;
 }
@@ -111,30 +114,28 @@
     return [self canMoveFrom:from to:to withLightLimit:CGFLOAT_MAX];
 }
 
-- (void)line:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(int x, int y, BOOL *stop))block
+- (void)evaluatePointsOnLineFrom:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(CGPoint, BOOL *))block
 {
-    float x0=from.x, y0=from.y;
-    float x1=to.x, y1=to.y;
+    float x0 = from.x, y0 = from.y;
+    float x1 = to.x,   y1 = to.y;
     
     // Check if x difference is bigger than y differene, than swap now and later call block swapped
-    bool steep = (abs(y1-y0) > abs(x1-x0));
+    bool steep = (abs(y1 - y0) > abs(x1 - x0));
     if(steep) {
         float swap;
-        swap=x0; x0=y0; y0=swap;
-        swap=x1; x1=y1; y1=swap;
+        swap = x0; x0 = y0; y0 = swap;
+        swap = x1; x1 = y1; y1 = swap;
     }
     
     // Run from left to right or from right to left
     int inc = x1 > x0 ? 1 : -1;
     
-    for(int x=x0; (inc>0) ? (x<=(int)x1) : (x>=(int)x1); x+=inc) {
-        float progress = (x-x0)/(x1-x0);
-        int y = y0 + (y1-y0)*progress;
+    for(int x = x0; (inc > 0) ? (x <= (int)x1) : (x >= (int)x1); x += inc) {
+        float progress = (x - x0) / (x1 - x0);
+        int y = y0 + (y1 - y0) * progress;
         BOOL stop = NO;
-        if(steep) block(y, x, &stop); else block(x, y, &stop);
-        if (stop) {
-            break;
-        }
+        if(steep) block(CGPointMake(y, x), &stop); else block(CGPointMake(x, y), &stop);
+        if (stop) break;
     }
 }
 
@@ -153,8 +154,8 @@
     //NSLog(@"%@ %@ %@", NSStringFromSelector(_cmd), NSStringFromCGPoint(from), NSStringFromCGPoint(to));
     
     bool __block canMove = YES;
-    [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
-        UIColor *color = [[self.collisionMap getRGBAsFromImageX:x andY:y count:1] lastObject];
+    [self evaluatePointsOnLineFrom:from to:to usingBlock:^(CGPoint point, BOOL *stop) {
+        UIColor *color = [[self.collisionMap getRGBAsFromImageX:point.x andY:point.y count:1] lastObject];
         const CGFloat *components = CGColorGetComponents([color CGColor]);
         if(components[0] == 0) {
             canMove = NO;
@@ -164,7 +165,7 @@
     }];
     
     if (canMove && lightLimit != CGFLOAT_MAX) {
-        [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
+        [self evaluatePointsOnLineFrom:from to:to usingBlock:^(CGPoint point, BOOL *stop) {
             for (NSDictionary *light in self.lights) {
                 CGPoint lightPosition = CGPointZero;
                 CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(light), &lightPosition);
@@ -178,7 +179,7 @@
                     }
                 };
                 
-                if (PointInsideCircle(CGPointMake(x, y), lightPosition, fakeRadius)) {
+                if (PointInsideCircle(point, lightPosition, fakeRadius)) {
                     canMove = NO;
                     *stop = YES;
                 }
@@ -217,6 +218,23 @@
     UIGraphicsEndImageContext();
     
     self.lightMap = lightmap;
+}
+
+#pragma mark - BDLevelViewDataSource implementation
+
+- (NSArray *)lightsInLevelView:(BDLevelView *)levelView
+{
+    return self.lights;
+}
+
+- (CGFloat)lightScaleInLevelView:(BDLevelView *)levelView
+{
+    return self.lightScale;
+}
+
+- (BOOL)lightSwitchIsVisibleInLevelView:(BDLevelView *)levelView
+{
+    return self.lightSwitchVisible;
 }
 
 @end

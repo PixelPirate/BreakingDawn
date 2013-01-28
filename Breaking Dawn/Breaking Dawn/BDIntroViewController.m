@@ -47,13 +47,45 @@
     }
     return self;
 }
+/*
+typedef void (^block)(void);
+typedef struct Clip {
+    struct Clip (*animate)(NSTimeInterval d, block b);
+    struct Clip (*then)(NSTimeInterval d);
+    NSTimeInterval delay;
+} Clip;
+static Clip ClipMake();
+static Clip ClipAnimation(NSTimeInterval d, block b) {
 
+    [UIView animateWithDuration:d animations:b];
+    return ClipMake();
+}
+static Clip ClipThen(NSTimeInterval d) {
+    // Wenn auf das returnte clip object annimation aufgerufen wird, muss es d sekunden warten bis es seine aktion ausführt
+    Clip c = ClipMake();
+    c.delay = d;
+    return c;
+}
+
+static Clip ClipMake() {
+    Clip p;
+    p.animate = ClipAnimation;
+    p.then = ClipThen;
+    p.delay = 0.0;
+    return p;
+};
+*/
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"SkipIntro"]) {
+        self.coverView.alpha = 0.0;
+        self.doorViews.alpha = 0.0;
+        self.girlViews.alpha = 1.0;
+        self.sleepingGirlView.alpha = 0.0;
         [self transitionToTitleScreen];
+        return;
     }
     
     self.girlViews.alpha = 0.0;
@@ -68,7 +100,15 @@
         int64_t delayInSeconds = 4.0; // After 4 seconds...
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            
+            /*
+            Clip.animate(0.1, ^{
+                self.view.alpha = 0.0;
+            }).then(3).animate(0.4, ^{
+                self.view.alpha = 1.0;
+            }).then(4).animate(0.1, ^{
+                self.view.alpha = 0.0;
+            });
+            */
             [UIView animateWithDuration:0.5 animations:^{
                 self.coverView.alpha = 0.0;  // Fade to the sleeping girl
             } completion:^(BOOL finished) {
@@ -139,77 +179,7 @@
                             }];
                         }];
                     }];
-                    // Girl waking up.
                 }];
-                /*
-                int64_t delayInSeconds = 2.5; // Show sleeping girl
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    
-                    
-                    
-                    
-                    int64_t delayInSeconds = 1.5; // Show bright door.
-                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                        
-                        
-                        // Now flicker that shit!
-                        [self.view insertSubview:dimmDoorView belowSubview:brightDoorView];
-                        
-                        [UIView animateWithDuration:0.01 delay:0.0 options:0 animations:^{
-                            brightDoorView.alpha = 0.0;
-                        } completion:^(BOOL finished) {
-                            [UIView animateWithDuration:0.01 delay:0.5 options:0 animations:^{
-                                brightDoorView.alpha = 0.8;
-                            } completion:^(BOOL finished) {
-                                [UIView animateWithDuration:0.2 delay:0.4 options:0 animations:^{
-                                    brightDoorView.alpha = 0.1;
-                                } completion:^(BOOL finished) {
-                                    [UIView animateWithDuration:0.01 delay:0.6 options:0 animations:^{
-                                        brightDoorView.alpha = 1.0;
-                                    } completion:^(BOOL finished) {
-                                        [UIView animateWithDuration:0.02 delay:0.3 options:0 animations:^{
-                                            brightDoorView.alpha = 0.2;
-                                        } completion:^(BOOL finished) {
-                                            [UIView animateWithDuration:0.01 delay:0.2 options:0 animations:^{
-                                                brightDoorView.alpha = 1.0;
-                                            } completion:^(BOOL finished) {
-                                                [self.view insertSubview:darkDoorView belowSubview:dimmDoorView];
-                                                dimmDoorView.alpha = 0.0;
-                                                [UIView animateWithDuration:0.01 delay:0.2 options:0 animations:^{
-                                                    brightDoorView.alpha = 0.0;
-                                                } completion:^(BOOL finished) {
-                                                    [UIView animateWithDuration:0.01 delay:2.5 options:0 animations:^{
-                                                        darkDoorView.alpha = 0.0;
-                                                    } completion:^(BOOL finished) {
-                                                        [self.view insertSubview:wakeGirlView belowSubview:sleepingGirlView];
-                                                        [UIView animateWithDuration:0.01 delay:2.5 options:0 animations:^{
-                                                            sleepingGirlView.alpha = 0.0;
-                                                        } completion:^(BOOL finished) {
-                                                            int64_t delayInSeconds = 1.0;
-                                                            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-                                                            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                                                                self.titleViewController.view.alpha = 0.0;
-                                                                self.titleViewController.view.frame = self.view.bounds;
-                                                                [self.view addSubview:self.titleViewController.view];
-                                                                [UIView animateWithDuration:0.5 animations:^{
-                                                                    self.titleViewController.view.alpha = 1.0;
-                                                                }];
-                                                            });
-                                                            
-                                                        }];
-                                                    }];
-                                                }];
-                                            }];
-                                        }];
-                                    }];
-                                }];
-                            }];
-                        }];
-                        
-                    });
-                });*/
             }];
         });
     }];

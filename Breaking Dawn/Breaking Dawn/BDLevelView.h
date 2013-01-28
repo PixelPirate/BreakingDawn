@@ -7,10 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BDLevel.h"
+
+@class BDLevelView;
+@class BDLevel;
+
+@protocol BDLevelViewDataSource <NSObject>
+
+@required
+
+- (NSArray *)lightsInLevelView:(BDLevelView *)levelView;
+
+- (CGFloat)lightScaleInLevelView:(BDLevelView *)levelView;
+
+- (BOOL)lightSwitchIsVisibleInLevelView:(BDLevelView *)levelView;
+
+@end
 
 
-@interface BDLevelView : UIView<BDLevelDelegate>
+@interface BDLevelView : UIView
+
+@property (strong, readwrite, nonatomic) id<BDLevelViewDataSource> dataSource;
 
 @property (strong, readonly, nonatomic) BDLevel *level;
 
@@ -20,7 +36,7 @@
 
 @property (strong, readonly, nonatomic) UIView *surfaceLayer;
 
-@property (assign, readwrite, nonatomic) CGFloat lightScale;
+@property (assign, readonly, nonatomic) CGFloat lightScale;
 
 @property (assign, readwrite, nonatomic) CGFloat pulse;
 

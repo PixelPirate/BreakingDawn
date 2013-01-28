@@ -24,6 +24,7 @@
     [[NSUserDefaults standardUserDefaults] setFloat:1/30.0 forKey:@"DrawRate"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SimultanousMonsterSounds"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"GodMode"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SkipIntro"];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];
@@ -32,6 +33,7 @@
         [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];
         self.viewController = [[BDViewController alloc] initWithNibName:@"BDViewController_iPad" bundle:nil];
     }
+    
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

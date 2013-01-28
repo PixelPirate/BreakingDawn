@@ -8,20 +8,21 @@
 
 #import "BDImageMap.h"
 #import <Foundation/Foundation.h>
+#import "BDLevelView.h"
 
 @class BDLevel;
 
+
 @protocol BDLevelDelegate <NSObject>
 
-- (void)levelChangedData:(BDLevel *)level;
-
-- (void)level:(BDLevel *)level willAddLights:(NSArray *)lights;
+- (void)level:(BDLevel *)level didAddLights:(NSArray *)lights;
 
 - (void)levelWillWin:(BDLevel *)level;
 
 @end
 
-@interface BDLevel : NSObject
+
+@interface BDLevel : NSObject<BDLevelViewDataSource>
 
 @property (strong, readonly, nonatomic) UIImage *diffuseMap;
 
@@ -45,6 +46,8 @@
 
 @property (weak, readwrite, nonatomic) id<BDLevelDelegate> delegate;
 
+@property (assign, readwrite, nonatomic) BOOL lightSwitchVisible;
+
 - (id)initWithName:(NSString *)name;
 
 + (BDLevel *)levelNamed:(NSString *)name;
@@ -55,12 +58,6 @@
 
 - (BOOL)canMoveFrom:(CGPoint)from to:(CGPoint)to withLightLimit:(CGFloat)lightLimit;
 
-- (void)line:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(int x, int y, BOOL *stop))block;
-
-@end
-
-@interface BDLevel (LevelOneExtras)
-
-@property (strong, readwrite, nonatomic) NSMutableArray *secondLights;
+- (void)evaluatePointsOnLineFrom:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(CGPoint point, BOOL *stop))block;
 
 @end

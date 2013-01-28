@@ -74,6 +74,7 @@
     [super viewDidLoad];
     
     self.currentLevel = [BDLevel levelNamed:@"map00"];
+    self.currentLevel.delegate = self;
     self.currentLevelView = [[BDLevelView alloc] initWithLevel:self.currentLevel];
     
     self.player = [[BDPlayer alloc] initWithPosition:self.currentLevel.spawn];
@@ -266,7 +267,9 @@
 {
     // Manipulate ambience
     self.currentLevelView.surfaceLayer.alpha = (1.0 - self.player.adrenalin) - 0.5;
-    self.currentLevelView.lightScale = (1.0 - self.player.adrenalin);
+    self.currentLevel.lightScale = (1.0 - self.player.adrenalin);
+    [self.currentLevelView reloadData];
+//    self.currentLevelView.lightScale = (1.0 - self.player.adrenalin);
     
     self.currentLevelView.pulse = self.player.adrenalin;
 }
@@ -317,6 +320,18 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - BDLevelDelegate implementation
+
+- (void)level:(BDLevel *)level didAddLights:(NSArray *)lights
+{
+    [self.currentLevelView reloadData];
+}
+
+- (void)levelWillWin:(BDLevel *)level
+{
+    [self gameWin];
 }
 
 @end
