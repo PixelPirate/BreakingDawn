@@ -8,10 +8,13 @@
 
 #import "BDGameOverViewController.h"
 #import "BDAppDelegate.h"
+#import "BDPostProcessingViewController.h"
 
 @interface BDGameOverViewController ()
 
 @property (strong, readwrite, nonatomic) UIButton *button;
+
+@property (strong, readwrite, nonatomic) BDPostProcessingViewController *postProcessingViewController;
 
 - (void)restartGame;
 
@@ -23,7 +26,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
     }
     return self;
 }

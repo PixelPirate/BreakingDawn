@@ -95,7 +95,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
-    self.postProcessingViewController.currentLevelView = self.currentLevelView;
+    self.postProcessingViewController.flickerView = self.currentLevelView.surfaceLayer;
     self.postProcessingViewController.view.frame = self.view.bounds;
     //    self.postProcessingViewController.view.frame = CGRectMake(-self.view.frame.origin.x,
     //                                                              -self.view.frame.origin.y,
@@ -124,7 +124,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [self.postProcessingViewController.view removeFromSuperview];
-    self.postProcessingViewController.currentLevelView = nil;
+    self.postProcessingViewController.flickerView = nil;
     self.postProcessingViewController = nil;
 }
 
