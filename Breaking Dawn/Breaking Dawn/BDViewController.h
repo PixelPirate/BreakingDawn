@@ -13,6 +13,4 @@
 
 @interface BDViewController : UIViewController
 
-@property (strong, readonly, nonatomic) BDGameViewController *gameViewController;
-
 @end

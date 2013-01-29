@@ -26,7 +26,7 @@
 
 @property (strong, readonly, nonatomic) UIImage *diffuseMap;
 
-@property (strong, readonly, nonatomic) BDImageMap *lightMap;
+//@property (strong, readonly, nonatomic) BDImageMap *lightMap;
 
 @property (strong, readonly, nonatomic) BDImageMap *collisionMap;
 

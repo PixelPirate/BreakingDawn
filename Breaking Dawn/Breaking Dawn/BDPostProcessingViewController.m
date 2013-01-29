@@ -32,6 +32,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [_noiseTimer invalidate];
+}
+
 + (NSArray *)noiseTextures
 {
     static NSMutableArray *_noiseTextures = nil;
@@ -93,10 +98,7 @@
     [_noiseTimer invalidate];
 }
 
-- (void)dealloc
-{
-    [_noiseTimer invalidate];
-}
+
 
 - (void)changeNoise
 {

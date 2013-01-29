@@ -18,7 +18,7 @@
 
 @property (strong, readwrite, nonatomic) UIImage *diffuseMap;
 
-@property (strong, readwrite, nonatomic) BDImageMap *lightMap;
+//@property (strong, readwrite, nonatomic) BDImageMap *lightMap;
 
 @property (strong, readwrite, nonatomic) BDImageMap *collisionMap;
 
@@ -32,7 +32,7 @@
 
 @property (strong, readwrite, nonatomic) NSDictionary *stages;
 
-- (void)loadLightmap;
+//- (void)loadLightmap;
 
 @end
 
@@ -60,12 +60,12 @@
         }
         
         // Load lightmap from file or generate it if file is missing
-        UIImage *light = [UIImage imageNamed:[name stringByAppendingString:@"_light"]];
-        if (light) {
-            self.lightMap = [[BDImageMap alloc] initWithUIImage:light];
-        } else {
-            [self loadLightmap];
-        }
+//        UIImage *light = [UIImage imageNamed:[name stringByAppendingString:@"_light"]];
+//        if (light) {
+//            self.lightMap = [[BDImageMap alloc] initWithUIImage:light];
+//        } else {
+//            [self loadLightmap];
+//        }
         
         self.lightScale = 1.0;
         
@@ -190,7 +190,7 @@
     
     return canMove;
 }
-
+/*
 - (void)loadLightmap
 {
     UIGraphicsBeginImageContext(self.diffuseMap.size);
@@ -219,7 +219,7 @@
     
     self.lightMap = lightmap;
 }
-
+*/
 #pragma mark - BDLevelViewDataSource implementation
 
 - (NSArray *)lightsInLevelView:(BDLevelView *)levelView

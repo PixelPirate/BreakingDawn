@@ -10,7 +10,6 @@
 #import "BDGameViewController.h"
 #import "BDPostProcessingViewController.h"
 
-
 @interface NSString (FU)
 - (CGFloat)fontSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size;
 @end
@@ -66,7 +65,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.gameViewController = [[BDGameViewController alloc] initWithNibName:nil bundle:nil];
     }
     return self;
 }
@@ -91,9 +89,9 @@
     
     
     self.logoView.alpha = 0.0;
-    [UIView animateWithDuration:0.5 animations:^{
-        //self.logoView.alpha = 1.0;
-    }];
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.logoView.alpha = 1.0;
+//    }];
 }
 
 
@@ -145,6 +143,8 @@
 
 - (void)startGame
 {
+    self.gameViewController = [[BDGameViewController alloc] initWithNibName:nil bundle:nil];
+    
     [UIView animateWithDuration:0.5 delay:0.0 options:0 animations:^{
         self.logoView.alpha = 0.0;
         self.button.alpha = 0.0;
@@ -161,10 +161,26 @@
 
 - (void)restartGame
 {
-    [self.gameViewController.view removeFromSuperview];
-    self.gameViewController = [[BDGameViewController alloc] initWithNibName:nil bundle:nil];
-    
-    [self viewDidAppear:YES];
+    [UIView animateWithDuration:2.5 delay:0.0 options:0 animations:^{
+        self.gameViewController.view.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [self.gameViewController.view removeFromSuperview];
+        self.gameViewController = nil;
+        
+        self.gameViewController = [[BDGameViewController alloc] initWithNibName:nil bundle:nil];
+        
+        [self.postEffectsController.view removeFromSuperview];
+        self.postEffectsController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
+        self.postEffectsController.view.frame = self.view.bounds;
+        [self.view addSubview:self.postEffectsController.view];
+        
+        [UIView animateWithDuration:2.0 animations:^{
+            
+            self.button.alpha = 1.0;
+            self.titleText.alpha = 1.0;
+            self.view.backgroundColor = [UIColor clearColor];
+        }];
+    }];
 }
 
 - (void)didReceiveMemoryWarning

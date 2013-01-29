@@ -10,10 +10,10 @@
 
 @interface BDImageMap ()
 
-@property (readwrite, nonatomic) UIImage *image;
-@property (readwrite, nonatomic) NSData *data;
-@property (readwrite, nonatomic) NSUInteger bytesPerPixel;
-@property (readwrite, nonatomic) NSUInteger bytesPerRow;
+@property (strong, readwrite, nonatomic) UIImage *image;
+@property (strong, readwrite, nonatomic) NSData *data;
+@property (assign, readwrite, nonatomic) NSUInteger bytesPerPixel;
+@property (assign, readwrite, nonatomic) NSUInteger bytesPerRow;
 
 @end
 

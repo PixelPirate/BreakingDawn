@@ -12,7 +12,6 @@
 #import "UIImage+UIImage_Extras.h"
 #import "BDMob.h"
 #import "BDMobView.h"
-#import "BDGameViewController.h"
 
 @interface BDLevelView ()
 
@@ -42,11 +41,17 @@
 
 @property (assign, readwrite, nonatomic) CGFloat lightScale;
 
+@property (strong, readwrite, nonatomic) NSTimer *flickerTimer;
+
+@property (strong, readwrite, nonatomic) NSMutableArray *flickeringLightsTimers;
+
 - (void)beginPulsating;
 
 - (void)endPulsating;
 
 - (void)pulsate;
+
+- (void)flicker:(NSTimer *)timer;
 
 @end
 
@@ -68,6 +73,7 @@
         self.lightLayer = [[UIView alloc] initWithFrame:self.bounds];;
         self.pulse = 0.0;
         self.displayedLights = [NSMutableArray array];
+        self.flickeringLightsTimers = [NSMutableArray array];
         
         self.backgroundColor = [UIColor blackColor];
         [self addSubview:self.surfaceLayer];
@@ -108,6 +114,11 @@
         [self addSubview:self.exitImage];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [self.flickeringLightsTimers makeObjectsPerformSelector:@selector(invalidate)];
 }
 
 - (void)beginPulsating
@@ -161,6 +172,8 @@
         
         [self.lightLayer.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [self.displayedLights removeAllObjects];
+        [self.flickeringLightsTimers makeObjectsPerformSelector:@selector(invalidate)];
+        [self.flickeringLightsTimers removeAllObjects];
         
         for (NSDictionary *pointRep in [self.dataSource lightsInLevelView:self]) {
             
@@ -180,19 +193,12 @@
             
             [self.lightLayer addSubview:v];
             [self.displayedLights addObject:pointRep];
-            
-            
-#warning This recursive block leaks for sure
-            void(^__block flicker)(void) = ^(void) {
-                [UIView animateWithDuration:0.1 animations:^{
-                    v.alpha = 1.0 - arc4random_uniform(100)/800.0;
-                }];
-                int64_t delayInMilliseconds = (0.1+(arc4random_uniform(100)/1000.0))*1000.0;
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
-                dispatch_after(popTime, dispatch_get_main_queue(), flicker);
-            };
-            
-            dispatch_async(dispatch_get_main_queue(), flicker);
+            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:(0.1+(arc4random_uniform(100)/1000.0))
+                                                              target:self
+                                                            selector:@selector(flicker:)
+                                                            userInfo:v
+                                                             repeats:NO];
+            [self.flickeringLightsTimers addObject:timer];
         }
         [self.pulsatingViews removeAllObjects];
         for (UIImageView *i in self.lightLayer.subviews) {
@@ -218,6 +224,21 @@
     }
     
     self.lightSwitch.hidden = ![self.dataSource lightSwitchIsVisibleInLevelView:self];
+}
+
+- (void)flicker:(NSTimer *)timer
+{
+    //NSLog(@"%@", timer);
+    id obj = timer.userInfo;
+    if ([obj isKindOfClass:[UIView class]]) {
+        UIView *view = obj;
+        view.alpha = 1.0 - arc4random_uniform(100)/800.0;
+        [NSTimer scheduledTimerWithTimeInterval:(0.1+(arc4random_uniform(100)/1000.0))
+                                         target:self
+                                       selector:@selector(flicker:)
+                                       userInfo:view
+                                        repeats:NO];
+    }
 }
 
 @end

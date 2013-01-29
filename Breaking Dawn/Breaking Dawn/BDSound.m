@@ -11,8 +11,6 @@
 #import "BDPlayer.h"
 #import <AVFoundation/AVFoundation.h>
 
-static BDSound *instance;
-
 @interface BDSound ()
 
 @property (strong, readwrite, nonatomic) BDPlayer *player;

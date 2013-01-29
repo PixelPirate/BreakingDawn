@@ -63,7 +63,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.lastTouchLocation = CGPointZero;
-        
         self.ambientMusicController = [BDAmbientMusicController sharedAmbientMusicController];
     }
     return self;
@@ -186,15 +185,15 @@
     if (!CGPointEqualToPoint(movement, CGPointZero)) {
         CGFloat walkingSpeed = [[NSUserDefaults standardUserDefaults] floatForKey:@"WalkingSpeed"] * gameSpeed;
         movement = CGPointApplyAffineTransform(movement, CGAffineTransformMakeScale(walkingSpeed, walkingSpeed));
-        CGPoint newLocation = CGPointApplyAffineTransform(self.player.location,
-                                                          CGAffineTransformMakeTranslation(-movement.x, -movement.y));
+//        CGPoint newLocation = CGPointApplyAffineTransform(self.player.location,
+//                                                          CGAffineTransformMakeTranslation(-movement.x, -movement.y));
         
         // Try to move at least in one the directions
         CGPoint pushBack[3] = { CGPointMake(-1, -1), CGPointMake(0, -1), CGPointMake(-1, 0), };
         for (NSUInteger i = 0; i < 3; i++) {
-            newLocation = CGPointApplyAffineTransform(self.player.location,
-                                                      CGAffineTransformMakeTranslation(movement.x*pushBack[i].x,
-                                                                                       movement.y*pushBack[i].y));
+            CGPoint newLocation = CGPointApplyAffineTransform(self.player.location,
+                                                              CGAffineTransformMakeTranslation(movement.x*pushBack[i].x,
+                                                                                               movement.y*pushBack[i].y));
             if ([self.currentLevel isFreeX:newLocation.x andY:newLocation.y]) {
                 self.player.location = newLocation;
                 break;
@@ -289,6 +288,14 @@
     
     [self.ambientMusicController stop];
     [self.sound endHeartbeat];
+
+    // Cannot nil the level views, they are still used for the transition to the game over screen.
+//    self.currentLevel = nil;
+//    [self.currentLevelView removeFromSuperview];
+//    self.currentLevelView = nil;
+//    self.player = nil;
+//    [self.playerView removeFromSuperview];
+//    self.playerView = nil;
 }
 
 - (void)gameDidEnd
