@@ -156,103 +156,58 @@
 }
 
 - (void)reloadData
-{
-    [self.lightLayer.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-    for (NSValue *light in self.level.lights) {
-        CGPoint p = [light CGPointValue];
+        [self.lightLayer.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [self.displayedLights removeAllObjects];
         
-        UIView *light = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 224, 224)];
-        light.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.4 alpha:0.8];
-        
-        UIImage *m = [UIImage maskView:light withMask:[UIImage imageNamed:@"light00-01.jpg"]];
-        self.normalLight = m;
-        light.backgroundColor = [UIColor colorWithRed:1.0 green:0.4 blue:0.4 alpha:0.8];
-        self.evilLight = [UIImage maskView:light withMask:[UIImage imageNamed:@"light00-01.jpg"]];
-        
-        UIImageView *v = [[UIImageView alloc] initWithImage:self.normalLight];
-        v.center = p;
-        
-        [self.lightLayer addSubview:v];
-        
-        
-        void(^__block flicker)(void) = ^(void) {
-            [UIView animateWithDuration:0.1 animations:^{
-                v.alpha = 1.0 - arc4random_uniform(100)/800.0;
-            }];
-            int64_t delayInMilliseconds = (0.1+(arc4random_uniform(100)/1000.0))*1000.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
-            dispatch_after(popTime, dispatch_get_main_queue(), flicker);
-        };
-        
-        dispatch_async(dispatch_get_main_queue(), flicker);
-    }
-    
-    [self.pulsatingViews removeAllObjects];
-    for (UIImageView *i in self.lightLayer.subviews) {
-        if ([i isKindOfClass:[UIImageView class]]) {
-            UIImageView *pulse = [[UIImageView alloc] initWithImage:self.evilLight];
-            pulse.frame = i.frame;
+        for (NSDictionary *pointRep in [self.dataSource lightsInLevelView:self]) {
+            
+            CGPoint p = CGPointZero;
+            CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(pointRep), &p);
+            
+            UIView *light = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 224, 224)];
+            light.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.4 alpha:0.8];
+            
+            UIImage *m = [UIImage maskView:light withMask:[UIImage imageNamed:@"light00-01.jpg"]];
+            self.normalLight = m;
+            light.backgroundColor = [UIColor colorWithRed:1.0 green:0.4 blue:0.4 alpha:0.8];
+            self.evilLight = [UIImage maskView:light withMask:[UIImage imageNamed:@"light00-01.jpg"]];
+            
+            UIImageView *v = [[UIImageView alloc] initWithImage:self.normalLight];
+            v.center = p;
+            
+            [self.lightLayer addSubview:v];
+            [self.displayedLights addObject:pointRep];
+            
+            
+#warning This recursive block leaks for sure
+            void(^__block flicker)(void) = ^(void) {
+                [UIView animateWithDuration:0.1 animations:^{
+                    v.alpha = 1.0 - arc4random_uniform(100)/800.0;
+                }];
+                int64_t delayInMilliseconds = (0.1+(arc4random_uniform(100)/1000.0))*1000.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
+                dispatch_after(popTime, dispatch_get_main_queue(), flicker);
+            };
+            
+            dispatch_async(dispatch_get_main_queue(), flicker);
             pulse.alpha = 0.0;
             [self.lightLayer addSubview:pulse];
             [self.pulsatingViews addObject:pulse];
         }
-    }
-}
-
-#pragma mark - BDLevelDelegate implementation
-
-- (void)levelChangedData:(BDLevel *)level
-{
-    [self reloadData];
-}
-
-- (void)levelWillWin:(BDLevel *)level
-{
-    // Dirty way to inform controller
-    BDGameViewController *controller = (BDGameViewController *)self.superview.nextResponder;
-    [controller gameWin];
-}
-
-- (void)level:(BDLevel *)level willAddLights:(NSArray *)lights
-{
-    self.lightSwitch.hidden = YES;
-    
-    for (NSValue *lightValue in lights) {
-        CGPoint p = [lightValue CGPointValue];
-        
-        UIView *light = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 224, 224)];
-        light.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.4 alpha:0.8];
-        
-        UIImage *m = [UIImage maskView:light withMask:[UIImage imageNamed:@"light00-01.jpg"]];
-        self.normalLight = m;
-        light.backgroundColor = [UIColor colorWithRed:1.0 green:0.4 blue:0.4 alpha:0.8];
-        self.evilLight = [UIImage maskView:light withMask:[UIImage imageNamed:@"light00-01.jpg"]];
-        
-        UIImageView *v = [[UIImageView alloc] initWithImage:self.normalLight];
-        v.center = p;
-        
-        [self.lightLayer addSubview:v];
-        
-        UIImageView *lighter = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lighter"]];
-        lighter.frame = CGRectMake(45, 642, lighter.image.size.width, lighter.image.size.height);
-        [self insertSubview:lighter aboveSubview:self.lightLayer];
-        
-        
-        void(^__block flicker)(void) = ^(void) {
-            [UIView animateWithDuration:0.1 animations:^{
-                v.alpha = 1.0 - arc4random_uniform(100)/800.0;
-            }];
-            int64_t delayInMilliseconds = (0.1+(arc4random_uniform(100)/1000.0))*1000.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
-            dispatch_after(popTime, dispatch_get_main_queue(), flicker);
-        };
-        
-        dispatch_async(dispatch_get_main_queue(), flicker);
-    }
-    
+        [self.pulsatingViews removeAllObjects];
+        for (UIImageView *i in self.lightLayer.subviews) {
+            if ([i isKindOfClass:[UIImageView class]]) {
+                UIImageView *pulse = [[UIImageView alloc] initWithImage:self.evilLight];
+                pulse.frame = i.frame;
+                pulse.alpha = 0.0;
+                [self.lightLayer addSubview:pulse];
+                [self.pulsatingViews addObject:pulse];
+            }
     CGSize lightSize = CGSizeMake(224, 224);
     self.lightScale = [self.dataSource lightScaleInLevelView:self];
+    }
+    
+    [self.pulsatingViews removeAllObjects];
     for (UIImageView *i in self.lightLayer.subviews) {
         if ([i isKindOfClass:[UIImageView class]] /*&& ![self.pulsatingViews containsObject:i]*/) {
             CGSize size = CGSizeApplyAffineTransform(lightSize, CGAffineTransformMakeScale(self.lightScale, self.lightScale));

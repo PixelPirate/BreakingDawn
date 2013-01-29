@@ -79,22 +79,7 @@ static Clip ClipMake() {
 */
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-    
-    
-    if([[NSUserDefaults standardUserDefaults] floatForKey:@"SkipIntro"]) {
-        [self gotoTitleView];
-        return;
-    }
-    
-    UIImageView *dummy = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GGJ13_RoundBadge"]];
-    dummy.frame = self.view.bounds;
-    dummy.contentMode = UIViewContentModeScaleAspectFit;
-    dummy.backgroundColor = [UIColor blackColor];
-    dummy.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [self.view addSubview:dummy];
-    self.view.backgroundColor = [UIColor blackColor];
-    
+    [super viewDidAppear:animated];
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"SkipIntro"]) {
         self.coverView.alpha = 0.0;

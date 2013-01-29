@@ -253,7 +253,7 @@
                 direction = CGPointMake(direction.x / maximalMovement, direction.y / maximalMovement);
                 direction = CGPointApplyAffineTransform(direction, CGAffineTransformMakeScale(speed, speed));
                 mob.location = CGPointMake(mob.location.x - direction.x, mob.location.y - direction.y);
-                [[BDSound getInstance] playMonster:arc4random_uniform(5)];
+                [[BDSound sharedSound] playMonster:arc4random_uniform(5)];
             }
         }
     }

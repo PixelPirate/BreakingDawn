@@ -82,9 +82,11 @@
         
         self.hotspots = [NSMutableArray array];
         [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1196, 663, 80, 60) trigger:^{
-            [[BDSound getInstance] playSound:SOUND_LIGHT_SWITCH];
+            [[BDSound sharedSound] playSound:SOUND_LIGHT_SWITCH];
+            // The model (BDLevel) notifies it's view (BDLevelView) that the data has been changed and the view shoud refresh itselve.
             NSArray *pointLights = [self convertLights:mapInfos[@"Stages"][1][@"Lights"]];
-            if (self.delegate) [self.delegate level:self willAddLights:pointLights];
+            self.lightSwitchVisible = NO;            
+            if (self.delegate) [self.delegate level:self didAddLights:pointLights];
             [self.lights addObjectsFromArray:pointLights];
         }]];
         
@@ -153,8 +155,8 @@
 {
     // Check collision map for obsacles along the path from 'from' to 'to'
     bool __block canMove = YES;
-    [self line:from to:to usingBlock:^(int x, int y, BOOL *stop) {
-        if([self.collisionMap getByteFromX:x andY:y component:0] == 0) {
+    [self evaluatePointsOnLineFrom:from to:to usingBlock:^(CGPoint point, BOOL *stop) {
+        if([self.collisionMap getByteFromX:point.x andY:point.y component:0] == 0) {
             canMove = NO;
             *stop = YES;
         }
