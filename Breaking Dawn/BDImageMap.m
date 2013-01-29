@@ -50,29 +50,11 @@
     return self;
 }
 
-- (NSArray*)getRGBAsFromImageX:(int)xx andY:(int)yy count:(int)count
+- (unsigned const char)getByteFromX:(int)x andY:(int)y component:(int)component
 {
     unsigned const char *rawData = self.data.bytes;
-    
-    NSMutableArray *result = [NSMutableArray arrayWithCapacity:count];
-    
-    // Now your rawData contains the image data in the RGBA8888 pixel format.
-    int byteIndex = (self.bytesPerRow * yy) + xx * self.bytesPerPixel;
-    for (int ii = 0 ; ii < count ; ++ii)
-    {
-        CGFloat red   = (rawData[byteIndex]     * 1.0) / 255.0;
-        CGFloat green = (rawData[byteIndex + 1] * 1.0) / 255.0;
-        CGFloat blue  = (rawData[byteIndex + 2] * 1.0) / 255.0;
-        CGFloat alpha = (rawData[byteIndex + 3] * 1.0) / 255.0;
-        byteIndex += 4;
-        
-        UIColor *acolor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-        [result addObject:acolor];
-    }
-    
-    //free(rawData);
-    
-    return result;
+    int byteIndex = (self.bytesPerRow * y) + x * self.bytesPerPixel + component;
+    return rawData[byteIndex];
 }
 
 @end

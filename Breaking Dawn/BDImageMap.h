@@ -11,6 +11,6 @@
 @interface BDImageMap : NSObject
 
 - (BDImageMap *)initWithUIImage:(UIImage *)image;
-- (NSArray*)getRGBAsFromImageX:(int)xx andY:(int)yy count:(int)count;
+- (unsigned const char)getByteFromX:(int)x andY:(int)y component:(int)component;
 
 @end

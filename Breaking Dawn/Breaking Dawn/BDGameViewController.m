@@ -210,9 +210,8 @@
     
     // Check light amount recieved by the player
     CGFloat luminance = 0.0;
-    for (NSDictionary *light in self.currentLevel.lights) {
-        CGPoint lightPosition = CGPointZero;
-        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(light), &lightPosition);
+    for (NSValue *light in self.currentLevel.lights) {
+        CGPoint lightPosition = [light CGPointValue];
         CGFloat fakeRadius = 80.0 * (MAX(self.currentLevel.lightScale, 0.45));
         
         BOOL(^PointInsideCircle)(CGPoint p, CGPoint center, CGFloat radius) = ^(CGPoint p, CGPoint center, CGFloat radius) {
@@ -244,14 +243,17 @@
         CGFloat dy = mob.location.y - self.player.location.y;
         if(sqrt(dx*dx + dy*dy) > 400) continue;
         
-        BOOL canReach = [self.currentLevel canMoveFrom:mob.location to:self.player.location withLightLimit:0.0];
+        BOOL canReach = [self.currentLevel canMoveFrom:mob.location to:self.player.location];
         if (canReach) {
-            CGPoint direction = CGPointMake(mob.location.x - self.player.location.x, mob.location.y - self.player.location.y);
-            CGFloat maximalMovement = MAX(ABS(direction.x), ABS(direction.y));
-            direction = CGPointMake(direction.x / maximalMovement, direction.y / maximalMovement);
-            direction = CGPointApplyAffineTransform(direction, CGAffineTransformMakeScale(speed, speed));
-            mob.location = CGPointMake(mob.location.x - direction.x, mob.location.y - direction.y);
-            [[BDSound sharedSound] playMonster:arc4random_uniform(5)];
+            canReach = [self.currentLevel noLightsFrom:mob.location to:self.player.location];
+            if(canReach) {
+                CGPoint direction = CGPointMake(mob.location.x - self.player.location.x, mob.location.y - self.player.location.y);
+                CGFloat maximalMovement = MAX(ABS(direction.x), ABS(direction.y));
+                direction = CGPointMake(direction.x / maximalMovement, direction.y / maximalMovement);
+                direction = CGPointApplyAffineTransform(direction, CGAffineTransformMakeScale(speed, speed));
+                mob.location = CGPointMake(mob.location.x - direction.x, mob.location.y - direction.y);
+                [[BDSound sharedSound] playMonster:arc4random_uniform(5)];
+            }
         }
     }
     
