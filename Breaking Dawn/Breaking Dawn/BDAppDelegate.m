@@ -17,6 +17,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    [[NSUserDefaults standardUserDefaults] setFloat:0.024 forKey:@"AdrenalinLight"];
+    [[NSUserDefaults standardUserDefaults] setFloat:0.0068 forKey:@"AdrenalinDusk"];
+    [[NSUserDefaults standardUserDefaults] setFloat:0.012 forKey:@"AdrenalinDark"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"PrecitionControlls"];
     [[NSUserDefaults standardUserDefaults] setFloat:2.0 forKey:@"WalkingSpeed"];
     [[NSUserDefaults standardUserDefaults] setFloat:2.5 forKey:@"MobWalkingSpeed"];
@@ -33,6 +36,7 @@
         [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];
         self.viewController = [[BDViewController alloc] initWithNibName:@"BDViewController_iPad" bundle:nil];
     }
+    
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

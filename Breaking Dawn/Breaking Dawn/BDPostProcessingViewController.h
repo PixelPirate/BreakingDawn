@@ -12,8 +12,12 @@
 
 @interface BDPostProcessingViewController : UIViewController
 
-@property (strong, readwrite, nonatomic) BDLevelView *currentLevelView;
+@property (strong, readwrite, nonatomic) UIView *flickerView;
+
++ (NSArray *)noiseTextures;
 
 - (void)static;
+
+- (void)fadeToNoise;
 
 @end

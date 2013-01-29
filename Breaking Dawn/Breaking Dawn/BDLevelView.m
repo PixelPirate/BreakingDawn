@@ -38,6 +38,10 @@
 
 @property (strong, readwrite, nonatomic) UIImageView *exitImage;
 
+@property (strong, readwrite, nonatomic) NSMutableArray *displayedLights;
+
+@property (assign, readwrite, nonatomic) CGFloat lightScale;
+
 - (void)beginPulsating;
 
 - (void)endPulsating;
@@ -57,12 +61,13 @@
     if (self) {
         
         self.level = level;
+        self.dataSource = level;
+        
         self.playerLayer = [[UIView alloc] initWithFrame:self.bounds];;
         self.surfaceLayer = [[UIView alloc] initWithFrame:self.bounds];;
         self.lightLayer = [[UIView alloc] initWithFrame:self.bounds];;
         self.pulse = 0.0;
-        
-        self.level.delegate = self;
+        self.displayedLights = [NSMutableArray array];
         
         self.backgroundColor = [UIColor blackColor];
         [self addSubview:self.surfaceLayer];
@@ -137,21 +142,6 @@
                 pulse.frame = originalFrame;
             }];
         }];
-    }
-}
-
-- (void)setLightScale:(CGFloat)scale
-{
-    CGSize lightSize = CGSizeMake(224, 224);
-    _lightScale = scale;
-    self.level.lightScale = scale;
-    for (UIImageView *i in self.lightLayer.subviews) {
-        if ([i isKindOfClass:[UIImageView class]] /*&& ![self.pulsatingViews containsObject:i]*/) {
-            CGSize size = CGSizeApplyAffineTransform(lightSize, CGAffineTransformMakeScale(scale, scale));
-            CGPoint center = i.center;
-            i.frame = CGRectMake(0, 0, size.width, size.height);
-            i.center = center;
-        }
     }
 }
 
@@ -261,16 +251,18 @@
         dispatch_async(dispatch_get_main_queue(), flicker);
     }
     
-    [self.pulsatingViews removeAllObjects];
+    CGSize lightSize = CGSizeMake(224, 224);
+    self.lightScale = [self.dataSource lightScaleInLevelView:self];
     for (UIImageView *i in self.lightLayer.subviews) {
-        if ([i isKindOfClass:[UIImageView class]]) {
-            UIImageView *pulse = [[UIImageView alloc] initWithImage:self.evilLight];
-            pulse.frame = i.frame;
-            pulse.alpha = 0.0;
-            [self.lightLayer addSubview:pulse];
-            [self.pulsatingViews addObject:pulse];
+        if ([i isKindOfClass:[UIImageView class]] /*&& ![self.pulsatingViews containsObject:i]*/) {
+            CGSize size = CGSizeApplyAffineTransform(lightSize, CGAffineTransformMakeScale(self.lightScale, self.lightScale));
+            CGPoint center = i.center;
+            i.frame = CGRectMake(0, 0, size.width, size.height);
+            i.center = center;
         }
     }
+    
+    self.lightSwitch.hidden = ![self.dataSource lightSwitchIsVisibleInLevelView:self];
 }
 
 @end

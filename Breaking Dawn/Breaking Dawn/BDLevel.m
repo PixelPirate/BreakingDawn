@@ -88,10 +88,11 @@
             [self.lights addObjectsFromArray:pointLights];
         }]];
         
-        
         [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(50, 705, 80, 100) trigger:^{
-            if (self.delegate) [self.delegate levelWillWin:self];
+            [self.delegate levelWillWin:self];
         }]];
+        
+        self.lightSwitchVisible = YES;
     }
     return self;
 }
@@ -118,30 +119,28 @@
     return level;
 }
 
-- (void)line:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(int x, int y, BOOL *stop))block
+- (void)evaluatePointsOnLineFrom:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(CGPoint, BOOL *))block
 {
-    float x0=from.x, y0=from.y;
-    float x1=to.x, y1=to.y;
+    float x0 = from.x, y0 = from.y;
+    float x1 = to.x,   y1 = to.y;
     
     // Check if x difference is bigger than y differene, than swap now and later call block swapped
-    bool steep = (abs(y1-y0) > abs(x1-x0));
+    bool steep = (abs(y1 - y0) > abs(x1 - x0));
     if(steep) {
         float swap;
-        swap=x0; x0=y0; y0=swap;
-        swap=x1; x1=y1; y1=swap;
+        swap = x0; x0 = y0; y0 = swap;
+        swap = x1; x1 = y1; y1 = swap;
     }
     
     // Run from left to right or from right to left
     int inc = x1 > x0 ? 1 : -1;
     
-    for(int x=x0; (inc>0) ? (x<=(int)x1) : (x>=(int)x1); x+=inc) {
-        float progress = (x-x0)/(x1-x0);
-        int y = y0 + (y1-y0)*progress;
+    for(int x = x0; (inc > 0) ? (x <= (int)x1) : (x >= (int)x1); x += inc) {
+        float progress = (x - x0) / (x1 - x0);
+        int y = y0 + (y1 - y0) * progress;
         BOOL stop = NO;
-        if(steep) block(y, x, &stop); else block(x, y, &stop);
-        if (stop) {
-            break;
-        }
+        if(steep) block(CGPointMake(y, x), &stop); else block(CGPointMake(x, y), &stop);
+        if (stop) break;
     }
 }
 
@@ -234,6 +233,23 @@ CGFloat dotProduct(const CGPoint p1, const CGPoint p2) {
     UIGraphicsEndImageContext();
     
     self.lightMap = lightmap;
+}
+
+#pragma mark - BDLevelViewDataSource implementation
+
+- (NSArray *)lightsInLevelView:(BDLevelView *)levelView
+{
+    return self.lights;
+}
+
+- (CGFloat)lightScaleInLevelView:(BDLevelView *)levelView
+{
+    return self.lightScale;
+}
+
+- (BOOL)lightSwitchIsVisibleInLevelView:(BDLevelView *)levelView
+{
+    return self.lightSwitchVisible;
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "BDSound.h"
 #import "BDAudioContainer.h"
+#import "BDPlayer.h"
 #import <AVFoundation/AVFoundation.h>
 
 static BDSound *instance;
@@ -15,7 +16,7 @@ static BDSound *instance;
 @interface BDSound ()
 
 @property (strong, readwrite, nonatomic) BDPlayer *player;
-
+@property (strong, readwrite, nonatomic) NSTimer *heartbeatTimer;
 @property (readwrite, nonatomic) BDAudioContainer *heart;
 @property (readwrite, nonatomic) NSMutableArray *monsters;
 @property (readwrite, nonatomic) NSMutableArray *sounds;
@@ -25,19 +26,21 @@ static BDSound *instance;
 
 @implementation BDSound
 
-+ (BDSound *)getInstance
++ (BDSound *)sharedSound
 {
-    return instance;
+    static BDSound *_sharedSound = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedSound = [[BDSound alloc] init];
+    });
+    return _sharedSound;
 }
 
-- (id)initWithPlayer:(BDPlayer *)player
+- (id)init
 {
     self = [super init];
     if (self) {
-        self.player = player;
-        
-        self.bpm = 60 + self.player.adrenalin*120;
-        
+        self.bpm = 60.0;
         self.heart = [[BDAudioContainer alloc] initWithPath:@"heartbeat_isolated_0_700" count:10];
         
         self.monsters = [NSMutableArray array];
@@ -51,13 +54,9 @@ static BDSound *instance;
 	    
         self.sounds = [NSMutableArray array];
         [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Game_Over_Scream" count:2]];
-        [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Flickering_Light_Electric_Buzz_5_700" count:2]];
         [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Exploding_Light_Bulb_1_200" count:2]];
+        [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Flickering_Light_Electric_Buzz_5_700" count:2]];
         [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Light_Switch_0_250" count:2]];
-        
-        [NSTimer scheduledTimerWithTimeInterval:60.0/self.bpm target:self selector:@selector(tickHeart:) userInfo:nil repeats:NO];
-        
-        instance = self;
     }
     return self;
 }
@@ -80,17 +79,38 @@ static BDSound *instance;
 
 - (void)tickHeart:(NSTimer *)timer
 {
-    self.bpm = 60 + self.player.adrenalin*120;
+    self.bpm = 60.0 + self.player.adrenalin * 120.0;
     
     // Schedule next timer
-    [NSTimer scheduledTimerWithTimeInterval:60/self.bpm target:self selector:@selector(tickHeart:) userInfo:nil repeats:NO];
-    
+    self.heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:(60.0 / self.bpm)
+                                                           target:self
+                                                         selector:@selector(tickHeart:)
+                                                         userInfo:nil
+                                                          repeats:NO];
     
     AVAudioPlayer *player = [self.heart getPlayer];
     
     // Speed between 1 and 2, depending on bpm (from 60 to 180)
-    player.rate = fmax(fmin(1 + (self.bpm-60)/(180-60), 2), 1);
+    player.rate = fmax(fmin(1.0 + (self.bpm - 60.0) / (180.0 - 60.0), 2.0), 1.0);
     [player play];
+}
+
+- (void)beginHeartbeatForPlayer:(BDPlayer *)player
+{
+    self.player = player;
+    self.bpm = 60 + self.player.adrenalin*120;
+    self.heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:60.0/self.bpm
+                                                           target:self
+                                                         selector:@selector(tickHeart:)
+                                                         userInfo:nil
+                                                          repeats:NO];
+}
+
+- (void)endHeartbeat
+{
+    self.player = nil;
+    self.bpm = 60.0;
+    [self.heartbeatTimer invalidate];
 }
 
 @end

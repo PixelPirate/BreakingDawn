@@ -13,15 +13,11 @@
 
 @property (strong, nonatomic) UIImageView *noiseImageView;
 
-@property (strong, nonatomic) CIContext *noiseContext;
-
-@property (strong, nonatomic) CIImage *noiseImage;
-
-@property (strong, readwrite, nonatomic) NSMutableArray *noiseTextures;
-
 @property (strong, readwrite, nonatomic) NSTimer *noiseTimer;
 
 - (void)changeNoise;
+
++ (NSArray *)noiseTextures;
 
 @end
 
@@ -31,10 +27,41 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.noiseTextures = [NSMutableArray array];
         self.view.userInteractionEnabled = NO;
     }
     return self;
+}
+
++ (NSArray *)noiseTextures
+{
+    static NSMutableArray *_noiseTextures = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        @autoreleasepool {
+            _noiseTextures = [NSMutableArray array];
+            CIContext *noiseContext = [CIContext contextWithOptions:nil];
+            
+            CIFilter *noiseGenerator = [CIFilter filterWithName:@"CIColorMonochrome"];
+            [noiseGenerator setValue:[[CIFilter filterWithName:@"CIRandomGenerator"] valueForKey:@"outputImage"] forKey:@"inputImage"];
+            [noiseGenerator setDefaults];
+            
+            CIImage *noiseImage = [noiseGenerator outputImage];
+            
+            CGSize extentSize = CGSizeMake(480, 480);
+            
+            for (NSUInteger i = 0; i < 5; ++i) {
+                CGRect extentRect = [noiseImage extent];
+                if (CGRectIsInfinite(extentRect) || CGRectIsEmpty(extentRect)) {
+                    extentRect = CGRectMake(arc4random_uniform(100), arc4random_uniform(100), extentSize.width, extentSize.height);
+                }
+                
+                CGImageRef __noiseImage = [noiseContext createCGImage:noiseImage fromRect:extentRect];
+                [_noiseTextures addObject:[UIImage imageWithCGImage:__noiseImage]];
+                CGImageRelease(__noiseImage);
+            }
+        }
+    });
+    return _noiseTextures;
 }
 
 - (void)loadView
@@ -50,29 +77,7 @@
     
     self.view.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     
-    self.noiseContext = [CIContext contextWithOptions:nil];
-    
-    CIFilter *noiseGenerator = [CIFilter filterWithName:@"CIColorMonochrome"];
-    [noiseGenerator setValue:[[CIFilter filterWithName:@"CIRandomGenerator"] valueForKey:@"outputImage"] forKey:@"inputImage"];
-    [noiseGenerator setDefaults];
-    
-    self.noiseImage = [noiseGenerator outputImage];
-    
-    CGSize extentSize = CGSizeMake(480, 480);
-    
-    for (NSUInteger i = 0; i < 5; ++i) {
-        CGRect extentRect = [self.noiseImage extent];
-        if (CGRectIsInfinite(extentRect) || CGRectIsEmpty(extentRect)) {
-            extentRect = CGRectMake(arc4random_uniform(100), arc4random_uniform(100), extentSize.width, extentSize.height);
-        }
-        
-        CGImageRef __noiseImage = [self.noiseContext createCGImage:self.noiseImage fromRect:extentRect];
-        [self.noiseTextures addObject:[UIImage imageWithCGImage:__noiseImage]];
-        CGImageRelease(__noiseImage);
-    }
-    
-    
-    self.noiseImageView = [[UIImageView alloc] initWithImage:self.noiseTextures.lastObject];
+    self.noiseImageView = [[UIImageView alloc] initWithImage:[BDPostProcessingViewController noiseTextures].lastObject];
     self.noiseImageView.frame = self.view.bounds;
     self.noiseImageView.alpha = arc4random_uniform(100) / 6000.0 + 0.1;
     [self.view addSubview:self.noiseImageView];
@@ -95,54 +100,51 @@
 
 - (void)changeNoise
 {
-    UIImage *noiseImage = self.noiseTextures[arc4random_uniform(self.noiseTextures.count)];
+    NSArray *noiseTextures = [BDPostProcessingViewController noiseTextures];
+    UIImage *noiseImage = noiseTextures[arc4random_uniform(noiseTextures.count)];
     self.noiseImageView.image = noiseImage;
     self.noiseImageView.alpha = arc4random_uniform(100) / 6000.0 + 0.1;
-    //        UIImageView *i = [[UIImageView alloc] initWithImage:noiseImage];
-    //        i.userInteractionEnabled = NO;
-    //        i.alpha = arc4random_uniform(100) / 6000.0 + 0.1;
-    //        i.frame = self.noiseImageView.frame;
-    //        [UIView transitionFromView:self.noiseImageView
-    //                            toView:i
-    //                          duration:0.01 //1.9
-    //                           options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionBeginFromCurrentState
-    //                        completion:^(BOOL finished) {
-    //            self.noiseImageView = i;
-    //        }];
+}
+
+- (void)changeNoiseKeepAlpha
+{
+    NSArray *noiseTextures = [BDPostProcessingViewController noiseTextures];
+    UIImage *noiseImage = noiseTextures[arc4random_uniform(noiseTextures.count)];
+    self.noiseImageView.image = noiseImage;
 }
 
 - (void)static
 {
-    self.currentLevelView.surfaceLayer.alpha = 1.0;
+    self.flickerView.alpha = 1.0;
     
     int64_t delayInMilliseconds = 300;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        self.currentLevelView.surfaceLayer.alpha = 0.3;
+        self.flickerView.alpha = 0.3;
         int64_t delayInMilliseconds = 300;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            self.currentLevelView.surfaceLayer.alpha = 0.9;
+            self.flickerView.alpha = 0.9;
             int64_t delayInMilliseconds = 100;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                self.currentLevelView.surfaceLayer.alpha = 0.1;
+                self.flickerView.alpha = 0.1;
                 int64_t delayInMilliseconds = 200;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    self.currentLevelView.surfaceLayer.alpha = 0.4;
+                    self.flickerView.alpha = 0.4;
                     int64_t delayInMilliseconds = 500;
                     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
                     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                        self.currentLevelView.surfaceLayer.alpha = 0.2;
+                        self.flickerView.alpha = 0.2;
                         int64_t delayInMilliseconds = 300;
                         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
                         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                            self.currentLevelView.surfaceLayer.alpha = 0.8;
+                            self.flickerView.alpha = 0.8;
                             int64_t delayInMilliseconds = 4500;
                             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
                             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                                self.currentLevelView.surfaceLayer.alpha = 0.4;
+                                self.flickerView.alpha = 0.4;
                             });
                         });
                     });
@@ -150,6 +152,21 @@
             });
         });
     });
+}
+
+- (void)fadeToNoise
+{
+    [self.noiseTimer invalidate];
+    self.noiseTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                       target:self
+                                                     selector:@selector(changeNoiseKeepAlpha)
+                                                     userInfo:nil
+                                                      repeats:YES];
+    
+    [UIView animateWithDuration:4.5 animations:^{
+        self.noiseImageView.alpha = 1.0;
+        self.view.backgroundColor = [UIColor blackColor];
+    }];
 }
 
 @end

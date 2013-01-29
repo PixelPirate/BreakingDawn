@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BDLevel.h"
 
-@interface BDGameViewController : UIViewController
+@interface BDGameViewController : UIViewController<BDLevelDelegate>
 
 - (void)gameWin;
 

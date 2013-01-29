@@ -8,10 +8,13 @@
 
 #import "BDGameOverViewController.h"
 #import "BDAppDelegate.h"
+#import "BDPostProcessingViewController.h"
 
 @interface BDGameOverViewController ()
 
 @property (strong, readwrite, nonatomic) UIButton *button;
+
+@property (strong, readwrite, nonatomic) BDPostProcessingViewController *postProcessingViewController;
 
 - (void)restartGame;
 
@@ -23,7 +26,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
     }
     return self;
 }
@@ -43,8 +46,12 @@
     self.view.backgroundColor = [UIColor clearColor];
     self.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
     
+    self.postProcessingViewController.view.frame = self.view.bounds;
+    [self.view addSubview:self.postProcessingViewController.view];
+    [self.postProcessingViewController fadeToNoise];
+    
     UILabel *dummy = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
-    dummy.text = [NSString stringWithFormat:@"Game Over, %@", @[@"Bitch", @"Dirtbag", @"Fool", @"Foolish Mortal"][arc4random_uniform(3)]];
+    dummy.text = [NSString stringWithFormat:@"Game Over, %@", @[@"Bitch", @"Dirtbag", @"Fool", @"Foolish Mortal"][arc4random_uniform(4)]];
     dummy.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
     CGSize textSize = [dummy.text sizeWithFont:dummy.font
                                       forWidth:dummy.bounds.size.width
@@ -56,7 +63,6 @@
     dummy.textColor = [UIColor whiteColor];
     dummy.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self.view addSubview:dummy];
-    
     
     UIImageView *title = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@[@"fail-01", @"fail-02", @"fail-03", @"fail-04"][arc4random_uniform(4)]]];
     title.frame = CGRectMake(0.0, 0.0, self.view.bounds.size.width, title.image.size.height);
