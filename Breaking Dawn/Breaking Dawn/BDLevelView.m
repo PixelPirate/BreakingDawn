@@ -156,14 +156,15 @@
 }
 
 - (void)reloadData
+{
+    if (![self.displayedLights isEqualToArray:[self.dataSource lightsInLevelView:self]]) {
+        
         [self.lightLayer.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [self.displayedLights removeAllObjects];
         
-        for (NSDictionary *pointRep in [self.dataSource lightsInLevelView:self]) {
-            
-            CGPoint p = CGPointZero;
-            CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(pointRep), &p);
-            
+        for (NSValue *light in [self.dataSource lightsInLevelView:self]) {
+            CGPoint p = [light CGPointValue];
+
             UIView *light = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 224, 224)];
             light.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.4 alpha:0.8];
             
@@ -176,7 +177,7 @@
             v.center = p;
             
             [self.lightLayer addSubview:v];
-            [self.displayedLights addObject:pointRep];
+            [self.displayedLights addObject:[NSValue valueWithCGPoint:p]];
             
             
 #warning This recursive block leaks for sure
@@ -190,9 +191,6 @@
             };
             
             dispatch_async(dispatch_get_main_queue(), flicker);
-            pulse.alpha = 0.0;
-            [self.lightLayer addSubview:pulse];
-            [self.pulsatingViews addObject:pulse];
         }
         [self.pulsatingViews removeAllObjects];
         for (UIImageView *i in self.lightLayer.subviews) {
@@ -203,11 +201,11 @@
                 [self.lightLayer addSubview:pulse];
                 [self.pulsatingViews addObject:pulse];
             }
-    CGSize lightSize = CGSizeMake(224, 224);
-    self.lightScale = [self.dataSource lightScaleInLevelView:self];
+        }
     }
     
-    [self.pulsatingViews removeAllObjects];
+    CGSize lightSize = CGSizeMake(224, 224);
+    self.lightScale = [self.dataSource lightScaleInLevelView:self];
     for (UIImageView *i in self.lightLayer.subviews) {
         if ([i isKindOfClass:[UIImageView class]] /*&& ![self.pulsatingViews containsObject:i]*/) {
             CGSize size = CGSizeApplyAffineTransform(lightSize, CGAffineTransformMakeScale(self.lightScale, self.lightScale));
