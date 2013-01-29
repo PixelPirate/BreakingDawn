@@ -100,7 +100,6 @@
 		87CF3DA916B6C1A50073F953 /* ggj13-poster.png in Resources */ = {isa = PBXBuildFile; fileRef = 87CF3DA816B6C1A50073F953 /* ggj13-poster.png */; };
 		87CF3DAC16B6CA5E0073F953 /* Icon01-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 87CF3DAB16B6CA5E0073F953 /* Icon01-144.png */; };
 		87CF3DAE16B6CA630073F953 /* Icon01-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 87CF3DAD16B6CA620073F953 /* Icon01-72.png */; };
-		87FB3A8316B86D6E002AF1F7 /* BDAllocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FB3A8216B86D6E002AF1F7 /* BDAllocations.m */; };
 		B15B92AB16B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92A816B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 */; };
 		B15B92AC16B47BF20001670D /* heartbeat_isolated_0_700.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92A916B47BF20001670D /* heartbeat_isolated_0_700.mp3 */; };
 		B15B92AD16B47BF20001670D /* Light_Switch_0_250.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */; };
@@ -232,8 +231,6 @@
 		87CF3DA816B6C1A50073F953 /* ggj13-poster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ggj13-poster.png"; sourceTree = "<group>"; };
 		87CF3DAB16B6CA5E0073F953 /* Icon01-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon01-144.png"; sourceTree = "<group>"; };
 		87CF3DAD16B6CA620073F953 /* Icon01-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon01-72.png"; sourceTree = "<group>"; };
-		87FB3A8116B86D6E002AF1F7 /* BDAllocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAllocations.h; sourceTree = "<group>"; };
-		87FB3A8216B86D6E002AF1F7 /* BDAllocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAllocations.m; sourceTree = "<group>"; };
 		B15B92A816B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Flickering_Light_Electric_Buzz_5_700.mp3; sourceTree = "<group>"; };
 		B15B92A916B47BF20001670D /* heartbeat_isolated_0_700.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = heartbeat_isolated_0_700.mp3; sourceTree = "<group>"; };
 		B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Light_Switch_0_250.mp3; sourceTree = "<group>"; };
@@ -311,8 +308,6 @@
 			isa = PBXGroup;
 			children = (
 				87A5372C16B31D8600F7C6DB /* BDAppDelegate.h */,
-				87FB3A8116B86D6E002AF1F7 /* BDAllocations.h */,
-				87FB3A8216B86D6E002AF1F7 /* BDAllocations.m */,
 				87A5372D16B31D8700F7C6DB /* BDAppDelegate.m */,
 				87A5373516B31D8700F7C6DB /* BDViewController.h */,
 				87A5373616B31D8700F7C6DB /* BDViewController.m */,
@@ -698,7 +693,6 @@
 				877DB00816B4769900CD9508 /* BDTitleViewController.m in Sources */,
 				877DB01116B4818800CD9508 /* BDGameOverViewController.m in Sources */,
 				B165D5D716B55D6E00719EAE /* BDGameWinViewController.m in Sources */,
-				87FB3A8316B86D6E002AF1F7 /* BDAllocations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
