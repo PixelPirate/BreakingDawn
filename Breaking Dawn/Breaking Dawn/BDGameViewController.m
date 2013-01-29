@@ -63,6 +63,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.lastTouchLocation = CGPointZero;
+        
         self.ambientMusicController = [BDAmbientMusicController sharedAmbientMusicController];
     }
     return self;

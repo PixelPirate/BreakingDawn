@@ -208,6 +208,7 @@ CGFloat distance(const CGPoint p1, const CGPoint p2) {
 CGFloat dotProduct(const CGPoint p1, const CGPoint p2) {
     return p1.x * p2.x + p1.y * p2.y;
 }
+
 /*
 - (void)loadLightmap
 {

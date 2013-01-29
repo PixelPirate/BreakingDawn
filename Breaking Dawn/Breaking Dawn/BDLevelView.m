@@ -190,7 +190,8 @@
             v.center = p;
             
             [self.lightLayer addSubview:v];
-            [self.displayedLights addObject:pointRep];
+            [self.displayedLights addObject:[NSValue valueWithCGPoint:p]];
+            
             NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:(0.1+(arc4random_uniform(100)/1000.0))
                                                               target:self
                                                             selector:@selector(flicker:)
