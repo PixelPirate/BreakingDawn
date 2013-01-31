@@ -18,6 +18,7 @@
 @property (readwrite, nonatomic) BDAudioContainer *heart;
 @property (readwrite, nonatomic) NSMutableArray *monsters;
 @property (readwrite, nonatomic) NSMutableArray *sounds;
+@property (strong, readwrite, nonatomic) NSDictionary *namedSounds;
 @property (readwrite, nonatomic) NSMutableArray *blockedMonsterSoundIDs;
 @property (strong, readwrite, nonatomic) BDAudioContainer *creditsPlayer;
 
@@ -57,6 +58,12 @@
         [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Flickering_Light_Electric_Buzz_5_700" count:2]];
         [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Light_Switch_0_250" count:2]];
         
+        self.namedSounds = @{@"Game_Over_Scream" : self.sounds[0],
+                             @"Exploding_Light_Bulb_1_200" : self.sounds[1],
+                             @"Flickering_Light_Electric_Buzz_5_700" : self.sounds[2],
+                             @"Light_Switch_0_250" : self.sounds[3]
+                            };
+        
         self.creditsPlayer = [[BDAudioContainer alloc] initWithPath:@"Endsequenz_45sec" count:1];
         self.creditsPlayer.getPlayer.volume = 0.5;
     }
@@ -78,6 +85,10 @@
     [player play];
 }
 
+- (void)playSoundNamed:(NSString *)name
+{
+    [[self.namedSounds[name] getPlayer] play];
+}
 
 - (void)tickHeart:(NSTimer *)timer
 {

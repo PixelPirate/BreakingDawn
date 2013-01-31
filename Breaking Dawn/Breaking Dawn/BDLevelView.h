@@ -19,7 +19,7 @@
 
 - (CGFloat)lightScaleInLevelView:(BDLevelView *)levelView;
 
-- (BOOL)lightSwitchIsVisibleInLevelView:(BDLevelView *)levelView;
+//- (BOOL)lightSwitchIsVisibleInLevelView:(BDLevelView *)levelView;
 
 @end
 

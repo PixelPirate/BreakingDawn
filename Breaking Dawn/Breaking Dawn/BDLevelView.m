@@ -45,6 +45,8 @@
 
 @property (strong, readwrite, nonatomic) NSMutableArray *flickeringLightsTimers;
 
+@property (strong, readwrite, nonatomic) NSMutableArray *decalViews;
+
 - (void)beginPulsating;
 
 - (void)endPulsating;
@@ -105,19 +107,21 @@
             mobView.hidden = YES;
         }
         
-        self.lightSwitch = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightSwitchLight.png"]];
-        self.lightSwitch.frame = CGRectMake(1224*scale,
-                                            642*scale,
-                                            self.lightSwitch.image.size.width*scale,
-                                            self.lightSwitch.image.size.height*scale);
-        [self addSubview:self.lightSwitch];
+        self.decalViews = [NSMutableArray array];
         
-        self.exitImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exit-ligher.png"]];
-        self.exitImage.frame = CGRectMake(50*scale,
-                                          (800-186)*scale,
-                                          self.exitImage.image.size.width*scale,
-                                          self.exitImage.image.size.height*scale);
-        [self addSubview:self.exitImage];
+//        self.lightSwitch = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightSwitchLight.png"]];
+//        self.lightSwitch.frame = CGRectMake(1224*scale,
+//                                            642*scale,
+//                                            self.lightSwitch.image.size.width*scale,
+//                                            self.lightSwitch.image.size.height*scale);
+//        [self addSubview:self.lightSwitch];
+//        
+//        self.exitImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exit-ligher.png"]];
+//        self.exitImage.frame = CGRectMake(50*scale,
+//                                          (800-186)*scale,
+//                                          self.exitImage.image.size.width*scale,
+//                                          self.exitImage.image.size.height*scale);
+//        [self addSubview:self.exitImage];
     }
     return self;
 }
@@ -232,7 +236,21 @@
         }
     }
     
-    self.lightSwitch.hidden = ![self.dataSource lightSwitchIsVisibleInLevelView:self];
+    [self.decalViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.decalViews removeAllObjects];
+    for (NSDictionary *decal in self.level.decals) {
+        UIImageView *decalView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:decal[@"imageName"]]];
+        decalView.frame = CGRectMake([decal[@"Origin"] CGPointValue].x * scale,
+                                     [decal[@"Origin"] CGPointValue].y * scale,
+                                     decalView.image.size.width * scale,
+                                     decalView.image.size.height * scale);
+        [self.decalViews addObject:decalView];
+    }
+    for (UIView *view in self.decalViews) {
+        [self addSubview:view];
+    }
+    
+    //self.lightSwitch.hidden = ![self.dataSource lightSwitchIsVisibleInLevelView:self];
 }
 
 - (void)flicker:(NSTimer *)timer

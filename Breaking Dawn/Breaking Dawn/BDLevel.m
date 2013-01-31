@@ -33,6 +33,8 @@
 
 @property (strong, readwrite, nonatomic) NSDictionary *stages;
 
+@property (strong, readwrite, nonatomic) NSArray *decals;
+
 //- (void)loadLightmap;
 
 @end
@@ -41,7 +43,7 @@
 @implementation BDLevel
 
 - (id)initWithName:(NSString *)name
-{
+{/*
     self = [super init];
     if (self) {
         self.diffuseMap = [UIImage imageNamed:[name stringByAppendingString:@"_diffuse"]];
@@ -86,7 +88,7 @@
             [[BDSound sharedSound] playSound:SOUND_LIGHT_SWITCH];
             // The model (BDLevel) notifies it's view (BDLevelView) that the data has been changed and the view shoud refresh itselve.
             NSArray *pointLights = [self valuesWithPositions:mapInfos[@"Stages"][1][@"Lights"]];
-            self.lightSwitchVisible = NO;
+            //self.lightSwitchVisible = NO;
             [self.delegate level:self didAddLights:pointLights];
             [self.lights addObjectsFromArray:pointLights];
         }]];
@@ -95,9 +97,142 @@
             [self.delegate levelWillWin:self];
         }]];
         
-        self.lightSwitchVisible = YES;
+        //self.lightSwitchVisible = YES;
+    }
+    return self;*/
+}
+
+- (NSArray *)NSPointsFromArrays:(NSArray *)array
+{
+    NSMutableArray *points = [NSMutableArray array];
+    for (NSArray *pointArray in array) {
+        NSValue *point = [NSValue valueWithCGPoint:CGPointMake([pointArray[0] floatValue], [pointArray[1] floatValue])];
+        [points addObject:point];
+    }
+    return points;
+}
+
+- (NSArray *)NSRectsFromArrays:(NSArray *)array
+{
+    NSMutableArray *rects = [NSMutableArray array];
+    for (NSArray *rectArray in array) {
+        NSValue *rect = [NSValue valueWithCGRect:CGRectMake([rectArray[0] floatValue],
+                                                             [rectArray[1] floatValue],
+                                                             [rectArray[2] floatValue],
+                                                             [rectArray[3] floatValue])];
+        [rects addObject:rect];
+    }
+    return rects;
+}
+
+- (id)initWithContentsOfFileNamed:(NSString *)fileName
+{
+    self = [super init];
+    if (self) {
+        NSURL *mapURL = [[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:fileName];
+        NSError *error = nil;
+        NSDictionary *levelInfo = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:mapURL] options:0 error:&error];
+        if (error) {
+            NSLog(@"<Warning> Could not load level %@, %@", fileName, error);
+            return nil;
+        }
+        
+        NSString *backgroundImageName = levelInfo[@"Background"];
+        NSString *collisionImageName = levelInfo[@"Collision"];
+        
+        NSDictionary *primaryStage = levelInfo[@"0"];
+        NSArray *lightPositions = [self NSPointsFromArrays:primaryStage[@"Lights"]];
+        NSArray *mobPositions = [self NSPointsFromArrays:primaryStage[@"MobSpawns"]];
+        CGPoint playerSpawn = CGPointMake([primaryStage[@"Spawn"][0] floatValue], [primaryStage[@"Spawn"][1] floatValue]);
+        
+        self.diffuseMap = [UIImage imageNamed:backgroundImageName];
+        UIImage *collision = [UIImage imageNamed:collisionImageName];
+        self.collisionMap = [[BDImageMap alloc] initWithUIImage:collision];
+        
+        self.lights = [NSMutableArray arrayWithArray:lightPositions];
+        
+        self.lightScale = 1.0;
+        
+        self.mobs = [NSMutableArray array];
+        for (NSValue *pointRep in mobPositions) {
+            [self.mobs addObject:[[BDMob alloc] initWithPosition:pointRep.CGPointValue]];
+        }
+        
+        CGSize imageSize = self.diffuseMap.size;
+        
+        self.spawn = playerSpawn;
+        
+        self.size = imageSize;
+        
+        self.decals = [NSArray array];
+        
+        self.hotspots = [NSMutableArray array];
+        for (NSDictionary *hotspotDict in primaryStage[@"Hotspots"]) {
+            CGRect area = [[[self NSRectsFromArrays:@[hotspotDict[@"Area"]]] lastObject] CGRectValue];
+            NSArray *changes = hotspotDict[@"Changes"];
+            NSString *level = hotspotDict[@"Level"];
+            NSString *stage = hotspotDict[@"Stage"];
+            NSDictionary *activeImageInfo = hotspotDict[@"Active"];
+            if (activeImageInfo) {
+                CGPoint point = CGPointMake([activeImageInfo[@"Origin"][0] floatValue],
+                                            [activeImageInfo[@"Origin"][1] floatValue]);
+                NSString *imageName = activeImageInfo[@"Image"];
+                NSString *soundName = activeImageInfo[@"Sound"];
+                NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+                [dict setObject:[NSValue valueWithCGPoint:point] forKey:@"Origin"];
+                if (imageName) [dict setObject:imageName forKey:@"imageName"];
+                if (soundName) [dict setObject:soundName forKey:@"Sound"];
+                activeImageInfo = dict;
+            }
+            NSDictionary *inactiveImageInfo = hotspotDict[@"Inactive"];
+            if (inactiveImageInfo) {
+                CGPoint point = CGPointMake([inactiveImageInfo[@"Origin"][0] floatValue],
+                                            [inactiveImageInfo[@"Origin"][1] floatValue]);
+                NSString *imageName = inactiveImageInfo[@"Image"];
+                NSString *soundName = activeImageInfo[@"Sound"];
+                NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+                [dict setObject:[NSValue valueWithCGPoint:point] forKey:@"Origin"];
+                if (imageName) [dict setObject:imageName forKey:@"imageName"];
+                if (soundName) [dict setObject:soundName forKey:@"Sound"];
+                inactiveImageInfo = dict;
+            }
+            
+            self.decals = [self.decals arrayByAddingObject:inactiveImageInfo];
+            
+            if (changes) {
+                BDHotspot *hotspot = [[BDHotspot alloc] initWithFrame:area changes:changes level:self];
+                hotspot.toggle = [hotspotDict[@"Repeat"] boolValue];
+                hotspot.activeDecal = activeImageInfo;
+                hotspot.inactiveDecal = inactiveImageInfo;
+                [self.hotspots addObject:hotspot];
+            } else if (level) {
+                BDHotspot *hotspot = [[BDHotspot alloc] initWithFrame:area levelChange:level level:self];
+                hotspot.toggle = [hotspotDict[@"Repeat"] boolValue];
+                hotspot.activeDecal = activeImageInfo;
+                hotspot.inactiveDecal = inactiveImageInfo;
+                [self.hotspots addObject:hotspot];
+            } else if (stage) {
+                BDHotspot *hotspot = [[BDHotspot alloc] initWithFrame:area stageChange:stage level:self];
+                hotspot.toggle = [hotspotDict[@"Repeat"] boolValue];
+                hotspot.activeDecal = activeImageInfo;
+                hotspot.inactiveDecal = inactiveImageInfo;
+                [self.hotspots addObject:hotspot];
+            }
+        }
     }
     return self;
+}
+
+- (void)exchangeDecal:(NSDictionary *)oldDecal withDecal:(NSDictionary *)decal
+{
+    NSMutableArray *newDecals = self.decals.mutableCopy;
+    if (oldDecal) {
+        [newDecals removeObject:oldDecal];
+    }
+    if (decal) {
+        [newDecals addObject:decal];
+    }
+    self.decals = newDecals;
 }
 
 - (NSArray *)convertPositions:(NSArray *)positions
@@ -318,10 +453,10 @@ CGFloat dotProduct(const CGPoint p1, const CGPoint p2) {
 {
     return self.lightScale;
 }
-
+/*
 - (BOOL)lightSwitchIsVisibleInLevelView:(BDLevelView *)levelView
 {
     return self.lightSwitchVisible;
 }
-
+*/
 @end

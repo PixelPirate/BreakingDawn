@@ -18,6 +18,8 @@
  Dynamic Level Format
  
  {
+    Background : map00_diffuse
+    Collision  : map00_collision
     0 : {                                                  // Initial layout of the level
             Spawn     : [0, 0]
             MobSpawns : [[1, 1], [2, 2], [3, 3]]
@@ -111,13 +113,18 @@
 
 @property (strong, readonly, nonatomic) NSDictionary *stages;
 
+@property (strong, readonly, nonatomic) NSArray *decals;
+
 @property (weak, readwrite, nonatomic) id<BDLevelDelegate> delegate;
 
-@property (assign, readwrite, nonatomic) BOOL lightSwitchVisible;
+//@property (assign, readwrite, nonatomic) BOOL lightSwitchVisible;
 
 - (id)initWithName:(NSString *)name;
 
-+ (BDLevel *)levelNamed:(NSString *)name;
+- (id)initWithContentsOfFileNamed:(NSString *)fileName;
+
+
+//+ (BDLevel *)levelNamed:(NSString *)name;
 
 - (BOOL)isFreeX:(int)x andY:(int)y;
 
@@ -132,5 +139,7 @@
 - (NSValue *)convertPosition:(NSDictionary *)position;
 
 - (NSArray *)corners;
+
+- (void)exchangeDecal:(NSDictionary *)decal withDecal:(NSDictionary *)decal;
 
 @end

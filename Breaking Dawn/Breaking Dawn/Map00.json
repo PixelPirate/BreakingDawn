@@ -1,0 +1,36 @@
+{
+    "Background" : "map00_diffuse",
+    "Collision"  : "map00_collision",
+    "0" : {
+        "Spawn"     : [1552, 208],
+        "MobSpawns" : [[1712, 512], [1064, 193], [888, 835], [345, 368], [496, 771], [300, 350]],
+        "Lights"    : [[1552, 208], [1423, 416], [960, 368], [960, 624], [1184, 752]],
+        "Hotspots"  : [{
+                        "Area"    : [1196, 663, 80, 60],
+                        "Changes" : [{
+                                     "AddLights" : [[384, 688], [416, 496], [580, 400]]
+                                    }],
+                        "Repeat"  : false,
+                        "Inactive"  : {
+                                       "Image"  : "lightSwitchLight",
+                                       "Origin" : [1224, 642],
+                                       "Sound"  : "Light_Switch_0_250"
+                                      },
+                        "Active"    : {
+                                       "Sound" : "Light_Switch_0_250"
+                                      }
+                       },{
+                        "Area"     : [50, 705, 80, 100],
+                        "Level"    : "Credits",
+                        "Repeat"   : false,
+                        "Active"   : {
+                                       "Image"  : "exit-ligher",
+                                       "Origin" : [50, 614]
+                                     },
+                        "Inactive" : {
+                                       "Image"  : "exit-ligher",
+                                       "Origin" : [50, 614]
+                                     }
+                       }]
+    }
+}

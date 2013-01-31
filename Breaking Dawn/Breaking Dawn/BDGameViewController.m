@@ -74,7 +74,8 @@
 {
     [super viewDidLoad];
     
-    self.currentLevel = [BDLevel levelNamed:@"map00"];
+    self.currentLevel = [[BDLevel alloc] initWithContentsOfFileNamed:@"Map00.json"];
+    //[BDLevel levelNamed:@"map00"];
     self.currentLevel.delegate = self;
     self.currentLevelView = [[BDLevelView alloc] initWithLevel:self.currentLevel];
     
@@ -282,7 +283,7 @@
     // Manipulate ambience
     self.currentLevelView.surfaceLayer.alpha = (1.0 - self.player.adrenalin) - 0.5;
     self.currentLevel.lightScale = (1.0 - self.player.adrenalin);
-    [self.currentLevelView reloadData];    
+    [self.currentLevelView reloadData];
     self.currentLevelView.pulse = self.player.adrenalin;
 }
 

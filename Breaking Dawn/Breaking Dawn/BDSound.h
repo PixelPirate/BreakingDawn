@@ -27,6 +27,8 @@ enum {
 
 - (void)playSound:(int)soundId;
 
+- (void)playSoundNamed:(NSString *)name;
+
 - (void)playMonster:(int)soundId;
 
 - (void)beginHeartbeatForPlayer:(BDPlayer *)player;
