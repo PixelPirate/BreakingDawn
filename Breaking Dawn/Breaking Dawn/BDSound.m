@@ -19,6 +19,7 @@
 @property (readwrite, nonatomic) NSMutableArray *monsters;
 @property (readwrite, nonatomic) NSMutableArray *sounds;
 @property (readwrite, nonatomic) NSMutableArray *blockedMonsterSoundIDs;
+@property (strong, readwrite, nonatomic) BDAudioContainer *creditsPlayer;
 
 @end
 
@@ -55,6 +56,9 @@
         [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Exploding_Light_Bulb_1_200" count:2]];
         [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Flickering_Light_Electric_Buzz_5_700" count:2]];
         [self.sounds addObject:[[BDAudioContainer alloc] initWithPath:@"Light_Switch_0_250" count:2]];
+        
+        self.creditsPlayer = [[BDAudioContainer alloc] initWithPath:@"Endsequenz_45sec" count:1];
+        self.creditsPlayer.getPlayer.volume = 0.5;
     }
     return self;
 }
@@ -109,6 +113,16 @@
     self.player = nil;
     self.bpm = 60.0;
     [self.heartbeatTimer invalidate];
+}
+
+- (void)playCredits
+{
+    [self.creditsPlayer fadeIn:10.0];
+}
+
+- (void)stopCredits
+{
+    [self.creditsPlayer fadeOut:3.5];
 }
 
 @end

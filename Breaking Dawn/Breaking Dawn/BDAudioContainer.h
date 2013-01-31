@@ -12,6 +12,11 @@
 @interface BDAudioContainer : NSObject
 
 -(id)initWithPath:(NSString *)path count:(int)count;
+
 -(AVAudioPlayer *)getPlayer;
+
+- (void)fadeIn:(NSTimeInterval)duration;
+
+- (void)fadeOut:(NSTimeInterval)duration;
 
 @end

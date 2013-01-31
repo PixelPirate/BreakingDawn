@@ -33,4 +33,8 @@ enum {
 
 - (void)endHeartbeat;
 
+- (void)playCredits;
+
+- (void)stopCredits;
+
 @end

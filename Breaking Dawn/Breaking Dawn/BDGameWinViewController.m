@@ -8,6 +8,7 @@
 
 #import "BDGameWinViewController.h"
 #import "BDAppDelegate.h"
+#import "BDSound.h"
 
 @interface BDGameWinViewController ()
 
@@ -75,6 +76,7 @@
         [UIView animateWithDuration:2.0 delay:3.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.room.alpha = 1.0;
         } completion:^(BOOL finished) {
+            [[BDSound sharedSound] playCredits];
             self.blinkTimer = [NSTimer scheduledTimerWithTimeInterval:2.1
                                                                target:self
                                                              selector:@selector(blinkWithTimer:)
@@ -164,6 +166,7 @@
 
 - (void)restartGame
 {
+    [[BDSound sharedSound] stopCredits];
     [self.blinkTimer invalidate];
     BDAppDelegate *d = [[UIApplication sharedApplication] delegate];
     [d.titleViewController restartGame];

@@ -249,8 +249,8 @@
 		B165D5D116B5567F00719EAE /* exit-ligher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exit-ligher.png"; sourceTree = "<group>"; };
 		B165D5D516B55D6E00719EAE /* BDGameWinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDGameWinViewController.h; sourceTree = "<group>"; };
 		B165D5D616B55D6E00719EAE /* BDGameWinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDGameWinViewController.m; sourceTree = "<group>"; };
-		B18EC2F316B9D29B00D8E78F /* Endsequenz_45sec.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Endsequenz_45sec.mp3; path = "Breaking Dawn/Endsequenz_45sec.mp3"; sourceTree = "<group>"; };
-		B18EC2F416B9D29B00D8E78F /* Endsequenz_57sec.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Endsequenz_57sec.mp3; path = "Breaking Dawn/Endsequenz_57sec.mp3"; sourceTree = "<group>"; };
+		B18EC2F316B9D29B00D8E78F /* Endsequenz_45sec.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Endsequenz_45sec.mp3; sourceTree = "<group>"; };
+		B18EC2F416B9D29B00D8E78F /* Endsequenz_57sec.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Endsequenz_57sec.mp3; sourceTree = "<group>"; };
 		B19113AE16B4018E008BFCB9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B19113B316B40707008BFCB9 /* BDSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSound.h; sourceTree = "<group>"; };
 		B19113B416B40707008BFCB9 /* BDSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDSound.m; sourceTree = "<group>"; };
@@ -286,8 +286,6 @@
 		87A5370E16B31D8500F7C6DB = {
 			isa = PBXGroup;
 			children = (
-				B18EC2F316B9D29B00D8E78F /* Endsequenz_45sec.mp3 */,
-				B18EC2F416B9D29B00D8E78F /* Endsequenz_57sec.mp3 */,
 				87CF3D9516B55F6D0073F953 /* Icon01-57.png */,
 				87CF3DAD16B6CA620073F953 /* Icon01-72.png */,
 				87CF3D9316B55F1D0073F953 /* Icon01-114.png */,
@@ -393,6 +391,8 @@
 		87A5374B16B321AC00F7C6DB /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				B18EC2F316B9D29B00D8E78F /* Endsequenz_45sec.mp3 */,
+				B18EC2F416B9D29B00D8E78F /* Endsequenz_57sec.mp3 */,
 				87CF3D8816B55C910073F953 /* Intro */,
 				87CF3D7E16B540270073F953 /* GGJ13_RoundBadge.png */,
 				87CF3DA816B6C1A50073F953 /* ggj13-poster.png */,
