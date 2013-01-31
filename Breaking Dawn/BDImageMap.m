@@ -14,6 +14,7 @@
 @property (strong, readwrite, nonatomic) NSData *data;
 @property (assign, readwrite, nonatomic) NSUInteger bytesPerPixel;
 @property (assign, readwrite, nonatomic) NSUInteger bytesPerRow;
+@property (assign, readwrite, nonatomic) CGSize size;
 
 @end
 
@@ -25,10 +26,10 @@
     self = [super init];
     if (self) {
         self.image = image;
-        
         CGImageRef imageRef = [self.image CGImage];
         NSUInteger width = CGImageGetWidth(imageRef);
         NSUInteger height = CGImageGetHeight(imageRef);
+        self.size = CGSizeMake(width, height);
         self.bytesPerPixel = 4;
         self.bytesPerRow = self.bytesPerPixel * width;
         NSUInteger bitsPerComponent = 8;

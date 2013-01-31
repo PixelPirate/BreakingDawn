@@ -60,4 +60,6 @@
 
 - (void)evaluatePointsOnLineFrom:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(CGPoint point, BOOL *stop))block;
 
+- (NSArray *)corners;
+
 @end

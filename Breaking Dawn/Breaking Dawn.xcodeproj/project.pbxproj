@@ -10,6 +10,8 @@
 		872F6BCB16B860920064D617 /* credits-scroll00.png in Resources */ = {isa = PBXBuildFile; fileRef = 872F6BCA16B860920064D617 /* credits-scroll00.png */; };
 		872F6BCF16B86AF90064D617 /* map00-bed-bright-eyes-open00.png in Resources */ = {isa = PBXBuildFile; fileRef = 872F6BCE16B86AF90064D617 /* map00-bed-bright-eyes-open00.png */; };
 		872F6BD116B86AFC0064D617 /* map00-bed-bright-eyes-closed00.png in Resources */ = {isa = PBXBuildFile; fileRef = 872F6BD016B86AFC0064D617 /* map00-bed-bright-eyes-closed00.png */; };
+		8754331916BA9EAE004BCFAF /* BDVectorizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754331816BA9EAE004BCFAF /* BDVectorizer.m */; };
+		8754331D16BA9EBB004BCFAF /* BDCornerDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754331C16BA9EBB004BCFAF /* BDCornerDetector.m */; };
 		877DAFF516B464BF00CD9508 /* Ambience-16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFF216B464BF00CD9508 /* Ambience-16.mp3 */; };
 		877DAFF616B464BF00CD9508 /* Ambience-17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFF316B464BF00CD9508 /* Ambience-17.mp3 */; };
 		877DAFF716B464BF00CD9508 /* Ambience-22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 877DAFF416B464BF00CD9508 /* Ambience-22.mp3 */; };
@@ -100,6 +102,7 @@
 		87CF3DA916B6C1A50073F953 /* ggj13-poster.png in Resources */ = {isa = PBXBuildFile; fileRef = 87CF3DA816B6C1A50073F953 /* ggj13-poster.png */; };
 		87CF3DAC16B6CA5E0073F953 /* Icon01-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 87CF3DAB16B6CA5E0073F953 /* Icon01-144.png */; };
 		87CF3DAE16B6CA630073F953 /* Icon01-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 87CF3DAD16B6CA620073F953 /* Icon01-72.png */; };
+		87E7BAF216B9357400B6DD5C /* BDLightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87E7BAF116B9357400B6DD5C /* BDLightView.m */; };
 		B15B92AB16B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92A816B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 */; };
 		B15B92AC16B47BF20001670D /* heartbeat_isolated_0_700.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92A916B47BF20001670D /* heartbeat_isolated_0_700.mp3 */; };
 		B15B92AD16B47BF20001670D /* Light_Switch_0_250.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */; };
@@ -122,6 +125,10 @@
 		872F6BCA16B860920064D617 /* credits-scroll00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "credits-scroll00.png"; sourceTree = "<group>"; };
 		872F6BCE16B86AF90064D617 /* map00-bed-bright-eyes-open00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map00-bed-bright-eyes-open00.png"; sourceTree = "<group>"; };
 		872F6BD016B86AFC0064D617 /* map00-bed-bright-eyes-closed00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map00-bed-bright-eyes-closed00.png"; sourceTree = "<group>"; };
+		8754331716BA9EAE004BCFAF /* BDVectorizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDVectorizer.h; sourceTree = "<group>"; };
+		8754331816BA9EAE004BCFAF /* BDVectorizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDVectorizer.m; sourceTree = "<group>"; };
+		8754331B16BA9EBB004BCFAF /* BDCornerDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDCornerDetector.h; sourceTree = "<group>"; };
+		8754331C16BA9EBB004BCFAF /* BDCornerDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDCornerDetector.m; sourceTree = "<group>"; };
 		877DAFF216B464BF00CD9508 /* Ambience-16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ambience-16.mp3"; sourceTree = "<group>"; };
 		877DAFF316B464BF00CD9508 /* Ambience-17.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ambience-17.mp3"; sourceTree = "<group>"; };
 		877DAFF416B464BF00CD9508 /* Ambience-22.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ambience-22.mp3"; sourceTree = "<group>"; };
@@ -231,6 +238,8 @@
 		87CF3DA816B6C1A50073F953 /* ggj13-poster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ggj13-poster.png"; sourceTree = "<group>"; };
 		87CF3DAB16B6CA5E0073F953 /* Icon01-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon01-144.png"; sourceTree = "<group>"; };
 		87CF3DAD16B6CA620073F953 /* Icon01-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon01-72.png"; sourceTree = "<group>"; };
+		87E7BAF016B9357400B6DD5C /* BDLightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDLightView.h; sourceTree = "<group>"; };
+		87E7BAF116B9357400B6DD5C /* BDLightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDLightView.m; sourceTree = "<group>"; };
 		B15B92A816B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Flickering_Light_Electric_Buzz_5_700.mp3; sourceTree = "<group>"; };
 		B15B92A916B47BF20001670D /* heartbeat_isolated_0_700.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = heartbeat_isolated_0_700.mp3; sourceTree = "<group>"; };
 		B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Light_Switch_0_250.mp3; sourceTree = "<group>"; };
@@ -347,6 +356,12 @@
 				87A5377D16B3E0C300F7C6DB /* BDMobView.m */,
 				87A5377716B3DF2400F7C6DB /* BDMob.h */,
 				87A5377816B3DF2500F7C6DB /* BDMob.m */,
+				87E7BAF016B9357400B6DD5C /* BDLightView.h */,
+				87E7BAF116B9357400B6DD5C /* BDLightView.m */,
+				8754331716BA9EAE004BCFAF /* BDVectorizer.h */,
+				8754331816BA9EAE004BCFAF /* BDVectorizer.m */,
+				8754331B16BA9EBB004BCFAF /* BDCornerDetector.h */,
+				8754331C16BA9EBB004BCFAF /* BDCornerDetector.m */,
 				87A5373816B31D8700F7C6DB /* BDViewController_iPhone.xib */,
 				87A5373B16B31D8700F7C6DB /* BDViewController_iPad.xib */,
 				87A5374B16B321AC00F7C6DB /* Ressources */,
@@ -693,6 +708,9 @@
 				877DB00816B4769900CD9508 /* BDTitleViewController.m in Sources */,
 				877DB01116B4818800CD9508 /* BDGameOverViewController.m in Sources */,
 				B165D5D716B55D6E00719EAE /* BDGameWinViewController.m in Sources */,
+				87E7BAF216B9357400B6DD5C /* BDLightView.m in Sources */,
+				8754331916BA9EAE004BCFAF /* BDVectorizer.m in Sources */,
+				8754331D16BA9EBB004BCFAF /* BDCornerDetector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@
 #import "BDImageMap.h"
 #import "BDHotspot.h"
 #import "BDSound.h"
+#import "BDVectorizer.h"
 
 @interface BDLevel () // Private setter
 
@@ -207,6 +208,60 @@ CGFloat distance(const CGPoint p1, const CGPoint p2) {
 
 CGFloat dotProduct(const CGPoint p1, const CGPoint p2) {
     return p1.x * p2.x + p1.y * p2.y;
+}
+
+//TODO: Replace with an generic approach
+- (NSArray *)corners
+{
+    return @[
+    [NSValue valueWithCGPoint:CGPointMake(50, 700)],
+    [NSValue valueWithCGPoint:CGPointMake(50, 800)],
+    [NSValue valueWithCGPoint:CGPointMake(236, 319)],
+    [NSValue valueWithCGPoint:CGPointMake(236, 705)],
+    [NSValue valueWithCGPoint:CGPointMake(542, 518)],
+    [NSValue valueWithCGPoint:CGPointMake(542, 800)],
+    
+    [NSValue valueWithCGPoint:CGPointMake(720, 418)],
+    [NSValue valueWithCGPoint:CGPointMake(720, 513)],
+    [NSValue valueWithCGPoint:CGPointMake(818, 239)],
+    [NSValue valueWithCGPoint:CGPointMake(818, 319)],
+    [NSValue valueWithCGPoint:CGPointMake(818, 414)],
+    [NSValue valueWithCGPoint:CGPointMake(818, 888)],
+    
+    [NSValue valueWithCGPoint:CGPointMake(969, 160)],
+    [NSValue valueWithCGPoint:CGPointMake(969, 240)],
+    
+    [NSValue valueWithCGPoint:CGPointMake(1105, 160)],
+    [NSValue valueWithCGPoint:CGPointMake(1105, 317)],
+    [NSValue valueWithCGPoint:CGPointMake(1105, 415)],
+    [NSValue valueWithCGPoint:CGPointMake(1105, 654)],
+    
+    [NSValue valueWithCGPoint:CGPointMake(1123, 655)],
+    [NSValue valueWithCGPoint:CGPointMake(1123, 675)],
+    
+    [NSValue valueWithCGPoint:CGPointMake(1177, 655)],
+    [NSValue valueWithCGPoint:CGPointMake(1177, 675)],
+    
+    [NSValue valueWithCGPoint:CGPointMake(1300, 250)],
+    [NSValue valueWithCGPoint:CGPointMake(1300, 319)],
+    [NSValue valueWithCGPoint:CGPointMake(1300, 417)],
+    [NSValue valueWithCGPoint:CGPointMake(1300, 597)],
+    
+    [NSValue valueWithCGPoint:CGPointMake(1414, 122)],
+    [NSValue valueWithCGPoint:CGPointMake(1414, 199)],
+    
+    [NSValue valueWithCGPoint:CGPointMake(1426, 199)],
+    [NSValue valueWithCGPoint:CGPointMake(1426, 250)],
+    
+    [NSValue valueWithCGPoint:CGPointMake(1475, 95)],
+    [NSValue valueWithCGPoint:CGPointMake(1475, 116)],
+    
+    [NSValue valueWithCGPoint:CGPointMake(1650, 95)],
+    [NSValue valueWithCGPoint:CGPointMake(1650, 116)],
+    
+    [NSValue valueWithCGPoint:CGPointMake(1778, 127)],
+    [NSValue valueWithCGPoint:CGPointMake(1778, 609)],
+    ];
 }
 
 /*

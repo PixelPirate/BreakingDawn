@@ -10,7 +10,12 @@
 
 @interface BDImageMap : NSObject
 
+@property (assign, readonly, nonatomic) CGSize size;
+
+@property (assign, readonly, nonatomic) NSUInteger bytesPerPixel;
+
 - (BDImageMap *)initWithUIImage:(UIImage *)image;
+
 - (unsigned const char)getByteFromX:(int)x andY:(int)y component:(int)component;
 
 @end

@@ -19,6 +19,7 @@
 #import "BDAmbientMusicController.h"
 #import "BDGameOverViewController.h"
 #import "BDGameWinViewController.h"
+#import "BDLightView.h"
 
 
 @interface BDGameViewController ()
@@ -92,6 +93,13 @@
     self.lastTouchLocation = CGPointZero;
     
     self.view.alpha = 0.0;
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"RealisticLighting"]) {
+        BDLightView *light = [[BDLightView alloc] initWithPosition:CGPointApplyAffineTransform(self.currentLevel.spawn,
+                                                                                               CGAffineTransformMakeTranslation(-10, -10))
+                                                           inLevel:self.currentLevel];
+        [self.currentLevelView addSubview:light];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated

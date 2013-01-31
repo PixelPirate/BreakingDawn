@@ -28,6 +28,8 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SimultanousMonsterSounds"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"GodMode"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SkipIntro"];
+    [[NSUserDefaults standardUserDefaults] setFloat:90.0 forKey:@"DefaultLightRadius"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"RealisticLighting"];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];
