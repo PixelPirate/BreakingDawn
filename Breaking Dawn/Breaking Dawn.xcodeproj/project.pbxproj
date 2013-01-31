@@ -109,6 +109,8 @@
 		B15B92B316B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B15B92B216B4837F0001670D /* Exploding_Light_Bulb_1_200.mp3 */; };
 		B165D5D216B5567F00719EAE /* exit-ligher.png in Resources */ = {isa = PBXBuildFile; fileRef = B165D5D116B5567F00719EAE /* exit-ligher.png */; };
 		B165D5D716B55D6E00719EAE /* BDGameWinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B165D5D616B55D6E00719EAE /* BDGameWinViewController.m */; };
+		B18EC2F516B9D29B00D8E78F /* Endsequenz_45sec.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B18EC2F316B9D29B00D8E78F /* Endsequenz_45sec.mp3 */; };
+		B18EC2F616B9D29B00D8E78F /* Endsequenz_57sec.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B18EC2F416B9D29B00D8E78F /* Endsequenz_57sec.mp3 */; };
 		B19113AF16B4018E008BFCB9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19113AE16B4018E008BFCB9 /* AVFoundation.framework */; };
 		B19113B516B40707008BFCB9 /* BDSound.m in Sources */ = {isa = PBXBuildFile; fileRef = B19113B416B40707008BFCB9 /* BDSound.m */; };
 		B192C8CC16B435F5000E4BC9 /* BDAudioContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */; };
@@ -247,6 +249,8 @@
 		B165D5D116B5567F00719EAE /* exit-ligher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exit-ligher.png"; sourceTree = "<group>"; };
 		B165D5D516B55D6E00719EAE /* BDGameWinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDGameWinViewController.h; sourceTree = "<group>"; };
 		B165D5D616B55D6E00719EAE /* BDGameWinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDGameWinViewController.m; sourceTree = "<group>"; };
+		B18EC2F316B9D29B00D8E78F /* Endsequenz_45sec.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Endsequenz_45sec.mp3; path = "Breaking Dawn/Endsequenz_45sec.mp3"; sourceTree = "<group>"; };
+		B18EC2F416B9D29B00D8E78F /* Endsequenz_57sec.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Endsequenz_57sec.mp3; path = "Breaking Dawn/Endsequenz_57sec.mp3"; sourceTree = "<group>"; };
 		B19113AE16B4018E008BFCB9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B19113B316B40707008BFCB9 /* BDSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSound.h; sourceTree = "<group>"; };
 		B19113B416B40707008BFCB9 /* BDSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDSound.m; sourceTree = "<group>"; };
@@ -282,6 +286,8 @@
 		87A5370E16B31D8500F7C6DB = {
 			isa = PBXGroup;
 			children = (
+				B18EC2F316B9D29B00D8E78F /* Endsequenz_45sec.mp3 */,
+				B18EC2F416B9D29B00D8E78F /* Endsequenz_57sec.mp3 */,
 				87CF3D9516B55F6D0073F953 /* Icon01-57.png */,
 				87CF3DAD16B6CA620073F953 /* Icon01-72.png */,
 				87CF3D9316B55F1D0073F953 /* Icon01-114.png */,
@@ -677,6 +683,8 @@
 				872F6BCB16B860920064D617 /* credits-scroll00.png in Resources */,
 				872F6BCF16B86AF90064D617 /* map00-bed-bright-eyes-open00.png in Resources */,
 				872F6BD116B86AFC0064D617 /* map00-bed-bright-eyes-closed00.png in Resources */,
+				B18EC2F516B9D29B00D8E78F /* Endsequenz_45sec.mp3 in Resources */,
+				B18EC2F616B9D29B00D8E78F /* Endsequenz_57sec.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
