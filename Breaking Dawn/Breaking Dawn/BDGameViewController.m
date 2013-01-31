@@ -193,10 +193,7 @@
     // Move the player
     if (!CGPointEqualToPoint(movement, CGPointZero)) {
         CGFloat walkingSpeed = [[NSUserDefaults standardUserDefaults] floatForKey:@"WalkingSpeed"] * gameSpeed;
-        movement = CGPointApplyAffineTransform(movement, CGAffineTransformMakeScale(walkingSpeed, walkingSpeed));
-//        CGPoint newLocation = CGPointApplyAffineTransform(self.player.location,
-//                                                          CGAffineTransformMakeTranslation(-movement.x, -movement.y));
-        
+        movement = CGPointApplyAffineTransform(movement, CGAffineTransformMakeScale(walkingSpeed, walkingSpeed));        
         // Try to move at least in one the directions
         CGPoint pushBack[3] = { CGPointMake(-1, -1), CGPointMake(0, -1), CGPointMake(-1, 0), };
         for (NSUInteger i = 0; i < 3; i++) {

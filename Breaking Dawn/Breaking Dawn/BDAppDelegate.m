@@ -17,6 +17,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"GodMode"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SkipIntro"];
+    
     [[NSUserDefaults standardUserDefaults] setFloat:0.024 forKey:@"AdrenalinLight"];
     [[NSUserDefaults standardUserDefaults] setFloat:0.0068 forKey:@"AdrenalinDusk"];
     [[NSUserDefaults standardUserDefaults] setFloat:0.012 forKey:@"AdrenalinDark"];
@@ -26,13 +29,11 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DebugMenu"];
     [[NSUserDefaults standardUserDefaults] setFloat:1/30.0 forKey:@"DrawRate"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SimultanousMonsterSounds"];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"GodMode"];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SkipIntro"];
     [[NSUserDefaults standardUserDefaults] setFloat:90.0 forKey:@"DefaultLightRadius"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"RealisticLighting"];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];
+        [[NSUserDefaults standardUserDefaults] setFloat:0.65 forKey:@"Scale"];
         self.viewController = [[BDViewController alloc] initWithNibName:@"BDViewController_iPhone" bundle:nil];
     } else {
         [[NSUserDefaults standardUserDefaults] setFloat:1.0 forKey:@"Scale"];

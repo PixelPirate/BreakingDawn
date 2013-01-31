@@ -106,11 +106,17 @@
         }
         
         self.lightSwitch = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightSwitchLight.png"]];
-        self.lightSwitch.frame = CGRectMake(1224, 642, self.lightSwitch.image.size.width, self.lightSwitch.image.size.height);
+        self.lightSwitch.frame = CGRectMake(1224*scale,
+                                            642*scale,
+                                            self.lightSwitch.image.size.width*scale,
+                                            self.lightSwitch.image.size.height*scale);
         [self addSubview:self.lightSwitch];
         
         self.exitImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exit-ligher.png"]];
-        self.exitImage.frame = CGRectMake(50, 800-186, self.exitImage.image.size.width, self.exitImage.image.size.height);
+        self.exitImage.frame = CGRectMake(50*scale,
+                                          (800-186)*scale,
+                                          self.exitImage.image.size.width*scale,
+                                          self.exitImage.image.size.height*scale);
         [self addSubview:self.exitImage];
     }
     return self;
@@ -175,9 +181,11 @@
         [self.flickeringLightsTimers makeObjectsPerformSelector:@selector(invalidate)];
         [self.flickeringLightsTimers removeAllObjects];
         
+        CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"Scale"];
         for (NSValue *light in [self.dataSource lightsInLevelView:self]) {
             CGPoint p = [light CGPointValue];
-
+            p = CGPointApplyAffineTransform(p, CGAffineTransformMakeScale(scale, scale));
+            
             UIView *light = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 224, 224)];
             light.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.4 alpha:0.8];
             
@@ -187,6 +195,7 @@
             self.evilLight = [UIImage maskView:light withMask:[UIImage imageNamed:@"light00-01.jpg"]];
             
             UIImageView *v = [[UIImageView alloc] initWithImage:self.normalLight];
+            v.contentMode = UIViewContentModeScaleAspectFit;
             v.center = p;
             
             [self.lightLayer addSubview:v];
@@ -211,7 +220,8 @@
         }
     }
     
-    CGSize lightSize = CGSizeMake(224, 224);
+    CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"Scale"];
+    CGSize lightSize = CGSizeMake(224*scale, 224*scale);
     self.lightScale = [self.dataSource lightScaleInLevelView:self];
     for (UIImageView *i in self.lightLayer.subviews) {
         if ([i isKindOfClass:[UIImageView class]] /*&& ![self.pulsatingViews containsObject:i]*/) {

@@ -52,7 +52,7 @@
         NSURL *url = [[[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:@"map00.plist"] filePathURL];
         NSDictionary *mapInfos = [NSDictionary dictionaryWithContentsOfURL:url];
         
-        NSArray *pointLights = [self convertLights:mapInfos[@"Stages"][0][@"Lights"]];
+        NSArray *pointLights = [self valuesWithPositions:mapInfos[@"Stages"][0][@"Lights"]];
         [self.lights addObjectsFromArray:pointLights];
         
         // Load lightmap from file or generate it if file is missing
@@ -67,16 +67,16 @@
         
         self.mobs = [NSMutableArray array];
         [self.mobs addObject:[[BDMob alloc] initWithPosition:CGPointMake(300, 350)]];
-        for (NSDictionary *pointRep in mapInfos[@"Stages"][0][@"Monsters"]) {
-            CGPoint position = CGPointZero;
-            CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(pointRep), &position);
+        NSArray *mobSpawns = [self valuesWithPositions:mapInfos[@"Stages"][0][@"Monsters"]];
+        for (NSValue *pointRep in mobSpawns) {
+            CGPoint position = pointRep.CGPointValue;
             [self.mobs addObject:[[BDMob alloc] initWithPosition:position]];
         }
         
         CGSize imageSize = self.diffuseMap.size;
         
         CGPoint spawn = CGPointZero;
-        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(mapInfos[@"Stages"][0][@"Spawn"]), &spawn);
+        spawn = [[self valueWithPositionDictionary:mapInfos[@"Stages"][0][@"Spawn"]] CGPointValue];
         self.spawn = spawn;
         
         self.size = imageSize;
@@ -85,9 +85,9 @@
         [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1196, 663, 80, 60) trigger:^{
             [[BDSound sharedSound] playSound:SOUND_LIGHT_SWITCH];
             // The model (BDLevel) notifies it's view (BDLevelView) that the data has been changed and the view shoud refresh itselve.
-            NSArray *pointLights = [self convertLights:mapInfos[@"Stages"][1][@"Lights"]];
-            self.lightSwitchVisible = NO;            
-            if (self.delegate) [self.delegate level:self didAddLights:pointLights];
+            NSArray *pointLights = [self valuesWithPositions:mapInfos[@"Stages"][1][@"Lights"]];
+            self.lightSwitchVisible = NO;
+            [self.delegate level:self didAddLights:pointLights];
             [self.lights addObjectsFromArray:pointLights];
         }]];
         
@@ -100,20 +100,35 @@
     return self;
 }
 
-- (NSArray *)convertLights:(NSArray *)lights
+- (NSArray *)convertPositions:(NSArray *)positions
 {
     NSMutableArray *pointLights = [NSMutableArray array];
-    for (NSDictionary *pointRep in lights) {
-        //            CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"Scale"];
-        //            NSNumber *x = [NSNumber numberWithFloat:[pointRep[@"X"] floatValue] * scale];
-        //            NSNumber *y = [NSNumber numberWithFloat:[pointRep[@"Y"] floatValue] * scale];
-        //            NSDictionary *p = [NSDictionary dictionaryWithObjectsAndKeys:@"X", x, @"Y", y, nil];
-        CGPoint light;
-        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)(pointRep), &light);
-        
-        [pointLights addObject:[NSValue valueWithCGPoint:light]];
+    for (NSDictionary *pointRep in positions) {;
+        [pointLights addObject:[self convertPosition:pointRep]];
     }
     return pointLights;
+}
+
+- (NSValue *)convertPosition:(NSDictionary *)position
+{
+    CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"Scale"];
+    CGPoint light = CGPointMake([position[@"X"] floatValue]*scale, [position[@"Y"] floatValue]*scale);
+    return [NSValue valueWithCGPoint:light];
+}
+
+- (NSArray *)valuesWithPositions:(NSArray *)positions
+{
+    NSMutableArray *values = [NSMutableArray array];
+    for (NSDictionary *pointRep in positions) {
+        [values addObject:[self valueWithPositionDictionary:pointRep]];
+    }
+    return values;
+}
+
+- (NSValue *)valueWithPositionDictionary:(NSDictionary *)position
+{
+    CGPoint light = CGPointMake([position[@"X"] floatValue], [position[@"Y"] floatValue]);
+    return [NSValue valueWithCGPoint:light];
 }
 
 + (BDLevel *)levelNamed:(NSString *)name
@@ -175,7 +190,6 @@
         CGPoint lightPosition = [light CGPointValue];
         
         if([self isLineFrom:from to:to withinRadius:fakeRadius fromPoint:lightPosition]) return NO;
-
     }
     
     return YES;

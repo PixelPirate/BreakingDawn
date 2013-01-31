@@ -34,6 +34,10 @@
 
 @property (assign, readonly, nonatomic) CGPoint spawn;
 
+// Data models are always in the map coordinate system (The original size of the background image)
+// As such, the light coordinates are also in the images coordinate system. (Like the player spawn for example)
+// Convertion to screen positions should be done in the views (see the last part in playerDidMove:toPosition: in BDPlayerView).
+// This makes usage of the canMoveFrom:to: kind of methods easier, as they operate on the image and thus need image coordinates.
 @property (strong, readonly, nonatomic) NSMutableArray *lights;
 
 @property (strong, readonly, nonatomic) NSMutableArray *mobs;
@@ -59,6 +63,10 @@
 - (BOOL)noLightsFrom:(CGPoint)from to:(CGPoint)to;
 
 - (void)evaluatePointsOnLineFrom:(CGPoint)from to:(CGPoint)to usingBlock:(void (^)(CGPoint point, BOOL *stop))block;
+
+- (NSArray *)convertPositions:(NSArray *)positions;
+
+- (NSValue *)convertPosition:(NSDictionary *)position;
 
 - (NSArray *)corners;
 
