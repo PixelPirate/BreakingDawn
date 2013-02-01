@@ -4,14 +4,28 @@
     "0" : {
         "Spawn"     : [1552, 208],
         "MobSpawns" : [[1712, 512], [1064, 193], [888, 835], [345, 368], [496, 771], [300, 350]],
-        "Lights"    : [[1552, 208], [1423, 416], [960, 368], [960, 624], [1184, 752]],
+        "Lights"    : [[1423, 416], [960, 368], [960, 624], [1184, 752]],
+        "TimedLights" : [{
+                         "Position" : [1552, 208],
+                         "Disappear" : 5.0,
+                         "Reappear" : 0.0
+                         }],
         "Hotspots"  : [{
                         "Area"    : [1196, 663, 80, 60],
                         "Changes" : [{
-                                     "AddLights" : [[384, 688], [416, 496], [580, 400]]
-                                    }],
-                        "Repeat"  : false,
-                        "Inactive"  : {
+                                      "AddLights"     : [[420, 505]],
+                                      "AddTrapLights" : [{
+                                                         "Position" : [580, 400],
+                                                         "Duration" : 1.5,
+                                                         "Reappear" : 0
+                                                         }],
+                                      "RemoveLights"  : [[1552, 208], [1423, 416]]
+                                     },{
+                                      "AddLights" : [[1552, 208], [1423, 416]],
+                                      "RemoveLights" : [[420, 505], [580, 400]]
+                                     }],
+                        "Repeat"  : true,
+                        "Normal"    : {
                                        "Image"  : "lightSwitchLight",
                                        "Origin" : [1224, 642],
                                        "Sound"  : "Light_Switch_0_250"
@@ -27,7 +41,7 @@
                                        "Image"  : "exit-ligher",
                                        "Origin" : [50, 614]
                                      },
-                        "Inactive" : {
+                        "Normal"   : {
                                        "Image"  : "exit-ligher",
                                        "Origin" : [50, 614]
                                      }

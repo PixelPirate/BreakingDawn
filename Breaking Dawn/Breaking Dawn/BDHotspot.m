@@ -24,23 +24,25 @@ typedef void (^BDTrigger)(void);
 
 @property (assign, readwrite, nonatomic) NSInteger state;
 
+@property (assign, readwrite, nonatomic) BOOL entityDidLeave;
+
 @end
 
 
 @implementation BDHotspot
 
-- (id)initWithFrame:(CGRect)frame trigger:(void (^)())trigger
-{
-    self = [super init];
-    if (self) {
-        self.frame = frame;
-        self.trigger = trigger;
-        self.toggle = NO;
-        self.active = YES;
-        self.state = 0;
-    }
-    return self;
-}
+//- (id)initWithFrame:(CGRect)frame trigger:(void (^)())trigger
+//{
+//    self = [super init];
+//    if (self) {
+//        self.frame = frame;
+//        self.trigger = trigger;
+//        self.toggle = NO;
+//        self.active = YES;
+//        self.state = 0;
+//    }
+//    return self;
+//}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -51,6 +53,7 @@ typedef void (^BDTrigger)(void);
         self.active = YES;
         self.changeIndex = 0;
         self.state = 0;
+        self.entityDidLeave = NO;
     }
     return self;
 }
@@ -70,6 +73,15 @@ typedef void (^BDTrigger)(void);
             for (NSArray *positionRep in removedLights) {
                 NSValue *position = [NSValue valueWithCGPoint:CGPointMake([positionRep[0] floatValue], [positionRep[1] floatValue])];
                 [level.lights removeObject:position];
+                [level.trapLights filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+                    NSArray *pos = [evaluatedObject objectForKey:@"Position"];
+                    NSValue *aPosition = [NSValue valueWithCGPoint:CGPointMake([pos[0] floatValue], [pos[1] floatValue])];
+                    return ![position isEqualToValue:aPosition];
+                }]];
+                [level.timedLights filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+                    NSValue *aPosition = [evaluatedObject objectForKey:@"Position"];
+                    return ![position isEqualToValue:aPosition];
+                }]];
             }
             
             for (NSArray *positionRep in addedLights) {
@@ -81,8 +93,14 @@ typedef void (^BDTrigger)(void);
                 NSValue *position = [NSValue valueWithCGPoint:CGPointMake([positionRep[0] floatValue], [positionRep[1] floatValue])];
             }
             
-            for (NSArray *positionRep in addedTrapLights) {
-                NSValue *position = [NSValue valueWithCGPoint:CGPointMake([positionRep[0] floatValue], [positionRep[1] floatValue])];
+            for (NSDictionary *trapLightInfo in addedTrapLights) {
+                NSMutableDictionary *trapLight = [NSMutableDictionary dictionaryWithDictionary:trapLightInfo];
+                [trapLight setObject:[NSNumber numberWithBool:NO] forKey:@"Triggered"];
+                
+                NSArray *positionInfo = trapLight[@"Position"];
+                NSValue *position = [NSValue valueWithCGPoint:CGPointMake([positionInfo[0] floatValue], [positionInfo[1] floatValue])];
+                [level.trapLights addObject:trapLight];
+                [level.lights addObject:position];
             }
             
             switch (self.state) {
@@ -145,11 +163,16 @@ typedef void (^BDTrigger)(void);
 {
     if (self.active) {
         if (CGRectContainsPoint(self.frame, position)) {
-            self.state = (self.state + 1) % 2;
-            self.trigger();
-            if (!self.toggle) {
-                self.active = NO;
+            if (self.entityDidLeave) {
+                self.entityDidLeave = NO;
+                self.state = (self.state + 1) % 2;
+                self.trigger();
+                if (!self.toggle) {
+                    self.active = NO;
+                }
             }
+        } else {
+            self.entityDidLeave = YES;
         }
     }
 }

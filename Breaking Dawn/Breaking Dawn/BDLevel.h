@@ -34,7 +34,7 @@
             Spawn     : [5, 5]                             // Overwrites old spawn, aka "Checkpoint"
             MobSpawns : [[10, 10], [2, 2]]                 // One enemy did disappear, one did join the fight
             Lights    : [[2, 2], [3, 3], [4, 4]]           // One light appeard, one disappeard
-            BadLights : [{
+            TrapLights : [{
                             Position : [1, 1]              // One light "changed" to an fragile light. (Explodes after 'duration' seconds)
                             Duration : 5
                             Reappear : 0                   // Takes 'reappear' seconds til the light goes on again. Zero equals never
@@ -105,6 +105,10 @@
 // This makes usage of the canMoveFrom:to: kind of methods easier, as they operate on the image and thus need image coordinates.
 @property (strong, readonly, nonatomic) NSMutableArray *lights;
 
+@property (strong, readonly, nonatomic) NSMutableArray *trapLights;
+
+@property (strong, readonly, nonatomic) NSMutableArray *timedLights;
+
 @property (strong, readonly, nonatomic) NSMutableArray *mobs;
 
 @property (assign, readwrite, nonatomic) CGFloat lightScale;
@@ -141,5 +145,9 @@
 - (NSArray *)corners;
 
 - (void)exchangeDecal:(NSDictionary *)decal withDecal:(NSDictionary *)decal;
+
+- (void)evaluateLightsForPlayerAtPosition:(CGPoint)position;
+
+- (void)levelDidBegin;
 
 @end

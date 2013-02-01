@@ -115,6 +115,8 @@
 {
     [super viewDidAppear:animated];
     
+    [self.currentLevel levelDidBegin];
+    
     self.staticTimer = [NSTimer scheduledTimerWithTimeInterval:3.0
                                      target:self.postProcessingViewController
                                    selector:@selector(static)
@@ -241,6 +243,9 @@
                                              -self.playerView.center.y+self.view.bounds.size.height/2.0,
                                              self.currentLevelView.frame.size.width,
                                              self.currentLevelView.frame.size.height);
+    
+    // Evaluate trap and timed lights.
+    [self.currentLevel evaluateLightsForPlayerAtPosition:self.player.location];
     
     // Mobs
     CGFloat speed = [[NSUserDefaults standardUserDefaults] floatForKey:@"MobWalkingSpeed"] * gameSpeed;

@@ -23,7 +23,7 @@
 
 @property (assign, readonly, nonatomic) NSInteger state;
 
-- (id)initWithFrame:(CGRect)frame trigger:(void(^)())trigger;
+//- (id)initWithFrame:(CGRect)frame trigger:(void(^)())trigger;
 
 - (id)initWithFrame:(CGRect)frame changes:(NSArray *)changes level:(BDLevel *)level;
 
