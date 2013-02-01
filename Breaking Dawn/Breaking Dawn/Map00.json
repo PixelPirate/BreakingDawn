@@ -13,7 +13,7 @@
         "Hotspots"  : [{
                         "Area"    : [1196, 663, 80, 60],
                         "Changes" : [{
-                                      "AddLights"     : [[420, 505]],
+                                      "AddLights"     : [[390, 585]],
                                       "AddTrapLights" : [{
                                                          "Position" : [580, 400],
                                                          "Duration" : 1.5,
@@ -22,7 +22,7 @@
                                       "RemoveLights"  : [[1552, 208], [1423, 416]]
                                      },{
                                       "AddLights" : [[1552, 208], [1423, 416]],
-                                      "RemoveLights" : [[420, 505], [580, 400]]
+                                      "RemoveLights" : [[390, 585], [580, 400]]
                                      }],
                         "Repeat"  : true,
                         "Normal"    : {
