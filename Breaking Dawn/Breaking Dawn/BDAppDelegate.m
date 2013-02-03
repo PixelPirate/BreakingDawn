@@ -27,7 +27,7 @@
     [[NSUserDefaults standardUserDefaults] setFloat:2.0 forKey:@"WalkingSpeed"];
     [[NSUserDefaults standardUserDefaults] setFloat:2.5 forKey:@"MobWalkingSpeed"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DebugMenu"];
-    [[NSUserDefaults standardUserDefaults] setFloat:1/30.0 forKey:@"DrawRate"];
+    [[NSUserDefaults standardUserDefaults] setFloat:1.0/30.0 forKey:@"DrawRate"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SimultanousMonsterSounds"];
     [[NSUserDefaults standardUserDefaults] setFloat:90.0 forKey:@"DefaultLightRadius"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"RealisticLighting"];

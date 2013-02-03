@@ -10,6 +10,10 @@
 		872F6BCB16B860920064D617 /* credits-scroll00.png in Resources */ = {isa = PBXBuildFile; fileRef = 872F6BCA16B860920064D617 /* credits-scroll00.png */; };
 		872F6BCF16B86AF90064D617 /* map00-bed-bright-eyes-open00.png in Resources */ = {isa = PBXBuildFile; fileRef = 872F6BCE16B86AF90064D617 /* map00-bed-bright-eyes-open00.png */; };
 		872F6BD116B86AFC0064D617 /* map00-bed-bright-eyes-closed00.png in Resources */ = {isa = PBXBuildFile; fileRef = 872F6BD016B86AFC0064D617 /* map00-bed-bright-eyes-closed00.png */; };
+		873F44BA16BE6C6D00BD3DAB /* BDLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 873F44B916BE6C6D00BD3DAB /* BDLight.m */; };
+		873F44BE16BE6F3A00BD3DAB /* BDTimedLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 873F44BD16BE6F3A00BD3DAB /* BDTimedLight.m */; };
+		873F44C116BE6F4500BD3DAB /* BDTrapLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 873F44C016BE6F4500BD3DAB /* BDTrapLight.m */; };
+		873F44C416BE6F6700BD3DAB /* BDRegularLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 873F44C316BE6F6700BD3DAB /* BDRegularLight.m */; };
 		8754331916BA9EAE004BCFAF /* BDVectorizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754331816BA9EAE004BCFAF /* BDVectorizer.m */; };
 		8754331D16BA9EBB004BCFAF /* BDCornerDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754331C16BA9EBB004BCFAF /* BDCornerDetector.m */; };
 		8754332616BB0464004BCFAF /* Map00.json in Resources */ = {isa = PBXBuildFile; fileRef = 8754332516BB0464004BCFAF /* Map00.json */; };
@@ -128,6 +132,14 @@
 		872F6BCA16B860920064D617 /* credits-scroll00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "credits-scroll00.png"; sourceTree = "<group>"; };
 		872F6BCE16B86AF90064D617 /* map00-bed-bright-eyes-open00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map00-bed-bright-eyes-open00.png"; sourceTree = "<group>"; };
 		872F6BD016B86AFC0064D617 /* map00-bed-bright-eyes-closed00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map00-bed-bright-eyes-closed00.png"; sourceTree = "<group>"; };
+		873F44B816BE6C6D00BD3DAB /* BDLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDLight.h; sourceTree = "<group>"; };
+		873F44B916BE6C6D00BD3DAB /* BDLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDLight.m; sourceTree = "<group>"; };
+		873F44BC16BE6F3A00BD3DAB /* BDTimedLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDTimedLight.h; sourceTree = "<group>"; };
+		873F44BD16BE6F3A00BD3DAB /* BDTimedLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDTimedLight.m; sourceTree = "<group>"; };
+		873F44BF16BE6F4500BD3DAB /* BDTrapLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDTrapLight.h; sourceTree = "<group>"; };
+		873F44C016BE6F4500BD3DAB /* BDTrapLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDTrapLight.m; sourceTree = "<group>"; };
+		873F44C216BE6F6700BD3DAB /* BDRegularLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDRegularLight.h; sourceTree = "<group>"; };
+		873F44C316BE6F6700BD3DAB /* BDRegularLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDRegularLight.m; sourceTree = "<group>"; };
 		8754331716BA9EAE004BCFAF /* BDVectorizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDVectorizer.h; sourceTree = "<group>"; };
 		8754331816BA9EAE004BCFAF /* BDVectorizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDVectorizer.m; sourceTree = "<group>"; };
 		8754331B16BA9EBB004BCFAF /* BDCornerDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDCornerDetector.h; sourceTree = "<group>"; };
@@ -380,6 +392,14 @@
 				87A5377816B3DF2500F7C6DB /* BDMob.m */,
 				87E7BAF016B9357400B6DD5C /* BDLightView.h */,
 				87E7BAF116B9357400B6DD5C /* BDLightView.m */,
+				873F44B816BE6C6D00BD3DAB /* BDLight.h */,
+				873F44B916BE6C6D00BD3DAB /* BDLight.m */,
+				873F44BC16BE6F3A00BD3DAB /* BDTimedLight.h */,
+				873F44BD16BE6F3A00BD3DAB /* BDTimedLight.m */,
+				873F44BF16BE6F4500BD3DAB /* BDTrapLight.h */,
+				873F44C016BE6F4500BD3DAB /* BDTrapLight.m */,
+				873F44C216BE6F6700BD3DAB /* BDRegularLight.h */,
+				873F44C316BE6F6700BD3DAB /* BDRegularLight.m */,
 				8754331716BA9EAE004BCFAF /* BDVectorizer.h */,
 				8754331816BA9EAE004BCFAF /* BDVectorizer.m */,
 				8754331B16BA9EBB004BCFAF /* BDCornerDetector.h */,
@@ -739,6 +759,10 @@
 				87E7BAF216B9357400B6DD5C /* BDLightView.m in Sources */,
 				8754331916BA9EAE004BCFAF /* BDVectorizer.m in Sources */,
 				8754331D16BA9EBB004BCFAF /* BDCornerDetector.m in Sources */,
+				873F44BA16BE6C6D00BD3DAB /* BDLight.m in Sources */,
+				873F44BE16BE6F3A00BD3DAB /* BDTimedLight.m in Sources */,
+				873F44C116BE6F4500BD3DAB /* BDTrapLight.m in Sources */,
+				873F44C416BE6F6700BD3DAB /* BDRegularLight.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

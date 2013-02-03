@@ -123,9 +123,9 @@
 
 //@property (assign, readwrite, nonatomic) BOOL lightSwitchVisible;
 
-- (id)initWithName:(NSString *)name;
+//- (id)initWithName:(NSString *)name;
 
-- (id)initWithContentsOfFileNamed:(NSString *)fileName;
+- (id)initWithLevelNamed:(NSString *)fileName;
 
 
 //+ (BDLevel *)levelNamed:(NSString *)name;

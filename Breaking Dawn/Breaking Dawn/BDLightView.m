@@ -44,7 +44,6 @@ static inline BOOL CircleContainsCGPoint(const CGPoint *center, const CGFloat *r
 - (void)drawRect:(CGRect)rect
 {
     // Drawing realistic light using the collision map from level
-    
     CGPoint center = CGPointMake(self.bounds.size.width / 2.0, self.bounds.size.height / 2.0);
     
     NSArray *corners = self.level.corners;

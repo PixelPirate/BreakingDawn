@@ -14,6 +14,8 @@
 #import "BDHotspot.h"
 #import "BDSound.h"
 #import "BDVectorizer.h"
+#import "BDLight.h"
+#import "BDPlayer.h"
 
 @interface BDLevel () // Private setter
 
@@ -41,72 +43,14 @@
 
 @property (strong, readwrite, nonatomic) NSDate *levelStartingDate;
 
+@property (strong, readwrite, nonatomic) NSDate *previousEvaluationDate;
+
 //- (void)loadLightmap;
 
 @end
 
 
 @implementation BDLevel
-
-- (id)initWithName:(NSString *)name
-{/*
-    self = [super init];
-    if (self) {
-        self.diffuseMap = [UIImage imageNamed:[name stringByAppendingString:@"_diffuse"]];
-        UIImage *collision = [UIImage imageNamed:[name stringByAppendingString:@"_collision"]];
-        self.collisionMap = [[BDImageMap alloc] initWithUIImage:collision];
-        
-        self.lights = [NSMutableArray array];
-        NSURL *url = [[[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:@"map00.plist"] filePathURL];
-        NSDictionary *mapInfos = [NSDictionary dictionaryWithContentsOfURL:url];
-        
-        NSArray *pointLights = [self valuesWithPositions:mapInfos[@"Stages"][0][@"Lights"]];
-        [self.lights addObjectsFromArray:pointLights];
-        
-        // Load lightmap from file or generate it if file is missing
-//        UIImage *light = [UIImage imageNamed:[name stringByAppendingString:@"_light"]];
-//        if (light) {
-//            self.lightMap = [[BDImageMap alloc] initWithUIImage:light];
-//        } else {
-//            [self loadLightmap];
-//        }
-        
-        self.lightScale = 1.0;
-        
-        self.mobs = [NSMutableArray array];
-        [self.mobs addObject:[[BDMob alloc] initWithPosition:CGPointMake(300, 350)]];
-        NSArray *mobSpawns = [self valuesWithPositions:mapInfos[@"Stages"][0][@"Monsters"]];
-        for (NSValue *pointRep in mobSpawns) {
-            CGPoint position = pointRep.CGPointValue;
-            [self.mobs addObject:[[BDMob alloc] initWithPosition:position]];
-        }
-        
-        CGSize imageSize = self.diffuseMap.size;
-        
-        CGPoint spawn = CGPointZero;
-        spawn = [[self valueWithPositionDictionary:mapInfos[@"Stages"][0][@"Spawn"]] CGPointValue];
-        self.spawn = spawn;
-        
-        self.size = imageSize;
-        
-        self.hotspots = [NSMutableArray array];
-        [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(1196, 663, 80, 60) trigger:^{
-            [[BDSound sharedSound] playSound:SOUND_LIGHT_SWITCH];
-            // The model (BDLevel) notifies it's view (BDLevelView) that the data has been changed and the view shoud refresh itselve.
-            NSArray *pointLights = [self valuesWithPositions:mapInfos[@"Stages"][1][@"Lights"]];
-            //self.lightSwitchVisible = NO;
-            [self.delegate level:self didAddLights:pointLights];
-            [self.lights addObjectsFromArray:pointLights];
-        }]];
-        
-        [self.hotspots addObject:[[BDHotspot alloc] initWithFrame:CGRectMake(50, 705, 80, 100) trigger:^{
-            [self.delegate levelWillWin:self];
-        }]];
-        
-        //self.lightSwitchVisible = YES;
-    }
-    return self;*/
-}
 
 - (NSArray *)NSPointsFromArrays:(NSArray *)array
 {
@@ -131,7 +75,7 @@
     return rects;
 }
 
-- (id)initWithContentsOfFileNamed:(NSString *)fileName
+- (id)initWithLevelNamed:(NSString *)fileName
 {
     self = [super init];
     if (self) {
@@ -160,26 +104,28 @@
         self.lights = [NSMutableArray arrayWithArray:lightPositions];
         self.trapLights = [NSMutableArray array];
         for (NSDictionary *trapLightInfo in trapLights) {
-            NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:trapLightInfo];
-            [dictionary setObject:[NSNumber numberWithBool:NO] forKey:@"Triggered"];
-            [self.trapLights addObject:dictionary];
+            
+            CGPoint location = CGPointMake([trapLightInfo[@"Position"][0] floatValue], [trapLightInfo[@"Position"][1] floatValue]);
+            BDLight *trapLight = [BDLight lightWithDuration:[trapLightInfo[@"Duration"] doubleValue]
+                                           reappearIntetval:[trapLightInfo[@"Reappear"] doubleValue]
+                                            playerTriggered:YES
+                                                   location:location];
+            [self.trapLights addObject:trapLight];
         }
-        for (NSDictionary *trapLightInfo in self.trapLights) {
-            NSValue *trapLight = [[self NSPointsFromArrays:@[trapLightInfo[@"Position"]]] lastObject];
-            [self.lights addObject:trapLight];
+        for (BDLight *trapLightInfo in self.trapLights) {
+            [self.lights addObject:[NSValue valueWithCGPoint:trapLightInfo.location]];
         }
         self.timedLights = [NSMutableArray array];
         for (NSDictionary *timedLightInfo in timedLights) {
-            NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:timedLightInfo];
-            [dictionary setObject:[NSNumber numberWithBool:NO] forKey:@""];
-            NSValue *position = [[self NSPointsFromArrays:@[timedLightInfo[@"Position"]]] lastObject];
-            [dictionary setObject:position forKey:@"Position"];
-            [dictionary setObject:[NSNumber numberWithBool:NO] forKey:@"Appearing"];
-            [dictionary setObject:timedLightInfo[@"Reappear"] forKey:@"ReappearingDate"];
-            [dictionary setObject:timedLightInfo[@"Disappear"] forKey:@"DisappearingDate"];
             
-            [self.timedLights addObject:dictionary];
-            [self.lights addObject:position];
+            CGPoint location = CGPointMake([timedLightInfo[@"Position"][0] floatValue], [timedLightInfo[@"Position"][1] floatValue]);
+            BDLight *timedLight = [BDLight lightWithDuration:[timedLightInfo[@"Disappear"] floatValue]
+                                            reappearIntetval:[timedLightInfo[@"Reappear"] floatValue]
+                                             playerTriggered:NO
+                                                    location:location];
+                        
+            [self.timedLights addObject:timedLight];
+            [self.lights addObject:[NSValue valueWithCGPoint:location]];
         }
         
         self.lightScale = 1.0;
@@ -299,7 +245,7 @@
 
 + (BDLevel *)levelNamed:(NSString *)name
 {
-    BDLevel *level = [[BDLevel alloc] initWithName:name];
+    BDLevel *level = [[BDLevel alloc] initWithLevelNamed:name];
     return level;
 }
 
@@ -475,81 +421,50 @@ CGFloat dotProduct(const CGPoint p1, const CGPoint p2) {
 */
 - (void)evaluateLightsForPlayerAtPosition:(CGPoint)position
 {
-    BOOL(^CircleContainsPoint)(CGPoint center, CGFloat radius, CGPoint p) = ^(CGPoint center, CGFloat radius, CGPoint p) {
-        if ((pow(p.x-center.x, 2.0) + pow(p.y - center.y, 2.0)) < pow(radius, 2.0)) {
-            return YES;
-        } else {
-            return NO;
-        }
-    };
+    NSTimeInterval delta = 0.0;
     
     // Trap lights
     CGFloat radius = 80.0 * self.lightScale;
-    for (NSMutableDictionary *trapLightInfo in self.trapLights) {
-        NSValue *center = [[self NSPointsFromArrays:@[trapLightInfo[@"Position"]]] lastObject];
-        BOOL triggered = [trapLightInfo[@"Triggered"] boolValue];
-        
-        if (CircleContainsPoint(center.CGPointValue, radius, position) && !triggered) {
-            NSTimeInterval duration = [trapLightInfo[@"Duration"] doubleValue];
-            NSTimeInterval reappear = [trapLightInfo[@"Reappear"] doubleValue];
-            [trapLightInfo setObject:[NSNumber numberWithBool:YES] forKey:@"Triggered"];
-            
-            int64_t delayInMilliseconds = duration * 1000.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self.lights removeObject:center];
-                [[BDSound sharedSound] playSound:SOUND_LIGHT_EXPLODE];
-            });
-            
-            if (reappear <= 0.0) {
-                [self.trapLights removeObject:trapLightInfo];
+    for (BDLight *trapLightInfo in self.trapLights) {
+        __weak id __self = self;
+        BDPlayer *player = [[BDPlayer alloc] initWithPosition:position];
+        [trapLightInfo evaluateForDelta:delta player:player radius:radius triggered:^(BDLight *theLight) {
+            NSValue *center = [NSValue valueWithCGPoint:theLight.location];
+            if (theLight.visible) {
+                [[__self lights] addObject:center];
             } else {
-                int64_t delayInMilliseconds = reappear * 1000.0;
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
-                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    [trapLightInfo setObject:[NSNumber numberWithBool:NO] forKey:@"Triggered"];
-                    [self.lights addObject:center];
-                });
+                [[BDSound sharedSound] playSound:SOUND_LIGHT_EXPLODE];
+                [[__self lights] removeObject:center];
             }
-        }
+        }];
     }
     
     // Timed lights
-    NSTimeInterval duration = [self.levelStartingDate timeIntervalSinceNow]; // Negative since starting time is in the past.
-    for (NSMutableDictionary *timedLightInfo in self.timedLights) {
-        NSValue *center = timedLightInfo[@"Position"];
-        CGFloat disappear = [timedLightInfo[@"Disappear"] floatValue];
-        CGFloat reappear = [timedLightInfo[@"Reappear"] floatValue];
-        CFAbsoluteTime reappearingDate = [timedLightInfo[@"ReappearingDate"] doubleValue];
-        CFAbsoluteTime disappearingDate = [timedLightInfo[@"DisappearingDate"] doubleValue];
-        
-        BOOL appearing = [timedLightInfo[@"Appearing"] boolValue];
-        
-        if (!appearing) {
-            if ((- duration) > disappearingDate) {
+    for (BDLight *timedLightInfo in self.timedLights) {
+        __weak id __self = self;
+        BDPlayer *player = [[BDPlayer alloc] initWithPosition:position];
+        [timedLightInfo evaluateForDelta:delta player:player radius:radius triggered:^(BDLight *theLight) {
+            NSValue *center = [NSValue valueWithCGPoint:theLight.location];
+            if (theLight.visible) {
+                [[__self lights] addObject:center];
+            } else {
                 [[BDSound sharedSound] playSound:SOUND_LIGHT_EXPLODE];
-                [self.lights removeObject:center];
-                
-                [timedLightInfo setObject:[NSNumber numberWithBool:YES] forKey:@"Appearing"];
-                if (reappear > 0.0) [timedLightInfo setObject:[NSNumber numberWithDouble:reappear + (-duration)]
-                                                       forKey:@"ReappearingDate"];
-                if (reappear <= 0.0) {
-                    [self.timedLights removeObject:timedLightInfo];
-                }
+                [[__self lights] removeObject:center];
             }
-        } else {
-            if ((-duration) > reappearingDate) {
-                [timedLightInfo setObject:[NSNumber numberWithDouble:disappear + (-duration)] forKey:@"DisappearingDate"];
-                [timedLightInfo setObject:[NSNumber numberWithBool:NO] forKey:@"Appearing"];
-                [self.lights addObject:center];
-            }
-        }
+        }];
     }
 }
 
 - (void)levelDidBegin
 {
     self.levelStartingDate = [NSDate date];
+    self.previousEvaluationDate = self.levelStartingDate;
+    for (BDLight *aLight in self.timedLights) {
+        [aLight setAppeared:CFAbsoluteTimeGetCurrent()];
+    }
+    for (BDLight *aLight in self.trapLights) {
+        [aLight setAppeared:CFAbsoluteTimeGetCurrent()];
+    }
 }
 
 #pragma mark - BDLevelViewDataSource implementation

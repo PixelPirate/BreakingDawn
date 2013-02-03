@@ -74,7 +74,7 @@
 {
     [super viewDidLoad];
     
-    self.currentLevel = [[BDLevel alloc] initWithContentsOfFileNamed:@"Map00.json"];
+    self.currentLevel = [[BDLevel alloc] initWithLevelNamed:@"Map00.json"];
     //[BDLevel levelNamed:@"map00"];
     self.currentLevel.delegate = self;
     self.currentLevelView = [[BDLevelView alloc] initWithLevel:self.currentLevel];

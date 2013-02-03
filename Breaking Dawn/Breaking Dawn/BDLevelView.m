@@ -180,6 +180,7 @@
 {
     if (![self.displayedLights isEqualToArray:[self.dataSource lightsInLevelView:self]]) {
         
+        //TODO: Instead of removing everything, make a list of new and lost objects.
         [self.lightLayer.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [self.displayedLights removeAllObjects];
         [self.flickeringLightsTimers makeObjectsPerformSelector:@selector(invalidate)];
@@ -236,6 +237,8 @@
         }
     }
     
+    
+    //TODO: Instead of removing everything, make a list of new and lost objects.
     [self.decalViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.decalViews removeAllObjects];
     for (NSDictionary *decal in self.level.decals) {
@@ -249,13 +252,10 @@
     for (UIView *view in self.decalViews) {
         [self addSubview:view];
     }
-    
-    //self.lightSwitch.hidden = ![self.dataSource lightSwitchIsVisibleInLevelView:self];
 }
 
 - (void)flicker:(NSTimer *)timer
 {
-    //NSLog(@"%@", timer);
     id obj = timer.userInfo;
     if ([obj isKindOfClass:[UIView class]]) {
         UIView *view = obj;

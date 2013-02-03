@@ -17,7 +17,7 @@
                                       "AddTrapLights" : [{
                                                          "Position" : [580, 400],
                                                          "Duration" : 1.5,
-                                                         "Reappear" : 0
+                                                         "Reappear" : 0.0
                                                          }],
                                       "RemoveLights"  : [[1552, 208], [1423, 416]]
                                      },{

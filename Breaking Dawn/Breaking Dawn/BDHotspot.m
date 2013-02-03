@@ -9,6 +9,7 @@
 #import "BDHotspot.h"
 #import "BDLevel.h"
 #import "BDSound.h"
+#import "BDLight.h"
 
 typedef void (^BDTrigger)(void);
 
@@ -71,15 +72,21 @@ typedef void (^BDTrigger)(void);
             NSArray *addedTrapLights = change[@"AddTrapLights"];
             
             for (NSArray *positionRep in removedLights) {
+                // Remove normal lights.
                 NSValue *position = [NSValue valueWithCGPoint:CGPointMake([positionRep[0] floatValue], [positionRep[1] floatValue])];
                 [level.lights removeObject:position];
+                
+                // Remove trap lights.
                 [level.trapLights filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-                    NSArray *pos = [evaluatedObject objectForKey:@"Position"];
-                    NSValue *aPosition = [NSValue valueWithCGPoint:CGPointMake([pos[0] floatValue], [pos[1] floatValue])];
+                    BDLight *light = evaluatedObject;
+                    NSValue *aPosition = [NSValue valueWithCGPoint:light.location];
                     return ![position isEqualToValue:aPosition];
                 }]];
+                
+                // Remove timed lights.
                 [level.timedLights filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-                    NSValue *aPosition = [evaluatedObject objectForKey:@"Position"];
+                    BDLight *light = evaluatedObject;
+                    NSValue *aPosition = [NSValue valueWithCGPoint:light.location];
                     return ![position isEqualToValue:aPosition];
                 }]];
             }
@@ -89,16 +96,28 @@ typedef void (^BDTrigger)(void);
                 [level.lights addObject:position];
             }
             
-            for (NSArray *positionRep in addedTimeLights) {
-                NSValue *position = [NSValue valueWithCGPoint:CGPointMake([positionRep[0] floatValue], [positionRep[1] floatValue])];
+            for (NSDictionary *timedLightInfo in addedTimeLights) {
+                NSArray *positionInfo = timedLightInfo[@"Position"];
+                NSValue *position = [NSValue valueWithCGPoint:CGPointMake([positionInfo[0] floatValue], [positionInfo[1] floatValue])];
+                
+                BDLight *timedLight = [BDLight lightWithDuration:[timedLightInfo[@"Disappear"] floatValue]
+                                                reappearIntetval:[timedLightInfo[@"Reappear"] floatValue]
+                                                 playerTriggered:NO
+                                                        location:position.CGPointValue];
+                
+                [level.timedLights addObject:timedLight];
+                [level.lights addObject:position];
             }
             
             for (NSDictionary *trapLightInfo in addedTrapLights) {
-                NSMutableDictionary *trapLight = [NSMutableDictionary dictionaryWithDictionary:trapLightInfo];
-                [trapLight setObject:[NSNumber numberWithBool:NO] forKey:@"Triggered"];
-                
-                NSArray *positionInfo = trapLight[@"Position"];
+                NSArray *positionInfo = trapLightInfo[@"Position"];
                 NSValue *position = [NSValue valueWithCGPoint:CGPointMake([positionInfo[0] floatValue], [positionInfo[1] floatValue])];
+                
+                BDLight *trapLight = [BDLight lightWithDuration:[trapLightInfo[@"Duration"] floatValue]
+                                               reappearIntetval:[trapLightInfo[@"Reappear"] floatValue]
+                                                playerTriggered:YES
+                                                       location:position.CGPointValue];
+                
                 [level.trapLights addObject:trapLight];
                 [level.lights addObject:position];
             }
