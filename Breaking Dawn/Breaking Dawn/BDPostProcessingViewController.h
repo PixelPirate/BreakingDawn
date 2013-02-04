@@ -12,7 +12,7 @@
 
 @interface BDPostProcessingViewController : UIViewController
 
-@property (strong, readwrite, nonatomic) UIView *flickerView;
+@property (weak, readwrite, nonatomic) UIView *flickerView;
 
 + (NSArray *)noiseTextures;
 

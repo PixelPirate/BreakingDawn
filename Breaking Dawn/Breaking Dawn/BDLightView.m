@@ -13,9 +13,9 @@
 
 @property (assign, readwrite, nonatomic) CGFloat radius;
 
-@property (assign, readwrite, nonatomic) BDImageMap *collisionMap;
+@property (weak, readwrite, nonatomic) BDImageMap *collisionMap;
 
-@property (strong, readwrite, nonatomic) BDLevel *level;
+@property (weak, readwrite, nonatomic) BDLevel *level;
 
 @end
 

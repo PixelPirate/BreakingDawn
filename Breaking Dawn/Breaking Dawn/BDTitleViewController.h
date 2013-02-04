@@ -10,6 +10,6 @@
 
 @interface BDTitleViewController : UIViewController
 
-- (void)restartGame;
+- (void)presentTitleScreen;
 
 @end

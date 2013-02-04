@@ -34,10 +34,9 @@
         self.bytesPerRow = self.bytesPerPixel * width;
         NSUInteger bitsPerComponent = 8;
         
-        unsigned const char *rawData;
+        unsigned const char *rawData = (unsigned char *)calloc(height * width * 4, sizeof(unsigned char));
         // First get the image into your data buffer
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-        rawData = (unsigned char*) calloc(height * width * 4, sizeof(unsigned char));
         CGContextRef context = CGBitmapContextCreate((void *)rawData, width, height,
                                                      bitsPerComponent, self.bytesPerRow, colorSpace,
                                                      kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);

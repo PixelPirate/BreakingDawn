@@ -14,15 +14,23 @@
 @interface BDSound ()
 
 @property (strong, readwrite, nonatomic) BDPlayer *player;
+
 @property (strong, readwrite, nonatomic) NSTimer *heartbeatTimer;
-@property (readwrite, nonatomic) BDAudioContainer *heart;
-@property (readwrite, nonatomic) NSMutableArray *monsters;
-@property (readwrite, nonatomic) NSMutableArray *sounds;
+
+@property (strong, readwrite, nonatomic) BDAudioContainer *heart;
+
+@property (strong, readwrite, nonatomic) NSMutableArray *monsters;
+
+@property (strong, readwrite, nonatomic) NSMutableArray *sounds;
+
 @property (strong, readwrite, nonatomic) NSDictionary *namedSounds;
-@property (readwrite, nonatomic) NSMutableArray *blockedMonsterSoundIDs;
+
+@property (strong, readwrite, nonatomic) NSMutableArray *blockedMonsterSoundIDs;
+
 @property (strong, readwrite, nonatomic) BDAudioContainer *creditsPlayer;
 
 @end
+
 
 @implementation BDSound
 
@@ -111,8 +119,8 @@
 - (void)beginHeartbeatForPlayer:(BDPlayer *)player
 {
     self.player = player;
-    self.bpm = 60 + self.player.adrenalin*120;
-    self.heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:60.0/self.bpm
+    self.bpm = 60 + self.player.adrenalin * 120;
+    self.heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 / self.bpm
                                                            target:self
                                                          selector:@selector(tickHeart:)
                                                          userInfo:nil

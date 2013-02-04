@@ -31,7 +31,7 @@
 
 @property (strong, readwrite, nonatomic) NSTimer *pulseTimer;
 
-@property (strong, readwrite, nonatomic) BDLevel *level;
+@property (weak, readwrite, nonatomic) BDLevel *level;
 
 @property (strong, readwrite, nonatomic) UIImageView *lightSwitch;
 
@@ -108,20 +108,6 @@
         }
         
         self.decalViews = [NSMutableArray array];
-        
-//        self.lightSwitch = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lightSwitchLight.png"]];
-//        self.lightSwitch.frame = CGRectMake(1224*scale,
-//                                            642*scale,
-//                                            self.lightSwitch.image.size.width*scale,
-//                                            self.lightSwitch.image.size.height*scale);
-//        [self addSubview:self.lightSwitch];
-//        
-//        self.exitImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exit-ligher.png"]];
-//        self.exitImage.frame = CGRectMake(50*scale,
-//                                          (800-186)*scale,
-//                                          self.exitImage.image.size.width*scale,
-//                                          self.exitImage.image.size.height*scale);
-//        [self addSubview:self.exitImage];
     }
     return self;
 }

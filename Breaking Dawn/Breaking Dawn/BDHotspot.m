@@ -32,19 +32,6 @@ typedef void (^BDTrigger)(void);
 
 @implementation BDHotspot
 
-//- (id)initWithFrame:(CGRect)frame trigger:(void (^)())trigger
-//{
-//    self = [super init];
-//    if (self) {
-//        self.frame = frame;
-//        self.trigger = trigger;
-//        self.toggle = NO;
-//        self.active = YES;
-//        self.state = 0;
-//    }
-//    return self;
-//}
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super init];
@@ -59,12 +46,14 @@ typedef void (^BDTrigger)(void);
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame changes:(NSArray *)changes level:(BDLevel *)level
+- (id)initWithFrame:(CGRect)frame changes:(NSArray *)changes level:(BDLevel *)_level
 {
     self = [self initWithFrame:frame];
     if (self) {
+        __weak BDLevel *level = _level;
+        __weak BDHotspot *__self = self;
         self.trigger = ^{
-            NSDictionary *change = changes[self.changeIndex % changes.count];
+            NSDictionary *change = changes[__self.changeIndex % changes.count];
             self.changeIndex ++;
             NSArray *removedLights = change[@"RemoveLights"];
             NSArray *addedLights = change[@"AddLights"];
@@ -122,14 +111,14 @@ typedef void (^BDTrigger)(void);
                 [level.lights addObject:position];
             }
             
-            switch (self.state) {
+            switch (__self.state) {
                 case 0: // Inactive decal
-                    [level exchangeDecal:self.activeDecal withDecal:self.inactiveDecal];
-                    [[BDSound sharedSound] playSoundNamed:self.inactiveDecal[@"Sound"]];
+                    [level exchangeDecal:__self.activeDecal withDecal:__self.inactiveDecal];
+                    [[BDSound sharedSound] playSoundNamed:__self.inactiveDecal[@"Sound"]];
                     break;
                 case 1: // Active decal
-                    [level exchangeDecal:self.inactiveDecal withDecal:self.activeDecal];
-                    [[BDSound sharedSound] playSoundNamed:self.activeDecal[@"Sound"]];
+                    [level exchangeDecal:__self.inactiveDecal withDecal:__self.activeDecal];
+                    [[BDSound sharedSound] playSoundNamed:__self.activeDecal[@"Sound"]];
                     break;
                 default:
                     break;
@@ -141,10 +130,11 @@ typedef void (^BDTrigger)(void);
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame stageChange:(NSString *)stage level:(BDLevel *)level
+- (id)initWithFrame:(CGRect)frame stageChange:(NSString *)stage level:(BDLevel *)_level
 {
     self = [self initWithFrame:frame];
     if (self) {
+        __weak BDLevel *level = _level;
         self.trigger = ^{
             switch (self.state) {
                 case 0: // Inactive decal
@@ -161,10 +151,11 @@ typedef void (^BDTrigger)(void);
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame levelChange:(NSString *)levelName level:(BDLevel *)level
+- (id)initWithFrame:(CGRect)frame levelChange:(NSString *)levelName level:(BDLevel *)_level
 {
     self = [self initWithFrame:frame];
     if (self) {
+        __weak BDLevel *level = _level;
         self.trigger = ^{
             if ([levelName isEqualToString:@"Credits"]) {
                 [level.delegate levelWillWin:level];

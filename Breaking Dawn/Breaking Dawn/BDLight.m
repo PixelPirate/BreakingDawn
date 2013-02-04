@@ -64,8 +64,7 @@
                                                   playerTriggered:NO
                                                          location:location];
         self = light;
-    }
-    if (playerTriggered) {
+    } else if (playerTriggered) {
         BDLight *light = [[BDTrapLight alloc] initWithDuration:duration
                                               reappearIntetval:reappear
                                                playerTriggered:YES

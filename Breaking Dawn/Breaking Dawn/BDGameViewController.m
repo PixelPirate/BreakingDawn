@@ -75,7 +75,6 @@
     [super viewDidLoad];
     
     self.currentLevel = [[BDLevel alloc] initWithLevelNamed:@"Map00.json"];
-    //[BDLevel levelNamed:@"map00"];
     self.currentLevel.delegate = self;
     self.currentLevelView = [[BDLevelView alloc] initWithLevel:self.currentLevel];
     
@@ -144,6 +143,11 @@
     [self.postProcessingViewController.view removeFromSuperview];
     self.postProcessingViewController.flickerView = nil;
     self.postProcessingViewController = nil;
+    
+    [self.playerView removeFromSuperview];
+    self.playerView = nil;
+    [self.currentLevelView removeFromSuperview];
+    self.currentLevelView = nil;
 }
 
 - (void)pushTouch:(UITouch *)touch
@@ -304,12 +308,8 @@
     [self.sound endHeartbeat];
 
     // Cannot nil the level views, they are still used for the transition to the game over screen.
-//    self.currentLevel = nil;
-//    [self.currentLevelView removeFromSuperview];
-//    self.currentLevelView = nil;
-//    self.player = nil;
-//    [self.playerView removeFromSuperview];
-//    self.playerView = nil;
+    self.currentLevel = nil;
+    self.player = nil;
 }
 
 - (void)gameDidEnd

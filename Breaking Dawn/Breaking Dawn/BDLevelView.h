@@ -19,16 +19,14 @@
 
 - (CGFloat)lightScaleInLevelView:(BDLevelView *)levelView;
 
-//- (BOOL)lightSwitchIsVisibleInLevelView:(BDLevelView *)levelView;
-
 @end
 
 
 @interface BDLevelView : UIView
 
-@property (strong, readwrite, nonatomic) id<BDLevelViewDataSource> dataSource;
+@property (weak, readwrite, nonatomic) id<BDLevelViewDataSource> dataSource;
 
-@property (strong, readonly, nonatomic) BDLevel *level;
+@property (weak, readonly, nonatomic) BDLevel *level;
 
 @property (strong, readonly, nonatomic) UIView *playerLayer;
 

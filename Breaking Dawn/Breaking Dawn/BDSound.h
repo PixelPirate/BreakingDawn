@@ -23,8 +23,6 @@ enum {
 
 + (BDSound *)sharedSound;
 
-//- (id)initWithPlayer:(BDPlayer *)player;
-
 - (void)playSound:(int)soundId;
 
 - (void)playSoundNamed:(NSString *)name;

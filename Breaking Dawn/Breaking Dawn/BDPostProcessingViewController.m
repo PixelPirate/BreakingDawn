@@ -21,6 +21,7 @@
 
 @end
 
+
 @implementation BDPostProcessingViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -98,8 +99,6 @@
     [_noiseTimer invalidate];
 }
 
-
-
 - (void)changeNoise
 {
     NSArray *noiseTextures = [BDPostProcessingViewController noiseTextures];
@@ -117,36 +116,38 @@
 
 - (void)static
 {
-    self.flickerView.alpha = 1.0;
+    UIView *flickerView = self.flickerView; // Capture the view strongly here.
+    
+    flickerView.alpha = 1.0;
     
     int64_t delayInMilliseconds = 300;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        self.flickerView.alpha = 0.3;
+        flickerView.alpha = 0.3;
         int64_t delayInMilliseconds = 300;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            self.flickerView.alpha = 0.9;
+            flickerView.alpha = 0.9;
             int64_t delayInMilliseconds = 100;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                self.flickerView.alpha = 0.1;
+                flickerView.alpha = 0.1;
                 int64_t delayInMilliseconds = 200;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    self.flickerView.alpha = 0.4;
+                    flickerView.alpha = 0.4;
                     int64_t delayInMilliseconds = 500;
                     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
                     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                        self.flickerView.alpha = 0.2;
+                        flickerView.alpha = 0.2;
                         int64_t delayInMilliseconds = 300;
                         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
                         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                            self.flickerView.alpha = 0.8;
+                            flickerView.alpha = 0.8;
                             int64_t delayInMilliseconds = 4500;
                             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
                             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                                self.flickerView.alpha = 0.4;
+                                flickerView.alpha = 0.4;
                             });
                         });
                     });

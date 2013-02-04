@@ -83,7 +83,7 @@
 - (void)restartGame
 {
     BDAppDelegate *d = [[UIApplication sharedApplication] delegate];
-    [d.titleViewController restartGame];
+    [d.titleViewController presentTitleScreen];
 }
 
 - (void)didReceiveMemoryWarning

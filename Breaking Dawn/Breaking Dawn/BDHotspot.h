@@ -23,8 +23,6 @@
 
 @property (assign, readonly, nonatomic) NSInteger state;
 
-//- (id)initWithFrame:(CGRect)frame trigger:(void(^)())trigger;
-
 - (id)initWithFrame:(CGRect)frame changes:(NSArray *)changes level:(BDLevel *)level;
 
 - (id)initWithFrame:(CGRect)frame stageChange:(NSString *)stage level:(BDLevel *)level;

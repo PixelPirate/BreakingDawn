@@ -169,7 +169,7 @@
     [[BDSound sharedSound] stopCredits];
     [self.blinkTimer invalidate];
     BDAppDelegate *d = [[UIApplication sharedApplication] delegate];
-    [d.titleViewController restartGame];
+    [d.titleViewController presentTitleScreen];
 }
 
 - (void)didReceiveMemoryWarning

@@ -17,6 +17,22 @@
 
 @property (strong, readwrite, nonatomic) UIImageView *playerImageView;
 
+@property (strong, readwrite, nonatomic) NSArray *upright;
+
+@property (strong, readwrite, nonatomic) NSArray *up;
+
+@property (strong, readwrite, nonatomic) NSArray *upleft;
+
+@property (strong, readwrite, nonatomic) NSArray *left;
+
+@property (strong, readwrite, nonatomic) NSArray *leftdown;
+
+@property (strong, readwrite, nonatomic) NSArray *down;
+
+@property (strong, readwrite, nonatomic) NSArray *rightdown;
+
+@property (strong, readwrite, nonatomic) NSArray *right;
+
 @end
 
 
@@ -39,6 +55,31 @@
         [self addSubview:self.playerImageView];
         
         self.player.delegate = self;
+        
+        self.upright = @[[UIImage imageNamed:@"player00-move-back-right-01"],
+                         [UIImage imageNamed:@"player00-move-back-right-02"],
+                         [UIImage imageNamed:@"player00-move-back-right-03"]];
+        self.up = @[[UIImage imageNamed:@"player00-move-back-01"],
+                    [UIImage imageNamed:@"player00-move-back-02"],
+                    [UIImage imageNamed:@"player00-move-back-03"]];
+        self.upleft = @[[UIImage imageNamed:@"player00-move-back-left-01"],
+                        [UIImage imageNamed:@"player00-move-back-left-02"],
+                        [UIImage imageNamed:@"player00-move-back-left-03"]];
+        self.left = @[[UIImage imageNamed:@"player00-move-left-01"],
+                      [UIImage imageNamed:@"player00-move-left-02"],
+                      [UIImage imageNamed:@"player00-move-left-03"]];
+        self.leftdown = @[[UIImage imageNamed:@"player00-move-front-left-01"],
+                          [UIImage imageNamed:@"player00-move-front-left-02"],
+                          [UIImage imageNamed:@"player00-move-front-left-03"]];
+        self.down = @[[UIImage imageNamed:@"player00-move-front-01"],
+                      [UIImage imageNamed:@"player00-move-front-02"],
+                      [UIImage imageNamed:@"player00-move-front-03"]];
+        self.rightdown = @[[UIImage imageNamed:@"player00-move-front-right-01"],
+                           [UIImage imageNamed:@"player00-move-front-right-02"],
+                           [UIImage imageNamed:@"player00-move-front-right-03"]];
+        self.right = @[[UIImage imageNamed:@"player00-move-right-01"],
+                       [UIImage imageNamed:@"player00-move-right-02"],
+                       [UIImage imageNamed:@"player00-move-right-03"]];
     }
     return self;
 }
@@ -69,34 +110,25 @@
     angle = angle * 180.0 / M_PI;
     angle = (angle < 0.0) ? angle + 360.0 : angle;
     
-    NSArray *upright = @[[UIImage imageNamed:@"player00-move-back-right-01"], [UIImage imageNamed:@"player00-move-back-right-02"], [UIImage imageNamed:@"player00-move-back-right-03"]];
-    NSArray *up = @[[UIImage imageNamed:@"player00-move-back-01"], [UIImage imageNamed:@"player00-move-back-02"], [UIImage imageNamed:@"player00-move-back-03"]];
-    NSArray *upleft = @[[UIImage imageNamed:@"player00-move-back-left-01"], [UIImage imageNamed:@"player00-move-back-left-02"], [UIImage imageNamed:@"player00-move-back-left-03"]];
-    NSArray *left = @[[UIImage imageNamed:@"player00-move-left-01"], [UIImage imageNamed:@"player00-move-left-02"], [UIImage imageNamed:@"player00-move-left-03"]];
-    NSArray *leftdown = @[[UIImage imageNamed:@"player00-move-front-left-01"], [UIImage imageNamed:@"player00-move-front-left-02"], [UIImage imageNamed:@"player00-move-front-left-03"]];
-    NSArray *down = @[[UIImage imageNamed:@"player00-move-front-01"], [UIImage imageNamed:@"player00-move-front-02"], [UIImage imageNamed:@"player00-move-front-03"]];
-    NSArray *rightdown = @[[UIImage imageNamed:@"player00-move-front-right-01"], [UIImage imageNamed:@"player00-move-front-right-02"], [UIImage imageNamed:@"player00-move-front-right-03"]];
-    NSArray *right = @[[UIImage imageNamed:@"player00-move-right-01"], [UIImage imageNamed:@"player00-move-right-02"], [UIImage imageNamed:@"player00-move-right-03"]];
-    
     static NSUInteger index = 0;
     index += s;
     
     if (angle > 292.5 && angle < 337.5) {
-        self.playerImageView.image = upright[index % upright.count];
+        self.playerImageView.image = _upright[index % _upright.count];
     } else if (angle > 337.5 || angle < 22.5) {
-        self.playerImageView.image = up[index % up.count];
+        self.playerImageView.image = _up[index % _up.count];
     } else if (angle > 22.5 && angle < 67.5) {
-        self.playerImageView.image = upleft[index % upleft.count];
+        self.playerImageView.image = _upleft[index % _upleft.count];
     } else if (angle > 67.5 && angle < 112.5) {
-        self.playerImageView.image = left[index % left.count];
+        self.playerImageView.image = _left[index % _left.count];
     } else if (angle > 112.5 && angle < 157.5) {
-        self.playerImageView.image = leftdown[index % leftdown.count];
+        self.playerImageView.image = _leftdown[index % _leftdown.count];
     } else if (angle > 157.5 && angle < 202.5) {
-        self.playerImageView.image = down[index % down.count];
+        self.playerImageView.image = _down[index % _down.count];
     } else if (angle > 202.5 && angle < 247.5) {
-        self.playerImageView.image = rightdown[index % rightdown.count];
+        self.playerImageView.image = _rightdown[index % _rightdown.count];
     } else {
-        self.playerImageView.image = right[index % right.count];
+        self.playerImageView.image = _right[index % _right.count];
     }
     
     CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"Scale"];

@@ -89,14 +89,8 @@
     self.titleText.alpha = 1.0;
     self.view.backgroundColor = [UIColor clearColor];
     
-    
     self.logoView.alpha = 0.0;
-//    [UIView animateWithDuration:0.5 animations:^{
-//        self.logoView.alpha = 1.0;
-//    }];
 }
-
-
 
 - (void)loadView
 {
@@ -120,7 +114,6 @@
     self.titleText.font = [UIFont fontWithName:@"Chalkduster" size:fontSize];
     
     [self.view addSubview:self.titleText];
-    
     
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
     UIEdgeInsets insets = UIEdgeInsetsMake(5.0, 0.0, 0.0, 0.0);
@@ -161,7 +154,7 @@
     }];
 }
 
-- (void)restartGame
+- (void)presentTitleScreen
 {
     [UIView animateWithDuration:2.5 delay:0.0 options:0 animations:^{
         self.gameViewController.view.alpha = 0.0;
@@ -169,15 +162,12 @@
         [self.gameViewController.view removeFromSuperview];
         self.gameViewController = nil;
         
-        self.gameViewController = [[BDGameViewController alloc] initWithNibName:nil bundle:nil];
-        
         [self.postEffectsController.view removeFromSuperview];
         self.postEffectsController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
         self.postEffectsController.view.frame = self.view.bounds;
         [self.view addSubview:self.postEffectsController.view];
         
         [UIView animateWithDuration:2.0 animations:^{
-            
             self.button.alpha = 1.0;
             self.titleText.alpha = 1.0;
             self.view.backgroundColor = [UIColor clearColor];

@@ -288,7 +288,6 @@
             canMove = NO;
             *stop = YES;
         }
-        
     }];
 
     return canMove;
@@ -301,7 +300,7 @@
     for (NSValue *light in self.lights) {
         CGPoint lightPosition = [light CGPointValue];
         
-        if([self isLineFrom:from to:to withinRadius:fakeRadius fromPoint:lightPosition]) return NO;
+        if ([self isLineFrom:from to:to withinRadius:fakeRadius fromPoint:lightPosition]) return NO;
     }
     
     return YES;
@@ -478,10 +477,5 @@ CGFloat dotProduct(const CGPoint p1, const CGPoint p2) {
 {
     return self.lightScale;
 }
-/*
-- (BOOL)lightSwitchIsVisibleInLevelView:(BDLevelView *)levelView
-{
-    return self.lightSwitchVisible;
-}
-*/
+
 @end
