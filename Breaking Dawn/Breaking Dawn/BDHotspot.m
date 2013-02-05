@@ -61,7 +61,7 @@ typedef void (^BDTrigger)(void);
             NSArray *addedTrapLights = change[@"AddTrapLights"];
             
             for (NSArray *positionRep in removedLights) {
-                // Remove normal lights.
+                // Remove lights.
                 NSValue *position = [NSValue valueWithCGPoint:CGPointMake([positionRep[0] floatValue], [positionRep[1] floatValue])];
                 [level.lights removeObject:position];
                 
@@ -80,11 +80,13 @@ typedef void (^BDTrigger)(void);
                 }]];
             }
             
+            // Add normal lights
             for (NSArray *positionRep in addedLights) {
                 NSValue *position = [NSValue valueWithCGPoint:CGPointMake([positionRep[0] floatValue], [positionRep[1] floatValue])];
                 [level.lights addObject:position];
             }
             
+            // Add timed lights
             for (NSDictionary *timedLightInfo in addedTimeLights) {
                 NSArray *positionInfo = timedLightInfo[@"Position"];
                 NSValue *position = [NSValue valueWithCGPoint:CGPointMake([positionInfo[0] floatValue], [positionInfo[1] floatValue])];
@@ -98,6 +100,7 @@ typedef void (^BDTrigger)(void);
                 [level.lights addObject:position];
             }
             
+            // Add trap lights
             for (NSDictionary *trapLightInfo in addedTrapLights) {
                 NSArray *positionInfo = trapLightInfo[@"Position"];
                 NSValue *position = [NSValue valueWithCGPoint:CGPointMake([positionInfo[0] floatValue], [positionInfo[1] floatValue])];
@@ -111,6 +114,7 @@ typedef void (^BDTrigger)(void);
                 [level.lights addObject:position];
             }
             
+            // Update graphical representation of the hotspot
             switch (__self.state) {
                 case 0: // Inactive decal
                     [level exchangeDecal:__self.activeDecal withDecal:__self.inactiveDecal];
@@ -135,13 +139,17 @@ typedef void (^BDTrigger)(void);
     self = [self initWithFrame:frame];
     if (self) {
         __weak BDLevel *level = _level;
+        __weak BDHotspot *__self = self;
         self.trigger = ^{
+            [_level loadStage:stage];
             switch (self.state) {
                 case 0: // Inactive decal
-                    [level exchangeDecal:self.activeDecal withDecal:self.inactiveDecal];
+                    [level exchangeDecal:__self.activeDecal withDecal:__self.inactiveDecal];
+                    [[BDSound sharedSound] playSoundNamed:__self.inactiveDecal[@"Sound"]];
                     break;
                 case 1: // Active decal
-                    [level exchangeDecal:self.inactiveDecal withDecal:self.activeDecal];
+                    [level exchangeDecal:__self.inactiveDecal withDecal:__self.activeDecal];
+                    [[BDSound sharedSound] playSoundNamed:__self.activeDecal[@"Sound"]];
                     break;
                 default:
                     break;
@@ -160,9 +168,10 @@ typedef void (^BDTrigger)(void);
             if ([levelName isEqualToString:@"Credits"]) {
                 [level.delegate levelWillWin:level];
             } else if ([levelName isEqualToString:@"GameOver"]) {
-                //[level.delegate levelWillLoose:level];
+                [level.delegate levelDidFail:level];
             } else {
-                //[level.delegate level:level loadLevel:levelName];
+                BDLevel *newlevel = [[BDLevel alloc] initWithLevelNamed:levelName];
+                [level.delegate level:level shouldChangeToLevel:newlevel];
             }
         };
     }

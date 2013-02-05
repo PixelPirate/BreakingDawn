@@ -47,6 +47,10 @@
 
 @property (strong, readwrite, nonatomic) NSMutableArray *decalViews;
 
+@property (strong, readwrite, nonatomic) NSMutableArray *mobViews;
+
+@property (strong, readwrite, nonatomic) NSMutableArray *displayedMobs;
+
 - (void)beginPulsating;
 
 - (void)endPulsating;
@@ -87,34 +91,22 @@
         [self.surfaceLayer addSubview:self.diffuseMapView];
         
         self.pulsatingViews = [NSMutableArray array];
+        self.decalViews = [NSMutableArray array];
+        self.mobViews = [NSMutableArray array];
+        self.displayedMobs = [NSMutableArray array];
         
         [self reloadData];
-        
-        self.pulsatingViews = [NSMutableArray array];
-        for (UIImageView *i in self.lightLayer.subviews) {
-            if ([i isKindOfClass:[UIImageView class]]) {
-                UIImageView *pulse = [[UIImageView alloc] initWithImage:self.evilLight];
-                pulse.frame = i.frame;
-                pulse.alpha = 0.0;
-                [self.lightLayer addSubview:pulse];
-                [self.pulsatingViews addObject:pulse];
-            }
-        }
-        
-        for (BDMob *mob in level.mobs) {
-            BDMobView *mobView = [[BDMobView alloc] initWithMob:mob];
-            [self.playerLayer addSubview:mobView];
-            mobView.hidden = YES;
-        }
-        
-        self.decalViews = [NSMutableArray array];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    NSLog(@"Warning, never called! Each BDLevelView leaks!");
     [self.flickeringLightsTimers makeObjectsPerformSelector:@selector(invalidate)];
+    [self.mobViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.mobViews removeAllObjects];
+    [self.displayedMobs removeAllObjects];
 }
 
 - (void)beginPulsating
@@ -128,6 +120,13 @@
 - (void)endPulsating
 {
     [self.pulseTimer invalidate];
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
+    if (newSuperview == nil) {
+        [self endPulsating];
+    }
 }
 
 - (void)pulsate
@@ -237,6 +236,19 @@
     }
     for (UIView *view in self.decalViews) {
         [self addSubview:view];
+    }
+    
+    if (![self.displayedMobs isEqualToArray:self.level.mobs]) {
+        [self.mobViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [self.mobViews removeAllObjects];
+        [self.displayedMobs removeAllObjects];
+        for (BDMob *mob in self.level.mobs) {
+            BDMobView *mobView = [[BDMobView alloc] initWithMob:mob];
+            mobView.hidden = YES;
+            [self.playerLayer addSubview:mobView];
+            [self.mobViews addObject:mobView];
+            [self.displayedMobs addObject:mob];
+        }
     }
 }
 

@@ -48,11 +48,19 @@
 
 @property (strong, readwrite, nonatomic) BDGameWinViewController *gameWinViewController;
 
+@property (assign, readwrite, nonatomic) BOOL gameInProgress;
+
 - (void)tickWithTimer:(NSTimer *)timer;
 
 - (void)adrenalinChanged;
 
 - (void)gameDidEnd;
+
+- (void)transitionToLevel:(BDLevel *)level animated:(BOOL)animated;
+
+- (void)addPostProcessingEffects;
+
+- (void)startGame;
 
 @end
 
@@ -64,7 +72,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.lastTouchLocation = CGPointZero;
-        
+        self.gameInProgress = NO;
         self.ambientMusicController = [BDAmbientMusicController sharedAmbientMusicController];
     }
     return self;
@@ -73,7 +81,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    /*
     self.currentLevel = [[BDLevel alloc] initWithLevelNamed:@"Map00.json"];
     self.currentLevel.delegate = self;
     self.currentLevelView = [[BDLevelView alloc] initWithLevel:self.currentLevel];
@@ -84,11 +92,14 @@
     self.player.adrenalinHandler = ^{
         [s adrenalinChanged];
     };
+    */
+    
+    [self transitionToLevel:[[BDLevel alloc] initWithLevelNamed:@"Map00.json"] animated:NO];
     
     self.sound = [BDSound sharedSound];
     
-    [self.currentLevelView.playerLayer addSubview:self.playerView];
-    [self.view addSubview:self.currentLevelView];
+//    [self.currentLevelView.playerLayer addSubview:self.playerView];
+//    [self.view addSubview:self.currentLevelView];
     
     self.lastTouchLocation = CGPointZero;
     
@@ -104,30 +115,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
-    self.postProcessingViewController.flickerView = self.currentLevelView.surfaceLayer;
-    self.postProcessingViewController.view.frame = self.view.bounds;
-    [self.view addSubview:self.postProcessingViewController.view];
+    [self addPostProcessingEffects];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    [self.currentLevel levelDidBegin];
-    
-    self.staticTimer = [NSTimer scheduledTimerWithTimeInterval:3.0
-                                     target:self.postProcessingViewController
-                                   selector:@selector(static)
-                                   userInfo:nil
-                                    repeats:YES];
-    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:[[NSUserDefaults standardUserDefaults] floatForKey:@"DrawRate"]
-                                                      target:self
-                                                    selector:@selector(tickWithTimer:)
-                                                    userInfo:nil
-                                                     repeats:YES];
-    [self.ambientMusicController play];
-    [self.sound beginHeartbeatForPlayer:self.player];
+    [self startGame];
     
     int64_t delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -148,6 +143,15 @@
     self.playerView = nil;
     [self.currentLevelView removeFromSuperview];
     self.currentLevelView = nil;
+}
+
+- (void)addPostProcessingEffects
+{
+    [self.postProcessingViewController.view removeFromSuperview];
+    self.postProcessingViewController = [[BDPostProcessingViewController alloc] initWithNibName:nil bundle:nil];
+    self.postProcessingViewController.flickerView = self.currentLevelView.surfaceLayer;
+    self.postProcessingViewController.view.frame = self.view.bounds;
+    [self.view addSubview:self.postProcessingViewController.view];
 }
 
 - (void)pushTouch:(UITouch *)touch
@@ -296,8 +300,82 @@
     self.currentLevelView.pulse = self.player.adrenalin;
 }
 
+- (void)transitionToLevel:(BDLevel *)level animated:(BOOL)animated
+{
+    [self gameStop];
+    
+    __weak BDGameViewController *__self = self;
+    void(^fadeOutBlock)(void) = ^(void) {
+        __self.currentLevelView.alpha = 0.0;
+    };
+    
+    void(^completitionBlock)(BOOL finished) = ^(BOOL finished) {
+        [__self.currentLevelView removeFromSuperview];
+        __self.currentLevelView = nil;
+        [__self.playerView removeFromSuperview];
+        __self.playerView = nil;
+        
+        __self.currentLevel = nil;
+        __self.player = nil;
+        
+        __self.currentLevel = level;
+        __self.currentLevel.delegate = __self;
+        __self.currentLevelView = [[BDLevelView alloc] initWithLevel:__self.currentLevel];
+        __self.player = [[BDPlayer alloc] initWithPosition:__self.currentLevel.spawn];
+        __weak id s = __self;
+        __self.player.adrenalinHandler = ^{
+            [s adrenalinChanged];
+        };
+        __self.playerView = [[BDPlayerView alloc] initWithPlayer:__self.player];
+        
+        [__self.currentLevelView.playerLayer addSubview:__self.playerView];
+        __self.currentLevelView.alpha = 0.0;
+        [__self.view addSubview:__self.currentLevelView];
+        
+        [__self addPostProcessingEffects];
+        [UIView animateWithDuration:0.5 animations:^{
+            __self.currentLevelView.alpha = 1.0;
+        }];
+        [self startGame];
+    };
+    
+    self.view.backgroundColor = [UIColor blackColor];
+    
+    if (animated) {
+        [UIView animateWithDuration:0.5 animations:fadeOutBlock completion:completitionBlock];
+    } else {
+        completitionBlock(YES);
+    }
+}
+
+- (void)startGame
+{
+    if (self.gameInProgress) return;
+    
+    [self.currentLevel levelDidBegin];
+    
+    [self.staticTimer invalidate];
+    self.staticTimer = [NSTimer scheduledTimerWithTimeInterval:3.0
+                                                        target:self.postProcessingViewController
+                                                      selector:@selector(static)
+                                                      userInfo:nil
+                                                       repeats:YES];
+    [self.gameTimer invalidate];
+    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:[[NSUserDefaults standardUserDefaults] floatForKey:@"DrawRate"]
+                                                      target:self
+                                                    selector:@selector(tickWithTimer:)
+                                                    userInfo:nil
+                                                     repeats:YES];
+    [self.ambientMusicController play];
+    [self.sound beginHeartbeatForPlayer:self.player];
+    
+    self.gameInProgress = YES;
+}
+
 - (void)gameStop
 {
+    if (!self.gameInProgress) return;
+    
     [self.gameTimer invalidate];
     [self.staticTimer invalidate];
     
@@ -310,6 +388,8 @@
     // Cannot nil the level views, they are still used for the transition to the game over screen.
     self.currentLevel = nil;
     self.player = nil;
+    
+    self.gameInProgress = NO;
 }
 
 - (void)gameDidEnd
@@ -356,9 +436,29 @@
     [self.currentLevelView reloadData];
 }
 
+- (void)level:(BDLevel *)level didChangeState:(NSString *)state toState:(NSString *)newState
+{
+    [self.currentLevelView reloadData];
+}
+
+- (void)level:(BDLevel *)level didChangePlayerPosition:(CGPoint)position
+{
+    self.player.location = position;
+}
+
+- (void)level:(BDLevel *)level shouldChangeToLevel:(BDLevel *)newLevel
+{
+    [self transitionToLevel:newLevel animated:YES];
+}
+
 - (void)levelWillWin:(BDLevel *)level
 {
     [self gameWin];
+}
+
+- (void)levelDidFail:(BDLevel *)level
+{
+    [self gameDidEnd];
 }
 
 @end

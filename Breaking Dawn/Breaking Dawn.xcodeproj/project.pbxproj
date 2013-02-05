@@ -27,7 +27,6 @@
 		877DB00816B4769900CD9508 /* BDTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877DB00716B4769900CD9508 /* BDTitleViewController.m */; };
 		877DB00A16B4801D00CD9508 /* logo00-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DB00916B4801C00CD9508 /* logo00-02.png */; };
 		877DB01116B4818800CD9508 /* BDGameOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877DB01016B4818800CD9508 /* BDGameOverViewController.m */; };
-		877DB01416B493C400CD9508 /* map00.plist in Resources */ = {isa = PBXBuildFile; fileRef = 877DB01316B493C400CD9508 /* map00.plist */; };
 		877DB01A16B4AE7600CD9508 /* lightSwitchLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 877DB01916B4AE7600CD9508 /* lightSwitchLight.png */; };
 		8784972516B4C5EC00D72C0D /* fail-01 in Resources */ = {isa = PBXBuildFile; fileRef = 8784971B16B4C5E000D72C0D /* fail-01 */; };
 		8784972616B4C5EC00D72C0D /* fail-02 in Resources */ = {isa = PBXBuildFile; fileRef = 8784971C16B4C5E000D72C0D /* fail-02 */; };
@@ -94,6 +93,7 @@
 		87A537DD16B4527F00F7C6DB /* player00-move-front-right-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A537D716B4527F00F7C6DB /* player00-move-front-right-01.png */; };
 		87A537DE16B4527F00F7C6DB /* player00-move-front-right-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A537D816B4527F00F7C6DB /* player00-move-front-right-02.png */; };
 		87A537DF16B4527F00F7C6DB /* player00-move-front-right-03.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A537D916B4527F00F7C6DB /* player00-move-front-right-03.png */; };
+		87C474B316C12C3A0015FFBB /* BDImageMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C474B216C12C390015FFBB /* BDImageMap.m */; };
 		87CF3D7F16B540280073F953 /* GGJ13_RoundBadge.png in Resources */ = {isa = PBXBuildFile; fileRef = 87CF3D7E16B540270073F953 /* GGJ13_RoundBadge.png */; };
 		87CF3D8E16B55CAF0073F953 /* intro-door-01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87CF3D8916B55CAF0073F953 /* intro-door-01.jpg */; };
 		87CF3D8F16B55CAF0073F953 /* intro-door-02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87CF3D8A16B55CAF0073F953 /* intro-door-02.jpg */; };
@@ -125,7 +125,6 @@
 		B1C2B52216B43CBA00CFCC37 /* Monster_Awakes2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */; };
 		B1C2B52316B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51C16B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 */; };
 		B1C2B52416B43CBA00CFCC37 /* Monster_Awakes3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B1C2B51D16B43CBA00CFCC37 /* Monster_Awakes3.mp3 */; };
-		B1DC52EA16B44EE10048DED1 /* BDImageMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DC52E916B44EE10048DED1 /* BDImageMap.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -159,7 +158,6 @@
 		877DB00916B4801C00CD9508 /* logo00-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo00-02.png"; sourceTree = "<group>"; };
 		877DB00F16B4818800CD9508 /* BDGameOverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDGameOverViewController.h; sourceTree = "<group>"; };
 		877DB01016B4818800CD9508 /* BDGameOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDGameOverViewController.m; sourceTree = "<group>"; };
-		877DB01316B493C400CD9508 /* map00.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = map00.plist; sourceTree = "<group>"; };
 		877DB01916B4AE7600CD9508 /* lightSwitchLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightSwitchLight.png; sourceTree = "<group>"; };
 		8784971B16B4C5E000D72C0D /* fail-01 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fail-01"; sourceTree = "<group>"; };
 		8784971C16B4C5E000D72C0D /* fail-02 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fail-02"; sourceTree = "<group>"; };
@@ -241,6 +239,8 @@
 		87A537D716B4527F00F7C6DB /* player00-move-front-right-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-right-01.png"; sourceTree = "<group>"; };
 		87A537D816B4527F00F7C6DB /* player00-move-front-right-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-right-02.png"; sourceTree = "<group>"; };
 		87A537D916B4527F00F7C6DB /* player00-move-front-right-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player00-move-front-right-03.png"; sourceTree = "<group>"; };
+		87C474B116C12C390015FFBB /* BDImageMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDImageMap.h; sourceTree = "<group>"; };
+		87C474B216C12C390015FFBB /* BDImageMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDImageMap.m; sourceTree = "<group>"; };
 		87CF3D7E16B540270073F953 /* GGJ13_RoundBadge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GGJ13_RoundBadge.png; sourceTree = "<group>"; };
 		87CF3D8916B55CAF0073F953 /* intro-door-01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-door-01.jpg"; sourceTree = "<group>"; };
 		87CF3D8A16B55CAF0073F953 /* intro-door-02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-door-02.jpg"; sourceTree = "<group>"; };
@@ -276,8 +276,6 @@
 		B1C2B51B16B43CBA00CFCC37 /* Monster_Awakes2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Monster_Awakes2.mp3; sourceTree = "<group>"; };
 		B1C2B51C16B43CBA00CFCC37 /* Monster_Awakes2+3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Monster_Awakes2+3.mp3"; sourceTree = "<group>"; };
 		B1C2B51D16B43CBA00CFCC37 /* Monster_Awakes3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Monster_Awakes3.mp3; sourceTree = "<group>"; };
-		B1DC52E916B44EE10048DED1 /* BDImageMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BDImageMap.m; path = ../BDImageMap.m; sourceTree = "<group>"; };
-		B1DC52EC16B45B6F0048DED1 /* BDImageMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDImageMap.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,12 +364,12 @@
 				877DB01016B4818800CD9508 /* BDGameOverViewController.m */,
 				87A5376E16B3983600F7C6DB /* BDPostProcessingViewController.h */,
 				87A5376F16B3983600F7C6DB /* BDPostProcessingViewController.m */,
-				B1DC52EC16B45B6F0048DED1 /* BDImageMap.h */,
-				B1DC52E916B44EE10048DED1 /* BDImageMap.m */,
 				877DAFF816B467D000CD9508 /* BDAmbientMusicController.h */,
 				877DAFF916B467D000CD9508 /* BDAmbientMusicController.m */,
 				B192C8CA16B435F5000E4BC9 /* BDAudioContainer.h */,
 				B192C8CB16B435F5000E4BC9 /* BDAudioContainer.m */,
+				87C474B116C12C390015FFBB /* BDImageMap.h */,
+				87C474B216C12C390015FFBB /* BDImageMap.m */,
 				B19113B316B40707008BFCB9 /* BDSound.h */,
 				B19113B416B40707008BFCB9 /* BDSound.m */,
 				87A537B316B42D7100F7C6DB /* BDHotspot.h */,
@@ -455,7 +453,6 @@
 				877DB01916B4AE7600CD9508 /* lightSwitchLight.png */,
 				B15B92AA16B47BF20001670D /* Light_Switch_0_250.mp3 */,
 				877DAFFB16B46C9100CD9508 /* lightSwitch-Off.png */,
-				877DB01316B493C400CD9508 /* map00.plist */,
 				877DB00916B4801C00CD9508 /* logo00-02.png */,
 				877DAFFC16B46C9500CD9508 /* lightSwitch-On.png */,
 				877DAFF216B464BF00CD9508 /* Ambience-16.mp3 */,
@@ -691,7 +688,6 @@
 				877DB00116B4722200CD9508 /* lightSwitch-Off.png in Resources */,
 				877DB00216B4722400CD9508 /* lightSwitch-On.png in Resources */,
 				877DB00A16B4801D00CD9508 /* logo00-02.png in Resources */,
-				877DB01416B493C400CD9508 /* map00.plist in Resources */,
 				B15B92AB16B47BF20001670D /* Flickering_Light_Electric_Buzz_5_700.mp3 in Resources */,
 				B15B92AC16B47BF20001670D /* heartbeat_isolated_0_700.mp3 in Resources */,
 				B15B92AD16B47BF20001670D /* Light_Switch_0_250.mp3 in Resources */,
@@ -750,7 +746,6 @@
 				B19113B516B40707008BFCB9 /* BDSound.m in Sources */,
 				B192C8CC16B435F5000E4BC9 /* BDAudioContainer.m in Sources */,
 				87A537B516B42D7200F7C6DB /* BDHotspot.m in Sources */,
-				B1DC52EA16B44EE10048DED1 /* BDImageMap.m in Sources */,
 				877DAFFA16B467D000CD9508 /* BDAmbientMusicController.m in Sources */,
 				877DB00516B4768A00CD9508 /* BDIntroViewController.m in Sources */,
 				877DB00816B4769900CD9508 /* BDTitleViewController.m in Sources */,
@@ -763,6 +758,7 @@
 				873F44BE16BE6F3A00BD3DAB /* BDTimedLight.m in Sources */,
 				873F44C116BE6F4500BD3DAB /* BDTrapLight.m in Sources */,
 				873F44C416BE6F6700BD3DAB /* BDRegularLight.m in Sources */,
+				87C474B316C12C3A0015FFBB /* BDImageMap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

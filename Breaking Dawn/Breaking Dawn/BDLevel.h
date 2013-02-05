@@ -82,7 +82,15 @@
 
 - (void)level:(BDLevel *)level didAddLights:(NSArray *)lights;
 
+- (void)level:(BDLevel *)level didChangeState:(NSString *)state toState:(NSString *)newState;
+
+- (void)level:(BDLevel *)level didChangePlayerPosition:(CGPoint)position;
+
+- (void)level:(BDLevel *)level shouldChangeToLevel:(BDLevel *)newLevel;
+
 - (void)levelWillWin:(BDLevel *)level;
+
+- (void)levelDidFail:(BDLevel *)level;
 
 @end
 
@@ -149,5 +157,7 @@
 - (void)evaluateLightsForPlayerAtPosition:(CGPoint)position;
 
 - (void)levelDidBegin;
+
+- (void)loadStage:(NSString *)stageName;
 
 @end

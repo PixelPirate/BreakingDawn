@@ -11,7 +11,7 @@
 
 @interface BDMobView () // Private setter
 
-@property (strong, readwrite, nonatomic) BDMob *mob;
+@property (weak, readwrite, nonatomic) BDMob *mob;
 
 @property (strong, readwrite, nonatomic) UIImage *mobImage;
 

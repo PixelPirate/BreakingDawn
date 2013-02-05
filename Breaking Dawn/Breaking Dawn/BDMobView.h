@@ -11,7 +11,7 @@
 
 @interface BDMobView : UIView<BDMobDelegate>
 
-@property (strong, readonly, nonatomic) BDMob *mob;
+@property (weak, readonly, nonatomic) BDMob *mob;
 
 - (id)initWithMob:(BDMob *)mob;
 

@@ -37,6 +37,7 @@
         NSMutableArray *detectedCorners = [NSMutableArray array];
         id<BDFeatureDetector> detector = [[BDCornerDetector alloc] init];
         NSInteger weights[(NSInteger)self.imageMap.size.width][(NSInteger)self.imageMap.size.height];
+        memset(weights, 0, self.imageMap.size.width * self.imageMap.size.height);
         NSInteger max = NSIntegerMin;
         for (NSUInteger x = 0; x+2 < self.imageMap.size.width; ++x) {
             for (NSUInteger y = 0; y+2 < self.imageMap.size.height; ++y) {
